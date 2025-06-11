@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 // Mocking methods which are not implemented in JSDOM
 // If some code uses a method which JSDOM (the DOM implementation used by Jest) hasn't implemented yet,
 // testing it is not easily possible. This is e.g. the case with window.matchMedia().

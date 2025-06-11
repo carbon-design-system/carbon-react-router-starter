@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 /*
  * This config file started as the base config file included by Vite when creating a new React application March 24th 2025.
  * Where it differs from this default will be noted in comments.

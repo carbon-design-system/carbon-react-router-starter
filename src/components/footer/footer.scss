@@ -1,4 +1,11 @@
-@use '@carbon/react/scss/spacing' as *;
+/**
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+ 
+ @use '@carbon/react/scss/spacing' as *;
 
 .cs--footer {
   padding-block-start: $spacing-12;
