@@ -13,8 +13,8 @@
     "lint:style": "stylelint './**/*.scss'",
     "lint:format": "prettier . --write --ignore-unknown --no-error-on-unmatched-pattern --log-level warn",
     "lint:spell": "cspell lint --quiet \"**\"",
-    "preview:prod": "cross-env NODE_ENV=production node server",
-    "preview": "cross-env NODE_ENV=local node server",
+    "preview:prod": "cross-env NODE_ENV=production node src/server.js",
+    "preview": "cross-env NODE_ENV=local node src/server.js",
     "test": "vitest run --coverage",
     "test:watch": "vitest --watch",
     "prepare": "husky"

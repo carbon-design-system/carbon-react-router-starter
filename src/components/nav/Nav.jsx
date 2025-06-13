@@ -30,8 +30,10 @@ import {
   Search,
   Switcher as SwitcherIcon,
 } from '@carbon/icons-react';
+import { useLocation, Link } from 'react-router';
 
 export const Nav = () => {
+  const location = useLocation();
   const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
 
   const toggleNav = () => {
@@ -51,11 +53,17 @@ export const Nav = () => {
           isActive={isSideNavExpanded}
           aria-expanded={isSideNavExpanded}
         />
-        <HeaderName href="/" prefix="Carbon">
+        <HeaderName as={Link} to="/" prefix="Carbon">
           React starter template
         </HeaderName>
         <HeaderNavigation aria-label="fed-at-ibm">
-          <HeaderMenuItem href="/dashboard">Dashboard</HeaderMenuItem>
+          <HeaderMenuItem
+            as={Link}
+            to="/dashboard"
+            isActive={location.pathname === '/dashboard'}
+          >
+            Dashboard Dashboard
+          </HeaderMenuItem>
           <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
           <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
           <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
