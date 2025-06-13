@@ -62,7 +62,7 @@ export const Nav = () => {
             to="/dashboard"
             isActive={location.pathname === '/dashboard'}
           >
-            Dashboard Dashboard
+            Dashboard
           </HeaderMenuItem>
           <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
           <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
