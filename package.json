@@ -24,7 +24,7 @@
     "@carbon/react": "^1.73.0",
     "@carbon/styles": "^1.72.0",
     "@ibm/plex": "^6.4.1",
-    "@lhci/cli": "^0.14.0",
+    "@lhci/cli": "^0.15.0",
     "compression": "^1.7.5",
     "express": "^5.0.1",
     "react": "^19.0.0",
