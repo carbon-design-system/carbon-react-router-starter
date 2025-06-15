@@ -1,6 +1,6 @@
 const ci = {
   collect: {
-    startServerCommand: 'cross-env NODE_ENV=production node server',
+    startServerCommand: 'npm run preview:prod',
     url: 'http://localhost:5173/',
   },
   assert: {
