@@ -14,7 +14,7 @@ export const Router = () => {
   return (
     <Routes>
       <Route index path="/" element={<Welcome />} />
-      <Route index path="/dashboard/" element={<Dashboard />} />
+      <Route index path="/dashboard" element={<Dashboard />} />
     </Routes>
   );
 };

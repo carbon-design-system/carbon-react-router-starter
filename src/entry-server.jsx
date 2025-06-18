@@ -17,7 +17,9 @@ import { PageWrapper } from './components/wrapper/PageWrapper.jsx';
  * @param {string} url
  * @param {import('react-dom/server').RenderToPipeableStreamOptions} [options]
  */
-export function render(url, options) {
+export function render(_url, options) {
+  const url = `/${_url}`;
+
   const { pipe, abort } = renderToPipeableStream(
     <StrictMode>
       <StaticRouter location={url}>
