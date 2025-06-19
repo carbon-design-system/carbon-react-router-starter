@@ -1,0 +1,33 @@
+/**
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/type' as *;
+@use '@carbon/react/scss/breakpoint' as *;
+
+@mixin page-common() {
+  h1,
+  dd {
+    @include type-style('heading-07');
+
+    margin-block-end: $spacing-08;
+  }
+
+  h3 {
+    margin-block-end: $spacing-05;
+  }
+
+  p,
+  dt {
+    margin-block-end: $spacing-05;
+    margin-inline-end: $spacing-08;
+  }
+
+  dt {
+    @include type-style('label-02');
+  }
+}

@@ -11,7 +11,7 @@ import { renderToPipeableStream } from 'react-dom/server';
 import { StaticRouter } from 'react-router';
 
 // App level imports
-import { PageWrapper } from './components/wrapper/PageWrapper.jsx';
+import { Router } from './routes/index.jsx';
 
 /**
  * @param {string} url
@@ -23,7 +23,7 @@ export function render(_url, options) {
   const { pipe, abort } = renderToPipeableStream(
     <StrictMode>
       <StaticRouter location={url}>
-        <PageWrapper />
+        <Router />
       </StaticRouter>
     </StrictMode>,
     options,
