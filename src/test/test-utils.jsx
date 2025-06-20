@@ -9,17 +9,17 @@
 import { render as rtlRender } from '@testing-library/react';
 import { BrowserRouter } from 'react-router';
 import { StrictMode } from 'react';
-import { PageWrapper } from '../components/wrapper/PageWrapper';
+import { Router } from '../routes';
 
 export function render(ui, { route = '/', ...renderOptions } = {}) {
   // Push the route we want to test
   window.history.pushState({}, 'Test page', route);
 
-  function Wrapper({ children }) {
+  function Wrapper() {
     return (
       <StrictMode>
         <BrowserRouter>
-          <PageWrapper>{children}</PageWrapper>
+          <Router />
         </BrowserRouter>
       </StrictMode>
     );

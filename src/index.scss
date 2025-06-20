@@ -18,6 +18,7 @@
    not "flashing style" - everything will be at the right
    place from the start. In most case, avoid loading styles
    from the JavaScript. */
+@use 'layouts/page-layout';
 @use 'pages/welcome/welcome';
 @use 'pages/dashboard/dashboard';
 @use 'components/welcomeHeader/welcomeHeader';

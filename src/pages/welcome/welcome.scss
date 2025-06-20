@@ -8,31 +8,10 @@
 @use '@carbon/react/scss/spacing' as *;
 @use '@carbon/react/scss/type' as *;
 @use '@carbon/react/scss/breakpoint' as *;
+@use '../page-common' as common;
 
 .cs--welcome {
-  @include default-type;
-
-  margin-block-start: $spacing-09;
-  padding-block-start: $spacing-05;
-
-  @include breakpoint-down('md') {
-    padding-inline: 0;
-  }
-}
-
-.cs--welcome h1 {
-  @include type-style('heading-07');
-
-  margin-block-end: $spacing-08;
-}
-
-.cs--welcome h3 {
-  margin-block-end: $spacing-05;
-}
-
-.cs--welcome p {
-  margin-block-end: $spacing-05;
-  margin-inline-end: $spacing-08;
+  @include common.page-common;
 }
 
 .cs--welcome__about {

@@ -7,19 +7,19 @@
 
 import { GlobalTheme, Theme } from '@carbon/react';
 
-import { useThemes } from '../../hooks/useThemes';
-import { Router } from '../../routes/index';
+import { useThemes } from '../hooks/useThemes';
+import { Outlet } from 'react-router';
 
-export const PageWrapper = () => {
+export const ThemeLayout = () => {
   const { primaryTheme, themeReady } = useThemes();
 
   return themeReady ? (
     <GlobalTheme theme={primaryTheme}>
       <Theme theme={primaryTheme}>
-        <Router />
+        <Outlet />
       </Theme>
     </GlobalTheme>
   ) : (
-    <Router />
+    <Outlet />
   );
 };
