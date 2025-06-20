@@ -9,15 +9,15 @@
 import { StrictMode } from 'react';
 import { hydrateRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router';
+import { Router } from './routes';
 
 // App level imports
-import { PageWrapper } from './components/wrapper/PageWrapper.jsx';
 
 hydrateRoot(
   document.getElementById('root'),
   <StrictMode>
     <BrowserRouter>
-      <PageWrapper />
+      <Router />
     </BrowserRouter>
   </StrictMode>,
 );
