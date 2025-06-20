@@ -24,16 +24,94 @@ import {
   SkipToContent,
 } from '@carbon/react';
 
-import {
-  LogoGithub,
-  MagicWand,
-  Search,
-  Switcher as SwitcherIcon,
-} from '@carbon/icons-react';
-import { useLocation, Link } from 'react-router';
+import { Search, Switcher as SwitcherIcon } from '@carbon/icons-react';
+import { Link as RouterLink } from 'react-router';
 
+import { routesInHeader, routesInSideNav } from '../../routes/config';
+
+const destinationProps = (path, carbon, currentPath) =>
+  path
+    ? {
+        as: RouterLink,
+        isActive: path === currentPath,
+      }
+    : {
+        href: carbon.href,
+      };
+
+const NavSideItems = ({ routesInSideNav, currentPath }) => (
+  <>
+    {routesInSideNav.map(({ path, carbon }) =>
+      !carbon.inSubMenu && carbon?.label ? (
+        carbon.subMenu ? (
+          <SideNavMenu
+            key={path ?? carbon.label}
+            renderIcon={carbon.icon}
+            title={carbon.label}
+          >
+            {carbon.subMenu.map((subRoute) => (
+              <SideNavMenuItem
+                key={subRoute.path ?? subRoute.carbon.label}
+                {...destinationProps(
+                  subRoute.path,
+                  subRoute.carbon,
+                  currentPath,
+                )}
+              >
+                {subRoute.carbon.label}
+              </SideNavMenuItem>
+            ))}
+          </SideNavMenu>
+        ) : (
+          <SideNavLink
+            key={path ?? carbon.label}
+            renderIcon={carbon.icon}
+            {...destinationProps(path, carbon, currentPath)}
+          >
+            {carbon.label}
+          </SideNavLink>
+        )
+      ) : null,
+    )}
+  </>
+);
+
+const NavHeaderItems = ({ routesInHeader, currentPath }) => (
+  <>
+    {routesInHeader.map(({ path, carbon }) =>
+      !carbon.inSubMenu && carbon?.label ? (
+        carbon.subMenu ? (
+          <HeaderMenu
+            aria-label={carbon.label}
+            key={path}
+            menuLinkName={carbon.label}
+          >
+            {carbon.subMenu.map((subRoute) => (
+              <HeaderMenuItem
+                as={RouterLink}
+                to={subRoute.path}
+                key={subRoute.path}
+                isActive={subRoute.path === currentPath}
+              >
+                {subRoute.carbon.label}
+              </HeaderMenuItem>
+            ))}
+          </HeaderMenu>
+        ) : (
+          <HeaderMenuItem
+            as={RouterLink}
+            key={path}
+            to={path}
+            isActive={path === currentPath}
+          >
+            {carbon?.label}
+          </HeaderMenuItem>
+        )
+      ) : null,
+    )}
+  </>
+);
 export const Nav = () => {
-  const location = useLocation();
   const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
 
   const toggleNav = () => {
@@ -41,6 +119,8 @@ export const Nav = () => {
     // https://react.dev/reference/react/useState#updating-state-based-on-the-previous-state
     setIsSideNavExpanded((isExpanded) => !isExpanded);
   };
+
+  console.log(routesInSideNav);
 
   return (
     <>
@@ -53,25 +133,17 @@ export const Nav = () => {
           isActive={isSideNavExpanded}
           aria-expanded={isSideNavExpanded}
         />
-        <HeaderName as={Link} to="/" prefix="Carbon">
+        <HeaderName as={RouterLink} to="/" prefix="Carbon">
           React starter template
         </HeaderName>
-        <HeaderNavigation aria-label="fed-at-ibm">
-          <HeaderMenuItem
-            as={Link}
-            to="/dashboard"
-            isActive={location.pathname === '/dashboard'}
-          >
-            Dashboard
-          </HeaderMenuItem>
-          <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
-          <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
-          <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
-            <HeaderMenuItem href="#one">Sub-link 1</HeaderMenuItem>
-            <HeaderMenuItem href="#two">Sub-link 2</HeaderMenuItem>
-            <HeaderMenuItem href="#three">Sub-link 3</HeaderMenuItem>
-          </HeaderMenu>
-        </HeaderNavigation>
+        {routesInHeader.length > 0 && (
+          <HeaderNavigation aria-label="fed-at-ibm">
+            <NavHeaderItems
+              routesInHeader={routesInHeader}
+              currentPath={location.pathname}
+            />
+          </HeaderNavigation>
+        )}
         <HeaderGlobalBar>
           <HeaderGlobalAction aria-label="Search">
             <Search size={20} />
@@ -87,24 +159,19 @@ export const Nav = () => {
         isPersistent={false}
       >
         <SideNavItems>
-          <HeaderSideNavItems hasDivider>
-            <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
-            <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
-            <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
-            <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
-              <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
-              <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
-              <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
-            </HeaderMenu>
-          </HeaderSideNavItems>
-          <SideNavMenu renderIcon={MagicWand} title="Getting started">
-            <SideNavMenuItem href="#">Install</SideNavMenuItem>
-            <SideNavMenuItem href="#">Guide</SideNavMenuItem>
-            <SideNavMenuItem href="#">FAQ</SideNavMenuItem>
-          </SideNavMenu>
-          <SideNavLink renderIcon={LogoGithub} href="#">
-            GitHub
-          </SideNavLink>
+          {routesInHeader.length > 0 && (
+            <HeaderSideNavItems hasDivider>
+              <NavHeaderItems
+                routesInHeader={routesInHeader}
+                currentPath={location.pathname}
+              />
+            </HeaderSideNavItems>
+          )}
+
+          <NavSideItems
+            routesInSideNav={routesInSideNav}
+            currentPath={location.pathname}
+          />
         </SideNavItems>
       </SideNav>
     </>
