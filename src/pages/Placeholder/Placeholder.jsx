@@ -9,20 +9,22 @@ import { PageLayout } from '../../layouts/page-layout';
 
 import { useLocation } from 'react-router';
 
-const NotFound = () => {
+const Placeholder = () => {
   const location = useLocation();
+
   return (
     <PageLayout
-      className="cs--not-found"
-      fallback={<p>Loading not found page...</p>}
+      className="cs--placeholder"
+      fallback={<p>Loading placeholder page...</p>}
     >
       <CommonHeader
-        title={'Page not found'}
+        title={'This page is not ready yet'}
         paragraphs={[
-          <>This is not the page you were looking for.</>,
+          <>Generally not a good idea to have pages under construction.</>,
+          <>This page is here to help demonstrate the global navigation.</>,
           <>
-            The route <em>&lsquo;{location.pathname}&rsquo;</em> is not
-            recognized.
+            You are at the location served from route{' '}
+            <em>&lsquo;{location.pathname}&rsquo;</em>.
           </>,
           <>Maintained by fed-at-ibm, a chapter of the OIC.</>,
         ]}
@@ -31,4 +33,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default Placeholder;

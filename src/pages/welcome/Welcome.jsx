@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 
 import { getMessage } from '../../api/message.js';
 import { Footer } from '../../components/footer/Footer';
-import { WelcomeHeader } from '../../components/welcomeHeader/WelcomeHeader';
+import { WelcomeHeader } from './WelcomeHeader.jsx';
 import { PageLayout } from '../../layouts/page-layout.jsx';
 
 // The styles are imported into index.scss by default.
@@ -39,6 +39,7 @@ const Welcome = () => {
       fallback={<p>Loading welcome page...</p>}
     >
       <WelcomeHeader />
+
       <Grid>
         <Column sm={4} md={4} lg={8} xlg={4}>
           <h3 className="cs--welcome__heading">↳ Run the template</h3>

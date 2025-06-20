@@ -7,6 +7,6 @@
 
 @use '../page-common' as common;
 
-.cs--not-found {
+.cs--placeholder {
   @include common.page-common;
 }
