@@ -8,11 +8,16 @@
 @use '@carbon/react/scss/spacing' as *;
 @use '@carbon/react/scss/type' as *;
 @use '@carbon/react/scss/breakpoint' as *;
+@use '@carbon/react/scss/theme' as *;
 
 .cs--page-layout-content {
   @include default-type;
 
+  block-size: calc(100vh - $spacing-09);
+  max-block-size: calc(100vh - $spacing-08);
   padding-block-start: $spacing-05;
+  overflow-y: auto;
+  scrollbar-color: $background-active $layer-01;
 
   @include breakpoint-down('md') {
     padding-inline: 0;
