@@ -149,10 +149,10 @@ const routesProcessed = routes.map((route) => {
     return route;
   }
 
-  const path = route.path ?? route?.carbon?.virtualPath;
+  const path = route.path || route.carbon.virtualPath;
 
   const subMenu = routes.filter((subRoute) => {
-    const subPath = subRoute.path ?? subRoute.carbon.virtualPath;
+    const subPath = subRoute.path || subRoute.carbon.virtualPath;
     const childPath = new RegExp(`^${path}/[^/]+$`); // match direct parent only
 
     return !route.index && subPath && childPath.test(subPath);
@@ -160,14 +160,13 @@ const routesProcessed = routes.map((route) => {
 
   if (subMenu && subMenu.length > 0) {
     // add sub menu to parent
-    route.carbon = route.carbon ?? {};
     route.carbon.subMenu = subMenu;
 
     // mark child as in sub menu
     subMenu.forEach((menu) => {
-      const subPath = menu.path ?? menu.carbon.virtualPath;
+      const subPath = menu.path || menu.carbon.virtualPath;
       // Carbon should never be blank
-      menu.carbon = menu.carbon ?? { label: subPath };
+      menu.carbon = menu.carbon || { label: subPath };
       menu.carbon.inSubMenu = true;
     });
   }
@@ -176,9 +175,9 @@ const routesProcessed = routes.map((route) => {
 });
 
 export const routesInHeader = routesProcessed.filter(
-  (route) => route?.carbon?.inHeader && !route?.carbon?.inSubMenu,
+  (route) => route.carbon && route.carbon.inHeader && !route.carbon.inSubMenu,
 );
 
 export const routesInSideNav = routesProcessed.filter(
-  (route) => route?.carbon?.inSideNav && !route?.carbon?.inSubMenu,
+  (route) => route.carbon && route.carbon.inSideNav && !route.carbon.inSubMenu,
 );

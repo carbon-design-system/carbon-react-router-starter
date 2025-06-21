@@ -25,7 +25,7 @@ import {
 } from '@carbon/react';
 
 import { Search, Switcher as SwitcherIcon } from '@carbon/icons-react';
-import { Link as RouterLink } from 'react-router';
+import { Link as RouterLink, useLocation } from 'react-router';
 
 import { routesInHeader, routesInSideNav } from '../../routes/config';
 
@@ -112,6 +112,7 @@ const NavHeaderItems = ({ routesInHeader, currentPath }) => (
   </>
 );
 export const Nav = () => {
+  const location = useLocation();
   const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
 
   const toggleNav = () => {
@@ -119,8 +120,6 @@ export const Nav = () => {
     // https://react.dev/reference/react/useState#updating-state-based-on-the-previous-state
     setIsSideNavExpanded((isExpanded) => !isExpanded);
   };
-
-  console.log(routesInSideNav);
 
   return (
     <>
