@@ -44,7 +44,8 @@
 .cs--page-layout-content {
   @include default-type;
 
-  // These styles and moves the scroll from the body to this content area
+  // These following styles size the content area and move the scroll
+  // from the body to this content area
   block-size: calc(100vh - $spacing-09);
   max-block-size: calc(100vh - $spacing-08);
   padding-block-start: $spacing-05;
