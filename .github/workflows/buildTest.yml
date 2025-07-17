@@ -18,6 +18,6 @@ jobs:
         with:
           node-version: ${{ steps.nvm.outputs.NODE_VERSION }}
       # cannot use npm ci yet because of https://github.com/npm/cli/issues/4828
-      - run: npm i
+      - run: npm ci
       - run: npm run build
       - run: npm run test
