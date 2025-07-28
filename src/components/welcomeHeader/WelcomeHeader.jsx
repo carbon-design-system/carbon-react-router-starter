@@ -24,7 +24,12 @@ export const WelcomeHeader = () => {
           </p>
           <p>Maintained by fed-at-ibm, a chapter of the OIC.</p>
           <p>
-            <Button renderIcon={ArrowRight}>Clone the template</Button>
+            <Button
+              renderIcon={ArrowRight}
+              href="https://github.com/carbon-design-system/carbon-react-router-starter"
+            >
+              Use this template
+            </Button>
           </p>
         </AspectRatio>
       </Column>
