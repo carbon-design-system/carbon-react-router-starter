@@ -32,6 +32,27 @@ import {
 } from '@carbon/icons-react';
 import { useLocation, Link } from 'react-router';
 
+function NavigationItems({ location }) {
+  return (
+    <>
+      <HeaderMenuItem
+        as={Link}
+        to="/dashboard"
+        isActive={location.pathname === '/dashboard'}
+      >
+        Dashboard
+      </HeaderMenuItem>
+      <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+      <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+      <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
+        <HeaderMenuItem href="#one">Sub-link 1</HeaderMenuItem>
+        <HeaderMenuItem href="#two">Sub-link 2</HeaderMenuItem>
+        <HeaderMenuItem href="#three">Sub-link 3</HeaderMenuItem>
+      </HeaderMenu>
+    </>
+  );
+}
+
 export const Nav = () => {
   const location = useLocation();
   const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
@@ -57,20 +78,9 @@ export const Nav = () => {
           React starter template
         </HeaderName>
         <HeaderNavigation aria-label="fed-at-ibm">
-          <HeaderMenuItem
-            as={Link}
-            to="/dashboard"
-            isActive={location.pathname === '/dashboard'}
-          >
-            Dashboard
-          </HeaderMenuItem>
-          <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
-          <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
-          <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
-            <HeaderMenuItem href="#one">Sub-link 1</HeaderMenuItem>
-            <HeaderMenuItem href="#two">Sub-link 2</HeaderMenuItem>
-            <HeaderMenuItem href="#three">Sub-link 3</HeaderMenuItem>
-          </HeaderMenu>
+          {/* Render navigation items for viewports equal to or larger than the "Large" breakpoint.
+          This applies to desktop views. */}
+          <NavigationItems location={location} />
         </HeaderNavigation>
         <HeaderGlobalBar>
           <HeaderGlobalAction aria-label="Search">
@@ -88,14 +98,9 @@ export const Nav = () => {
       >
         <SideNavItems>
           <HeaderSideNavItems hasDivider>
-            <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
-            <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
-            <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
-            <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
-              <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
-              <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
-              <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
-            </HeaderMenu>
+            {/* Render navigation items for viewports smaller than the "Large" breakpoint.
+              This applies to mobile and small tablet views. */}
+            <NavigationItems location={location} />
           </HeaderSideNavItems>
           <SideNavMenu renderIcon={MagicWand} title="Getting started">
             <SideNavMenuItem href="#">Install</SideNavMenuItem>
