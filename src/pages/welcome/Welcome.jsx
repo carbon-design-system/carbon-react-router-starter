@@ -15,20 +15,17 @@ import {
 } from '@carbon/react';
 import { useEffect, useState } from 'react';
 
-import { getComments, getPost } from '../../api/message.js';
 import { Footer } from '../../components/footer/Footer';
 import { WelcomeHeader } from './WelcomeHeader.jsx';
 import { PageLayout } from '../../layouts/page-layout.jsx';
-import { use } from 'react';
+import PostComponent from './post/PostComponent.jsx';
+import { Suspense } from 'react';
 
 // The styles are imported into index.scss by default.
 // Do the same unless you have a good reason not to.
 // import './welcome.scss';
 
 const Welcome = () => {
-  const post = use(getPost(1));
-  const comments = use(getComments(1));
-
   return (
     <PageLayout
       className="cs--welcome"
@@ -148,19 +145,9 @@ const Welcome = () => {
                 endpoint. This showcases how to perform data fetching while
                 keeping components clean and separating network logic.
               </p>
-              <Tile>
-                <Section as="article" level={1}>
-                  <Heading>{post.title || 'Loading...'}</Heading>
-                </Section>
-                <Section as="article" level={2}>
-                  <Heading>Comments</Heading>
-                  {comments.map((comment) => (
-                    <Tile title={`From ${comment.email}`} key={comment.id}>
-                      <Heading>{comment.title}</Heading>
-                    </Tile>
-                  ))}
-                </Section>
-              </Tile>
+              <Suspense>
+                <PostComponent />
+              </Suspense>
             </Column>
           </Grid>
         </Column>

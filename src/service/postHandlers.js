@@ -21,7 +21,7 @@ export const getPost = async ({ params: { id } }, res) => {
     const blogpost = await response.json();
 
     // Return the blogpost's title
-    res.json({ blogpost });
+    res.json(blogpost);
   } catch {
     res.status(500).json({ message: 'Failed to fetch message' });
   }
@@ -37,7 +37,7 @@ export const getComments = async ({ query: { postId } }, res) => {
     const comments = await response.json();
 
     // Return the blogpost's title
-    res.json({ comments });
+    res.json(comments);
   } catch {
     res.status(500).json({ message: 'Failed to fetch message' });
   }
