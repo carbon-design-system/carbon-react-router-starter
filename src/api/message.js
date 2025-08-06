@@ -11,19 +11,19 @@
 
 export const getPost = async (postId) => {
   try {
-    const response = await fetch(`/api/post/${postId}`);
-    const data = await response.json();
-    return data.message;
+    const response = await fetch(`http://localhost:5173/api/post/${postId}`);
+    return await response.json();
   } catch (error) {
-    throw new Error('Failed to load message: ', error);
+    throw new Error('Failed to load post: ', error);
   }
 };
 
 export const getComments = async (postId) => {
   try {
-    const response = await fetch(`/api/comments?postId=${postId}`);
-    const data = await response.json();
-    return data.message;
+    const response = await fetch(
+      `http://localhost:5173/api/comments?postId=${postId}`,
+    );
+    return await response.json();
   } catch (error) {
     throw new Error('Failed to load comments: ', error);
   }
