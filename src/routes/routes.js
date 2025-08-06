@@ -5,11 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { getMessage } from '../service/message.js';
-
-export const routeHandlers = {
-  getMessage,
-};
+// eslint-disable-next-line import/namespace,import/default, import/no-named-as-default, import/no-named-as-default-member
+import postHandlers from '../service/postHandlers.js';
 
 /**
  * Registers all API routes on the given Express app instance.
@@ -19,6 +16,7 @@ export const routeHandlers = {
  * @param app - Express app instance OR msw router in case of unit testing
  * @param handlers - Route handlers (can be mocked for testing)
  */
-export const getRoutes = (app, handlers = routeHandlers) => {
-  app.get('/api/message', handlers.getMessage);
+export const getRoutes = (app, handlers = postHandlers) => {
+  app.get('/api/post/:id', handlers.getPost);
+  app.get('/api/comments', handlers.getComments);
 };

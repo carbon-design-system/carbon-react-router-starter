@@ -5,33 +5,28 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { CodeSnippet, Column, Grid, Tile } from '@carbon/react';
-import { useEffect, useState } from 'react';
+import {
+  CodeSnippet,
+  Column,
+  Grid,
+  Heading,
+  Section,
+  Tile,
+} from '@carbon/react';
 
-import { getMessage } from '../../api/message.js';
+import { getComments, getPost } from '../../api/message.js';
 import { Footer } from '../../components/footer/Footer';
 import { WelcomeHeader } from './WelcomeHeader.jsx';
 import { PageLayout } from '../../layouts/page-layout.jsx';
+import { use } from 'react';
 
 // The styles are imported into index.scss by default.
 // Do the same unless you have a good reason not to.
 // import './welcome.scss';
 
 const Welcome = () => {
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    const loadMessage = async () => {
-      try {
-        const msg = await getMessage();
-        setMessage(msg);
-      } catch {
-        setMessage('Failed to load message');
-      }
-    };
-
-    loadMessage();
-  }, []);
+  const post = use(getPost(1));
+  const comments = use(getComments(1));
 
   return (
     <PageLayout
@@ -151,7 +146,17 @@ const Welcome = () => {
                 keeping components clean and separating network logic.
               </p>
               <Tile>
-                <strong>Message:</strong> {message || 'Loading...'}
+                <Section as="article" level={1}>
+                  <Heading>{post.title || 'Loading...'}</Heading>
+                </Section>
+                <Section as="article" level={2}>
+                  <Heading>Comments</Heading>
+                  {comments.map((comment) => (
+                    <Tile title={`From ${comment.email}`} key={comment.id}>
+                      <Heading>{comment.title}</Heading>
+                    </Tile>
+                  ))}
+                </Section>
               </Tile>
             </Column>
           </Grid>
