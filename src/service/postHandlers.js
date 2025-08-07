@@ -12,6 +12,11 @@
 export const getPost = async ({ params: { id } }, res) => {
   console.log(id);
 
+  // Validate that id is a positive integer
+  if (!/^\d+$/.test(id)) {
+    return res.status(400).json({ message: 'Invalid post id' });
+  }
+
   try {
     const response = await fetch(
       // TODO: replace with actual endpoint URL
