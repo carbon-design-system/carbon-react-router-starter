@@ -1,0 +1,22 @@
+name: Carbon React Router starter template CI
+
+on: [push]
+
+jobs:
+  run-defined-frontend-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read .nvmrc
+        run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
+        id: nvm
+      - name: Use Node.js ${{ steps.nvm.outputs.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ steps.nvm.outputs.NODE_VERSION }}
+      - run: npm ci
+      - run: npm run build
+      - run: npm run test

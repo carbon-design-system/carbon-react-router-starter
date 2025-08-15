@@ -5,41 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use '@carbon/grid' as *;
-@use '@carbon/layout' as *;
-@use '@carbon/type' as *;
-@use '@carbon/colors' as *;
+@use '@carbon/react/scss/grid' as *;
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/type' as *;
+@use '../page-common' as common;
 
 .cs--dashboard {
-  @include default-type;
-
-  margin-block-start: $spacing-09;
-  padding-block-start: $spacing-05;
-
-  @include breakpoint-down('md') {
-    padding-inline: 0;
-  }
-}
-
-.cs--dashboard h1,
-.cs--dashboard dd {
-  @include type-style('heading-07');
-
-  margin-block-end: $spacing-08;
-}
-
-.cs--dashboard h3 {
-  margin-block-end: $spacing-05;
-}
-
-.cs--dashboard p,
-.cs--dashboard dt {
-  margin-block-end: $spacing-05;
-  margin-inline-end: $spacing-08;
-}
-
-.cs--dashboard dt {
-  @include type-style('label-02');
+  @include common.page-common;
 }
 
 .cs--dashboard__tile {

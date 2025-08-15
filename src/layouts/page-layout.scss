@@ -1,0 +1,54 @@
+/**
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/type' as *;
+@use '@carbon/react/scss/breakpoint' as *;
+@use '@carbon/react/scss/theme' as *;
+
+@mixin carbon-content-overrides() {
+  // These Carbon overrides are pending outcome of issue #19877
+  // https://github.com/carbon-design-system/carbon/issues/19877
+
+  :where(.cds--side-nav ~ .cds--content) {
+    // Where used to allow padding to be overridden later
+    padding: 0;
+  }
+
+  .cds--side-nav ~ .cds--content {
+    /* stylelint-disable-next-line carbon/layout-use -- temporary fix pending Content component updates */
+    margin-inline-start: 16rem;
+
+    @include breakpoint-down('lg') {
+      margin-inline-start: 0;
+    }
+  }
+
+  .cds--side-nav--hidden ~ .cds--content {
+    margin-inline-start: 0;
+  }
+
+  .cds--side-nav--rail ~ .cds--content {
+    margin-inline: $spacing-09;
+  }
+}
+
+.cs--page-layout {
+  @include carbon-content-overrides;
+}
+
+.cs--page-layout-content {
+  @include default-type;
+
+  // These following styles size the content area and move the scroll
+  // from the body to this content area
+  block-size: calc(100vh - $spacing-09);
+  max-block-size: calc(100vh - $spacing-08);
+  padding-block-start: $spacing-05;
+  overflow-y: auto;
+  scrollbar-color: $background-active $layer-01;
+}
