@@ -21,7 +21,7 @@ export const CommonHeader = ({ title, paragraphs }) => {
       <Column sm={4} md={8} lg={8}>
         <AspectRatio ratio="16x9" className="cs--common-header__image-banner">
           <img
-            src="/icon.dark.svg"
+            src="/icon.dark.svg?version=0.1.0"
             className="cs--common-header__logo"
             alt="fed-at-ibm logo"
           />

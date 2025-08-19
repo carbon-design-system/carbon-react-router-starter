@@ -76,7 +76,7 @@ const NavSideItems = ({ routesInSideNav, currentPath }) => (
   </>
 );
 
-const NavHeaderItems = ({ routesInHeader, currentPath }) => (
+const NavigationHeaderItems = ({ routesInHeader, currentPath }) => (
   <>
     {routesInHeader.map(({ path, carbon }) =>
       !carbon.inSubMenu && carbon?.label ? (
@@ -137,7 +137,7 @@ export const Nav = () => {
         </HeaderName>
         {routesInHeader.length > 0 && (
           <HeaderNavigation aria-label="fed-at-ibm">
-            <NavHeaderItems
+            <NavigationHeaderItems
               routesInHeader={routesInHeader}
               currentPath={location.pathname}
             />
@@ -160,7 +160,7 @@ export const Nav = () => {
         <SideNavItems>
           {routesInHeader.length > 0 && (
             <HeaderSideNavItems hasDivider>
-              <NavHeaderItems
+              <NavigationHeaderItems
                 routesInHeader={routesInHeader}
                 currentPath={location.pathname}
               />
