@@ -10,17 +10,12 @@ import {
   Header,
   HeaderGlobalAction,
   HeaderGlobalBar,
-  HeaderMenu,
   HeaderMenuButton,
-  HeaderMenuItem,
   HeaderName,
   HeaderNavigation,
   HeaderSideNavItems,
   SideNav,
   SideNavItems,
-  SideNavLink,
-  SideNavMenu,
-  SideNavMenuItem,
   SkipToContent,
 } from '@carbon/react';
 
@@ -28,89 +23,9 @@ import { Search, Switcher as SwitcherIcon } from '@carbon/icons-react';
 import { Link as RouterLink, useLocation } from 'react-router';
 
 import { routesInHeader, routesInSideNav } from '../../routes/config';
+import { NavHeaderItems } from './NavHeaderItems';
+import { NavSideItems } from './NavSideItems';
 
-const destinationProps = (path, carbon, currentPath) =>
-  path
-    ? {
-        as: RouterLink,
-        isActive: path === currentPath,
-      }
-    : {
-        href: carbon.href,
-      };
-
-const NavSideItems = ({ routesInSideNav, currentPath }) => (
-  <>
-    {routesInSideNav.map(({ path, carbon }) =>
-      !carbon.inSubMenu && carbon?.label ? (
-        carbon.subMenu ? (
-          <SideNavMenu
-            key={path ?? carbon.label}
-            renderIcon={carbon.icon}
-            title={carbon.label}
-          >
-            {carbon.subMenu.map((subRoute) => (
-              <SideNavMenuItem
-                key={subRoute.path ?? subRoute.carbon.label}
-                {...destinationProps(
-                  subRoute.path,
-                  subRoute.carbon,
-                  currentPath,
-                )}
-              >
-                {subRoute.carbon.label}
-              </SideNavMenuItem>
-            ))}
-          </SideNavMenu>
-        ) : (
-          <SideNavLink
-            key={path ?? carbon.label}
-            renderIcon={carbon.icon}
-            {...destinationProps(path, carbon, currentPath)}
-          >
-            {carbon.label}
-          </SideNavLink>
-        )
-      ) : null,
-    )}
-  </>
-);
-
-const NavigationHeaderItems = ({ routesInHeader, currentPath }) => (
-  <>
-    {routesInHeader.map(({ path, carbon }) =>
-      !carbon.inSubMenu && carbon?.label ? (
-        carbon.subMenu ? (
-          <HeaderMenu
-            aria-label={carbon.label}
-            key={path}
-            menuLinkName={carbon.label}
-          >
-            {carbon.subMenu.map((subRoute) => (
-              <HeaderMenuItem
-                as={RouterLink}
-                to={subRoute.path}
-                key={subRoute.path}
-                isActive={subRoute.path === currentPath}
-              >
-                {subRoute.carbon.label}
-              </HeaderMenuItem>
-            ))}
-          </HeaderMenu>
-        ) : (
-          <HeaderMenuItem
-            as={RouterLink}
-            key={path}
-            to={path}
-            isActive={path === currentPath}
-          >
-            {carbon?.label}
-          </HeaderMenuItem>
-        )
-      ) : null,
-    )}
-  </>
-);
 export const Nav = () => {
   const location = useLocation();
   const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
@@ -137,7 +52,7 @@ export const Nav = () => {
         </HeaderName>
         {routesInHeader.length > 0 && (
           <HeaderNavigation aria-label="fed-at-ibm">
-            <NavigationHeaderItems
+            <NavHeaderItems
               routesInHeader={routesInHeader}
               currentPath={location.pathname}
             />
@@ -160,7 +75,7 @@ export const Nav = () => {
         <SideNavItems>
           {routesInHeader.length > 0 && (
             <HeaderSideNavItems hasDivider>
-              <NavigationHeaderItems
+              <NavHeaderItems
                 routesInHeader={routesInHeader}
                 currentPath={location.pathname}
               />
