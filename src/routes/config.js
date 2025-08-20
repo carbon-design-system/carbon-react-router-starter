@@ -7,7 +7,7 @@
 import { MagicWand, LogoGithub } from '@carbon/icons-react';
 import Dashboard from '../pages/dashboard/Dashboard';
 import NotFound from '../pages/not-found/NotFound';
-import Placeholder from '../pages/Placeholder/Placeholder';
+import Placeholder from '../pages/placeholder-/Placeholder';
 import Welcome from '../pages/welcome/Welcome';
 
 // type carbonRouteType = {
