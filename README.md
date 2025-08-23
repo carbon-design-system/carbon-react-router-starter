@@ -69,7 +69,6 @@ This project comes with a pre-configured testing setup using React Testing Libra
 
 Add your test files to `src/__test__/*.test.jsx`, import the necessary methods from React Testing Library and MSW and use `render` and `screen` to render your components and interact with them. Use MSW handlers (defined in `src/test/server.js`) to mock API responses for your components.
 
-
 #### Running Tests
 
 For test execution, run:
