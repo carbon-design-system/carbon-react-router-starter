@@ -26,7 +26,7 @@ export const WelcomeHeader = () => {
           <p>
             <Button
               renderIcon={ArrowRight}
-              href="https://github.com/carbon-design-system/carbon-react-router-starter"
+              href="https://github.com/carbon-design-system/carbon-react-router-starter/generate"
             >
               Use this template
             </Button>
