@@ -10,24 +10,26 @@
 @use '@carbon/react/scss/breakpoint' as *;
 
 @mixin page-common() {
-  h1,
-  dd {
+  // Wrap all rules with :where to keep specificity low.
+  // Users should be able to override these easily
+  :where(h1),
+  :where(dd) {
     @include type-style('heading-07');
 
     margin-block-end: $spacing-08;
   }
 
-  h3 {
+  :where(h3) {
     margin-block-end: $spacing-05;
   }
 
-  p,
-  dt {
+  :where(p),
+  :where(dt) {
     margin-block-end: $spacing-05;
     margin-inline-end: $spacing-08;
   }
 
-  dt {
+  :where(dt) {
     @include type-style('label-02');
   }
 }
