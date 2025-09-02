@@ -8,11 +8,6 @@
 @use '@carbon/react/scss/spacing' as *;
 @use '@carbon/react/scss/type' as *;
 @use '@carbon/react/scss/breakpoint' as *;
-@use '../page-common' as common;
-
-.cs--welcome {
-  @include common.page-common;
-}
 
 .cs--welcome__about {
   margin-block-start: $spacing-07;
