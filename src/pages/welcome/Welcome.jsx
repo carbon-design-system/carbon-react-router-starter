@@ -6,33 +6,18 @@
  */
 
 import { CodeSnippet, Column, Grid, Tile } from '@carbon/react';
-import { useEffect, useState } from 'react';
 
-import { getMessage } from '../../api/message.js';
 import { Footer } from '../../components/footer/Footer';
 import { WelcomeHeader } from '../../components/welcomeHeader/WelcomeHeader';
 import { PageLayout } from '../../layouts/page-layout.jsx';
+import PostComponent from './post/PostComponent.jsx';
+import { Suspense } from 'react';
 
 // The styles are imported into index.scss by default.
 // Do the same unless you have a good reason not to.
 // import './welcome.scss';
 
 const Welcome = () => {
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    const loadMessage = async () => {
-      try {
-        const msg = await getMessage();
-        setMessage(msg);
-      } catch {
-        setMessage('Failed to load message');
-      }
-    };
-
-    loadMessage();
-  }, []);
-
   return (
     <PageLayout
       className="cs--welcome"
@@ -149,9 +134,9 @@ const Welcome = () => {
                 endpoint. This showcases how to perform data fetching while
                 keeping components clean and separating network logic.
               </p>
-              <Tile>
-                <strong>Message:</strong> {message || 'Loading...'}
-              </Tile>
+              <Suspense>
+                <PostComponent />
+              </Suspense>
             </Column>
           </Grid>
         </Column>
