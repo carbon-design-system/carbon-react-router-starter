@@ -8,11 +8,6 @@
 @use '@carbon/react/scss/grid' as *;
 @use '@carbon/react/scss/spacing' as *;
 @use '@carbon/react/scss/type' as *;
-@use '../page-common' as common;
-
-.cs--dashboard {
-  @include common.page-common;
-}
 
 .cs--dashboard__tile {
   margin-block: $spacing-05;
