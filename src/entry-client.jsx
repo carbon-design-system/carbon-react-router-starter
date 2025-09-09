@@ -12,12 +12,15 @@ import { BrowserRouter } from 'react-router';
 import { Router } from './routes';
 
 // App level imports
+import { ThemeProvider } from './context/ThemeContext';
 
 hydrateRoot(
   document.getElementById('root'),
   <StrictMode>
-    <BrowserRouter>
-      <Router />
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+    </ThemeProvider>
   </StrictMode>,
 );
