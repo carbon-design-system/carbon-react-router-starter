@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use '@carbon/react/scss/spacing' as *;
+@use '../page-common' as common;
 
-.cs--footer {
-  padding-block-start: $spacing-12;
+.cs--placeholder {
+  @include common.page-common;
 }
