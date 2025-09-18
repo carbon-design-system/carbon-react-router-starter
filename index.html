@@ -6,6 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/src/index.scss" />
     <title>Carbon React starter template</title>
+    <script>
+      // Prevent theme flash by applying stored theme immediately
+      (function () {
+        try {
+          var themeSetting =
+            localStorage.getItem('app-theme-setting') || 'system';
+          if (themeSetting !== 'system') {
+            // For explicit theme choices, set the attribute immediately
+            var theme = themeSetting === 'dark' ? 'g100' : 'g10';
+            document.documentElement.setAttribute('cs--theme', theme);
+          } else {
+            // For system preference, check if we should use dark mode
+            var prefersDark = window.matchMedia(
+              '(prefers-color-scheme: dark)',
+            ).matches;
+            if (prefersDark) {
+              // System prefers dark, but we don't set an attribute as CSS handles this
+              // The :root selector in theme.scss will apply the dark theme via media query
+            }
+          }
+        } catch (e) {
+          // Ignore errors, fall back to CSS media query
+        }
+      })();
+    </script>
     <!--app-head-->
   </head>
 
