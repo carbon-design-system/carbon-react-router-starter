@@ -30,4 +30,8 @@
   dt {
     @include type-style('label-02');
   }
+
+  em {
+    font-style: italic;
+  }
 }

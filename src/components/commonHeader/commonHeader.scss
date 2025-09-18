@@ -4,16 +4,16 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
- 
+
 @use '@carbon/react/scss/spacing' as *;
 @use '@carbon/react/scss/type' as *;
 @use '@carbon/react/scss/theme' as *;
 
-.cs--welcome-header {
+.cs--common-header {
   margin-block-end: $spacing-09;
 }
 
-.cs--welcome-header__image-banner {
+.cs--common-header__image-banner {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,7 +24,7 @@
   );
 }
 
-.cs--welcome-header__logo {
+.cs--common-header__logo {
   block-size: calc(4 * #{$spacing-09});
   filter: var(--cs-logo-filter);
 }
