@@ -26,6 +26,7 @@ import Welcome from '../pages/welcome/Welcome';
 //   path: string;
 //   index?: boolean;
 //   element?: ({ usingOutlet }: { usingOutlet?: boolean }) => JSX.Element;
+//   status?: number;
 //   carbon?: carbonRouteType;
 // };
 
