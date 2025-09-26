@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// eslint-disable-next-line import/namespace
 import { getMessage } from '../service/message.js';
 
 export const routeHandlers = {

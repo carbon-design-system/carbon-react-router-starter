@@ -64,14 +64,14 @@ app.use('*all', async (req, res) => {
 
     let didError = false;
 
-    const { pipe, abort } = render(url, {
+    const { pipe, abort, statusCode } = render(url, {
       onShellError() {
         res.status(500);
         res.set({ 'Content-Type': 'text/html' });
         res.send('<h1>Something went wrong</h1>');
       },
       onShellReady() {
-        res.status(didError ? 500 : 200);
+        res.status(didError ? 500 : statusCode);
         res.set({ 'Content-Type': 'text/html' });
 
         const transformStream = new Transform({

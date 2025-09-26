@@ -138,6 +138,7 @@ export const routes = [
   {
     path: '*',
     element: NotFound,
+    status: 404,
   },
 ];
 

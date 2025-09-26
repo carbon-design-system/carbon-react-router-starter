@@ -12,6 +12,7 @@ import { StaticRouter } from 'react-router';
 
 // App level imports
 import { Router } from './routes/index.jsx';
+import { getStatusCodeForPath } from './routes/utils.js';
 
 /**
  * @param {string} url
@@ -19,6 +20,7 @@ import { Router } from './routes/index.jsx';
  */
 export function render(_url, options) {
   const url = `/${_url}`;
+  const statusCode = getStatusCodeForPath(url);
 
   const { pipe, abort } = renderToPipeableStream(
     <StrictMode>
@@ -31,5 +33,5 @@ export function render(_url, options) {
 
   const head = '<meta name="description" content="Server-side rendered page">';
 
-  return { pipe, head, abort };
+  return { pipe, head, abort, statusCode };
 }

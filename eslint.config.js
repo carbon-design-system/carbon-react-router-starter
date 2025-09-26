@@ -33,7 +33,7 @@ export default [
       /* added (globals.node) - for server side elements */
       globals: { ...globals.browser, ...globals.node, ...globals.jest },
       parserOptions: {
-        ecmaVersion: 'latest',
+        ecmaVersion: 2022, // Explicitly set to 2022 to support optional chaining
         ecmaFeatures: { jsx: true },
         sourceType: 'module',
       },
@@ -77,6 +77,8 @@ export default [
         NOTE: Should be removable after https://github.com/Mikadv/carbon-react-starter/issues/32
         */
       'no-irregular-whitespace': ['error', { skipJSXText: true }],
+      // Allow optional chaining
+      'import/namespace': 'off',
     },
   },
 ];

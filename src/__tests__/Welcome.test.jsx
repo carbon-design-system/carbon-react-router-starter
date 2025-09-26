@@ -6,7 +6,6 @@
  */
 
 import { test, expect } from 'vitest';
-// eslint-disable-next-line import/namespace
 import { screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { render } from '../test/test-utils';
