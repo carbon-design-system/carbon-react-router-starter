@@ -10,48 +10,21 @@ import {
   Header,
   HeaderGlobalAction,
   HeaderGlobalBar,
-  HeaderMenu,
   HeaderMenuButton,
-  HeaderMenuItem,
   HeaderName,
   HeaderNavigation,
   HeaderSideNavItems,
   SideNav,
   SideNavItems,
-  SideNavLink,
-  SideNavMenu,
-  SideNavMenuItem,
   SkipToContent,
 } from '@carbon/react';
 
-import {
-  LogoGithub,
-  MagicWand,
-  Search,
-  Switcher as SwitcherIcon,
-} from '@carbon/icons-react';
-import { useLocation, Link } from 'react-router';
+import { Search, Switcher as SwitcherIcon } from '@carbon/icons-react';
+import { Link as RouterLink, useLocation } from 'react-router';
 
-function NavigationItems({ location }) {
-  return (
-    <>
-      <HeaderMenuItem
-        as={Link}
-        to="/dashboard"
-        isActive={location.pathname === '/dashboard'}
-      >
-        Dashboard
-      </HeaderMenuItem>
-      <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
-      <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
-      <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
-        <HeaderMenuItem href="#one">Sub-link 1</HeaderMenuItem>
-        <HeaderMenuItem href="#two">Sub-link 2</HeaderMenuItem>
-        <HeaderMenuItem href="#three">Sub-link 3</HeaderMenuItem>
-      </HeaderMenu>
-    </>
-  );
-}
+import { routesInHeader, routesInSideNav } from '../../routes/config';
+import { NavHeaderItems } from './NavHeaderItems';
+import { NavSideItems } from './NavSideItems';
 
 export const Nav = () => {
   const location = useLocation();
@@ -74,14 +47,17 @@ export const Nav = () => {
           isActive={isSideNavExpanded}
           aria-expanded={isSideNavExpanded}
         />
-        <HeaderName as={Link} to="/" prefix="Carbon">
+        <HeaderName as={RouterLink} to="/" prefix="Carbon">
           React starter template
         </HeaderName>
-        <HeaderNavigation aria-label="fed-at-ibm">
-          {/* Render navigation items for viewports equal to or larger than the "Large" breakpoint.
-          This applies to desktop views. */}
-          <NavigationItems location={location} />
-        </HeaderNavigation>
+        {routesInHeader.length > 0 && (
+          <HeaderNavigation aria-label="fed-at-ibm">
+            <NavHeaderItems
+              routesInHeader={routesInHeader}
+              currentPath={location.pathname}
+            />
+          </HeaderNavigation>
+        )}
         <HeaderGlobalBar>
           <HeaderGlobalAction aria-label="Search">
             <Search size={20} />
@@ -97,19 +73,19 @@ export const Nav = () => {
         isPersistent={false}
       >
         <SideNavItems>
-          <HeaderSideNavItems hasDivider>
-            {/* Render navigation items for viewports smaller than the "Large" breakpoint.
-              This applies to mobile and small tablet views. */}
-            <NavigationItems location={location} />
-          </HeaderSideNavItems>
-          <SideNavMenu renderIcon={MagicWand} title="Getting started">
-            <SideNavMenuItem href="#">Install</SideNavMenuItem>
-            <SideNavMenuItem href="#">Guide</SideNavMenuItem>
-            <SideNavMenuItem href="#">FAQ</SideNavMenuItem>
-          </SideNavMenu>
-          <SideNavLink renderIcon={LogoGithub} href="#">
-            GitHub
-          </SideNavLink>
+          {routesInHeader.length > 0 && (
+            <HeaderSideNavItems hasDivider>
+              <NavHeaderItems
+                routesInHeader={routesInHeader}
+                currentPath={location.pathname}
+              />
+            </HeaderSideNavItems>
+          )}
+
+          <NavSideItems
+            routesInSideNav={routesInSideNav}
+            currentPath={location.pathname}
+          />
         </SideNavItems>
       </SideNav>
     </>

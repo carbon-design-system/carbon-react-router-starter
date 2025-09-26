@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// eslint-disable-next-line import/namespace
 import { render as rtlRender } from '@testing-library/react';
 import { BrowserRouter } from 'react-router';
 import { StrictMode } from 'react';
