@@ -49,6 +49,6 @@
   block-size: calc(100vh - $spacing-09);
   max-block-size: calc(100vh - $spacing-08);
   padding-block-start: $spacing-05;
-  overflow-y: auto;
+  overflow: hidden auto;
   scrollbar-color: $background-active $layer-01;
 }
