@@ -13,11 +13,11 @@ import { CommonHeader } from '../../components/commonHeader/CommonHeader';
 export const WelcomeHeader = () => {
   return (
     <CommonHeader
-      title={'Welcome to the Carbon React starter template'}
+      title={'Welcome to the Carbon React starter template'}
       paragraphs={[
         <>
           This is a boilerplate and a living guide for creating React
-          applications with the Carbon Design System. Change it as you see
+          applications with the Carbon Design System. Change it as you see
           needed.
         </>,
         <>Maintained by fed-at-ibm, a chapter of the OIC.</>,

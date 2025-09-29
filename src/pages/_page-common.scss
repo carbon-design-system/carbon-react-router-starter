@@ -10,9 +10,13 @@
 @use '@carbon/react/scss/breakpoint' as *;
 
 @mixin page-common() {
+  * {
+    text-wrap: pretty;
+  }
+
   h1,
   dd {
-    @include type-style('heading-07');
+    @include type-style('heading-06');
 
     margin-block-end: $spacing-08;
   }
