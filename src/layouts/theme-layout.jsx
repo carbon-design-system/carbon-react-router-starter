@@ -12,13 +12,13 @@ import { useThemeContext } from '../context/ThemeContext';
 export const ThemeLayout = () => {
   const { themeMenu, ready } = useThemeContext();
 
-  return ready ? (
-    <GlobalTheme theme={themeMenu}>
-      <Theme theme={themeMenu}>
-        <Outlet />
-      </Theme>
-    </GlobalTheme>
-  ) : (
-    <Outlet />
+  return (
+    ready && (
+      <GlobalTheme theme={themeMenu}>
+        <Theme theme={themeMenu}>
+          <Outlet />
+        </Theme>
+      </GlobalTheme>
+    )
   );
 };

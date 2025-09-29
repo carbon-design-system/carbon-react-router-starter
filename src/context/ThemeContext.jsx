@@ -33,6 +33,7 @@ const ThemeContext = createContext({
 export const ThemeProvider = ({ children }) => {
   const prefersDark = usePrefersDarkScheme();
   const [ready, setReady] = useState(false);
+  const [updateReady, setUpdateReady] = useState(false);
 
   // Initialize state from local storage
   const storedValues = getLocalStorageValues();
@@ -84,14 +85,11 @@ export const ThemeProvider = ({ children }) => {
     return calculateMenuTheme(initialTheme);
   });
 
-  // Initialize theme on mount
-  useEffect(() => {
-    setReady(true);
-  }, []);
-
   // Update themes when settings change
   useEffect(() => {
     const newTheme = calculateTheme();
+    setReady(false);
+    setUpdateReady(true);
     setTheme(newTheme);
     setThemeMenu(calculateMenuTheme(newTheme));
 
@@ -105,8 +103,6 @@ export const ThemeProvider = ({ children }) => {
     if (themeSetting !== 'system') {
       root.setAttribute('cs--theme', newTheme);
     }
-
-    setReady(true);
   }, [
     themeSetting,
     themeMenuCompliment,
@@ -114,6 +110,13 @@ export const ThemeProvider = ({ children }) => {
     calculateTheme,
     calculateMenuTheme,
   ]);
+
+  useEffect(() => {
+    if (updateReady) {
+      setReady(true);
+      setUpdateReady(false);
+    }
+  }, [updateReady]);
 
   const value = {
     themeSetting,

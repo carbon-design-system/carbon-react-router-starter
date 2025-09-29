@@ -14,27 +14,16 @@ import { useThemeContext } from '../context/ThemeContext';
 export const PageLayout = ({ children, className, fallback }) => {
   const { theme, ready } = useThemeContext();
 
-  // Create content with or without explicit theme
-  const renderContent = () => {
-    // If theme context is not ready, render without explicit theme
-    if (!ready) {
-      return <Content className="cs--page-layout-content">{children}</Content>;
-    }
-
-    // Once theme context is ready, use the theme
-    return (
-      <Theme theme={theme} as={Content}>
-        <Content className="cs--page-layout-content">{children}</Content>
-      </Theme>
-    );
-  };
-
   return (
-    <Suspense fallback={fallback}>
-      <div className={classNames('cs--page-layout', className)}>
-        <Nav />
-        {renderContent()}
-      </div>
-    </Suspense>
+    ready && (
+      <Suspense fallback={fallback}>
+        <div className={classNames('cs--page-layout', className)}>
+          <Nav />
+          <Theme theme={theme} as={Content}>
+            <Content className="cs--page-layout-content">{children}</Content>
+          </Theme>
+        </div>
+      </Suspense>
+    )
   );
 };
