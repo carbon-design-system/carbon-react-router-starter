@@ -11,7 +11,12 @@
 
 @mixin page-common() {
   * {
-    text-wrap: pretty;
+    /* 
+    text-wrap-style: balance aims to improve typography by creating more visually appealing text blocks. 
+    When text is balanced, the browser attempts to distribute text more evenly across lines, 
+    avoiding situations where you have very long lines followed by very short lines (orphans).
+    */
+    text-wrap-style: balance;
   }
 
   h1,
