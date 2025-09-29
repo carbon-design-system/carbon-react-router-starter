@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* eslint-disable */
 import { setupServer } from 'msw/node';
 import { getNetworking } from './networking';
 import { getRouter } from './router';

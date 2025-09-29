@@ -21,9 +21,11 @@
    place from the start. In most case, avoid loading styles
    from the JavaScript. */
 @use 'layouts/page-layout';
+@use 'pages/not-found/not-found';
+@use 'pages/placeholder/placeholder';
 @use 'pages/welcome/welcome';
 @use 'pages/dashboard/dashboard';
-@use 'components/welcomeHeader/welcomeHeader';
+@use 'components/commonHeader/commonHeader';
 @use 'components/footer/footer';
 
 @mixin light-brand {
