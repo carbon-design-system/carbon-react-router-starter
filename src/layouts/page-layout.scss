@@ -41,9 +41,47 @@
   @include carbon-content-overrides;
 }
 
-.cs--page-layout-content {
+@mixin default-project-type() {
+  * {
+    /* 
+    text-wrap-style: balance aims to improve typography by creating more visually appealing text blocks. 
+    When text is balanced, the browser attempts to distribute text more evenly across lines, 
+    avoiding situations where you have very long lines followed by very short lines (orphans).
+    */
+    text-wrap-style: balance;
+  }
+
+  h1,
+  dd {
+    @include type-style('heading-07');
+
+    margin-block-end: $spacing-08;
+  }
+
+  h3 {
+    margin-block-end: $spacing-05;
+  }
+
+  p,
+  dt {
+    margin-block-end: $spacing-05;
+    margin-inline-end: $spacing-08;
+  }
+
+  dt {
+    @include type-style('label-02');
+  }
+}
+
+:where(.cs--page-layout-content) {
+  // low specificity to make it easier to override defaults
   @include default-type;
 
+  // after Carbon default type
+  @include default-project-type;
+}
+
+.cs--page-layout-content {
   // These following styles size the content area and move the scroll
   // from the body to this content area
   block-size: calc(100vh - $spacing-09);
