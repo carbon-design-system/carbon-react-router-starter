@@ -49,6 +49,15 @@
   block-size: calc(100vh - $spacing-09);
   max-block-size: calc(100vh - $spacing-08);
   padding-block-start: $spacing-05;
-  overflow-y: auto;
-  scrollbar-color: $background-active $layer-01;
+
+  /* 
+  This is our main content area for which we should ensure all of our content is displayed 
+  within the vertical scrolling area. 
+  
+  If you desire horizontal and vertical scrolling, such as within a diagramming component/canvas, 
+  you should manage scrolling withing the component/canvas. 
+  */
+  overflow: hidden auto; /* no horizontal scroll, vertical only unless manged elsewhere */
+  scrollbar-gutter: stable; /* ensure we do not jump on scroll bar appearance */
+  scrollbar-color: $background-active $layer;
 }
