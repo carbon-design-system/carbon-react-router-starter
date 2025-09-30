@@ -6,20 +6,19 @@
  */
 
 import { GlobalTheme, Theme } from '@carbon/react';
-
-import { useThemes } from '../hooks/useThemes';
 import { Outlet } from 'react-router';
+import { useThemeContext } from '../context/ThemeContext';
 
 export const ThemeLayout = () => {
-  const { primaryTheme, themeReady } = useThemes();
+  const { themeMenu, ready } = useThemeContext();
 
-  return themeReady ? (
-    <GlobalTheme theme={primaryTheme}>
-      <Theme theme={primaryTheme}>
-        <Outlet />
-      </Theme>
-    </GlobalTheme>
-  ) : (
-    <Outlet />
+  return (
+    ready && (
+      <GlobalTheme theme={themeMenu}>
+        <Theme theme={themeMenu}>
+          <Outlet />
+        </Theme>
+      </GlobalTheme>
+    )
   );
 };
