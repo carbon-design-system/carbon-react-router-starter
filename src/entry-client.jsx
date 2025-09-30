@@ -11,8 +11,6 @@ import { hydrateRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router';
 import { Router } from './routes';
 
-// App level imports
-
 hydrateRoot(
   document.getElementById('root'),
   <StrictMode>

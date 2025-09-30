@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 export const useThemes = () => {
   const prefersDark = usePrefersDarkScheme();
   const [themeReady, setThemeReady] = useState(false);
+  const [updateThemeReady, setUpdateThemeReady] = useState(false);
 
   // Will not resolve to actual theme preferences until after first render
   // monitor themeReady to make use of primary and secondary theme.
@@ -25,8 +26,16 @@ export const useThemes = () => {
       setPrimaryTheme('g10');
       setSecondaryTheme('white');
     }
-    setThemeReady(true);
+
+    setUpdateThemeReady(true);
   }, [prefersDark]);
+
+  useEffect(() => {
+    if (updateThemeReady) {
+      // Theme is only marked as ready after the theme settings have been initialized
+      setThemeReady(true);
+    }
+  }, [updateThemeReady]);
 
   return { primaryTheme, secondaryTheme, themeReady };
 };

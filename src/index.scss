@@ -24,23 +24,35 @@
 @use 'components/commonHeader/commonHeader';
 @use 'components/footer/footer';
 
-/* system preference theme by default */
-:root {
-  @include theme(themes.$g10);
-
+@mixin light-brand {
   --cs-brand: #{$blue-30};
   --cs-brand-alt: #{$blue-20};
   --cs-logo-filter: invert(100%);
 }
 
+@mixin dark-brand {
+  --cs-brand: #{$blue-80};
+  --cs-brand-alt: #{$blue-90};
+  --cs-logo-filter: initial;
+}
+
+/* system preference theme by default */
+:root,
+:root[cs--theme='g10'] {
+  @include theme(themes.$g10);
+  @include light-brand;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     @include theme(themes.$g100);
-
-    --cs-brand: #{$blue-80};
-    --cs-brand-alt: #{$blue-90};
-    --cs-logo-filter: initial;
+    @include dark-brand;
   }
+}
+
+:root[cs--theme='g100'] {
+  @include theme(themes.$g100);
+  @include dark-brand;
 }
 
 body {
