@@ -13,13 +13,13 @@ import { Outlet } from 'react-router';
 export const ThemeLayout = () => {
   const { primaryTheme, themeReady } = useThemes();
 
-  return themeReady ? (
-    <GlobalTheme theme={primaryTheme}>
-      <Theme theme={primaryTheme}>
-        <Outlet />
-      </Theme>
-    </GlobalTheme>
-  ) : (
-    <Outlet />
+  return (
+    themeReady && (
+      <GlobalTheme theme={primaryTheme}>
+        <Theme theme={primaryTheme}>
+          <Outlet />
+        </Theme>
+      </GlobalTheme>
+    )
   );
 };
