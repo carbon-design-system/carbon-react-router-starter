@@ -8,7 +8,10 @@ It is intended to be helping, not dictating. If you don't know exactly what to u
 
 ## Get started
 
-1. Clone this template
+1. Instantiate this template locally without the git history
+   ```
+   npx degit https://github.com/carbon-design-system/carbon-react-router-starter
+   ```
 1. Install the dependencies. _Requires Node 24_
    ```
    nvm i # Optional, but desirable to make sure you have the supported version
