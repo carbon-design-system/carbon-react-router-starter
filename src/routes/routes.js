@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// eslint-disable-next-line import/namespace,import/default, import/no-named-as-default, import/no-named-as-default-member
+// eslint-disable-next-line import/default, import/no-named-as-default, import/no-named-as-default-member
 import postHandlers from '../service/postHandlers.js';
 
 /**
