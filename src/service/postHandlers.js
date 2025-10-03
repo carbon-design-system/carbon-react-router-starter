@@ -10,8 +10,6 @@
  */
 
 export const getPost = async ({ params: { id } }, res) => {
-  console.log(id);
-
   // Validate that id is a positive integer
   if (!/^\d+$/.test(id)) {
     return res.status(400).json({ message: 'Invalid post id' });
@@ -28,7 +26,7 @@ export const getPost = async ({ params: { id } }, res) => {
     // Return the blogpost's title
     res.json(blogpost);
   } catch {
-    res.status(500).json({ message: 'Failed to fetch message' });
+    res.status(500).json({ message: 'Failed to fetch post' });
   }
 };
 
@@ -44,7 +42,7 @@ export const getComments = async ({ query: { postId } }, res) => {
     // Return the blogpost's title
     res.json(comments);
   } catch {
-    res.status(500).json({ message: 'Failed to fetch message' });
+    res.status(500).json({ message: 'Failed to fetch comments' });
   }
 };
 
