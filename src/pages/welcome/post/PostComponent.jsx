@@ -1,5 +1,5 @@
 import { getComments, getPost } from '../../../api/message.js';
-import { Heading, Layer, Section, Tile } from '@carbon/react';
+import { Heading, Section, Tile, Stack, Layer } from '@carbon/react';
 import { useEffect, useState } from 'react';
 
 const PostComponent = () => {
@@ -20,7 +20,7 @@ const PostComponent = () => {
       const comments = await getComments(1);
       setComments(comments);
     } catch {
-      setPost('Failed to load comments');
+      setComments('Failed to load comments');
     }
   };
 
@@ -33,28 +33,32 @@ const PostComponent = () => {
     <Section as="article" level={3}>
       <Heading>Posts</Heading>
       <Tile>
-        <Section as="article" level={3}>
-          <Section level={4}>
-            <Heading>{post?.title ?? 'Loading...'}</Heading>
-            <div>{post?.body}</div>
+        <Stack gap={6}>
+          <Section as="article" level={3}>
+            <Section level={4}>
+              <Heading>{post?.title ?? 'Loading...'}</Heading>
+              <p>{post?.body}</p>
+            </Section>
           </Section>
-        </Section>
 
-        <Section as="article" level={3}>
-          <Heading>Comments</Heading>
-          <Section as="article" level={4}>
-            <Layer level={1}>
-              <Tile>
-                {comments?.map((comment) => (
-                  <Tile title={`Post from ${comment.email}`} key={comment.id}>
-                    <Heading>{`From ${comment.email}`}</Heading>
-                    <div>{comment.body}</div>
-                  </Tile>
-                ))}
-              </Tile>
-            </Layer>
+          <Section as="article" level={5}>
+            <Stack gap={3}>
+              <Heading>Comments</Heading>
+              <Section as="article" level={6}>
+                <Stack gap={3}>
+                  {comments?.map((comment) => (
+                    <Layer level={1} key={comment.id}>
+                      <Tile title={`Post from ${comment.email}`}>
+                        <Heading>{`From ${comment.email}`}</Heading>
+                        <p>{comment.body}</p>
+                      </Tile>
+                    </Layer>
+                  ))}
+                </Stack>
+              </Section>
+            </Stack>
           </Section>
-        </Section>
+        </Stack>
       </Tile>
     </Section>
   );
