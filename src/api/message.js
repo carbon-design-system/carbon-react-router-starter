@@ -11,6 +11,7 @@
 
 export const getPost = async (postId) => {
   try {
+    // TODO: handle production and development environments
     const response = await fetch(`http://localhost:5173/api/post/${postId}`);
     return await response.json();
   } catch (error) {
@@ -20,6 +21,7 @@ export const getPost = async (postId) => {
 
 export const getComments = async (postId) => {
   try {
+    // TODO: handle production and development environments
     const response = await fetch(
       `http://localhost:5173/api/comments?postId=${postId}`,
     );
