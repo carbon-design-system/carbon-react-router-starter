@@ -47,7 +47,7 @@ const PostComponent = () => {
               <Section as="article" level={6}>
                 <Stack gap={3}>
                   {comments?.map((comment) => (
-                    <Layer level={1} key={comment.id}>
+                    <Layer key={comment.id}>
                       <Tile title={`Post from ${comment.email}`}>
                         <Heading>{`From ${comment.email}`}</Heading>
                         <p>{comment.body}</p>
