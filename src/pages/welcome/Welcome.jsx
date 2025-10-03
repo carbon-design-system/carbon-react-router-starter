@@ -11,7 +11,10 @@ import {
   Grid,
   Heading,
   Tile,
+  UnorderedList,
+  ListItem,
   Section,
+  Stack,
 } from '@carbon/react';
 import { useEffect, useState } from 'react';
 
@@ -135,16 +138,40 @@ const Welcome = () => {
               </Heading>
             </Column>
             <Column
-              sm={2}
+              sm={4}
               md={4}
               lg={12}
               className="cs--welcome__dynamic-message"
             >
-              <p>
-                Below is a dynamically fetched message from an external API
-                endpoint. This showcases how to perform data fetching while
-                keeping components clean and separating network logic.
-              </p>
+              <Stack gap={3}>
+                <p>
+                  Below is a dynamically fetched message from an external API
+                  endpoint. This showcases how to perform data fetching while
+                  keeping components clean and separating network logic. Here is
+                  how it works:
+                </p>
+                <UnorderedList>
+                  <ListItem>
+                    <strong>UI Layer</strong> - PostComponent.jsx manages React
+                    state and renders the data using Carbon Design components
+                  </ListItem>
+                  <ListItem>
+                    <strong>API Layer</strong> - Client-side functions in{' '}
+                    <code>api/message.js</code> handle HTTP requests to our
+                    Express backend
+                  </ListItem>
+                  <ListItem>
+                    <strong>Service Layer</strong> - Server-side handlers in{' '}
+                    <code>service/postHandlers.js</code> proxy requests to
+                    external APIs (JSONPlaceholder)
+                  </ListItem>
+                </UnorderedList>
+                <p>
+                  This pattern keeps your components focused on presentation
+                  while centralizing data fetching logic for reusability and
+                  testability.
+                </p>
+              </Stack>
               <Suspense>
                 <PostComponent />
               </Suspense>
