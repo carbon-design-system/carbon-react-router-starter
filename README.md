@@ -1,6 +1,6 @@
 # carbon-react-starter
 
-<img height=48px src="public/icon.dark.svg"></img>
+![Screen capture of the app home screen](public/home-page.jpg)
 
 This project is intended as a guiding template to get you and your team started with a fresh project basing on the Carbon Design System.
 
