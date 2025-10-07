@@ -9,8 +9,8 @@
     "build:client": "vite build --ssrManifest .vite/ssr-manifest.json  --outDir dist/client",
     "build:server": "vite build --ssr src/entry-server.jsx --outDir dist/server",
     "lighthouse": "lhci collect",
-    "lint": "run-p -s 'lint:*'",
-    "lint-fix": "run-s -s 'lint:es --fix' 'lint:style --fix' 'lint:format'",
+    "lint": "npm run lint:es && npm run lint:style && npm run lint:format && npm run lint:spell",
+    "lint-fix": "npm run lint:es -- --fix && npm run lint:style -- --fix && npm run lint:format",
     "lint:es": "eslint . --report-unused-disable-directives --max-warnings 0 --cache --cache-location \"node_modules/.cache/eslint/\"",
     "lint:style": "stylelint \"./**/*.scss\" --cache --cache-location \"node_modules/.cache/stylelint/\"",
     "lint:format": "prettier . --write --ignore-unknown --no-error-on-unmatched-pattern --log-level warn --cache --cache-location \"node_modules/.cache/prettier/\"",
@@ -19,9 +19,7 @@
     "preview": "cross-env NODE_ENV=local node src/server.js",
     "test": "vitest run --coverage",
     "test:watch": "vitest --watch",
-    "prepare": "husky",
-    "upgrade:other": "npm-check-updates -u --dep dev,peer,prod --reject '/(carbon|^react$|^react-dom$|^@testing-library)/' --target minor",
-    "upgrade:carbon": "npm-check-updates -u --dep dev,peer,prod --packageFile '{package.json,{config/**,packages/**}/package.json}' --filter '/carbon/' --target minor"
+    "prepare": "husky"
   },
   "dependencies": {
     "@carbon/icons-react": "^11.53.0",
@@ -62,8 +60,6 @@
     "jsdom": "^27.0.0",
     "lint-staged": "^16.0.0",
     "msw": "^2.7.3",
-    "npm-check-updates": "^18.0.3",
-    "npm-run-all2": "^5.0.0",
     "prettier": "^3.5.3",
     "sass-embedded": "^1.85.1",
     "stylelint": "^16.18.0",
