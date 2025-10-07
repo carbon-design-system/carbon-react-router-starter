@@ -89,9 +89,9 @@ export const ThemeProvider = ({ children }) => {
   useEffect(() => {
     const newTheme = calculateTheme();
     setReady(false);
-    setUpdateReady(true);
     setTheme(newTheme);
     setThemeMenu(calculateMenuTheme(newTheme));
+    setUpdateReady(true);
 
     // Update the document element with the appropriate theme data attribute
     const root = document.documentElement;
