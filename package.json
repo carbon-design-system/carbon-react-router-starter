@@ -63,7 +63,7 @@
     "lint-staged": "^16.0.0",
     "msw": "^2.7.3",
     "npm-check-updates": "^18.0.3",
-    "npm-run-all2": "^5.0.0",
+    "npm-run-all2": "^8.0.0",
     "prettier": "^3.5.3",
     "sass-embedded": "^1.85.1",
     "stylelint": "^16.18.0",
