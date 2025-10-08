@@ -5,7 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { CodeSnippet, Column, Grid, Tile } from '@carbon/react';
+import {
+  CodeSnippet,
+  Column,
+  Grid,
+  Heading,
+  Tile,
+  Section,
+} from '@carbon/react';
 import { useEffect, useState } from 'react';
 
 import { getMessage } from '../../api/message.js';
@@ -40,9 +47,9 @@ const Welcome = () => {
     >
       <WelcomeHeader />
 
-      <Grid>
+      <Section as={Grid}>
         <Column sm={4} md={4} lg={8} xlg={4}>
-          <h3 className="cs--welcome__heading">↳ Run the template</h3>
+          <Heading className="cs--welcome__heading">↳ Run the template</Heading>
         </Column>
         <Column sm={4} md={8} lg={8} xlg={8}>
           <p>This code requires node v.20</p>
@@ -57,7 +64,9 @@ const Welcome = () => {
         <Column className="cs--welcome__about" sm={4} md={8} lg={16}>
           <Grid>
             <Column sm={4} md={4} lg={8} xlg={4}>
-              <h3 className="cs--welcome__heading">↳ What is this about?</h3>
+              <Heading className="cs--welcome__heading">
+                ↳ What is this about?
+              </Heading>
             </Column>
             {/* While the carbon documentation states that most containers should be
                   sized through the aspect ratios defined in the design language,
@@ -108,7 +117,7 @@ const Welcome = () => {
         <Column className="cs--welcome__features" sm={4} md={8} lg={16}>
           <Grid>
             <Column sm={2} md={4} lg={4}>
-              <h3 className="cs--welcome__heading">↳ Features</h3>
+              <Heading className="cs--welcome__heading">↳ Features</Heading>
             </Column>
             <Column className="cs--welcome__tile" sm={2} md={4} lg={4}>
               <Tile title="Flexibility">
@@ -135,9 +144,9 @@ const Welcome = () => {
         >
           <Grid>
             <Column sm={2} md={4} lg={4}>
-              <h3 className="cs--welcome__heading">
+              <Heading className="cs--welcome__heading">
                 ↳ An example of data fetching
-              </h3>
+              </Heading>
             </Column>
             <Column
               sm={2}
@@ -157,7 +166,7 @@ const Welcome = () => {
           </Grid>
         </Column>
         <Footer />
-      </Grid>
+      </Section>
     </PageLayout>
   );
 };
