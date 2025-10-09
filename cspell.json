@@ -33,6 +33,7 @@
     "mdx"
   ],
   "ignorePaths": [
+    "coverage",
     "cspell-dictionaries",
     "dist",
     "package.json",
