@@ -9,6 +9,7 @@ import { render as rtlRender } from '@testing-library/react';
 import { BrowserRouter } from 'react-router';
 import { StrictMode } from 'react';
 import { Router } from '../routes';
+import { ThemeProvider } from '../context/ThemeContext';
 
 export function render(ui, { route = '/', ...renderOptions } = {}) {
   // Push the route we want to test
@@ -17,9 +18,11 @@ export function render(ui, { route = '/', ...renderOptions } = {}) {
   function Wrapper() {
     return (
       <StrictMode>
-        <BrowserRouter>
-          <Router />
-        </BrowserRouter>
+        <ThemeProvider>
+          <BrowserRouter>
+            <Router />
+          </BrowserRouter>
+        </ThemeProvider>
       </StrictMode>
     );
   }

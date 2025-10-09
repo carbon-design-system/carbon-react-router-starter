@@ -12,18 +12,16 @@ import classNames from 'classnames';
 import { useThemeContext } from '../context/ThemeContext';
 
 export const PageLayout = ({ children, className, fallback }) => {
-  const { theme, ready } = useThemeContext();
+  const { theme } = useThemeContext();
 
   return (
-    ready && (
-      <Suspense fallback={fallback}>
-        <div className={classNames('cs--page-layout', className)}>
-          <Nav />
-          <Theme theme={theme} as={Content}>
-            <Content className="cs--page-layout-content">{children}</Content>
-          </Theme>
-        </div>
-      </Suspense>
-    )
+    <Suspense fallback={fallback}>
+      <div className={classNames('cs--page-layout', className)}>
+        <Nav />
+        <Theme theme={theme} as={Content}>
+          <Content className="cs--page-layout-content">{children}</Content>
+        </Theme>
+      </div>
+    </Suspense>
   );
 };
