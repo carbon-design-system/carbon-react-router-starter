@@ -88,7 +88,6 @@ export const ThemeProvider = ({ children }) => {
   // Update themes when settings change
   useEffect(() => {
     const newTheme = calculateTheme();
-    setReady(false);
     setTheme(newTheme);
     setThemeMenu(calculateMenuTheme(newTheme));
     setUpdateReady(true);

@@ -24,7 +24,7 @@
     "upgrade:carbon": "npm-check-updates -u --dep dev,peer,prod --packageFile '{package.json,{config/**,packages/**}/package.json}' --filter '/carbon/' --target minor"
   },
   "dependencies": {
-    "@carbon-labs/react-theme-settings": "^0.15.0",
+    "@carbon-labs/react-theme-settings": "^0.16.0",
     "@carbon/ibm-products": "^2.74.0",
     "@carbon/icons-react": "^11.53.0",
     "@carbon/react": "^1.73.0",

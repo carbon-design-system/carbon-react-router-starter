@@ -242,10 +242,10 @@
   dependencies:
     "@ibm/telemetry-js" "^1.10.2"
 
-"@carbon-labs/react-theme-settings@^0.15.0":
-  version "0.15.0"
-  resolved "https://registry.yarnpkg.com/@carbon-labs/react-theme-settings/-/react-theme-settings-0.15.0.tgz#4c7a159624c121d9a33ce94b072fb3e4fd92e08c"
-  integrity sha512-yn+jaTCRlksCRqq/A3Hn8t3FqOjs12KPCDUy9s5BDh7pyyI+IrswLNOZbH/B1SAYGwIpyNWsabVktm8WJld1vA==
+"@carbon-labs/react-theme-settings@^0.16.0":
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/@carbon-labs/react-theme-settings/-/react-theme-settings-0.16.0.tgz#ddcc41ff7c90315d4b1dfa615fb565fb780f0125"
+  integrity sha512-46M8Aa+cpH6Hb9AIm3FpYTDoM5L01c66HcvUoeYbt9+7qooBZps+jIpeGK6RcYTSCTz6So8eAE0gSLhLS5rfkQ==
   dependencies:
     "@ibm/telemetry-js" "^1.10.2"
 

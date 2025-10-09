@@ -14,7 +14,7 @@ import {
   ThemeSettings,
   ThemeMenuComplement,
   ThemeSwitcher,
-} from '@carbon-labs/react-theme-settings/es/index.js';
+} from '@carbon-labs/react-theme-settings';
 import { useThemeContext } from '../../context/ThemeContext';
 
 export const ProfilePanel = ({ className }) => {
