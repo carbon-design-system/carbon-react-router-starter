@@ -25,19 +25,24 @@ export const ProfilePanel = ({ className }) => {
     setThemeMenuCompliment,
   } = useThemeContext();
 
+  const userProfile = {
+    name: 'Anne Profile',
+    email: 'anne.profile@ibm.com',
+  };
+
   return (
     <div className={classNames(className, 'cs--profile-panel')}>
       <div className="cs--profile-user-info">
         <UserAvatar
-          name="Anne Profile"
+          name={userProfile.name}
           renderIcon=""
           size="lg"
           tooltipAlignment="bottom"
         />
         <div className="cds--profile-user-info__text-wrapper">
-          <div className="cds--profile-user-info__name">Anne Profile</div>
+          <div className="cds--profile-user-info__name">{userProfile.name}</div>
           <div className="cds--profile-user-info__email">
-            anne.profile@ibm.com
+            {userProfile.email}
           </div>
         </div>
       </div>
