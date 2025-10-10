@@ -63,7 +63,7 @@ test('renders profile panel with user information', () => {
   expect(screen.getByText('Complement menu theme')).toBeInTheDocument();
 });
 
-test.only('changes theme when theme switcher is used', async () => {
+test('changes theme when theme switcher is used', async () => {
   const user = userEvent.setup();
   renderWithTheme(<ProfilePanel />);
 
