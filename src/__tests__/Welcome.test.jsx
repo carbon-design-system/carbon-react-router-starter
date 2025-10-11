@@ -8,7 +8,7 @@
 import { test, expect } from 'vitest';
 import { screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { render } from '../test/test-utils';
+import { renderWithAllProviders } from '../test/test-utils';
 import Welcome from '../pages/welcome/Welcome';
 import { server } from '../test/server';
 import {
@@ -25,7 +25,7 @@ afterEach(() => setupAfterEach(server));
 afterAll(() => setupAfterAll(server));
 
 test('renders received message', async () => {
-  render(<Welcome />);
+  renderWithAllProviders(<Welcome />);
 
   // Wait for the expected text to appear
   expect(
