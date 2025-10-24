@@ -5,14 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { AspectRatio, Column, Grid } from '@carbon/react';
+import { AspectRatio, Column, Grid, Heading } from '@carbon/react';
 
 export const CommonHeader = ({ title, paragraphs }) => {
   return (
-    <Grid className="cs--common-header">
+    <Grid as="header" className="cs--common-header">
       <Column sm={4} md={8} lg={8}>
         <AspectRatio as="section" ratio="16x9">
-          <h1 className="cs--common-header__title">{title}</h1>
+          <Heading className="cs--common-header__title">{title}</Heading>
           {paragraphs.map((paragraph, i) => (
             <p key={`common-header-paragraph-${i}`}>{paragraph}</p>
           ))}

@@ -19,7 +19,7 @@ export const PageLayout = ({ children, className, fallback }) => {
       <div className={classNames('cs--page-layout', className)}>
         <Nav />
         <Theme theme={theme} as={Content}>
-          <Content className="cs--page-layout-content">{children}</Content>
+          <div className="cs--page-layout-content">{children}</div>
         </Theme>
       </div>
     </Suspense>
