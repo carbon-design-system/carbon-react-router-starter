@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+@use '@carbon/ibm-products/css/index.min';
 @use '@carbon/react' with (
   $font-path: '@ibm/plex'
 );
@@ -12,6 +13,7 @@
 @use '@carbon/react/scss/theme' as *;
 @use '@carbon/react/scss/themes';
 @use '@carbon/react/scss/colors' as *;
+@use '@carbon-labs/react-theme-settings/scss/theme-settings';
 
 /* Importing the component styles here will load them
    before the JavaScript, which will make the page 
