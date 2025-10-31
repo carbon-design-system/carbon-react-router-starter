@@ -14,26 +14,18 @@
   // These Carbon overrides are pending outcome of issue #19877
   // https://github.com/carbon-design-system/carbon/issues/19877
 
-  :where(.cds--side-nav ~ .cds--content) {
-    // Where used to allow padding to be overridden later
+  // :where used to allow padding to be overridden later
+  :where(.cds--content) {
+    // Padding is really not needed in the content and can get in the way
+    // of page headers footers etc.
+    // This is especially true on pages using Carbon CSS Grid
+    // which has its own padding and margin. On mobile devices this can makes
+    // for a lot of whitespace on the left and right of the page
     padding: 0;
   }
 
-  .cds--side-nav ~ .cds--content {
-    /* stylelint-disable-next-line carbon/layout-use -- temporary fix pending Content component updates */
-    margin-inline-start: 16rem;
-
-    @include breakpoint-down('lg') {
-      margin-inline-start: 0;
-    }
-  }
-
-  .cds--side-nav--hidden ~ .cds--content {
+  .cds--side-nav:not(.cds--side-nav--expanded) ~ .cds--content {
     margin-inline-start: 0;
-  }
-
-  .cds--side-nav--rail ~ .cds--content {
-    margin-inline: $spacing-09;
   }
 }
 
