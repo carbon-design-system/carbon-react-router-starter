@@ -65,7 +65,7 @@
   }
 }
 
-:where(.cs--page-layout-content) {
+:where(.cs--page-layout__content) {
   // low specificity to make it easier to override defaults
   @include default-type;
 
@@ -73,7 +73,7 @@
   @include default-project-type;
 }
 
-.cs--page-layout-content {
+.cs--page-layout__content {
   // These following styles size the content area and move the scroll
   // from the body to this content area
   block-size: calc(100vh - $spacing-09);
@@ -90,4 +90,12 @@
   overflow: hidden auto; /* no horizontal scroll, vertical only unless manged elsewhere */
   scrollbar-gutter: stable; /* ensure we do not jump on scroll bar appearance */
   scrollbar-color: $background-active $layer;
+}
+
+.cs--page-layout :has(.cs--page-layout__content-header) {
+  padding-block-start: 0;
+}
+
+.cs--page-layout__content-header {
+  margin-block-end: $spacing-05;
 }
