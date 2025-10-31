@@ -11,7 +11,12 @@ import { Nav } from '../components/nav/Nav';
 import classNames from 'classnames';
 import { useThemeContext } from '../context/ThemeContext';
 
-export const PageLayout = ({ children, className, fallback }) => {
+export const PageLayout = ({
+  children,
+  className,
+  fallback,
+  renderPageHeader,
+}) => {
   const { theme } = useThemeContext();
 
   return (
@@ -19,7 +24,14 @@ export const PageLayout = ({ children, className, fallback }) => {
       <div className={classNames('cs--page-layout', className)}>
         <Nav />
         <Theme theme={theme} as={Content}>
-          <div className="cs--page-layout-content">{children}</div>
+          <div className="cs--page-layout__content">
+            {renderPageHeader && (
+              <div className="cs--page-layout__content-header">
+                {renderPageHeader()}
+              </div>
+            )}
+            <div className="cs--page-layout__content-body">{children}</div>
+          </div>
         </Theme>
       </div>
     </Suspense>
