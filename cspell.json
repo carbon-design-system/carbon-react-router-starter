@@ -1,7 +1,7 @@
 {
-  "version": "0.1",
+  "version": "0.2",
   "language": "en",
-  "dictionaries": ["carbon", "project", "people"],
+  "dictionaries": ["carbon", "project"],
   "dictionaryDefinitions": [
     {
       "name": "carbon",
@@ -10,10 +10,6 @@
     {
       "name": "project",
       "path": "./cspell-dictionaries/project.txt"
-    },
-    {
-      "name": "people",
-      "path": "./cspell-dictionaries/people.txt"
     }
   ],
   "enabledLanguageIds": [
