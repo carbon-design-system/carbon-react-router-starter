@@ -6,18 +6,21 @@
  */
 
 import { Content, Theme } from '@carbon/react';
-import { Suspense } from 'react';
+import { Children, Suspense } from 'react';
 import { Nav } from '../components/nav/Nav';
 import classNames from 'classnames';
 import { useThemeContext } from '../context/ThemeContext';
 
-export const PageLayout = ({
-  children,
-  className,
-  fallback,
-  renderPageHeader,
-}) => {
+export const PageLayout = ({ children, className, fallback }) => {
   const { theme } = useThemeContext();
+  const childArray = Children.toArray(children);
+  console.log(childArray);
+  const otherChildren = childArray.filter(
+    (child) => child.type !== PageLayoutHeader,
+  );
+  const Header = childArray.find((child) => child.type === PageLayoutHeader);
+
+  console.log(Header);
 
   return (
     <Suspense fallback={fallback}>
@@ -25,15 +28,17 @@ export const PageLayout = ({
         <Nav />
         <Theme theme={theme} as={Content}>
           <div className="cs--page-layout__content">
-            {renderPageHeader && (
-              <div className="cs--page-layout__content-header">
-                {renderPageHeader()}
-              </div>
-            )}
-            <div className="cs--page-layout__content-body">{children}</div>
+            {Header}
+            <div className="cs--page-layout__content-body">{otherChildren}</div>
           </div>
         </Theme>
       </div>
     </Suspense>
   );
 };
+
+const PageLayoutHeader = ({ children }) => (
+  <div className="cs--page-layout__content-header">{children}</div>
+);
+PageLayoutHeader.displayName = 'PageLayoutHeader';
+PageLayout.Header = PageLayoutHeader;
