@@ -9,6 +9,8 @@ import fs from 'node:fs/promises';
 import express from 'express';
 import { Transform } from 'node:stream';
 import { getRoutes } from './routes/routes.js';
+import i18nextMiddleware from 'i18next-http-middleware';
+import i18n from './i18n.server.js';
 
 // Constants
 const isProduction = process.env.NODE_ENV === 'production';
@@ -37,6 +39,9 @@ if (!isProduction) {
   app.use(base, sirv('./dist/client', { extensions: [] }));
 }
 
+// Add i18next middleware for language detection
+app.use(i18nextMiddleware.handle(i18n));
+
 // Register API routes
 getRoutes(app);
 
@@ -64,7 +69,7 @@ app.use('*all', async (req, res) => {
 
     let didError = false;
 
-    const { pipe, abort, statusCode } = render(url, {
+    const { pipe, abort, statusCode } = render(url, req.i18n, {
       onShellError() {
         res.status(500);
         res.set({ 'Content-Type': 'text/html' });

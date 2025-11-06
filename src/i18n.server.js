@@ -1,0 +1,46 @@
+/**
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import i18next from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import Backend from 'i18next-fs-backend';
+import { fileURLToPath } from 'node:url';
+import { dirname, resolve } from 'node:path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+i18next
+  // Load translation files from filesystem
+  .use(Backend)
+  // Pass the i18n instance to react-i18next
+  .use(initReactI18next)
+  // Init i18next
+  .init({
+    debug: false,
+    fallbackLng: 'en',
+    supportedLngs: ['en', 'de'],
+    preload: ['en', 'de'], // Preload all languages on server
+
+    // Important for SSR
+    useSuspense: false,
+
+    // Return key if translation missing (useful with defaultValue pattern)
+    returnNull: false,
+    returnEmptyString: false,
+
+    backend: {
+      // Path to translation files
+      loadPath: resolve(__dirname, 'locales/{{lng}}.json'),
+    },
+
+    interpolation: {
+      escapeValue: false, // React already escapes values
+    },
+  });
+
+export default i18next;
