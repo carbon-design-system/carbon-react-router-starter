@@ -90,7 +90,9 @@ const Welcome = () => {
             </Column>
             <Column sm={4} md={4} lg={8} xlg={4}>
               <Tile className="cs--welcome__tile cs--welcome__tile--highlight">
-                <strong>{t('welcome.consistency.title', 'Stay consistent')}</strong>
+                <strong>
+                  {t('welcome.consistency.title', 'Stay consistent')}
+                </strong>
                 <br />
                 <br />
                 {t(
@@ -101,7 +103,9 @@ const Welcome = () => {
             </Column>
             <Column sm={4} md={4} lg={8} xlg={4}>
               <Tile className="cs--welcome__tile cs--welcome__tile--highlight">
-                <strong>{t('welcome.customize.title', 'Customize as needed')}</strong>
+                <strong>
+                  {t('welcome.customize.title', 'Customize as needed')}
+                </strong>
                 <br />
                 <br />
                 {t(

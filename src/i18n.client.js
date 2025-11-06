@@ -17,7 +17,7 @@ i18next
   .use(initReactI18next)
   // Load translation files dynamically
   .use(
-    resourcesToBackend((language, namespace) => {
+    resourcesToBackend((language) => {
       // Only load non-English translations from files
       // English is provided as defaultValue in components
       if (language === 'en') {

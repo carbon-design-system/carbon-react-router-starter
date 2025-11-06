@@ -8,25 +8,37 @@
 import { Button } from '@carbon/react';
 
 import { ArrowRight } from '@carbon/icons-react';
+import { useTranslation } from 'react-i18next';
 import { CommonHeader } from '../../components/commonHeader/CommonHeader';
 
 export const WelcomeHeader = () => {
+  const { t } = useTranslation();
+
   return (
     <CommonHeader
-      title={'Welcome to the Carbon React starter template'}
+      title={t(
+        'welcomeHeader.title',
+        'Welcome to the Carbon React starter template',
+      )}
       paragraphs={[
         <>
-          This is a boilerplate and a living guide for creating React
-          applications with the Carbon Design System. Change it as you see
-          needed.
+          {t(
+            'welcomeHeader.description1',
+            'This is a boilerplate and a living guide for creating React applications with the Carbon Design System. Change it as you see needed.',
+          )}
         </>,
-        <>Maintained by fed-at-ibm, a chapter of the OIC.</>,
+        <>
+          {t(
+            'welcomeHeader.maintainer',
+            'Maintained by fed-at-ibm, a chapter of the OIC.',
+          )}
+        </>,
         <>
           <Button
             renderIcon={ArrowRight}
             href="https://github.com/carbon-design-system/carbon-react-router-starter/generate"
           >
-            Use this template
+            {t('welcomeHeader.button.useTemplate', 'Use this template')}
           </Button>
         </>,
       ]}

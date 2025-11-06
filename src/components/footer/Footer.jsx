@@ -6,13 +6,16 @@
  */
 
 import { AspectRatio, Column } from '@carbon/react';
+import { useTranslation } from 'react-i18next';
 
 export const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <Column as="footer" sm={4} md={8} lg={8} className="cs--footer">
       <AspectRatio ratio="16x9">
-        <p>Footer</p>
-        <p>Copyright IBM 2025</p>
+        <p>{t('footer.title', 'Footer')}</p>
+        <p>{t('footer.copyright', 'Copyright IBM 2025')}</p>
       </AspectRatio>
     </Column>
   );
