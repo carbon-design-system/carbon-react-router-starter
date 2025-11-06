@@ -1,0 +1,27 @@
+{
+  "welcome": {
+    "runTemplate": "↳ Template starten",
+    "nodeRequirement": "Benötigt Node v.20",
+    "whatIsThis": "↳ Worum geht's?",
+    "purpose": {
+      "title": "Verwendungszweck",
+      "description": "Dieses Repository hilft beim Einstieg in das Carbon Design System mit React. Es spart Zeit durch eine fertig konfigurierte Basis für neue Projekte."
+    },
+    "consistency": {
+      "title": "Standards einhalten",
+      "description": "Nutzen Sie dies als Referenz, um IBM Design-Standards einzuhalten. Flexibel anpassbar, dabei konsistent in der User Experience."
+    },
+    "customize": {
+      "title": "Individuell anpassen",
+      "description": "Verstehen Sie dies als Startpunkt und Leitfaden, nicht als starres Framework. Passen Sie es an Ihre Anforderungen an oder nutzen Sie es als Inspiration."
+    },
+    "features": "↳ Features",
+    "dataFetching": {
+      "title": "↳ Beispiel: Daten laden",
+      "description": "Hier wird eine Nachricht dynamisch von einem API-Endpunkt geladen. Das zeigt, wie Sie Daten laden können, während Komponenten sauber und Netzwerklogik getrennt bleiben.",
+      "message": "Nachricht:",
+      "loading": "Lädt...",
+      "failed": "Laden fehlgeschlagen"
+    }
+  }
+}
