@@ -6,8 +6,10 @@
  */
 
 import { AspectRatio, Column, Grid, Heading } from '@carbon/react';
+import { useTranslation } from 'react-i18next';
 
 export const CommonHeader = ({ title, paragraphs }) => {
+  const { t } = useTranslation();
   return (
     <Grid as="header" className="cs--common-header">
       <Column sm={4} md={8} lg={8}>
@@ -23,7 +25,7 @@ export const CommonHeader = ({ title, paragraphs }) => {
           <img
             src="/icon.dark.svg?version=0.1.0"
             className="cs--common-header__logo"
-            alt="fed-at-ibm logo"
+            alt={t('commonHeader.logoAlt', 'fed-at-ibm logo')}
           />
         </AspectRatio>
       </Column>

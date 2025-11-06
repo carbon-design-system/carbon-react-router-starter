@@ -1,4 +1,81 @@
 {
+  "nav": {
+    "menu": {
+      "close": "Menü schließen",
+      "open": "Menü öffnen"
+    },
+    "header": {
+      "name": "React-Startvorlage"
+    },
+    "actions": {
+      "search": "Suchen",
+      "userProfile": "Benutzerprofil",
+      "appSwitcher": "App-Umschalter"
+    },
+    "sideNav": {
+      "ariaLabel": "Seitennavigation"
+    }
+  },
+  "footer": {
+    "title": "Fußzeile",
+    "copyright": "Copyright IBM 2025"
+  },
+  "profile": {
+    "settings": {
+      "complementMenuTheme": "Menü-Theme umkehren"
+    }
+  },
+  "commonHeader": {
+    "logoAlt": "fed-at-ibm Logo"
+  },
+  "dashboard": {
+    "metrics": {
+      "activeUsers": "Aktive Benutzer"
+    },
+    "loading": "Dashboard wird geladen...",
+    "sections": {
+      "visualization": "Visualisierung",
+      "coolTable": "Coole Tabelle"
+    }
+  },
+  "notFound": {
+    "loading": "Fehlerseite wird geladen...",
+    "title": "Seite nicht gefunden",
+    "description": "Dies ist nicht die Seite, die Sie gesucht haben.",
+    "routeNotRecognized": "Die Route '{{pathname}}' ist nicht bekannt.",
+    "maintainer": "Betreut von fed-at-ibm, einem Chapter der OIC."
+  },
+  "placeholder": {
+    "loading": "Platzhalterseite wird geladen...",
+    "title": "Diese Seite ist noch nicht fertig",
+    "description1": "Generell ist es keine gute Idee, Seiten im Aufbau zu haben.",
+    "description2": "Diese Seite hilft, die globale Navigation zu demonstrieren.",
+    "routeInfo": "Sie befinden sich an der Route '{{pathname}}'.",
+    "maintainer": "Betreut von fed-at-ibm, einem Chapter der OIC."
+  },
+  "welcomeHeader": {
+    "title": "Willkommen zur Carbon React-Startvorlage",
+    "description1": "Dies ist eine Boilerplate und ein lebendiger Leitfaden für die Erstellung von React-Anwendungen mit dem Carbon Design System. Passen Sie es nach Bedarf an.",
+    "maintainer": "Betreut von fed-at-ibm, einem Chapter der OIC.",
+    "button": {
+      "useTemplate": "Diese Vorlage verwenden"
+    }
+  },
+  "routes": {
+    "dashboard": "Dashboard",
+    "link1": "Link 1",
+    "link2": "Link 2",
+    "link3": "Link 3",
+    "link4": "Link 4",
+    "link4.subLink1": "Unterlink 1",
+    "link4.subLink2": "Unterlink 2",
+    "link4.subLink3": "Unterlink 3",
+    "gettingStarted": "Erste Schritte",
+    "gettingStarted.how": "Wie funktioniert das",
+    "gettingStarted.upToDate": "Aktuell halten",
+    "gettingStarted.report": "Probleme melden",
+    "github": "GitHub"
+  },
   "welcome": {
     "runTemplate": "↳ Template starten",
     "nodeRequirement": "Benötigt Node v.20",

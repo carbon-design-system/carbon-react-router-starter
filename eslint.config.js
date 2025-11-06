@@ -71,14 +71,20 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
-      /* no-irregular-whitespace 
-        - ignore to allow prettier of the text layout. April 10th 2025. 
+      /* no-irregular-whitespace
+        - ignore to allow prettier of the text layout. April 10th 2025.
 
         NOTE: Should be removable after https://github.com/Mikadv/carbon-react-starter/issues/32
         */
       'no-irregular-whitespace': ['error', { skipJSXText: true }],
       // Allow optional chaining
       'import/namespace': 'off',
+      /* Disable import plugin rules that have parse errors with i18next packages */
+      'import/default': 'off',
+      'import/no-named-as-default': 'off',
+      'import/no-named-as-default-member': 'off',
+      /* Ignore unresolved imports for build artifacts */
+      'import/no-unresolved': ['error', { ignore: ['^\\.\\./dist/'] }],
     },
   },
 ];
