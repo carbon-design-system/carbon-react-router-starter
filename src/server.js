@@ -69,7 +69,7 @@ app.use('*all', async (req, res) => {
 
     let didError = false;
 
-    const { pipe, abort, statusCode } = render(url, req.i18n, {
+    const { pipe, head, abort, statusCode } = render(url, req.i18n, {
       onShellError() {
         res.status(500);
         res.set({ 'Content-Type': 'text/html' });
@@ -88,7 +88,9 @@ app.use('*all', async (req, res) => {
 
         const [htmlStart, htmlEnd] = template.split(`<!--app-html-->`);
 
-        res.write(htmlStart);
+        const htmlStartWithHead = htmlStart.replace('<!--app-head-->', head);
+
+        res.write(htmlStartWithHead);
 
         transformStream.on('finish', () => {
           res.end(htmlEnd);
