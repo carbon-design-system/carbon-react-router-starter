@@ -6,6 +6,7 @@
  */
 
 import { Column, Grid, Tile } from '@carbon/react';
+import { useTranslation } from 'react-i18next';
 
 import { Footer } from '../../components/footer/Footer';
 import { PageLayout } from '../../layouts/page-layout';
@@ -14,11 +15,13 @@ import { PageLayout } from '../../layouts/page-layout';
 // Do the same unless you have a good reason not to.
 
 const NumberTile = () => {
+  const { t } = useTranslation();
+
   return (
     <Column sm={4} md={4} lg={4} xlg={4}>
       <Tile className="cs--dashboard__tile cs--dashboard__tile--number">
         <dl>
-          <dt>Active users</dt>
+          <dt>{t('dashboard.metrics.activeUsers', 'Active users')}</dt>
           <dd>{Math.round(Math.random() * 1000)}</dd>
         </dl>
       </Tile>
@@ -27,10 +30,12 @@ const NumberTile = () => {
 };
 
 const Dashboard = () => {
+  const { t } = useTranslation();
+
   return (
     <PageLayout
       className="cs--dashboard"
-      fallback={<p>Loading dashboard page...</p>}
+      fallback={<p>{t('dashboard.loading', 'Loading dashboard page...')}</p>}
     >
       <Grid>
         <NumberTile />
@@ -40,12 +45,14 @@ const Dashboard = () => {
 
         <Column sm={4} md={4} lg={8} xlg={8}>
           <Tile className="cs--dashboard__tile cs--dashboard__tile--data">
-            <strong>Visualization</strong>
+            <strong>
+              {t('dashboard.sections.visualization', 'Visualization')}
+            </strong>
           </Tile>
         </Column>
         <Column sm={4} md={4} lg={8} xlg={8}>
           <Tile className="cs--dashboard__tile cs--dashboard__tile--data">
-            <strong>Cool table</strong>
+            <strong>{t('dashboard.sections.coolTable', 'Cool table')}</strong>
           </Tile>
         </Column>
         <Footer />

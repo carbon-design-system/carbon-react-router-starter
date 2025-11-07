@@ -15,9 +15,11 @@ import {
   ThemeMenuComplement,
   ThemeSwitcher,
 } from '@carbon-labs/react-theme-settings';
+import { useTranslation } from 'react-i18next';
 import { useThemeContext } from '../../context/ThemeContext';
 
 export const ProfilePanel = ({ className }) => {
+  const { t } = useTranslation();
   const {
     themeSetting,
     setThemeSetting,
@@ -55,7 +57,10 @@ export const ProfilePanel = ({ className }) => {
           ></ThemeSwitcher>
           <ThemeMenuComplement
             id="theme-menu-complement"
-            labelText="Complement menu theme"
+            labelText={t(
+              'profile.settings.complementMenuTheme',
+              'Complement menu theme',
+            )}
             checked={themeMenuCompliment}
             onChange={(value) => setThemeMenuCompliment(value)}
           />

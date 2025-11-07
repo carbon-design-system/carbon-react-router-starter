@@ -9,6 +9,7 @@
 import { StrictMode } from 'react';
 import { renderToPipeableStream } from 'react-dom/server';
 import { StaticRouter } from 'react-router';
+import { I18nextProvider } from 'react-i18next';
 
 // App level imports
 import { Router } from './routes/index.jsx';
@@ -16,22 +17,37 @@ import { getStatusCodeForPath } from './routes/utils.js';
 
 /**
  * @param {string} url
+ * @param {import('i18next').i18n} i18n
  * @param {import('react-dom/server').RenderToPipeableStreamOptions} [options]
  */
-export function render(_url, options) {
+export function render(_url, i18n, options) {
   const url = `/${_url}`;
   const statusCode = getStatusCodeForPath(url);
 
   const { pipe, abort } = renderToPipeableStream(
     <StrictMode>
-      <StaticRouter location={url}>
-        <Router />
-      </StaticRouter>
+      <I18nextProvider i18n={i18n}>
+        <StaticRouter location={url}>
+          <Router />
+        </StaticRouter>
+      </I18nextProvider>
     </StrictMode>,
     options,
   );
 
-  const head = '<meta name="description" content="Server-side rendered page">';
+  // Serialize i18n state to pass to client
+  const initialI18nStore = {};
+  i18n.languages.forEach((lng) => {
+    initialI18nStore[lng] = i18n.services.resourceStore.data[lng];
+  });
+
+  const initialState = {
+    initialI18nStore,
+    initialLanguage: i18n.language,
+  };
+
+  const head = `<meta name="description" content="Server-side rendered page">
+<script>window.__INITIAL_I18N_STATE__ = ${JSON.stringify(initialState).replace(/</g, '\\u003c')}</script>`;
 
   return { pipe, head, abort, statusCode };
 }

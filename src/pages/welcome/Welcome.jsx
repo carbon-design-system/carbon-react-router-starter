@@ -14,6 +14,7 @@ import {
   Section,
 } from '@carbon/react';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { getMessage } from '../../api/message.js';
 import { Footer } from '../../components/footer/Footer';
@@ -25,6 +26,7 @@ import { PageLayout } from '../../layouts/page-layout.jsx';
 // import './welcome.scss';
 
 const Welcome = () => {
+  const { t } = useTranslation();
   const [message, setMessage] = useState('');
 
   useEffect(() => {
@@ -33,12 +35,12 @@ const Welcome = () => {
         const msg = await getMessage();
         setMessage(msg);
       } catch {
-        setMessage('Failed to load message');
+        setMessage(t('welcome.dataFetching.failed', 'Failed to load message'));
       }
     };
 
     loadMessage();
-  }, []);
+  }, [t]);
 
   return (
     <PageLayout
@@ -49,10 +51,12 @@ const Welcome = () => {
 
       <Section as={Grid}>
         <Column sm={4} md={4} lg={8} xlg={4}>
-          <Heading className="cs--welcome__heading">↳ Run the template</Heading>
+          <Heading className="cs--welcome__heading">
+            {t('welcome.runTemplate', '↳ Run the template')}
+          </Heading>
         </Column>
         <Column sm={4} md={8} lg={8} xlg={8}>
-          <p>This code requires node v.20</p>
+          <p>{t('welcome.nodeRequirement', 'This code requires node v.20')}</p>
           <CodeSnippet type="single" feedback="Copied to clipboard">
             npm i
           </CodeSnippet>
@@ -65,7 +69,7 @@ const Welcome = () => {
           <Grid>
             <Column sm={4} md={4} lg={8} xlg={4}>
               <Heading className="cs--welcome__heading">
-                ↳ What is this about?
+                {t('welcome.whatIsThis', '↳ What is this about?')}
               </Heading>
             </Column>
             {/* While the carbon documentation states that most containers should be
@@ -75,41 +79,39 @@ const Welcome = () => {
                   vertical rhythm */}
             <Column sm={4} md={4} lg={8} xlg={4}>
               <Tile className="cs--welcome__tile cs--welcome__tile--highlight">
-                <strong>Purpose</strong>
+                <strong>{t('welcome.purpose.title', 'Purpose')}</strong>
                 <br />
                 <br />
-                This repository provides a simple example to help you get
-                started with the Carbon Design System and React.
-                <br />
-                <br />
-                It is designed to save time by offering a pre-configured
-                foundation for your projects.
+                {t(
+                  'welcome.purpose.description',
+                  'This repository provides a simple example to help you get started with the Carbon Design System and React. It is designed to save time by offering a pre-configured foundation for your projects.',
+                )}
               </Tile>
             </Column>
             <Column sm={4} md={4} lg={8} xlg={4}>
               <Tile className="cs--welcome__tile cs--welcome__tile--highlight">
-                <strong>Stay consistent</strong>
+                <strong>
+                  {t('welcome.consistency.title', 'Stay consistent')}
+                </strong>
                 <br />
                 <br />
-                Use this as a reference to ensure your project aligns with
-                IBM&apos;s design standards.
-                <br />
-                <br />
-                It is flexible enough to adapt to your needs while promoting a
-                consistent user experience.
+                {t(
+                  'welcome.consistency.description',
+                  "Use this as a reference to ensure your project aligns with IBM's design standards. It is flexible enough to adapt to your needs while promoting a consistent user experience.",
+                )}
               </Tile>
             </Column>
             <Column sm={4} md={4} lg={8} xlg={4}>
               <Tile className="cs--welcome__tile cs--welcome__tile--highlight">
-                <strong>Customize as needed</strong>
+                <strong>
+                  {t('welcome.customize.title', 'Customize as needed')}
+                </strong>
                 <br />
                 <br />
-                This is meant to be a starting point and a living guide, not a
-                fixed framework.
-                <br />
-                <br />
-                You can modify the repository to fit your project requirements
-                or use it as inspiration for your own approach.
+                {t(
+                  'welcome.customize.description',
+                  'This is meant to be a starting point and a living guide, not a fixed framework. You can modify the repository to fit your project requirements or use it as inspiration for your own approach.',
+                )}
               </Tile>
             </Column>
           </Grid>
@@ -117,7 +119,9 @@ const Welcome = () => {
         <Column className="cs--welcome__features" sm={4} md={8} lg={16}>
           <Grid>
             <Column sm={2} md={4} lg={4}>
-              <Heading className="cs--welcome__heading">↳ Features</Heading>
+              <Heading className="cs--welcome__heading">
+                {t('welcome.features', '↳ Features')}
+              </Heading>
             </Column>
             <Column className="cs--welcome__tile" sm={2} md={4} lg={4}>
               <Tile title="Flexibility">
@@ -145,7 +149,10 @@ const Welcome = () => {
           <Grid>
             <Column sm={2} md={4} lg={4}>
               <Heading className="cs--welcome__heading">
-                ↳ An example of data fetching
+                {t(
+                  'welcome.dataFetching.title',
+                  '↳ An example of data fetching',
+                )}
               </Heading>
             </Column>
             <Column
@@ -155,12 +162,14 @@ const Welcome = () => {
               className="cs--welcome__dynamic-message"
             >
               <p>
-                Below is a dynamically fetched message from an external API
-                endpoint. This showcases how to perform data fetching while
-                keeping components clean and separating network logic.
+                {t(
+                  'welcome.dataFetching.description',
+                  'Below is a dynamically fetched message from an external API endpoint. This showcases how to perform data fetching while keeping components clean and separating network logic.',
+                )}
               </p>
               <Tile>
-                <strong>Message:</strong> {message || 'Loading...'}
+                <strong>{t('welcome.dataFetching.message', 'Message:')}</strong>{' '}
+                {message || t('welcome.dataFetching.loading', 'Loading...')}
               </Tile>
             </Column>
           </Grid>
