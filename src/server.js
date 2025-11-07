@@ -39,7 +39,12 @@ if (!isProduction) {
 }
 
 // Add i18next middleware for language detection
-app.use(i18nextMiddleware.handle(i18n));
+app.use(
+  i18nextMiddleware.handle(i18n, {
+    ignoreRoutes: [], // Don't ignore any routes
+    removeLngFromUrl: false,
+  }),
+);
 
 // Register API routes
 getRoutes(app);

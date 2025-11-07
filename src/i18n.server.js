@@ -36,6 +36,13 @@ await i18next
     returnNull: false,
     returnEmptyString: false,
 
+    // Language detection for server-side (used by i18next-http-middleware)
+    detection: {
+      order: ['header'],
+      lookupHeader: 'accept-language',
+      caches: false,
+    },
+
     backend: {
       // Path to translation files
       loadPath: resolve(__dirname, 'locales/{{lng}}.json'),
