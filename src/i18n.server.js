@@ -8,6 +8,7 @@
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import Backend from 'i18next-fs-backend';
+import i18nextMiddleware from 'i18next-http-middleware';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
@@ -17,6 +18,8 @@ const __dirname = dirname(__filename);
 i18next
   // Load translation files from filesystem
   .use(Backend)
+  // Add language detector for server-side
+  .use(i18nextMiddleware.LanguageDetector)
   // Pass the i18n instance to react-i18next
   .use(initReactI18next)
   // Init i18next
@@ -32,6 +35,13 @@ i18next
     // Return key if translation missing (useful with defaultValue pattern)
     returnNull: false,
     returnEmptyString: false,
+
+    // Language detection for server-side (used by i18next-http-middleware)
+    detection: {
+      order: ['header'],
+      lookupHeader: 'accept-language',
+      caches: false,
+    },
 
     backend: {
       // Path to translation files
