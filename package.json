@@ -48,6 +48,7 @@
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react-swc": "^4.0.0",
     "@vitest/coverage-v8": "^4.0.0",
+    "carbon-vscode-snippets": "git+ssh://git@github.ibm.com:lee-chase/carbon-code-snippets.git",
     "cross-env": "^10.0.0",
     "cspell": "^9.0.0",
     "eslint": "^9.23.0",
