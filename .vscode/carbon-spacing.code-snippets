@@ -80,25 +80,25 @@
   },
   "$fluid-spacing-01": {
     "scope": "scss",
-    "prefix": ["$fluid-spacing-01", "$spacing"],
+    "prefix": "$fluid-spacing-01",
     "body": "$$fluid-spacing-01",
     "description": "Carbon fluid spacing token (responsive)"
   },
   "$fluid-spacing-02": {
     "scope": "scss",
-    "prefix": ["$fluid-spacing-02", "$spacing"],
+    "prefix": "$fluid-spacing-02",
     "body": "$$fluid-spacing-02",
     "description": "Carbon fluid spacing token (responsive)"
   },
   "$fluid-spacing-03": {
     "scope": "scss",
-    "prefix": ["$fluid-spacing-03", "$spacing"],
+    "prefix": "$fluid-spacing-03",
     "body": "$$fluid-spacing-03",
     "description": "Carbon fluid spacing token (responsive)"
   },
   "$fluid-spacing-04": {
     "scope": "scss",
-    "prefix": ["$fluid-spacing-04", "$spacing"],
+    "prefix": "$fluid-spacing-04",
     "body": "$$fluid-spacing-04",
     "description": "Carbon fluid spacing token (responsive)"
   }

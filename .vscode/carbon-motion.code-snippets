@@ -38,37 +38,37 @@
   },
   "motion('standard', 'productive')": {
     "scope": "scss",
-    "prefix": ["motion"],
+    "prefix": ["motion", "standard", "productive"],
     "body": "@include motion('standard', 'productive')",
     "description": "Carbon motion token - standard easing"
   },
   "motion('standard', 'expressive')": {
     "scope": "scss",
-    "prefix": ["motion"],
+    "prefix": ["motion", "standard", "expressive"],
     "body": "@include motion('standard', 'expressive')",
     "description": "Carbon motion token - standard easing"
   },
   "motion('entrance', 'productive')": {
     "scope": "scss",
-    "prefix": ["motion"],
+    "prefix": ["motion", "entrance", "productive"],
     "body": "@include motion('entrance', 'productive')",
     "description": "Carbon motion token - entrance easing"
   },
   "motion('entrance', 'expressive')": {
     "scope": "scss",
-    "prefix": ["motion"],
+    "prefix": ["motion", "entrance", "expressive"],
     "body": "@include motion('entrance', 'expressive')",
     "description": "Carbon motion token - entrance easing"
   },
   "motion('exit', 'productive')": {
     "scope": "scss",
-    "prefix": ["motion"],
+    "prefix": ["motion", "exit", "productive"],
     "body": "@include motion('exit', 'productive')",
     "description": "Carbon motion token - exit easing"
   },
   "motion('exit', 'expressive')": {
     "scope": "scss",
-    "prefix": ["motion"],
+    "prefix": ["motion", "exit", "expressive"],
     "body": "@include motion('exit', 'expressive')",
     "description": "Carbon motion token - exit easing"
   }
