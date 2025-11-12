@@ -14,13 +14,10 @@ import { useThemeContext } from '../context/ThemeContext';
 export const PageLayout = ({ children, className, fallback }) => {
   const { theme } = useThemeContext();
   const childArray = Children.toArray(children);
-  console.log(childArray);
   const otherChildren = childArray.filter(
     (child) => child.type !== PageLayoutHeader,
   );
   const Header = childArray.find((child) => child.type === PageLayoutHeader);
-
-  console.log(Header);
 
   return (
     <Suspense fallback={fallback}>
