@@ -6,6 +6,7 @@
  */
 
 import { Column, Grid, Tile } from '@carbon/react';
+import { useState } from 'react';
 
 import { Footer } from '../../components/footer/Footer';
 import { PageLayout } from '../../layouts/page-layout';
@@ -14,12 +15,14 @@ import { PageLayout } from '../../layouts/page-layout';
 // Do the same unless you have a good reason not to.
 
 const NumberTile = () => {
+  const [activeUsers] = useState(() => Math.round(Math.random() * 1000));
+
   return (
     <Column sm={4} md={4} lg={4} xlg={4}>
       <Tile className="cs--dashboard__tile cs--dashboard__tile--number">
         <dl>
           <dt>Active users</dt>
-          <dd>{Math.round(Math.random() * 1000)}</dd>
+          <dd>{activeUsers}</dd>
         </dl>
       </Tile>
     </Column>
