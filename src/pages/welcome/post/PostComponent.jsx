@@ -20,7 +20,7 @@ const PostComponent = () => {
       const comments = await getComments(1);
       setComments(comments);
     } catch {
-      setComments('Failed to load comments');
+      setComments([]);
     }
   };
 
@@ -46,14 +46,15 @@ const PostComponent = () => {
               <Heading>Comments</Heading>
               <Section as="article" level={6}>
                 <Stack gap={3}>
-                  {comments?.map((comment) => (
-                    <Layer key={comment.id}>
-                      <Tile title={`Post from ${comment.email}`}>
-                        <Heading>{`From ${comment.email}`}</Heading>
-                        <p>{comment.body}</p>
-                      </Tile>
-                    </Layer>
-                  ))}
+                  {Array.isArray(comments) &&
+                    comments.map((comment) => (
+                      <Layer key={comment.id}>
+                        <Tile title={`Post from ${comment.email}`}>
+                          <Heading>{`From ${comment.email}`}</Heading>
+                          <p>{comment.body}</p>
+                        </Tile>
+                      </Layer>
+                    ))}
                 </Stack>
               </Section>
             </Stack>

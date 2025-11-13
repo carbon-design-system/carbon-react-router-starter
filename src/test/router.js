@@ -9,10 +9,14 @@ import { http } from 'msw';
 
 export const getRouter = (mocks, networking) => {
   const apiRoute = (verb, path, handler) => {
-    const mock = http[verb](path, async () => {
+    const mock = http[verb](path, async ({ request, params }) => {
+      // Parse query parameters from URL
+      const url = new URL(request.url);
+      const query = Object.fromEntries(url.searchParams.entries());
+
       const req = {
-        params: {},
-        query: {},
+        params,
+        query,
       };
 
       const res = {
@@ -20,6 +24,12 @@ export const getRouter = (mocks, networking) => {
           networking.removeRequest(path);
           return Response.json(data);
         },
+        status: (code) => ({
+          json: (data) => {
+            networking.removeRequest(path);
+            return Response.json(data, { status: code });
+          },
+        }),
       };
 
       networking.addRequests(path);
