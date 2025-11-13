@@ -40,9 +40,9 @@ export const getComments = async ({ query: { postId } }, res) => {
     const comments = await response.json();
 
     // Return the blogpost's title
-    res.json(comments);
-  } catch {
-    res.status(500).json({ message: 'Failed to fetch comments' });
+    return res.json(comments);
+  } catch (error) {
+    return res.status(500).json({ message: 'Failed to fetch comments' });
   }
 };
 

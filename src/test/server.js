@@ -6,6 +6,7 @@
  */
 
 import { setupServer } from 'msw/node';
+import { http } from 'msw';
 import { getNetworking } from './networking';
 import { getRouter } from './router';
 import { getRoutes } from '../routes/routes';
@@ -14,9 +15,42 @@ const _setupServer = (...args) => {
   const mocks = [];
   const networking = getNetworking();
 
+  // Set up internal API routes
   getRoutes(getRouter(mocks, networking));
 
-  const server = setupServer(...mocks, ...args);
+  // Mock external API calls to jsonplaceholder
+  const externalMocks = [
+    http.get('https://jsonplaceholder.typicode.com/posts/:id', ({ params }) => {
+      return Response.json({
+        id: params.id,
+        title: 'Test Post Title',
+        body: 'Test post body content',
+        userId: 1,
+      });
+    }),
+    http.get('https://jsonplaceholder.typicode.com/comments', ({ request }) => {
+      const url = new URL(request.url);
+      const postId = url.searchParams.get('postId');
+      return Response.json([
+        {
+          id: 1,
+          postId: parseInt(postId),
+          name: 'Test Comment 1',
+          email: 'test1@example.com',
+          body: 'Test comment 1 body',
+        },
+        {
+          id: 2,
+          postId: parseInt(postId),
+          name: 'Test Comment 2',
+          email: 'test2@example.com',
+          body: 'Test comment 2 body',
+        },
+      ]);
+    }),
+  ];
+
+  const server = setupServer(...mocks, ...externalMocks, ...args);
   server.networking = networking;
   return server;
 };
