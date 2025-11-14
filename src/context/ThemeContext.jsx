@@ -33,7 +33,6 @@ const ThemeContext = createContext({
 export const ThemeProvider = ({ children }) => {
   const prefersDark = usePrefersDarkScheme();
   const [ready, setReady] = useState(false);
-  const [updateReady, setUpdateReady] = useState(false);
 
   // Initialize state from local storage
   const storedValues = getLocalStorageValues();
@@ -79,20 +78,12 @@ export const ThemeProvider = ({ children }) => {
     [themeMenuCompliment],
   );
 
-  const [theme, setTheme] = useState(() => calculateTheme());
-  const [themeMenu, setThemeMenu] = useState(() => {
-    const initialTheme = calculateTheme();
-    return calculateMenuTheme(initialTheme);
-  });
+  // Calculate current theme based on settings
+  const theme = calculateTheme();
+  const themeMenu = calculateMenuTheme(theme);
 
-  // Update themes when settings change
+  // Update the DOM when theme changes
   useEffect(() => {
-    const newTheme = calculateTheme();
-    setTheme(newTheme);
-    setThemeMenu(calculateMenuTheme(newTheme));
-    setUpdateReady(true);
-
-    // Update the document element with the appropriate theme data attribute
     const root = document.documentElement;
 
     // Remove any existing theme data attribute
@@ -100,22 +91,12 @@ export const ThemeProvider = ({ children }) => {
 
     // If not using system theme, add the appropriate data attribute
     if (themeSetting !== 'system') {
-      root.setAttribute('cs--theme', newTheme);
+      root.setAttribute('cs--theme', theme);
     }
-  }, [
-    themeSetting,
-    themeMenuCompliment,
-    prefersDark,
-    calculateTheme,
-    calculateMenuTheme,
-  ]);
 
-  useEffect(() => {
-    if (updateReady) {
-      setReady(true);
-      setUpdateReady(false);
-    }
-  }, [updateReady]);
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- Setting ready state after DOM synchronization is intentional
+    setReady(true);
+  }, [theme, themeSetting]);
 
   const value = {
     themeSetting,

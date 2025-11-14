@@ -52,7 +52,7 @@ export default [
   importPlugin.flatConfigs.recommended,
   /* added (eslint-plugin-react) - popular recommended config March 24th 2025 */
   pluginReact.configs.flat['jsx-runtime'],
-  ...pluginReactHooks.configs['flat/recommended'],
+  pluginReactHooks.configs.flat.recommended,
   pluginReactRefresh.configs.vite,
   /* added (eslint-plugin-jsx-a11y) - ensures attributes needed for accessibility are added */
   eslintPluginJsxA11y.flatConfigs.recommended,
