@@ -1,0 +1,33 @@
+{
+  // WARNING: installed by carbon-vscode-snippets local updates will be lost on running package install
+  "Stylelint disable next line": {
+    "scope": "scss",
+    "prefix": "//",
+    "body": ["// stylelint-disable-next-line"]
+  },
+  "Stylelint disable next line Carbon Layout": {
+    "scope": "scss",
+    "prefix": "//la",
+    "body": ["// stylelint-disable-next-line carbon/layout-token-use"]
+  },
+  "Stylelint disable next line Carbon Motion Duration": {
+    "scope": "scss",
+    "prefix": "//mo",
+    "body": ["// stylelint-disable-next-line carbon/motion-duration-use"]
+  },
+  "Stylelint disable next line Carbon Motion Easing": {
+    "scope": "scss",
+    "prefix": "//moe",
+    "body": ["// stylelint-disable-next-line carbon/motion-easing-use"]
+  },
+  "Stylelint disable next line Carbon Type": {
+    "scope": "scss",
+    "prefix": "//ty",
+    "body": ["// stylelint-disable-next-line carbon/type-token-use"]
+  },
+  "Stylelint disable next line Carbon Theme": {
+    "scope": "scss",
+    "prefix": "//th",
+    "body": ["// stylelint-disable-next-line carbon/theme-token-use"]
+  }
+}
