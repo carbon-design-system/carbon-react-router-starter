@@ -217,7 +217,7 @@
   "@include motion('entrance', 'expressive')": {
     "scope": "scss",
     "prefix": ["mo", "motion"],
-    "body": "@include motion(entrance, 'expressive')",
+    "body": "@include motion('entrance', 'expressive')",
     "description": "Carbon duration token",
   },
   "@include motion('exit', 'productive')": {
@@ -322,10 +322,10 @@
     "body": "@include type-style('heading-02')",
     "description": "Carbon typography token",
   },
-  "@include type-style('productive-Heading-02')": {
+  "@include type-style('productive-heading-02')": {
     "scope": "scss",
     "prefix": ["ty", "type"],
-    "body": "@include type-style('productive-Heading-02')",
+    "body": "@include type-style('productive-heading-02')",
     "description": "Carbon typography token",
   },
   "@include type-style('productive-heading-03')": {
