@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "node src/server",
-    "build": "npm run build:client && npm run build:server",
+    "build": "npm run type-check && npm run build:client && npm run build:server",
     "build:client": "vite build --ssrManifest .vite/ssr-manifest.json  --outDir dist/client",
     "build:server": "vite build --ssr src/entry-server.jsx --outDir dist/server",
+    "type-check": "tsc --noEmit",
     "lighthouse": "lhci collect",
     "lint": "npm run lint:es && npm run lint:style && npm run lint:format && npm run lint:spell",
     "lint-fix": "npm run lint:es -- --fix && npm run lint:style -- --fix && npm run lint:format",
@@ -43,8 +44,13 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^14.6.1",
+    "@types/compression": "^1.8.1",
+    "@types/express": "^5.0.5",
+    "@types/node": "^24.10.1",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
+    "@typescript-eslint/eslint-plugin": "^8.47.0",
+    "@typescript-eslint/parser": "^8.47.0",
     "@vitejs/plugin-react-swc": "^4.0.0",
     "@vitest/coverage-v8": "^4.0.0",
     "cross-env": "^10.0.0",
@@ -68,11 +74,12 @@
     "stylelint-config-standard-scss": "^16.0.0",
     "stylelint-plugin-carbon-tokens": "^4.0.0",
     "stylelint-use-logical-spec": "^5.0.1",
+    "typescript": "^5.9.3",
     "vite": "^7.0.0",
     "vitest": "^4.0.0"
   },
   "lint-staged": {
-    "*.{js,ts,jsx,tsx}": "eslint . --cache --report-unused-disable-directives --max-warnings 0",
+    "*.{js,jsx,ts,tsx}": "eslint --cache --report-unused-disable-directives --max-warnings 0 --no-warn-ignored",
     ".npmrc": "node -e \"console.error('Are you sure you want to commit .npmrc?'); process.exit(1);\""
   },
   "overrides": {

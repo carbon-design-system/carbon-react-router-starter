@@ -6,7 +6,7 @@
  */
 
 import react from '@vitejs/plugin-react-swc';
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -21,3 +21,5 @@ export default defineConfig({
     },
   },
 });
+
+// Made with Bob
