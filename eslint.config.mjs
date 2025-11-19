@@ -8,6 +8,7 @@
 /*
  * This config file started as the base config file included by Vite when creating a new React application March 24th 2025.
  * Where it differs from this default will be noted in comments.
+ * Updated to support TypeScript migration.
  */
 
 import pluginJs from '@eslint/js';
@@ -23,17 +24,21 @@ import globals from 'globals';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 /* added eslint-config-prettier to turn off conflicting rules April 15th 2025 */
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
+/* added TypeScript support */
+import tseslint from '@typescript-eslint/eslint-plugin';
+import tsparser from '@typescript-eslint/parser';
 
 export default [
-  { ignores: ['dist', 'vite.config.js'] },
+  { ignores: ['dist', 'vite.config.ts', '*.config.ts', '*.config.js'] },
   {
-    files: ['**/*.{js,mjs,cjs,jsx}'],
-    ignores: ['dist', 'vite.config.js'],
+    files: ['**/*.{js,mjs,cjs,jsx,ts,tsx}'],
+    ignores: ['dist', 'vite.config.ts', '*.config.ts', '*.config.js'],
     languageOptions: {
       /* added (globals.node) - for server side elements */
       globals: { ...globals.browser, ...globals.node, ...globals.jest },
+      parser: tsparser,
       parserOptions: {
-        ecmaVersion: 2022, // Explicitly set to 2022 to support optional chaining
+        ecmaVersion: 2022,
         ecmaFeatures: { jsx: true },
         sourceType: 'module',
       },
@@ -44,9 +49,12 @@ export default [
       },
       'import/resolver': {
         node: {
-          extensions: ['.js', '.jsx'],
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
         },
       },
+    },
+    plugins: {
+      '@typescript-eslint': tseslint,
     },
   },
   importPlugin.flatConfigs.recommended,
@@ -66,7 +74,11 @@ export default [
       /* import named is off because @carbon/react uses default exports in some components April 10th 2025 */
       'import/named': 'off',
       /* no-unused-vars - ignore pattern for React component usage */
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { varsIgnorePattern: '^[A-Z_]', argsIgnorePattern: '^_' },
+      ],
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
@@ -79,6 +91,10 @@ export default [
       'no-irregular-whitespace': ['error', { skipJSXText: true }],
       // Allow optional chaining
       'import/namespace': 'off',
+      // TypeScript handles these
+      'import/no-unresolved': 'off',
     },
   },
 ];
+
+// Made with Bob
