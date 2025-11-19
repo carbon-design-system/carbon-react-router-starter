@@ -5,9 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { getMessage } from '../service/message.js';
+import type { Express, RequestHandler } from 'express';
+import { getMessage } from '../service/message';
 
-export const routeHandlers = {
+export interface RouteHandlers {
+  getMessage: RequestHandler;
+}
+
+export const routeHandlers: RouteHandlers = {
   getMessage,
 };
 
@@ -19,6 +24,11 @@ export const routeHandlers = {
  * @param app - Express app instance OR msw router in case of unit testing
  * @param handlers - Route handlers (can be mocked for testing)
  */
-export const getRoutes = (app, handlers = routeHandlers) => {
+export const getRoutes = (
+  app: Express,
+  handlers: RouteHandlers = routeHandlers,
+): void => {
   app.get('/api/message', handlers.getMessage);
 };
+
+// Made with Bob

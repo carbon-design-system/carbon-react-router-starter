@@ -9,28 +9,9 @@ import Dashboard from '../pages/dashboard/Dashboard';
 import NotFound from '../pages/not-found/NotFound';
 import Placeholder from '../pages/placeholder/Placeholder';
 import Welcome from '../pages/welcome/Welcome';
+import { RouteConfigArray } from '../types/routes';
 
-// type carbonRouteType = {
-//   virtualPath: string; // related to path, used for arranging Carbon menu when no path exists
-//   label: string;
-//   inHeader?: boolean;
-//   inSideNav?: boolean;
-//   separator?: boolean;
-//   icon?: CarbonIconType;
-//   subMenu?: routesType[];
-//   inSubMenu?: boolean;
-//   href?: string,
-// };
-
-// type routesType = {
-//   path: string;
-//   index?: boolean;
-//   element?: ({ usingOutlet }: { usingOutlet?: boolean }) => JSX.Element;
-//   status?: number;
-//   carbon?: carbonRouteType;
-// };
-
-export const routes = [
+export const routes: RouteConfigArray = [
   {
     index: true,
     path: '/',
@@ -146,7 +127,7 @@ export const routes = [
 // The routes config is a flat structure defined for use with react-router.
 // Here we organize the routes into a hierarchy for use by the Carbon header and sidenav
 // NOTE: The routes are processed outside of a component as they are not dynamic.
-const routesProcessed = routes.map((route) => {
+const routesProcessed: RouteConfigArray = routes.map((route) => {
   if (!route.carbon) {
     return route;
   }
@@ -154,7 +135,7 @@ const routesProcessed = routes.map((route) => {
   const path = route.path || route.carbon.virtualPath;
 
   const subMenu = routes.filter((subRoute) => {
-    const subPath = subRoute.path || subRoute.carbon.virtualPath;
+    const subPath = subRoute.path || subRoute.carbon?.virtualPath;
     const childPath = new RegExp(`^${path}/[^/]+$`); // match direct parent only
 
     return !route.index && subPath && childPath.test(subPath);
@@ -166,9 +147,9 @@ const routesProcessed = routes.map((route) => {
 
     // mark child as in sub menu
     subMenu.forEach((menu) => {
-      const subPath = menu.path || menu.carbon.virtualPath;
+      const subPath = menu.path || menu.carbon?.virtualPath;
       // Carbon should never be blank
-      menu.carbon = menu.carbon || { label: subPath };
+      menu.carbon = menu.carbon || { label: subPath || '' };
       menu.carbon.inSubMenu = true;
     });
   }
@@ -176,10 +157,12 @@ const routesProcessed = routes.map((route) => {
   return route;
 });
 
-export const routesInHeader = routesProcessed.filter(
+export const routesInHeader: RouteConfigArray = routesProcessed.filter(
   (route) => route.carbon && route.carbon.inHeader && !route.carbon.inSubMenu,
 );
 
-export const routesInSideNav = routesProcessed.filter(
+export const routesInSideNav: RouteConfigArray = routesProcessed.filter(
   (route) => route.carbon && route.carbon.inSideNav && !route.carbon.inSubMenu,
 );
+
+// Made with Bob

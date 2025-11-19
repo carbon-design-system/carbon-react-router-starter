@@ -11,51 +11,48 @@ import {
   useState,
   useEffect,
   useCallback,
+  ReactNode,
 } from 'react';
 import { usePrefersDarkScheme } from '@carbon/react';
-import PropTypes from 'prop-types';
 import {
   getLocalStorageValues,
   setLocalStorageValues,
 } from '../utils/local-storage';
+import { ThemeContextValue, ThemeSetting, CarbonTheme } from '../types/theme';
 
 // Create the context with default values
-const ThemeContext = createContext({
-  themeSetting: 'system', // system, light, or dark
-  setThemeSetting: () => {},
-  themeMenuCompliment: false, // true or false
-  setThemeMenuCompliment: () => {},
-  theme: 'g10', // g10 or g100
-  themeMenu: 'g10', // g10 or g100
-  ready: false, // indicates if values have been initialized
-});
+const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
-export const ThemeProvider = ({ children }) => {
+interface ThemeProviderProps {
+  children: ReactNode;
+}
+
+export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const prefersDark = usePrefersDarkScheme();
   const [ready, setReady] = useState(false);
 
   // Initialize state from local storage
   const storedValues = getLocalStorageValues();
-  const [themeSetting, setThemeSettingState] = useState(
+  const [themeSetting, setThemeSettingState] = useState<ThemeSetting>(
     storedValues.themeSetting || 'system',
   );
-  const [themeMenuCompliment, setThemeMenuComplimentState] = useState(
+  const [themeMenuCompliment, setThemeMenuComplimentState] = useState<boolean>(
     storedValues.headerInverse || false,
   );
 
   // Wrapper functions to update both state and local storage
-  const setThemeSetting = useCallback((value) => {
+  const setThemeSetting = useCallback((value: ThemeSetting) => {
     setThemeSettingState(value);
     setLocalStorageValues({ themeSetting: value });
   }, []);
 
-  const setThemeMenuCompliment = useCallback((value) => {
+  const setThemeMenuCompliment = useCallback((value: boolean) => {
     setThemeMenuComplimentState(value);
     setLocalStorageValues({ headerInverse: value });
   }, []);
 
   // Calculate the actual theme based on settings
-  const calculateTheme = useCallback(() => {
+  const calculateTheme = useCallback((): CarbonTheme => {
     if (themeSetting === 'light') {
       return 'g10';
     } else if (themeSetting === 'dark') {
@@ -68,7 +65,7 @@ export const ThemeProvider = ({ children }) => {
 
   // Calculate the menu theme based on settings and compliment option
   const calculateMenuTheme = useCallback(
-    (mainTheme) => {
+    (mainTheme: CarbonTheme): CarbonTheme => {
       if (!themeMenuCompliment) {
         return mainTheme;
       }
@@ -94,11 +91,11 @@ export const ThemeProvider = ({ children }) => {
       root.setAttribute('cs--theme', theme);
     }
 
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- Setting ready state after DOM synchronization is intentional
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- will not cause this section to re-run
     setReady(true);
   }, [theme, themeSetting]);
 
-  const value = {
+  const value: ThemeContextValue = {
     themeSetting,
     setThemeSetting,
     themeMenuCompliment,
@@ -113,13 +110,9 @@ export const ThemeProvider = ({ children }) => {
   );
 };
 
-ThemeProvider.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
 // Custom hook to use the theme context
 // eslint-disable-next-line react-refresh/only-export-components
-export const useThemeContext = () => {
+export const useThemeContext = (): ThemeContextValue => {
   const context = useContext(ThemeContext);
   if (context === undefined) {
     throw new Error('useThemeContext must be used within a ThemeProvider');
@@ -128,3 +121,5 @@ export const useThemeContext = () => {
 };
 
 export default ThemeContext;
+
+// Made with Bob

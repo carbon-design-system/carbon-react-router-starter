@@ -8,7 +8,9 @@
 import fs from 'node:fs/promises';
 import express from 'express';
 import { Transform } from 'node:stream';
-import { getRoutes } from './routes/routes.js';
+import type { ViteDevServer } from 'vite';
+import { getRoutes } from './routes/routes';
+import type { RenderFunction } from './types/server';
 
 // Constants
 const isProduction = process.env.NODE_ENV === 'production';
@@ -20,8 +22,7 @@ const ABORT_DELAY = 10000;
 const app = express();
 
 // Add Vite or respective production middlewares
-/** @type {import('vite').ViteDevServer | undefined} */
-let vite;
+let vite: ViteDevServer | undefined;
 if (!isProduction) {
   const { createServer } = await import('vite');
   vite = await createServer({
@@ -45,15 +46,13 @@ app.use('*all', async (req, res) => {
   try {
     const url = req.originalUrl.replace(base, '');
 
-    /** @type {string} */
-    let template;
-    /** @type {import('./entry-server.jsx').render} */
-    let render;
+    let template: string;
+    let render: RenderFunction;
     if (!isProduction) {
       // Always read fresh template in development
       template = await fs.readFile('./index.html', 'utf-8');
-      template = await vite.transformIndexHtml(url, template);
-      render = (await vite.ssrLoadModule('/src/entry-server.jsx')).render;
+      template = await vite!.transformIndexHtml(url, template);
+      render = (await vite!.ssrLoadModule('/src/entry-server.tsx')).render;
     } else {
       const templateHtml = isProduction
         ? await fs.readFile('./dist/client/index.html', 'utf-8')
@@ -101,9 +100,9 @@ app.use('*all', async (req, res) => {
       abort();
     }, ABORT_DELAY);
   } catch (e) {
-    vite?.ssrFixStacktrace(e);
-    console.log(e.stack);
-    res.status(500).end(e.stack);
+    vite?.ssrFixStacktrace(e as Error);
+    console.log((e as Error).stack);
+    res.status(500).end((e as Error).stack);
   }
 });
 
@@ -111,3 +110,5 @@ app.use('*all', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server started at http://localhost:${port}`);
 });
+
+// Made with Bob

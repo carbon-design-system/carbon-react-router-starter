@@ -15,7 +15,7 @@ import { Router } from './routes';
 import { ThemeProvider } from './context/ThemeContext';
 
 hydrateRoot(
-  document.getElementById('root'),
+  document.getElementById('root')!,
   <StrictMode>
     <ThemeProvider>
       <BrowserRouter>
@@ -24,3 +24,5 @@ hydrateRoot(
     </ThemeProvider>
   </StrictMode>,
 );
+
+// Made with Bob

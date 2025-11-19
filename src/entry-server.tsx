@@ -8,25 +8,29 @@
 // Third-party imports
 import { StrictMode } from 'react';
 import { renderToPipeableStream } from 'react-dom/server';
+import type { RenderToPipeableStreamOptions } from 'react-dom/server';
 import { StaticRouter } from 'react-router';
 
 // App level imports
-import { Router } from './routes/index.jsx';
-import { getStatusCodeForPath } from './routes/utils.js';
+import { Router } from './routes/index';
+import { getStatusCodeForPath } from './routes/utils';
+import type { RenderResult } from './types/server';
+import { ThemeProvider } from './context/ThemeContext';
 
-/**
- * @param {string} url
- * @param {import('react-dom/server').RenderToPipeableStreamOptions} [options]
- */
-export function render(_url, options) {
+export function render(
+  _url: string,
+  options?: RenderToPipeableStreamOptions,
+): RenderResult {
   const url = `/${_url}`;
   const statusCode = getStatusCodeForPath(url);
 
   const { pipe, abort } = renderToPipeableStream(
     <StrictMode>
-      <StaticRouter location={url}>
-        <Router />
-      </StaticRouter>
+      <ThemeProvider>
+        <StaticRouter location={url}>
+          <Router />
+        </StaticRouter>
+      </ThemeProvider>
     </StrictMode>,
     options,
   );
@@ -35,3 +39,5 @@ export function render(_url, options) {
 
   return { pipe, head, abort, statusCode };
 }
+
+// Made with Bob

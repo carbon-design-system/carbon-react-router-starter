@@ -7,7 +7,7 @@
 
 import { Route, Routes } from 'react-router';
 
-import { routes } from './config.js';
+import { routes } from './config';
 import { ThemeLayout } from '../layouts/theme-layout.jsx';
 
 export const Router = () => {
@@ -21,3 +21,5 @@ export const Router = () => {
     </Routes>
   );
 };
+
+// Made with Bob

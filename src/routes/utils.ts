@@ -6,13 +6,14 @@
  */
 
 import { routes } from './config.js';
+import { RouteConfig } from '../types/routes';
 
 /**
  * Finds the matching route for a given URL path
- * @param {string} pathname - The URL path to match against
- * @returns {Object|null} The matched route or null if no match is found
+ * @param pathname - The URL path to match against
+ * @returns The matched route or null if no match is found
  */
-export function findMatchingRoute(pathname) {
+export function findMatchingRoute(pathname: string): RouteConfig | null {
   // Clean up the pathname
   const path = pathname.startsWith('/') ? pathname : `/${pathname}`;
 
@@ -38,10 +39,12 @@ export function findMatchingRoute(pathname) {
 
 /**
  * Gets the HTTP status code for a given URL path
- * @param {string} pathname - The URL path to get the status code for
- * @returns {number} The HTTP status code (default: 200)
+ * @param pathname - The URL path to get the status code for
+ * @returns The HTTP status code (default: 200)
  */
-export function getStatusCodeForPath(pathname) {
+export function getStatusCodeForPath(pathname: string): number {
   const route = findMatchingRoute(pathname);
   return route?.status || 200;
 }
+
+// Made with Bob
