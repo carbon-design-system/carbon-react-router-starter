@@ -4,6 +4,13 @@
 
 **Last Updated:** 2025-01-19
 
+## ⚠️ Known Issues
+
+- **ProfilePanel Component**: Temporarily disabled due to `@carbon-labs/react-theme-settings` compatibility issue
+  - See [`docs/ProfilePanel-Issue.md`](./ProfilePanel-Issue.md) for full details and resolution steps
+  - Does not block TypeScript migration progress
+  - Application fully functional without this component
+
 ### Completed Phases
 
 - ✅ Phase 1: Setup and Configuration (COMPLETE)
