@@ -4,11 +4,33 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+import type { Express, RequestHandler } from 'express';
 import { getPost, getComments } from '../service/postHandlers.js';
 import {
   getExternalPost,
   getExternalComments,
 } from '../service/externalHandlers.js';
+
+export interface RouteHandlers {
+  getPost: RequestHandler;
+  getComments: RequestHandler;
+}
+
+export interface ExternalHandlers {
+  getExternalPost: RequestHandler;
+  getExternalComments: RequestHandler;
+}
+
+export const routeHandlers: RouteHandlers = {
+  getPost,
+  getComments,
+};
+
+export const defaultExternalHandlers: ExternalHandlers = {
+  getExternalPost,
+  getExternalComments,
+};
 
 /**
  * Registers all API routes on the given Express app instance.
@@ -20,10 +42,10 @@ import {
  * @param externalHandlers - External API mock handlers (can be mocked for testing)
  */
 export const getRoutes = (
-  app,
-  handlers = { getPost, getComments },
-  externalHandlers = { getExternalPost, getExternalComments },
-) => {
+  app: Express,
+  handlers: RouteHandlers = routeHandlers,
+  externalHandlers: ExternalHandlers = defaultExternalHandlers,
+): void => {
   // Client-facing API routes (these call the external routes below)
   app.get('/api/post/:id', handlers.getPost);
   app.get('/api/comments', handlers.getComments);

@@ -8,19 +8,20 @@
 // Third-party imports
 import { StrictMode } from 'react';
 import { renderToPipeableStream } from 'react-dom/server';
+import type { RenderToPipeableStreamOptions } from 'react-dom/server';
 import { StaticRouter } from 'react-router';
 
 // App level imports
-import { Router } from './routes/index.jsx';
-import { getStatusCodeForPath } from './routes/utils.js';
+import { Router } from './routes/index';
+import { getStatusCodeForPath } from './routes/utils';
 import { getThemeFromCookies } from './utils/cookies.js';
+import type { RenderResult } from './types/server';
 
-/**
- * @param {string} url
- * @param {import('react-dom/server').RenderToPipeableStreamOptions} [options]
- * @param {string} [cookies] - Cookie string from request headers
- */
-export function render(_url, options, cookies) {
+export function render(
+  _url: string,
+  options?: RenderToPipeableStreamOptions,
+  cookies?: string,
+): RenderResult {
   const url = `/${_url}`;
   const statusCode = getStatusCodeForPath(url);
 

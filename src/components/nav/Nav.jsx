@@ -28,7 +28,8 @@ import {
   UserAvatar,
 } from '@carbon/icons-react';
 import { Link as RouterLink, useLocation } from 'react-router';
-import ProfilePanel from '../profilePanel/ProfilePanel';
+// Temporarily disabled due to @carbon-labs/react-theme-settings compatibility issue
+// import ProfilePanel from '../profilePanel/ProfilePanel';
 
 import { routesInHeader, routesInSideNav } from '../../routes/config';
 import { NavHeaderItems } from './NavHeaderItems';
@@ -37,7 +38,8 @@ import { NavSideItems } from './NavSideItems';
 export const Nav = () => {
   const location = useLocation();
   const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  // Temporarily disabled due to @carbon-labs/react-theme-settings compatibility issue
+  // const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const toggleNav = () => {
     // Reason for this implementation of state change through an updater function:
@@ -45,9 +47,10 @@ export const Nav = () => {
     setIsSideNavExpanded((isExpanded) => !isExpanded);
   };
 
-  const handleProfileOpen = () => {
-    setIsProfileOpen((prev) => !prev);
-  };
+  // Temporarily disabled due to @carbon-labs/react-theme-settings compatibility issue
+  // const handleProfileOpen = () => {
+  //   setIsProfileOpen((prev) => !prev);
+  // };
 
   return (
     <>
@@ -75,21 +78,23 @@ export const Nav = () => {
           <HeaderGlobalAction aria-label="Search">
             <Search size={20} />
           </HeaderGlobalAction>
-          <HeaderGlobalAction
+          {/* Temporarily disabled due to @carbon-labs/react-theme-settings compatibility issue */}
+          {/* <HeaderGlobalAction
             aria-label="User profile"
             tooltipAlignment="end"
             onClick={handleProfileOpen}
           >
             <UserAvatar size={20} />
-          </HeaderGlobalAction>
+          </HeaderGlobalAction> */}
           <HeaderGlobalAction aria-label="App switcher" tooltipAlignment="end">
             <SwitcherIcon size={20} />
           </HeaderGlobalAction>
         </HeaderGlobalBar>
 
-        <HeaderPanel expanded={isProfileOpen} href="#profile-panel">
+        {/* Temporarily disabled due to @carbon-labs/react-theme-settings compatibility issue */}
+        {/* <HeaderPanel expanded={isProfileOpen} href="#profile-panel">
           {isProfileOpen && <ProfilePanel />}
-        </HeaderPanel>
+        </HeaderPanel> */}
       </Header>
       <SideNav
         aria-label="Side navigation"

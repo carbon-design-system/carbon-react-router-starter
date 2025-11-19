@@ -18,7 +18,7 @@ import { initializeTheme } from './utils/theme';
 initializeTheme();
 
 hydrateRoot(
-  document.getElementById('root'),
+  document.getElementById('root')!,
   <StrictMode>
     <BrowserRouter>
       <Router />

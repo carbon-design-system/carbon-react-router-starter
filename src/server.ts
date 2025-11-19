@@ -8,8 +8,10 @@
 import fs from 'node:fs/promises';
 import express from 'express';
 import { Transform } from 'node:stream';
-import { getRoutes } from './routes/routes.js';
+import type { ViteDevServer } from 'vite';
+import { getRoutes } from './routes/routes';
 import { port, base, baseUrl } from './config/server-config.js';
+import type { RenderFunction } from './types/server';
 
 // Constants
 const isProduction = process.env.NODE_ENV === 'production';
@@ -19,8 +21,7 @@ const ABORT_DELAY = 10000;
 const app = express();
 
 // Add Vite or respective production middlewares
-/** @type {import('vite').ViteDevServer | undefined} */
-let vite;
+let vite: ViteDevServer | undefined;
 if (!isProduction) {
   const { createServer } = await import('vite');
   vite = await createServer({
@@ -47,15 +48,13 @@ app.use('*all', async (req, res) => {
     // Get cookies from request
     const cookies = req.headers.cookie || '';
 
-    /** @type {string} */
-    let template;
-    /** @type {import('./entry-server.jsx').render} */
-    let render;
+    let template: string;
+    let render: RenderFunction;
     if (!isProduction) {
       // Always read fresh template in development
       template = await fs.readFile('./index.html', 'utf-8');
-      template = await vite.transformIndexHtml(url, template);
-      render = (await vite.ssrLoadModule('/src/entry-server.jsx')).render;
+      template = await vite!.transformIndexHtml(url, template);
+      render = (await vite!.ssrLoadModule('/src/entry-server.tsx')).render;
     } else {
       const templateHtml = isProduction
         ? await fs.readFile('./dist/client/index.html', 'utf-8')
@@ -69,12 +68,13 @@ app.use('*all', async (req, res) => {
     const { pipe, abort, statusCode, themeAttr } = render(
       url,
       {
-        onShellError(error) {
+        onShellError(error: unknown) {
           // Improved error handling with debugging context
+          const err = error as Error;
           console.error('Shell rendering error:', {
             url,
-            error: error.message,
-            stack: error.stack,
+            error: err.message,
+            stack: err.stack,
             timestamp: new Date().toISOString(),
           });
           res.status(500);
@@ -107,13 +107,14 @@ app.use('*all', async (req, res) => {
 
           pipe(transformStream);
         },
-        onError(error) {
+        onError(error: unknown) {
           didError = true;
           // Enhanced error logging with context
+          const err = error as Error;
           console.error('Streaming error:', {
             url,
-            error: error.message,
-            stack: error.stack,
+            error: err.message,
+            stack: err.stack,
             timestamp: new Date().toISOString(),
           });
         },
@@ -125,12 +126,12 @@ app.use('*all', async (req, res) => {
       abort();
     }, ABORT_DELAY);
   } catch (e) {
-    vite?.ssrFixStacktrace(e);
+    vite?.ssrFixStacktrace(e as Error);
     // Enhanced error logging with full context
     console.error('Server error:', {
       url: req.originalUrl,
-      error: e.message,
-      stack: e.stack,
+      error: (e as Error).message,
+      stack: (e as Error).stack,
       timestamp: new Date().toISOString(),
     });
     res
@@ -144,3 +145,5 @@ app.use('*all', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server started at: ${baseUrl}`);
 });
+
+// Made with Bob

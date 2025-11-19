@@ -7,7 +7,7 @@
 
 import { Route, Routes } from 'react-router';
 
-import { routes } from './config.js';
+import { routes } from './config';
 
 export const Router = () => {
   return (

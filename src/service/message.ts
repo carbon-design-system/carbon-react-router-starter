@@ -5,11 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import type { Request, Response } from 'express';
+
 /**
  * This file contains the functions that do async network requests
  */
 
-export const getMessage = async (req, res) => {
+export const getMessage = async (
+  _req: Request,
+  res: Response,
+): Promise<void> => {
   try {
     const response = await fetch(
       // TODO: replace with actual endpoint URL
@@ -24,3 +29,5 @@ export const getMessage = async (req, res) => {
     res.status(500).json({ message: 'Failed to fetch message' });
   }
 };
+
+// Made with Bob
