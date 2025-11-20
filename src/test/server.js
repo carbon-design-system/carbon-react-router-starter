@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
-import { http } from 'msw';
 import { getNetworking } from './networking';
 import { getRouter } from './router';
 import { getRoutes } from '../routes/routes';
@@ -22,7 +22,7 @@ const _setupServer = (...args) => {
   // These intercept the fetch calls made by postHandlers.js
   const externalMocks = [
     http.get('http://localhost:5173/api/external/post/:id', ({ params }) => {
-      return Response.json({
+      return HttpResponse.json({
         id: params.id,
         title: 'Test Post Title',
         body: 'Test post body content',
@@ -32,7 +32,7 @@ const _setupServer = (...args) => {
     http.get('http://localhost:5173/api/external/comments', ({ request }) => {
       const url = new URL(request.url);
       const postId = url.searchParams.get('postId');
-      return Response.json([
+      return HttpResponse.json([
         {
           id: 1,
           postId: parseInt(postId),

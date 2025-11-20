@@ -9,11 +9,10 @@ import fs from 'node:fs/promises';
 import express from 'express';
 import { Transform } from 'node:stream';
 import { getRoutes } from './routes/routes.js';
+import { port, base } from './config/server-config.js';
 
 // Constants
 const isProduction = process.env.NODE_ENV === 'production';
-export const port = process.env.PORT || 5173;
-export const base = process.env.BASE || 'http://localhost';
 const ABORT_DELAY = 10000;
 
 // Create http server

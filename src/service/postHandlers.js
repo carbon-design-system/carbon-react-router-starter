@@ -14,7 +14,7 @@
  * Get the base URL for the server
  * In production, this would be configured via environment variables
  */
-import { base, port } from '../server.js';
+import { base, port } from '../config/server-config.js';
 
 const getBaseUrl = () => {
   return `${base}:${port}`;
