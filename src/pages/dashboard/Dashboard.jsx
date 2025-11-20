@@ -62,8 +62,8 @@ const Dashboard = () => {
                 This demonstrates how to access both path parameters and query
                 parameters from the URL. <br />
                 Try accessing:{' '}
-                <Link href="/dashboard/1234?q=xxx&name=Anne">
-                  /dashboard/1234?q=xxx&name=Anne
+                <Link href="/dashboard/1234?q=xyz&name=Anne">
+                  /dashboard/1234?q=xyz&name=Anne
                 </Link>
               </p>
               <Stack gap={3}>
