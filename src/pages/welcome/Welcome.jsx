@@ -11,35 +11,23 @@ import {
   Grid,
   Heading,
   Tile,
+  UnorderedList,
+  ListItem,
   Section,
+  Stack,
 } from '@carbon/react';
-import { useEffect, useState } from 'react';
+import { Suspense } from 'react';
 
-import { getMessage } from '../../api/message.js';
 import { Footer } from '../../components/footer/Footer';
 import { WelcomeHeader } from './WelcomeHeader.jsx';
 import { PageLayout } from '../../layouts/page-layout.jsx';
+import PostComponent from './post/PostComponent.jsx';
 
 // The styles are imported into index.scss by default.
 // Do the same unless you have a good reason not to.
 // import './welcome.scss';
 
 const Welcome = () => {
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    const loadMessage = async () => {
-      try {
-        const msg = await getMessage();
-        setMessage(msg);
-      } catch {
-        setMessage('Failed to load message');
-      }
-    };
-
-    loadMessage();
-  }, []);
-
   return (
     <PageLayout
       className="cs--welcome"
@@ -154,14 +142,38 @@ const Welcome = () => {
               lg={12}
               className="cs--welcome__dynamic-message"
             >
-              <p>
-                Below is a dynamically fetched message from an external API
-                endpoint. This showcases how to perform data fetching while
-                keeping components clean and separating network logic.
-              </p>
-              <Tile>
-                <strong>Message:</strong> {message || 'Loading...'}
-              </Tile>
+              <Stack gap={3}>
+                <p>
+                  Below is a dynamically fetched message from an external API
+                  endpoint. This showcases how to perform data fetching while
+                  keeping components clean and separating network logic. Here is
+                  how it works:
+                </p>
+                <UnorderedList>
+                  <ListItem>
+                    <strong>UI Layer</strong> - PostComponent.jsx manages React
+                    state and renders the data using Carbon Design components
+                  </ListItem>
+                  <ListItem>
+                    <strong>API Layer</strong> - Client-side functions in{' '}
+                    <code>api/message.js</code> handle HTTP requests to our
+                    Express backend
+                  </ListItem>
+                  <ListItem>
+                    <strong>Service Layer</strong> - Server-side handlers in{' '}
+                    <code>service/postHandlers.js</code> proxy requests to
+                    external APIs.
+                  </ListItem>
+                </UnorderedList>
+                <p>
+                  This pattern keeps your components focused on presentation
+                  while centralizing data fetching logic for reusability and
+                  testability.
+                </p>
+              </Stack>
+              <Suspense>
+                <PostComponent />
+              </Suspense>
             </Column>
           </Grid>
         </Column>

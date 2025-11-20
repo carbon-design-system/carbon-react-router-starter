@@ -12,8 +12,8 @@ import { getRoutes } from './routes/routes.js';
 
 // Constants
 const isProduction = process.env.NODE_ENV === 'production';
-const port = process.env.PORT || 5173;
-const base = process.env.BASE || '/';
+export const port = process.env.PORT || 5173;
+export const base = process.env.BASE || 'http://localhost';
 const ABORT_DELAY = 10000;
 
 // Create http server
@@ -109,5 +109,5 @@ app.use('*all', async (req, res) => {
 
 // Start http server
 app.listen(port, () => {
-  console.log(`Server started at http://localhost:${port}`);
+  console.log(`Server started at: ${base}:${port}`);
 });

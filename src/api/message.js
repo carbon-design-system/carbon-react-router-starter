@@ -9,12 +9,20 @@
  * This file contains client-side API functions that call our express.js backend routes
  */
 
-export const getMessage = async () => {
+export const getPost = async (postId) => {
   try {
-    const response = await fetch('/api/message');
-    const data = await response.json();
-    return data.message;
+    const response = await fetch(`/api/post/${postId}`);
+    return await response.json();
   } catch (error) {
-    throw new Error('Failed to load message: ', error);
+    throw new Error('Failed to load post: ', error);
+  }
+};
+
+export const getComments = async (postId) => {
+  try {
+    const response = await fetch(`/api/comments?postId=${postId}`);
+    return await response.json();
+  } catch (error) {
+    throw new Error('Failed to load comments: ', error);
   }
 };
