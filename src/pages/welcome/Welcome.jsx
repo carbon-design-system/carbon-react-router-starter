@@ -151,16 +151,16 @@ const Welcome = () => {
                 </p>
                 <UnorderedList>
                   <ListItem>
-                    <strong>UI Layer</strong> - PostComponent.jsx manages React
+                    <strong>UI layer</strong> - PostComponent.jsx manages React
                     state and renders the data using Carbon Design components
                   </ListItem>
                   <ListItem>
-                    <strong>API Layer</strong> - Client-side functions in{' '}
+                    <strong>API layer</strong> - Client-side functions in{' '}
                     <code>api/message.js</code> handle HTTP requests to our
                     Express backend
                   </ListItem>
                   <ListItem>
-                    <strong>Service Layer</strong> - Server-side handlers in{' '}
+                    <strong>Service layer</strong> - Server-side handlers in{' '}
                     <code>service/postHandlers.js</code> proxy requests to
                     external APIs.
                   </ListItem>

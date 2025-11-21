@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Column, Grid, Link, Tile, Stack, Tag } from '@carbon/react';
+import { Column, Grid, Link, Tile, Stack } from '@carbon/react';
 import { useState } from 'react';
 import { useParams, useSearchParams } from 'react-router';
 
@@ -54,7 +54,7 @@ const Dashboard = () => {
         <Column sm={4} md={8} lg={16}>
           <Tile className="cs--dashboard__tile">
             <Stack gap={5}>
-              <strong>URL Parameters Example</strong>
+              <strong>URL parameters example</strong>
               {nameParam && (
                 <h2 style={{ margin: 0 }}>Hello {nameParam}! 👋</h2>
               )}
@@ -66,26 +66,26 @@ const Dashboard = () => {
                   /dashboard/1234?q=xyz&name=Anne
                 </Link>
               </p>
-              <Stack gap={3}>
+              <dl>
                 {id && (
-                  <div>
-                    <strong>Path Parameter (id):</strong>{' '}
-                    <Tag type="blue">{id}</Tag>
-                  </div>
+                  <>
+                    <dt>Path parameter detected (id):</dt>
+                    <dd>{id}</dd>
+                  </>
                 )}
                 {queryParam && (
-                  <div>
-                    <strong>Query Parameter (q):</strong>{' '}
-                    <Tag type="green">{queryParam}</Tag>
-                  </div>
+                  <>
+                    <dt>Query parameter detected (q):</dt>
+                    <dd>{queryParam}</dd>
+                  </>
                 )}
                 {nameParam && (
-                  <div>
-                    <strong>Query Parameter (name):</strong>{' '}
-                    <Tag type="purple">{nameParam}</Tag>
-                  </div>
+                  <>
+                    <dt>Query parameter detected (name):</dt>
+                    <dd>{nameParam}</dd>
+                  </>
                 )}
-              </Stack>
+              </dl>
             </Stack>
           </Tile>
         </Column>

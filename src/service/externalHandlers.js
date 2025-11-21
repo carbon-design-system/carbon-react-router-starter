@@ -25,13 +25,13 @@ const mockPosts = {
   },
   2: {
     id: 2,
-    title: 'Getting Started with React Router',
+    title: 'Getting started with React router',
     body: 'This is just a sample post. React Router is a standard library for routing in React applications.',
     userId: 1,
   },
   3: {
     id: 3,
-    title: 'Building Modern Web Applications',
+    title: 'Building modern web applications',
     body: 'This is just a sample post. Modern web development requires understanding of various tools and frameworks.',
     userId: 2,
   },
