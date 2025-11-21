@@ -14,13 +14,15 @@
  * Get the base URL for the server
  * In production, this would be configured via environment variables
  */
-import { base, port } from '../config/server-config.js';
+import { baseUrl } from '../config/server-config.js';
 
 const getBaseUrl = () => {
-  return `${base}:${port}`;
+  return baseUrl;
 };
 
-export const getPost = async ({ params: { id } }, res) => {
+export const getPost = async (req, res) => {
+  const { id } = req.params;
+
   // Validate that id is a positive integer
   if (!/^\d+$/.test(id)) {
     return res.status(400).json({ message: 'Invalid post id' });
@@ -45,7 +47,9 @@ export const getPost = async ({ params: { id } }, res) => {
   }
 };
 
-export const getComments = async ({ query: { postId } }, res) => {
+export const getComments = async (req, res) => {
+  const { postId } = req.query;
+
   if (!postId) {
     return res.status(400).json({ message: 'Missing postId parameter' });
   }

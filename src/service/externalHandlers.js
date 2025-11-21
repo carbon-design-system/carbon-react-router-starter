@@ -79,7 +79,9 @@ const mockComments = {
  * Mock external API handler for fetching a single post
  * Simulates an external service response
  */
-export const getExternalPost = async ({ params: { id } }, res) => {
+export const getExternalPost = async (req, res) => {
+  const { id } = req.params;
+
   // Validate that id is a positive integer
   if (!/^\d+$/.test(id)) {
     return res.status(400).json({ message: 'Invalid post id' });
@@ -100,7 +102,9 @@ export const getExternalPost = async ({ params: { id } }, res) => {
  * Mock external API handler for fetching comments for a post
  * Simulates an external service response
  */
-export const getExternalComments = async ({ query: { postId } }, res) => {
+export const getExternalComments = async (req, res) => {
+  const { postId } = req.query;
+
   // Validate that postId is provided and is a positive integer
   if (!postId || !/^\d+$/.test(postId)) {
     return res.status(400).json({ message: 'Invalid or missing postId' });

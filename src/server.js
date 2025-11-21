@@ -9,7 +9,7 @@ import fs from 'node:fs/promises';
 import express from 'express';
 import { Transform } from 'node:stream';
 import { getRoutes } from './routes/routes.js';
-import { port, base } from './config/server-config.js';
+import { port, base, baseUrl } from './config/server-config.js';
 
 // Constants
 const isProduction = process.env.NODE_ENV === 'production';
@@ -108,5 +108,5 @@ app.use('*all', async (req, res) => {
 
 // Start http server
 app.listen(port, () => {
-  console.log(`Server started at: ${base}:${port}`);
+  console.log(`Server started at: ${baseUrl}`);
 });
