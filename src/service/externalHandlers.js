@@ -16,7 +16,7 @@
 const mockPosts = {
   1: {
     id: 1,
-    title: 'Introduction to Carbon Design System',
+    title: 'What is Carbon?',
     body: `
       This is just a sample post. Carbon is IBM's open source design system for products and digital experiences. 
       With the IBM Design Language as its foundation, the system consists of working code, design tools and resources, 
