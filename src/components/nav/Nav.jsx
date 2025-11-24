@@ -30,7 +30,10 @@ import {
 import { Link as RouterLink, useLocation } from 'react-router';
 import ProfilePanel from '../profilePanel/ProfilePanel';
 
-import { routesInHeader, routesInSideNav } from '../../routes/config';
+import {
+  headerNavigation,
+  sideNavigation,
+} from '../../../app/navigation.config';
 import { NavHeaderItems } from './NavHeaderItems';
 import { NavSideItems } from './NavSideItems';
 
@@ -63,10 +66,10 @@ export const Nav = () => {
         <HeaderName as={RouterLink} to="/" prefix="Carbon">
           React starter template
         </HeaderName>
-        {routesInHeader.length > 0 && (
+        {headerNavigation.length > 0 && (
           <HeaderNavigation aria-label="fed-at-ibm">
             <NavHeaderItems
-              routesInHeader={routesInHeader}
+              navigationItems={headerNavigation}
               currentPath={location.pathname}
             />
           </HeaderNavigation>
@@ -97,17 +100,17 @@ export const Nav = () => {
         isPersistent={false}
       >
         <SideNavItems>
-          {routesInHeader.length > 0 && (
+          {headerNavigation.length > 0 && (
             <HeaderSideNavItems hasDivider>
               <NavHeaderItems
-                routesInHeader={routesInHeader}
+                navigationItems={headerNavigation}
                 currentPath={location.pathname}
               />
             </HeaderSideNavItems>
           )}
 
           <NavSideItems
-            routesInSideNav={routesInSideNav}
+            navigationItems={sideNavigation}
             currentPath={location.pathname}
           />
         </SideNavItems>
