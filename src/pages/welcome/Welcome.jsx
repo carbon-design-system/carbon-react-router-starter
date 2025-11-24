@@ -172,7 +172,7 @@ const Welcome = () => {
                 </p>
               </Stack>
               <Suspense>
-                <PostComponent />
+                <PostComponent postId={1} />
               </Suspense>
             </Column>
           </Grid>

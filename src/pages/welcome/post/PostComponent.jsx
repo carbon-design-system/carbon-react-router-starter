@@ -2,22 +2,29 @@ import { getComments, getPost } from '../../../api/message.js';
 import { Heading, Section, Tile, Stack, Layer } from '@carbon/react';
 import { useEffect, useState } from 'react';
 
-const PostComponent = () => {
+/**
+ * Renders a single blog post and its comments.
+ *
+ * @param {Object} props
+ * @param {number} [props.postId] - The ID of the post to display.
+ *   If not provided, defaults to 1 and renders the first post.
+ */
+const PostComponent = ({ postId = 1 }) => {
   const [post, setPost] = useState();
   const [comments, setComments] = useState([]);
 
-  const loadPost = async () => {
+  const loadPost = async (id) => {
     try {
-      const post = await getPost(1);
+      const post = await getPost(id);
       setPost(post);
     } catch {
       setPost('Failed to load message');
     }
   };
 
-  const loadComments = async () => {
+  const loadComments = async (id) => {
     try {
-      const comments = await getComments(1);
+      const comments = await getComments(id);
       setComments(comments);
     } catch {
       setComments([]);
@@ -26,11 +33,11 @@ const PostComponent = () => {
 
   useEffect(() => {
     const loadData = async () => {
-      await loadPost();
-      await loadComments();
+      await loadPost(postId);
+      await loadComments(postId);
     };
     loadData();
-  }, []);
+  }, [postId]);
 
   return (
     <Section as="article" level={3}>
