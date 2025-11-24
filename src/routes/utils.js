@@ -8,6 +8,21 @@
 import { routes } from './config.js';
 
 /**
+ * Converts a route pattern to a regex that matches dynamic parameters
+ * @param {string} pattern - Route pattern like '/dashboard/:id'
+ * @returns {RegExp} Regular expression to match the pattern
+ */
+function patternToRegex(pattern) {
+  // Escape special regex characters except for :param patterns
+  const regexPattern = pattern
+    .replace(/[.+?^${}()|[\]\\]/g, '\\$&') // Escape special chars
+    .replace(/\*/g, '.*') // Convert * to match anything
+    .replace(/:([^/]+)/g, '([^/]+)'); // Convert :param to capture group
+
+  return new RegExp(`^${regexPattern}$`);
+}
+
+/**
  * Finds the matching route for a given URL path
  * @param {string} pathname - The URL path to match against
  * @returns {Object|null} The matched route or null if no match is found
@@ -16,23 +31,26 @@ export function findMatchingRoute(pathname) {
   // Clean up the pathname
   const path = pathname.startsWith('/') ? pathname : `/${pathname}`;
 
-  // Try to find an exact match first
+  // Try to find a match
   for (const route of routes) {
     if (!route.path) continue;
 
     // Skip the wildcard route for now
     if (route.path === '*') continue;
 
-    // Simple path matching logic
-    if (
-      route.path === path ||
-      (route.path.endsWith('*') && path.startsWith(route.path.slice(0, -1)))
-    ) {
+    // Check for exact match first (most efficient)
+    if (route.path === path) {
+      return route;
+    }
+
+    // Check for pattern match (handles :param and *)
+    const regex = patternToRegex(route.path);
+    if (regex.test(path)) {
       return route;
     }
   }
 
-  // If no exact match, find the wildcard route (404)
+  // If no match, find the wildcard route (404)
   return routes.find((route) => route.path === '*') || null;
 }
 

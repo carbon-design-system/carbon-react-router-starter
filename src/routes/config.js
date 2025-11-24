@@ -45,6 +45,10 @@ export const routes = [
     },
   },
   {
+    path: '/dashboard/:id',
+    element: Dashboard,
+  },
+  {
     path: '/link-1',
     element: Placeholder,
     carbon: {
@@ -154,6 +158,9 @@ const routesProcessed = routes.map((route) => {
   const path = route.path || route.carbon.virtualPath;
 
   const subMenu = routes.filter((subRoute) => {
+    // Only include routes with carbon config in navigation menus
+    if (!subRoute.carbon) return false;
+
     const subPath = subRoute.path || subRoute.carbon.virtualPath;
     const childPath = new RegExp(`^${path}/[^/]+$`); // match direct parent only
 

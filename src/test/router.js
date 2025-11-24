@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { http } from 'msw';
+import { http, HttpResponse } from 'msw';
 
 export const getRouter = (mocks, networking) => {
   const apiRoute = (verb, path, handler) => {
@@ -18,7 +18,7 @@ export const getRouter = (mocks, networking) => {
       const res = {
         json: (data) => {
           networking.removeRequest(path);
-          return Response.json(data);
+          return HttpResponse.json(data);
         },
       };
 
