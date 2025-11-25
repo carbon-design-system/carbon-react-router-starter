@@ -21,7 +21,19 @@ const server = createServer(async (req, res) => {
     try {
       // Remove query string for file path
       const urlPath = req.url.split('?')[0];
-      const filePath = join(process.cwd(), 'build/client', urlPath);
+
+      // Sanitize path to prevent directory traversal attacks
+      const safePath = urlPath.replace(/^\/+/, '').replace(/\.\./g, '');
+      const filePath = join(process.cwd(), 'build/client', safePath);
+
+      // Verify the resolved path is still within build/client
+      const buildDir = join(process.cwd(), 'build/client');
+      if (!filePath.startsWith(buildDir)) {
+        res.statusCode = 403;
+        res.end('Forbidden');
+        return;
+      }
+
       const content = readFileSync(filePath);
       const ext = urlPath.split('.').pop();
       const contentTypes = {
