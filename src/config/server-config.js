@@ -7,6 +7,8 @@
 
 // Server configuration constants
 // Extracted to avoid importing the full server during tests
-export const port = process.env.PORT || 5173;
+// Use 5173 for dev (Vite default), 3000 for production
+export const port =
+  process.env.PORT || (process.env.NODE_ENV === 'production' ? 3000 : 5173);
 export const base = process.env.BASE || '/';
 export const baseUrl = `http://localhost:${port}`;

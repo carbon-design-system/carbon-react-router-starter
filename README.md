@@ -24,7 +24,22 @@ It is intended to be helping, not dictating. If you don't know exactly what to u
 
 → Good, you're already set up!
 
-Create a production build with `npm run build`, but be aware that a server runtime is needed as this project uses server-side rendering.
+## Production
+
+To test the production build locally:
+
+1. Build for production:
+
+   ```
+   npm run build
+   ```
+
+2. Start the production server:
+   ```
+   npm start
+   ```
+
+The production build will be created in the `build/` directory. Note that a server runtime is needed as this project uses server-side rendering.
 
 ## How does this work
 

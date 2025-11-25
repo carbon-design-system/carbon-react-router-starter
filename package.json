@@ -6,11 +6,7 @@
   "scripts": {
     "dev": "react-router dev",
     "build": "react-router build",
-    "start": "react-router-serve ./build/server/index.js",
-    "dev:old": "node src/server",
-    "build:old": "npm run build:client && npm run build:server",
-    "build:client": "vite build --ssrManifest .vite/ssr-manifest.json  --outDir dist/client",
-    "build:server": "vite build --ssr src/entry-server.jsx --outDir dist/server",
+    "start": "NODE_ENV=production node server.js",
     "lighthouse": "lhci collect",
     "lint": "npm run lint:es && npm run lint:style && npm run lint:format && npm run lint:spell",
     "lint-fix": "npm run lint:es -- --fix && npm run lint:style -- --fix && npm run lint:format",
@@ -18,8 +14,6 @@
     "lint:style": "stylelint \"./**/*.scss\" --cache --cache-location \"node_modules/.cache/stylelint/\"",
     "lint:format": "prettier . --write --ignore-unknown --no-error-on-unmatched-pattern --log-level warn --cache --cache-location \"node_modules/.cache/prettier/\"",
     "lint:spell": "cspell lint --quiet \"**\"",
-    "preview:prod": "cross-env NODE_ENV=production node src/server.js",
-    "preview": "cross-env NODE_ENV=local node src/server.js",
     "test": "vitest run --coverage",
     "test:watch": "vitest --watch",
     "prepare": "husky"
@@ -34,13 +28,10 @@
     "@lhci/cli": "^0.15.0",
     "@react-router/node": "^7.9.6",
     "classnames": "^2.5.1",
-    "compression": "^1.7.5",
-    "express": "^5.0.1",
     "isbot": "^5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router": "^7.5.2",
-    "sirv": "^3.0.0"
+    "react-router": "^7.5.2"
   },
   "devDependencies": {
     "@double-great/stylelint-a11y": "^3.0.4",
