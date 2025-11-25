@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {
+import React, {
   createContext,
   useContext,
   useState,
@@ -32,16 +32,12 @@ const ThemeContext = createContext({
 
 export const ThemeProvider = ({ children }) => {
   const prefersDark = usePrefersDarkScheme();
-  const [ready, setReady] = useState(false);
 
-  // Initialize state from local storage
-  const storedValues = getLocalStorageValues();
-  const [themeSetting, setThemeSettingState] = useState(
-    storedValues.themeSetting || 'system',
-  );
-  const [themeMenuCompliment, setThemeMenuComplimentState] = useState(
-    storedValues.headerInverse || false,
-  );
+  // Initialize with defaults for SSR
+  const [themeSetting, setThemeSettingState] = useState('system');
+  const [themeMenuCompliment, setThemeMenuComplimentState] = useState(false);
+  const [ready, setReady] = useState(false);
+  const [initialized, setInitialized] = useState(false);
 
   // Wrapper functions to update both state and local storage
   const setThemeSetting = useCallback((value) => {
@@ -82,8 +78,49 @@ export const ThemeProvider = ({ children }) => {
   const theme = calculateTheme();
   const themeMenu = calculateMenuTheme(theme);
 
+  // Load stored values from localStorage on mount (client-side only)
+  useEffect(() => {
+    // Only run on client side
+    if (typeof window === 'undefined') {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- Setting initialized on SSR is intentional
+      setInitialized(true);
+      return;
+    }
+
+    const storedValues = getLocalStorageValues();
+
+    // Update state with stored values
+    if (
+      storedValues.themeSetting &&
+      storedValues.themeSetting !== themeSetting
+    ) {
+      setThemeSettingState(storedValues.themeSetting);
+    }
+
+    if (
+      storedValues.headerInverse !== undefined &&
+      storedValues.headerInverse !== themeMenuCompliment
+    ) {
+      setThemeMenuComplimentState(storedValues.headerInverse);
+    }
+
+    // Mark as initialized after loading stored values
+
+    setInitialized(true);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps -- Only run once on mount
+
+  // Set ready after theme values have been updated
+  useEffect(() => {
+    if (initialized) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- Setting ready after theme state updates is intentional to prevent flash
+      setReady(true);
+    }
+  }, [initialized, themeSetting, themeMenuCompliment]);
+
   // Update the DOM when theme changes
   useEffect(() => {
+    if (!ready) return; // Don't update DOM until ready
+
     const root = document.documentElement;
 
     // Remove any existing theme data attribute
@@ -93,10 +130,7 @@ export const ThemeProvider = ({ children }) => {
     if (themeSetting !== 'system') {
       root.setAttribute('cs--theme', theme);
     }
-
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- Setting ready state after DOM synchronization is intentional
-    setReady(true);
-  }, [theme, themeSetting]);
+  }, [theme, themeSetting, ready]);
 
   const value = {
     themeSetting,

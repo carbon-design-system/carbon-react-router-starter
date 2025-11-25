@@ -1,3 +1,4 @@
+import React from 'react';
 import { HeaderMenu, HeaderMenuItem } from '@carbon/react';
 import { Link as RouterLink } from 'react-router';
 

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   Header,
   HeaderGlobalAction,
@@ -49,6 +49,7 @@ export const Nav = () => {
   };
 
   const handleProfileOpen = () => {
+    console.log('Profile button clicked, current state:', isProfileOpen);
     setIsProfileOpen((prev) => !prev);
   };
 

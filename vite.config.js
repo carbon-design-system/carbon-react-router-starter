@@ -5,12 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import react from '@vitejs/plugin-react-swc';
+import { reactRouter } from '@react-router/dev/vite';
 import { defineConfig } from 'vite';
 
 // https://vite.dev/config/
-export default defineConfig({
-  plugins: [react()],
+export default defineConfig(({ mode }) => ({
+  // Only use React Router plugin in non-test modes
+  // The plugin interferes with Vitest's module resolution
+  plugins: mode !== 'test' ? [reactRouter()] : [],
   test: {
     globals: true,
     environment: 'jsdom',
@@ -20,4 +22,4 @@ export default defineConfig({
       reporter: ['text', 'html'],
     },
   },
-});
+}));

@@ -7,22 +7,18 @@
 
 import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
-import { getNetworking } from './networking';
-import { getRouter } from './router';
-import { getRoutes } from '../routes/routes';
-import { port, base } from '../config/server-config.js';
 
+/**
+ * Mock Service Worker (MSW) server for testing
+ *
+ * In React Router Framework mode, API routes are handled by the framework.
+ * This server provides mock responses for external API calls made during tests.
+ */
 const _setupServer = (...args) => {
-  const mocks = [];
-  const networking = getNetworking();
-
-  // Set up internal API routes (including external mock routes)
-  getRoutes(getRouter(mocks, networking));
-
-  // Mock external API calls from postHandlers to our local external endpoints
-  // These intercept the fetch calls made by postHandlers.js
+  // Mock external API endpoints that the application might call
   const externalMocks = [
-    http.get(`${base}:${port}/api/external/post/:id`, ({ params }) => {
+    // Mock external post API
+    http.get('/api/external/post/:id', ({ params }) => {
       return HttpResponse.json({
         id: params.id,
         title: 'Test post title',
@@ -30,7 +26,9 @@ const _setupServer = (...args) => {
         userId: 1,
       });
     }),
-    http.get(`${base}:${port}/api/external/comments`, ({ request }) => {
+
+    // Mock external comments API
+    http.get('/api/external/comments', ({ request }) => {
       const url = new URL(request.url);
       const postId = url.searchParams.get('postId');
       return HttpResponse.json([
@@ -52,9 +50,7 @@ const _setupServer = (...args) => {
     }),
   ];
 
-  const server = setupServer(...mocks, ...externalMocks, ...args);
-  server.networking = networking;
-  return server;
+  return setupServer(...externalMocks, ...args);
 };
 
 export const server = _setupServer();

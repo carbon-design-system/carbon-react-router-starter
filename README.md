@@ -51,7 +51,7 @@ Where documenting inline is not possible or impractical, we have added explanati
 
 - **CSS and SCSS:** Based on Carbon, this project makes extensive use of SCSS. To improve the loading experience and avoid layout shifts and flash of unstyled content, we decided to load the SCSS from the `index.html` file. If you have a case where you load a lot of CSS under very dynamic conditions, you might decide to use an `import` statement inside one of your React components. However, be aware that this should stay as an exception, as the styles will be delayed after the component has been loaded.
 
-- **Server-side rendering:** Server-side rendering is a critical component for most applications to improve their performance. This means here that **the project is separated in two parts - client-side and server-side**.
+- **Server-side rendering:** This project uses React Router v7 in Framework mode, which provides built-in server-side rendering (SSR) with automatic code splitting and optimized hydration. The framework handles both client and server rendering seamlessly.
 
 - **Quality and productivity helpers:** This project contains quite a few helpers to help with consistency, productivity, and speed. For example, it has templates for unit and end-to-end testing. It also contains linters so your team doesn't have to lose time on code formatting.
   With time, we plan to add more helpers to help you monitor your accessibility and front-end performance.
@@ -62,11 +62,11 @@ This project comes with a pre-configured testing setup using React Testing Libra
 
 #### Setup
 
-- The test configuration is located in `vite.config.js`, which sets up Vitest with globals, a JSDOM environment, and points to the setup file `src/test/setup.js`.
+- The test configuration is located in `vite.config.js`, which sets up Vitest with globals, a JSDOM environment, and points to the setup file `src/test/setup.js`. The React Router plugin is conditionally disabled during tests to prevent conflicts.
 
-- This file handles mocking network requests and manages server startup and teardown. It also handles mocking browser features missing in JSDOM.
+- The setup file handles mocking network requests and manages MSW server startup and teardown. It also handles mocking browser features missing in JSDOM.
 
-- The `src/test/server.js` wraps the server with msw's setupServer function and injects networking utils from `src/test/networking.js` that track each outgoing network request and help debugging unit tests.
+- The `src/test/server.js` configures MSW (Mock Service Worker) handlers for API endpoints, allowing you to mock external API calls in your tests.
 
 #### Writing Tests
 

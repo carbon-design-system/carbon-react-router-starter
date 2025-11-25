@@ -15,6 +15,10 @@ dist-ssr
 
 .eslintcache
 
+# React Router generated files
+.react-router/
+build/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
