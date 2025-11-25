@@ -47,15 +47,11 @@ export function Layout({ children }) {
 /**
  * Theme wrapper component that applies Carbon Design System themes.
  * Uses the ThemeContext to determine which theme to apply.
- * Waits for theme to be ready before rendering to prevent flash.
+ * Always renders to ensure client-side navigation works correctly.
+ * Theme updates happen after localStorage is loaded to prevent flash.
  */
 function ThemedApp() {
-  const { themeMenu, ready } = useThemeContext();
-
-  // Don't render until theme is ready to prevent flash
-  if (!ready) {
-    return null;
-  }
+  const { themeMenu } = useThemeContext();
 
   return (
     <GlobalTheme theme={themeMenu}>

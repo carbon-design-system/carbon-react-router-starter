@@ -36,7 +36,9 @@ export const ThemeProvider = ({ children }) => {
   // Initialize with defaults for SSR
   const [themeSetting, setThemeSettingState] = useState('system');
   const [themeMenuCompliment, setThemeMenuComplimentState] = useState(false);
-  const [ready, setReady] = useState(false);
+  // Initialize ready as true - we always render, ready just tracks if localStorage has been loaded
+  // This prevents blocking client-side navigation
+  const [ready, setReady] = useState(true);
   const [initialized, setInitialized] = useState(false);
 
   // Wrapper functions to update both state and local storage
@@ -82,8 +84,10 @@ export const ThemeProvider = ({ children }) => {
   useEffect(() => {
     // Only run on client side
     if (typeof window === 'undefined') {
+      // On server, mark as initialized immediately since we don't need localStorage
       // eslint-disable-next-line react-hooks/set-state-in-effect -- Setting initialized on SSR is intentional
       setInitialized(true);
+      // ready is already true on server from initial state, no need to set again
       return;
     }
 
