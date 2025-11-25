@@ -1,9 +1,0 @@
-{
-  "mcpServers": {
-    "react-router Docs": {
-      "type": "sse",
-      "url": "https://gitmcp.io/remix-run/react-router",
-      "alwaysAllow": ["search_react_router_documentation"]
-    }
-  }
-}
