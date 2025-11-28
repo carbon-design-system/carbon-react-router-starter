@@ -88,7 +88,6 @@
   you should manage scrolling withing the component/canvas. 
   */
   overflow: hidden auto; /* no horizontal scroll, vertical only unless manged elsewhere */
-  scrollbar-gutter: stable; /* ensure we do not jump on scroll bar appearance */
   scrollbar-color: $background-active $layer;
 }
 

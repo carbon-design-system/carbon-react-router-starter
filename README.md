@@ -41,20 +41,20 @@ Ultimately, we want to save you time by avoiding you weeks of research to build 
 
 ### Documentation
 
-While the ultimate documentation is the code, it is like all languages possible to write some very complex stories. In creating this project we have tried to document inline complexity and where we deviate from standard practices or configurations. If you find something confusing, then we consider this a bug and would ask that you raise an issue.
+While the ultimate documentation is the code, it is, like all languages, possible to write some very complex stories. In creating this project, we have tried to document inline complexity and where we deviate from standard practices or configurations. If you find something confusing, then we consider this a bug and would ask that you raise an issue.
 
-Where documenting inline is not possible or impractical we have added explanations in the [docs](./docs) folder.
+Where documenting inline is not possible or impractical, we have added explanations in the [docs](./docs) folder.
 
 ### Project structure
 
-- **Carbon inclusion:** right now this project embeds the latest version of Carbon core, but not yet Carbon for IBM Products or Carbon for IBM Cloud. Contributions in this direction would be welcome.
+- **Carbon inclusion:** right now, this project embeds the latest version of Carbon core, but not yet Carbon for IBM Products or Carbon for IBM Cloud. Contributions in this direction would be welcome.
 
-- **CSS and SCSS:** basing on Carbon, this project makes extensive use of SCSS. To improve the loading experience and avoid layout shifts and flash of unstyled content, we decided to load the SCSS from the `index.html` file. If you have a case where you a lot of CSS on very dynamic conditions, you might decide to use an `import` statement inside on of your React components. However, be aware that this should stay exceptions as the styles will be delayed after the component has been loaded.
+- **CSS and SCSS:** Based on Carbon, this project makes extensive use of SCSS. To improve the loading experience and avoid layout shifts and flash of unstyled content, we decided to load the SCSS from the `index.html` file. If you have a case where you load a lot of CSS under very dynamic conditions, you might decide to use an `import` statement inside one of your React components. However, be aware that this should stay as an exception, as the styles will be delayed after the component has been loaded.
 
-- **Server-side rendering:** server-side rendering is a critical component for most applications to improve their performance. This means here that **the project is separated in two parts - client-side and server-side**.
+- **Server-side rendering:** Server-side rendering is a critical component for most applications to improve their performance. This means here that **the project is separated in two parts - client-side and server-side**.
 
-- **Quality and productivity helpers:** this project contains quite a few helpers to help consistency, productivity and speed. For example it has templates for unit and end-to-end testing. It also contains linters so your team doesn't have to lose time on code formatting.
-  With time we plan to add more helpers to help you monitor your accessibility and front-end performance.
+- **Quality and productivity helpers:** This project contains quite a few helpers to help with consistency, productivity, and speed. For example, it has templates for unit and end-to-end testing. It also contains linters so your team doesn't have to lose time on code formatting.
+  With time, we plan to add more helpers to help you monitor your accessibility and front-end performance.
 
 ### Testing
 
