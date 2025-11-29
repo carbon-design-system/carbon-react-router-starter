@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import React from 'react';
 import { test, expect } from 'vitest';
 import { screen } from '@testing-library/react';
 import '@testing-library/jest-dom';

@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import React, { Suspense } from 'react';
 import {
   CodeSnippet,
   Column,
@@ -16,7 +17,6 @@ import {
   Section,
   Stack,
 } from '@carbon/react';
-import { Suspense } from 'react';
 
 import { Footer } from '../../components/footer/Footer';
 import { WelcomeHeader } from './WelcomeHeader.jsx';

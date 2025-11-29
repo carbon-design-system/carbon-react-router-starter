@@ -25,10 +25,10 @@ import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
 
 export default [
-  { ignores: ['dist', 'vite.config.js'] },
+  { ignores: ['dist'] },
   {
     files: ['**/*.{js,mjs,cjs,jsx}'],
-    ignores: ['dist', 'vite.config.js'],
+    ignores: ['dist'],
     languageOptions: {
       /* added (globals.node) - for server side elements */
       globals: { ...globals.browser, ...globals.node, ...globals.jest },
@@ -71,14 +71,38 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
-      /* no-irregular-whitespace 
-        - ignore to allow prettier of the text layout. April 10th 2025. 
+      /* no-irregular-whitespace
+        - ignore to allow prettier of the text layout. April 10th 2025.
 
         NOTE: Should be removable after https://github.com/Mikadv/carbon-react-starter/issues/32
         */
       'no-irregular-whitespace': ['error', { skipJSXText: true }],
       // Allow optional chaining
       'import/namespace': 'off',
+      /*
+       * Disable import/no-unresolved for React Router packages.
+       * React Router v7 uses package exports that ESLint's import resolver doesn't understand.
+       * These imports work correctly at runtime and in the build.
+       */
+      'import/no-unresolved': [
+        'error',
+        {
+          ignore: ['^react-router', '^@react-router'],
+        },
+      ],
+    },
+  },
+  /*
+   * Disable react-refresh/only-export-components for React Router route files.
+   * React Router Framework mode requires route files to export both components (default export)
+   * and route functions (named exports like meta, loader, action, etc.).
+   * This is the intended pattern and doesn't affect functionality - it only means HMR will
+   * do a full page refresh instead of fast refresh when editing route files.
+   */
+  {
+    files: ['app/routes/**/*.{js,jsx}'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
     },
   },
 ];

@@ -5,15 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import React, { StrictMode } from 'react';
 import { render as rtlRender } from '@testing-library/react';
 import { BrowserRouter } from 'react-router';
-import { StrictMode } from 'react';
-import { Router } from '../routes';
 import { ThemeProvider } from '../context/ThemeContext';
 
 /**
  * Renders a component with all providers (Theme, Router, etc.)
  * Use this for page components or components that need routing
+ *
+ * Note: In React Router Framework mode, we use BrowserRouter for testing
+ * instead of the full application router since tests focus on individual components.
  */
 export function renderWithAllProviders(
   ui,
@@ -22,13 +24,11 @@ export function renderWithAllProviders(
   // Push the route we want to test
   window.history.pushState({}, 'Test page', route);
 
-  function Wrapper() {
+  function Wrapper({ children }) {
     return (
       <StrictMode>
         <ThemeProvider>
-          <BrowserRouter>
-            <Router />
-          </BrowserRouter>
+          <BrowserRouter>{children}</BrowserRouter>
         </ThemeProvider>
       </StrictMode>
     );

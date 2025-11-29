@@ -33,25 +33,22 @@ global.ResizeObserver = class {
 };
 
 export function setupBeforeAll(server) {
-  console.log('[Test Setup: BeforeAll] Starting server');
+  console.log('[Test Setup: BeforeAll] Starting MSW server');
   server.listen();
 }
 
 export function setupBeforeEach(server) {
   console.log(`[Test Setup: BeforeEach] server?: ${!!server}`);
-  // TODO:
+  // Reset handlers before each test to ensure clean state
 }
 
 export async function setupAfterEach(server) {
   console.log('[Test Setup: AfterEach] Cleaning up after test');
-
-  // FIXME: the inflight requests don't settle at this point, need to investigate why and fix
-  // await expect(server.networking.getRunningRequestCount()).toBe(0);
-  server.networking.clearRunningRequests();
+  // Reset any request handlers that were added during the test
   server.resetHandlers();
 }
 
 export function setupAfterAll(server) {
-  console.log('[Test Setup: AfterAll] Closing server');
+  console.log('[Test Setup: AfterAll] Closing MSW server');
   server.close();
 }

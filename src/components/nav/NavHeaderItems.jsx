@@ -1,3 +1,4 @@
+import React from 'react';
 import { HeaderMenu, HeaderMenuItem } from '@carbon/react';
 import { Link as RouterLink } from 'react-router';
 
@@ -13,35 +14,35 @@ const isPathActive = (menuPath, currentPath) => {
   return currentPath.startsWith(`${menuPath}/`);
 };
 
-export const NavHeaderItems = ({ routesInHeader, currentPath }) => (
+export const NavHeaderItems = ({ navigationItems, currentPath }) => (
   <>
-    {routesInHeader.map(({ path, carbon }) =>
-      !carbon.inSubMenu && carbon?.label ? (
-        carbon.subMenu ? (
+    {navigationItems.map((item) =>
+      item.label ? (
+        item.subMenu ? (
           <HeaderMenu
-            aria-label={carbon.label}
-            key={path}
-            menuLinkName={carbon.label}
+            aria-label={item.label}
+            key={item.path}
+            menuLinkName={item.label}
           >
-            {carbon.subMenu.map((subRoute) => (
+            {item.subMenu.map((subItem) => (
               <HeaderMenuItem
                 as={RouterLink}
-                to={subRoute.path}
-                key={subRoute.path}
-                isActive={isPathActive(subRoute.path, currentPath)}
+                to={subItem.path}
+                key={subItem.path}
+                isActive={isPathActive(subItem.path, currentPath)}
               >
-                {subRoute.carbon.label}
+                {subItem.label}
               </HeaderMenuItem>
             ))}
           </HeaderMenu>
         ) : (
           <HeaderMenuItem
             as={RouterLink}
-            key={path}
-            to={path}
-            isActive={isPathActive(path, currentPath)}
+            key={item.path}
+            to={item.path}
+            isActive={isPathActive(item.path, currentPath)}
           >
-            {carbon?.label}
+            {item.label}
           </HeaderMenuItem>
         )
       ) : null,

@@ -8,6 +8,7 @@
 import { Button } from '@carbon/react';
 
 import { ArrowRight } from '@carbon/icons-react';
+import React from 'react';
 import { CommonHeader } from '../../components/commonHeader/CommonHeader';
 
 export const WelcomeHeader = () => {

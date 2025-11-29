@@ -1,46 +1,44 @@
+import React from 'react';
 import { SideNavLink, SideNavMenu, SideNavMenuItem } from '@carbon/react';
 import { Link as RouterLink } from 'react-router';
 
-const destinationProps = (path, carbon, currentPath) =>
-  path
+const destinationProps = (item, currentPath) =>
+  item.path && !item.href
     ? {
         as: RouterLink,
-        isActive: path === currentPath,
+        to: item.path,
+        isActive: item.path === currentPath,
       }
     : {
-        href: carbon.href,
+        href: item.href,
       };
 
-export const NavSideItems = ({ routesInSideNav, currentPath }) => (
+export const NavSideItems = ({ navigationItems, currentPath }) => (
   <>
-    {routesInSideNav.map(({ path, carbon }) =>
-      !carbon.inSubMenu && carbon?.label ? (
-        carbon.subMenu ? (
+    {navigationItems.map((item) =>
+      item.label ? (
+        item.subMenu ? (
           <SideNavMenu
-            key={path ?? carbon.label}
-            renderIcon={carbon.icon}
-            title={carbon.label}
+            key={item.path ?? item.label}
+            renderIcon={item.icon}
+            title={item.label}
           >
-            {carbon.subMenu.map((subRoute) => (
+            {item.subMenu.map((subItem) => (
               <SideNavMenuItem
-                key={subRoute.path ?? subRoute.carbon.label}
-                {...destinationProps(
-                  subRoute.path,
-                  subRoute.carbon,
-                  currentPath,
-                )}
+                key={subItem.path ?? subItem.label}
+                {...destinationProps(subItem, currentPath)}
               >
-                {subRoute.carbon.label}
+                {subItem.label}
               </SideNavMenuItem>
             ))}
           </SideNavMenu>
         ) : (
           <SideNavLink
-            key={path ?? carbon.label}
-            renderIcon={carbon.icon}
-            {...destinationProps(path, carbon, currentPath)}
+            key={item.path ?? item.label}
+            renderIcon={item.icon}
+            {...destinationProps(item, currentPath)}
           >
-            {carbon.label}
+            {item.label}
           </SideNavLink>
         )
       ) : null,

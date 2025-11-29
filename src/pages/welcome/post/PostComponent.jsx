@@ -1,6 +1,6 @@
+import React, { useEffect, useState } from 'react';
 import { getComments, getPost } from '../../../api/message.js';
 import { Heading, Section, Tile, Stack, Layer } from '@carbon/react';
-import { useEffect, useState } from 'react';
 
 /**
  * Renders a single blog post and its comments.
