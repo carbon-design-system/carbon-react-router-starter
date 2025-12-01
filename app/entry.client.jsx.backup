@@ -1,0 +1,29 @@
+/**
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { startTransition, StrictMode } from 'react';
+import { hydrateRoot } from 'react-dom/client';
+import { HydratedRouter } from 'react-router';
+
+/**
+ * Client entry point for React Router Framework mode.
+ *
+ * This file handles client-side hydration of the server-rendered HTML.
+ * It's called by the browser to make the static HTML interactive.
+ *
+ * @see https://reactrouter.com/start/framework/entry-client
+ */
+startTransition(() => {
+  hydrateRoot(
+    document,
+    <StrictMode>
+      <HydratedRouter />
+    </StrictMode>,
+  );
+});
+
+// Made with Bob

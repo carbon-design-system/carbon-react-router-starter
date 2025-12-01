@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import React from 'react';
 import { describe, test, expect, vi, beforeEach } from 'vitest';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -46,7 +47,7 @@ describe('ThemeContext', () => {
   describe('ThemeProvider', () => {
     test('initializes state from localStorage', () => {
       // Mock localStorage values
-      localStorageUtils.getLocalStorageValues.mockReturnValueOnce({
+      localStorageUtils.getLocalStorageValues.mockReturnValue({
         themeSetting: 'dark',
         headerInverse: true,
       });

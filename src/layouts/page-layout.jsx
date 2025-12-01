@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import React, { Children, Suspense } from 'react';
 import { Content, Theme } from '@carbon/react';
-import { Children, Suspense } from 'react';
 import { Nav } from '../components/nav/Nav';
 import classNames from 'classnames';
 import { useThemeContext } from '../context/ThemeContext';

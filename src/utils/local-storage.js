@@ -3,7 +3,20 @@ const localStorageKeys = {
   headerInverse: 'app-header-inverse',
 };
 
+/**
+ * Check if we're running in a browser environment (not SSR)
+ */
+const isBrowser = typeof window !== 'undefined';
+
 export const getLocalStorageValues = () => {
+  // Return defaults during SSR
+  if (!isBrowser) {
+    return {
+      themeSetting: 'system',
+      headerInverse: false,
+    };
+  }
+
   const themeSetting =
     window.localStorage.getItem(localStorageKeys.themeSetting) || 'system';
   const headerInverse =
@@ -17,6 +30,11 @@ export const getLocalStorageValues = () => {
 };
 
 export const setLocalStorageValues = (values) => {
+  // Skip during SSR
+  if (!isBrowser) {
+    return;
+  }
+
   if (values) {
     const keys = Object.keys(localStorageKeys);
 

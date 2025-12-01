@@ -1,7 +1,7 @@
 const ci = {
   collect: {
-    startServerCommand: 'npm run preview:prod',
-    url: 'http://localhost:5173/',
+    startServerCommand: 'npm run start',
+    url: 'http://localhost:3000/',
   },
   assert: {
     // assert options here
