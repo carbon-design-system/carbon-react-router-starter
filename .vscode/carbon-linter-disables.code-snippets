@@ -3,31 +3,31 @@
   "Stylelint disable next line": {
     "scope": "scss",
     "prefix": "//",
-    "body": ["// stylelint-disable-next-line"]
+    "body": ["// stylelint-disable-next-line"],
   },
   "Stylelint disable next line Carbon Layout": {
     "scope": "scss",
     "prefix": "//la",
-    "body": ["// stylelint-disable-next-line carbon/layout-token-use"]
+    "body": ["// stylelint-disable-next-line carbon/layout-use"],
   },
   "Stylelint disable next line Carbon Motion Duration": {
     "scope": "scss",
     "prefix": "//mo",
-    "body": ["// stylelint-disable-next-line carbon/motion-duration-use"]
+    "body": ["// stylelint-disable-next-line carbon/motion-duration-use"],
   },
   "Stylelint disable next line Carbon Motion Easing": {
     "scope": "scss",
     "prefix": "//moe",
-    "body": ["// stylelint-disable-next-line carbon/motion-easing-use"]
+    "body": ["// stylelint-disable-next-line carbon/motion-easing-use"],
   },
   "Stylelint disable next line Carbon Type": {
     "scope": "scss",
     "prefix": "//ty",
-    "body": ["// stylelint-disable-next-line carbon/type-token-use"]
+    "body": ["// stylelint-disable-next-line carbon/type-use"],
   },
   "Stylelint disable next line Carbon Theme": {
     "scope": "scss",
     "prefix": "//th",
-    "body": ["// stylelint-disable-next-line carbon/theme-token-use"]
-  }
+    "body": ["// stylelint-disable-next-line carbon/theme-use"],
+  },
 }
