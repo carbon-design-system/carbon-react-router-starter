@@ -72,8 +72,6 @@ If you are not familiar with and have never configured your device to work with 
 
 ### Connecting to github.ibm.com
 
-HINT: You will need to replace `your-org` twice in the following.
-
 1. Create a new repository on github.ibm.com/your-org.
    1. Set the repository name
    2. Choose the visibility
@@ -87,9 +85,10 @@ HINT: You will need to replace `your-org` twice in the following.
    git commit -m 'feat: first commit'
    ```
 
-   2. Then the instructions to push and existing repository from the command line, which will look something like the following (replace `your-org` and `new-starter` with your own values):
+   2. Then the instructions to push and existing repository from the command line, which will look something like the following:
 
    ```bash
+   # Replace `your-ort` and `new-starter` with your own values
    git remote add origin git@github.ibm.com:your-org/new-starter.git
    git branch -M main
    git push -u origin main
