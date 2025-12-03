@@ -40,7 +40,7 @@ const Welcome = () => {
           <Heading className="cs--welcome__heading">↳ Run the template</Heading>
         </Column>
         <Column sm={4} md={8} lg={8} xlg={8}>
-          <p>This code requires node v.20</p>
+          <p>This code requires node v.24</p>
           <CodeSnippet type="single" feedback="Copied to clipboard">
             npm i
           </CodeSnippet>
