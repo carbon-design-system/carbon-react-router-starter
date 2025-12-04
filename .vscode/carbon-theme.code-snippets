@@ -1,8 +1,8 @@
 // WARNING: installed by carbon-vscode-snippets local updates will be lost on running package install
 {
-  "// ============================================": {},
-  "// Background Tokens": {},
-  "// ============================================": {},
+  // ============================================
+  // Background Tokens
+  // ============================================
   "Carbon background": {
     "prefix": "$background",
     "body": "$$background",
@@ -43,9 +43,9 @@
     "body": "$$background-brand",
     "description": "Feature background color"
   },
-  "// ============================================": {},
-  "// Layer Tokens": {},
-  "// ============================================": {},
+  // ============================================
+  // Layer Tokens
+  // ============================================
   "Carbon layer 01": {
     "prefix": "$layer-01",
     "body": "$$layer-01",
@@ -156,9 +156,9 @@
     "body": "$$layer-selected-disabled",
     "description": "Disabled color for selected layers"
   },
-  "// ============================================": {},
-  "// Layer Accent Tokens": {},
-  "// ============================================": {},
+  // ============================================
+  // Layer Accent Tokens
+  // ============================================
   "Carbon layer accent 01": {
     "prefix": "$layer-accent-01",
     "body": "$$layer-accent-01",
@@ -219,9 +219,9 @@
     "body": "$$layer-accent-active",
     "description": "Contextual layer accent active token; Automatically matches layer context"
   },
-  "// ============================================": {},
-  "// Field Tokens": {},
-  "// ============================================": {},
+  // ============================================
+  // Field Tokens
+  // ============================================
   "Carbon field 01": {
     "prefix": "$field-01",
     "body": "$$field-01",
@@ -262,9 +262,9 @@
     "body": "$$field-hover",
     "description": "Contextual field hover token; Automatically matches layer context"
   },
-  "// ============================================": {},
-  "// Border Tokens": {},
-  "// ============================================": {},
+  // ============================================
+  // Border Tokens
+  // ============================================
   "Carbon border interactive": {
     "prefix": "$border-interactive",
     "body": "$$border-interactive",
@@ -365,9 +365,9 @@
     "body": "$$border-disabled",
     "description": "Disabled border color (excluding border-subtles)"
   },
-  "// ============================================": {},
-  "// Text Tokens": {},
-  "// ============================================": {},
+  // ============================================
+  // Text Tokens
+  // ============================================
   "Carbon text primary": {
     "prefix": "$text-primary",
     "body": "$$text-primary",
@@ -413,9 +413,9 @@
     "body": "$$text-disabled",
     "description": "Disabled text color"
   },
-  "// ============================================": {},
-  "// Link Tokens": {},
-  "// ============================================": {},
+  // ============================================
+  // Link Tokens
+  // ============================================
   "Carbon link primary": {
     "prefix": "$link-primary",
     "body": "$$link-primary",
@@ -456,9 +456,9 @@
     "body": "$$link-visited",
     "description": "Color for visited links"
   },
-  "// ============================================": {},
-  "// Icon Tokens": {},
-  "// ============================================": {},
+  // ============================================
+  // Icon Tokens
+  // ============================================
   "Carbon icon primary": {
     "prefix": "$icon-primary",
     "body": "$$icon-primary",
@@ -494,9 +494,9 @@
     "body": "$$icon-disabled",
     "description": "Disabled icon color"
   },
-  "// ============================================": {},
-  "// Support Tokens": {},
-  "// ============================================": {},
+  // ============================================
+  // Support Tokens
+  // ============================================
   "Carbon support error": {
     "prefix": "$support-error",
     "body": "$$support-error",
@@ -552,9 +552,9 @@
     "body": "$support-caution-undefined",
     "description": "Undefined status"
   },
-  "// ============================================": {},
-  "// Focus Tokens": {},
-  "// ============================================": {},
+  // ============================================
+  // Focus Tokens
+  // ============================================
   "Carbon focus": {
     "prefix": "$focus",
     "body": "$$focus",
@@ -570,9 +570,9 @@
     "body": "$$focus-inverse",
     "description": "Focus on high contrast moments"
   },
-  "// ============================================": {},
-  "// Miscellaneous Tokens": {},
-  "// ============================================": {},
+  // ============================================
+  // Miscellaneous Tokens
+  // ============================================
   "Carbon interactive": {
     "prefix": "$interactive",
     "body": "$$interactive",
