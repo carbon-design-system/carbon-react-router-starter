@@ -153,7 +153,7 @@
   },
   "Carbon layer selected disabled": {
     "prefix": "$layer-selected-disabled",
-    "body": "$layer-selected-disabled",
+    "body": "$$layer-selected-disabled",
     "description": "Disabled color for selected layers"
   },
   "// ============================================": {},
@@ -196,7 +196,7 @@
   },
   "Carbon layer accent hover": {
     "prefix": "$layer-accent-hover",
-    "body": "$layer-accent-hover",
+    "body": "$$layer-accent-hover",
     "description": "Contextual layer accent hover token; Automatically matches layer context"
   },
   "Carbon layer accent active 01": {
@@ -216,7 +216,7 @@
   },
   "Carbon layer accent active": {
     "prefix": "$layer-accent-active",
-    "body": "$layer-accent-active",
+    "body": "$$layer-accent-active",
     "description": "Contextual layer accent active token; Automatically matches layer context"
   },
   "// ============================================": {},
@@ -312,7 +312,7 @@
   },
   "Carbon border subtle selected": {
     "prefix": "$border-subtle-selected",
-    "body": "$border-subtle-selected",
+    "body": "$$border-subtle-selected",
     "description": "Contextual subtle selected border token; Automatically matches layer context"
   },
   "Carbon border strong 01": {
@@ -385,7 +385,7 @@
   },
   "Carbon text on color": {
     "prefix": "$text-on-color",
-    "body": "$text-on-color",
+    "body": "$$text-on-color",
     "description": "Text on interactive colors; Text on button colors"
   },
   "Carbon text on color disabled": {
@@ -423,7 +423,7 @@
   },
   "Carbon link primary hover": {
     "prefix": "$link-primary-hover",
-    "body": "$link-primary-hover",
+    "body": "$$link-primary-hover",
     "description": "Hover color for $link-primary"
   },
   "Carbon link secondary": {
@@ -438,17 +438,17 @@
   },
   "Carbon link inverse hover": {
     "prefix": "$link-inverse-hover",
-    "body": "$link-inverse-hover",
+    "body": "$$link-inverse-hover",
     "description": "Hover color for links on $background-inverse backgrounds"
   },
   "Carbon link inverse active": {
     "prefix": "$link-inverse-active",
-    "body": "$link-inverse-active",
+    "body": "$$link-inverse-active",
     "description": "Active color for links on $background-inverse backgrounds"
   },
   "Carbon link inverse visited": {
     "prefix": "$link-inverse-visited",
-    "body": "$link-inverse-visited",
+    "body": "$$link-inverse-visited",
     "description": "Color for visited links on $background-inverse backgrounds"
   },
   "Carbon link visited": {
@@ -471,7 +471,7 @@
   },
   "Carbon icon on color": {
     "prefix": "$icon-on-color",
-    "body": "$icon-on-color",
+    "body": "$$icon-on-color",
     "description": "Icons on interactive colors; Icons on non-layer colors"
   },
   "Carbon icon on color disabled": {
