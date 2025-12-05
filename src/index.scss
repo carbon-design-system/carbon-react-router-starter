@@ -78,26 +78,26 @@ $system-selector: ':root:is(:not([data-theme-setting]), [data-theme-setting="sys
 
 // Default: light header, dark content (when header-inverse=true)
 #{$system-selector}[data-header-inverse='true'] {
-  @include apply-theme('light', 'root');
-  @include apply-theme('dark', 'content');
+  @include apply-theme('dark', 'root');
+  @include apply-theme('light', 'content');
 }
 
 // Default: dark everywhere (when header-inverse=false or not set)
 #{$system-selector}:not([data-header-inverse='true']) {
-  @include apply-theme('dark', 'root');
+  @include apply-theme('light', 'root');
 }
 
 // System theme with dark preference
 @media (prefers-color-scheme: dark) {
   // Dark header, light content (when header-inverse=true)
   #{$system-selector}[data-header-inverse='true'] {
-    @include apply-theme('dark', 'root');
-    @include apply-theme('light', 'content');
+    @include apply-theme('light', 'root');
+    @include apply-theme('dark', 'content');
   }
 
   // Light everywhere (when header-inverse=false or not set)
   #{$system-selector}:not([data-header-inverse='true']) {
-    @include apply-theme('light', 'root');
+    @include apply-theme('dark', 'root');
   }
 }
 
