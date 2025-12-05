@@ -5,20 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { GlobalTheme, Theme } from '@carbon/react';
 import { Outlet } from 'react-router';
-import { useThemeContext } from '../context/ThemeContext';
 
 export const ThemeLayout = () => {
-  const { themeMenu, ready } = useThemeContext();
-
-  return (
-    ready && (
-      <GlobalTheme theme={themeMenu}>
-        <Theme theme={themeMenu}>
-          <Outlet />
-        </Theme>
-      </GlobalTheme>
-    )
-  );
+  // Theme is now handled by CSS reading HTML attributes
+  // No React components needed
+  return <Outlet />;
 };
+
+// Made with Bob

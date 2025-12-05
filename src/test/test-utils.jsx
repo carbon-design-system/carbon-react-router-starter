@@ -9,10 +9,9 @@ import { render as rtlRender } from '@testing-library/react';
 import { BrowserRouter } from 'react-router';
 import { StrictMode } from 'react';
 import { Router } from '../routes';
-import { ThemeProvider } from '../context/ThemeContext';
 
 /**
- * Renders a component with all providers (Theme, Router, etc.)
+ * Renders a component with all providers (Router, etc.)
  * Use this for page components or components that need routing
  */
 export function renderWithAllProviders(
@@ -25,27 +24,9 @@ export function renderWithAllProviders(
   function Wrapper() {
     return (
       <StrictMode>
-        <ThemeProvider>
-          <BrowserRouter>
-            <Router />
-          </BrowserRouter>
-        </ThemeProvider>
-      </StrictMode>
-    );
-  }
-
-  return rtlRender(ui, { wrapper: Wrapper, ...renderOptions });
-}
-
-/**
- * Renders a component with only the ThemeProvider
- * Use this for components that need theme context but not routing
- */
-export function renderWithTheme(ui, renderOptions = {}) {
-  function Wrapper({ children }) {
-    return (
-      <StrictMode>
-        <ThemeProvider>{children}</ThemeProvider>
+        <BrowserRouter>
+          <Router />
+        </BrowserRouter>
       </StrictMode>
     );
   }
@@ -64,3 +45,5 @@ export function renderWithoutProviders(ui, renderOptions = {}) {
 
   return rtlRender(ui, { wrapper: Wrapper, ...renderOptions });
 }
+
+// Made with Bob

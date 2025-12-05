@@ -44,6 +44,9 @@ app.use('*all', async (req, res) => {
   try {
     const url = req.originalUrl.replace(base, '');
 
+    // Get cookies from request
+    const cookies = req.headers.cookie || '';
+
     /** @type {string} */
     let template;
     /** @type {import('./entry-server.jsx').render} */
@@ -63,38 +66,47 @@ app.use('*all', async (req, res) => {
 
     let didError = false;
 
-    const { pipe, abort, statusCode } = render(url, {
-      onShellError() {
-        res.status(500);
-        res.set({ 'Content-Type': 'text/html' });
-        res.send('<h1>Something went wrong</h1>');
+    const { pipe, abort, statusCode, themeAttr } = render(
+      url,
+      {
+        onShellError() {
+          res.status(500);
+          res.set({ 'Content-Type': 'text/html' });
+          res.send('<h1>Something went wrong</h1>');
+        },
+        onShellReady() {
+          res.status(didError ? 500 : statusCode);
+          res.set({ 'Content-Type': 'text/html' });
+
+          const transformStream = new Transform({
+            transform(chunk, encoding, callback) {
+              res.write(chunk, encoding);
+              callback();
+            },
+          });
+
+          const [htmlStart, htmlEnd] = template.split(`<!--app-html-->`);
+
+          // Inject theme attribute into the html tag
+          const htmlStartWithTheme = themeAttr
+            ? htmlStart.replace('<html', `<html${themeAttr}`)
+            : htmlStart;
+
+          res.write(htmlStartWithTheme);
+
+          transformStream.on('finish', () => {
+            res.end(htmlEnd);
+          });
+
+          pipe(transformStream);
+        },
+        onError(error) {
+          didError = true;
+          console.error(error);
+        },
       },
-      onShellReady() {
-        res.status(didError ? 500 : statusCode);
-        res.set({ 'Content-Type': 'text/html' });
-
-        const transformStream = new Transform({
-          transform(chunk, encoding, callback) {
-            res.write(chunk, encoding);
-            callback();
-          },
-        });
-
-        const [htmlStart, htmlEnd] = template.split(`<!--app-html-->`);
-
-        res.write(htmlStart);
-
-        transformStream.on('finish', () => {
-          res.end(htmlEnd);
-        });
-
-        pipe(transformStream);
-      },
-      onError(error) {
-        didError = true;
-        console.error(error);
-      },
-    });
+      cookies,
+    );
 
     setTimeout(() => {
       abort();

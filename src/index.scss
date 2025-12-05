@@ -27,34 +27,106 @@
 @use 'components/footer/footer';
 
 @mixin light-brand {
+  --light: 'true';
   --cs-brand: #{$blue-30};
   --cs-brand-alt: #{$blue-20};
   --cs-logo-filter: invert(100%);
+
+  background-color: $background;
+  color: $text-primary;
 }
 
 @mixin dark-brand {
+  --light: 'false';
   --cs-brand: #{$blue-80};
   --cs-brand-alt: #{$blue-90};
   --cs-logo-filter: initial;
+
+  background: $background;
+  color-color: $text-primary;
 }
 
-/* system preference theme by default */
-:root,
-:root[cs--theme='g10'] {
-  @include theme(themes.$g10);
-  @include light-brand;
-}
+/* Theme based on data-theme-setting attribute */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    @include theme(themes.$g100);
-    @include dark-brand;
+// Helper mixin to apply theme to root or content
+@mixin apply-theme($theme: 'light', $scope: 'root') {
+  @if $theme == 'light' {
+    @if $scope == 'root' {
+      @include theme(themes.$g10);
+      @include light-brand;
+    } @else {
+      .cs--content {
+        @include theme(themes.$g10);
+        @include light-brand;
+      }
+    }
+  } @else {
+    @if $scope == 'root' {
+      @include theme(themes.$g100);
+      @include dark-brand;
+    } @else {
+      .cs--content {
+        @include theme(themes.$g100);
+        @include dark-brand;
+      }
+    }
   }
 }
 
-:root[cs--theme='g100'] {
-  @include theme(themes.$g100);
-  @include dark-brand;
+// System theme (no explicit setting or explicit 'system' value)
+$system-selector: ':root:is(:not([data-theme-setting]), [data-theme-setting="system"])';
+
+// Default: light header, dark content (when header-inverse=true)
+#{$system-selector}[data-header-inverse='true'] {
+  @include apply-theme('light', 'root');
+  @include apply-theme('dark', 'content');
+}
+
+// Default: dark everywhere (when header-inverse=false or not set)
+#{$system-selector}:not([data-header-inverse='true']) {
+  @include apply-theme('dark', 'root');
+}
+
+// System theme with dark preference
+@media (prefers-color-scheme: dark) {
+  // Dark header, light content (when header-inverse=true)
+  #{$system-selector}[data-header-inverse='true'] {
+    @include apply-theme('dark', 'root');
+    @include apply-theme('light', 'content');
+  }
+
+  // Light everywhere (when header-inverse=false or not set)
+  #{$system-selector}:not([data-header-inverse='true']) {
+    @include apply-theme('light', 'root');
+  }
+}
+
+// Explicit light theme
+:root[data-theme-setting='light'] {
+  // Dark header, light content (when header-inverse=true)
+  &[data-header-inverse='true'] {
+    @include apply-theme('dark', 'root');
+    @include apply-theme('light', 'content');
+  }
+
+  // Light everywhere (when header-inverse=false or not set)
+  &:not([data-header-inverse='true']) {
+    @include apply-theme('light', 'root');
+  }
+}
+
+// Explicit dark theme
+:root[data-theme-setting='dark'] {
+  // Light header, dark content (when header-inverse=true)
+  &[data-header-inverse='true'] {
+    @include apply-theme('light', 'root');
+    @include apply-theme('dark', 'content');
+  }
+
+  // Dark everywhere (when header-inverse=false or not set)
+  &:not([data-header-inverse='true']) {
+    @include apply-theme('dark', 'root');
+  }
 }
 
 body {

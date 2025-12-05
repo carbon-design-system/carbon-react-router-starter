@@ -9,7 +9,7 @@ import { test, expect, vi, beforeEach } from 'vitest';
 import { screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-import { renderWithTheme } from '../test/test-utils';
+import { renderWithoutProviders } from '../test/test-utils';
 import ProfilePanel from '../components/profilePanel/ProfilePanel';
 import { server } from '../test/server';
 import {
@@ -18,7 +18,8 @@ import {
   setupAfterEach,
   setupAfterAll,
 } from '../test/setup';
-import * as ThemeContext from '../context/ThemeContext';
+import * as themeUtils from '../utils/theme';
+import * as cookieUtils from '../utils/cookies';
 
 // Setup test environment
 beforeAll(() => setupBeforeAll(server));
@@ -26,34 +27,44 @@ beforeEach(() => setupBeforeEach(server));
 afterEach(() => setupAfterEach(server));
 afterAll(() => setupAfterAll(server));
 
-// Mock the ThemeContext hook
+// Mock the theme utilities
 const mockSetThemeSetting = vi.fn();
-const mockSetThemeMenuCompliment = vi.fn();
+const mockSetHeaderInverse = vi.fn();
 
 beforeEach(() => {
   // Reset mocks before each test
   mockSetThemeSetting.mockReset();
-  mockSetThemeMenuCompliment.mockReset();
+  mockSetHeaderInverse.mockReset();
 
-  // Mock the useThemeContext hook
-  vi.spyOn(ThemeContext, 'useThemeContext').mockImplementation(() => ({
+  // Mock the theme utility functions
+  vi.spyOn(themeUtils, 'setThemeSetting').mockImplementation(
+    mockSetThemeSetting,
+  );
+  vi.spyOn(themeUtils, 'setHeaderInverse').mockImplementation(
+    mockSetHeaderInverse,
+  );
+
+  // Mock cookie utilities to return default values
+  // Note: headerInverse is 'false' (string) which converts to false (boolean)
+  vi.spyOn(cookieUtils, 'getThemeFromCookies').mockReturnValue({
     themeSetting: 'light',
-    setThemeSetting: mockSetThemeSetting,
-    themeMenuCompliment: false,
-    setThemeMenuCompliment: mockSetThemeMenuCompliment,
-    theme: 'g10',
-    themeMenu: 'g10',
-    ready: true,
-  }));
+    headerInverse: 'false',
+  });
+
+  // Mock getThemeSettings to return the same values
+  vi.spyOn(themeUtils, 'getThemeSettings').mockReturnValue({
+    themeSetting: 'light',
+    headerInverse: false, // boolean value
+  });
 });
 
 // Debug test to understand the DOM structure
 test('debug DOM structure', () => {
-  renderWithTheme(<ProfilePanel />);
+  renderWithoutProviders(<ProfilePanel />);
 });
 
 test('renders profile panel with user information', () => {
-  renderWithTheme(<ProfilePanel />);
+  renderWithoutProviders(<ProfilePanel />);
 
   // Check if user information is displayed
   expect(screen.getByText('Anne Profile')).toBeInTheDocument();
@@ -65,7 +76,7 @@ test('renders profile panel with user information', () => {
 
 test('changes theme when theme switcher is used', async () => {
   const user = userEvent.setup();
-  renderWithTheme(<ProfilePanel />);
+  renderWithoutProviders(<ProfilePanel />);
 
   // Find all buttons in the theme switcher area
   // This is more resilient than looking for specific text
@@ -106,7 +117,7 @@ test('changes theme when theme switcher is used', async () => {
 
 test('toggles menu complement when checkbox is clicked', async () => {
   const user = userEvent.setup();
-  renderWithTheme(<ProfilePanel />);
+  renderWithoutProviders(<ProfilePanel />);
 
   // Find the menu complement checkbox by its label
   const complementLabel = screen.getByText('Complement menu theme');
@@ -132,18 +143,19 @@ test('toggles menu complement when checkbox is clicked', async () => {
   if (complementCheckbox) {
     await user.click(complementCheckbox);
 
-    // Verify that setThemeMenuCompliment was called with true
+    // Verify that setHeaderInverse was called
+    // The checkbox starts unchecked (false), so clicking it should set it to true
     await waitFor(() => {
-      expect(mockSetThemeMenuCompliment).toHaveBeenCalledWith(true);
+      expect(mockSetHeaderInverse).toHaveBeenCalledWith(true);
     });
   } else {
     // If we couldn't find the checkbox, try clicking the label itself
     // This often works because labels are associated with checkboxes
     await user.click(complementLabel);
 
-    // Verify that setThemeMenuCompliment was called with true
+    // Verify that setHeaderInverse was called
     await waitFor(() => {
-      expect(mockSetThemeMenuCompliment).toHaveBeenCalledWith(true);
+      expect(mockSetHeaderInverse).toHaveBeenCalledWith(true);
     });
   }
 });
