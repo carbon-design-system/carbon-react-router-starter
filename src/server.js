@@ -114,7 +114,7 @@ app.use('*all', async (req, res) => {
   } catch (e) {
     vite?.ssrFixStacktrace(e);
     console.log(e.stack);
-    res.status(500).end(e.stack);
+    res.status(500).set('Content-Type', 'text/plain').end(e.stack);
   }
 });
 
