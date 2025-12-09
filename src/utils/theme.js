@@ -49,18 +49,24 @@ export function setHeaderInverse(headerInverse) {
 /**
  * Initialize theme on page load (sync HTML attributes with cookies)
  * Call this once when the app starts
+ * Only updates attributes if they're not already set by SSR
  */
 export function initializeTheme() {
   if (typeof document === 'undefined') return;
 
   const { themeSetting, headerInverse } = getThemeSettings();
 
-  // Ensure HTML attributes match cookie values
-  document.documentElement.setAttribute('data-theme-setting', themeSetting);
-  document.documentElement.setAttribute(
-    'data-header-inverse',
-    String(headerInverse),
-  );
+  // Only set attributes if they're not already present (to avoid hydration mismatch)
+  if (!document.documentElement.hasAttribute('data-theme-setting')) {
+    document.documentElement.setAttribute('data-theme-setting', themeSetting);
+  }
+
+  if (!document.documentElement.hasAttribute('data-header-inverse')) {
+    document.documentElement.setAttribute(
+      'data-header-inverse',
+      String(headerInverse),
+    );
+  }
 }
 
 // Made with Bob
