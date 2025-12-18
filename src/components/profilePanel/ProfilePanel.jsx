@@ -23,16 +23,16 @@ import {
 } from '../../utils/theme';
 
 export const ProfilePanel = ({ className }) => {
-  // Get initial values from cookies
-  const [themeSetting, setThemeSettingState] = useState(() => {
-    const { themeSetting } = getThemeSettings();
-    return themeSetting;
-  });
+  // Get initial values from cookies (single call to avoid redundant parsing)
+  const initialSettings = getThemeSettings();
 
-  const [themeMenuCompliment, setThemeMenuComplimentState] = useState(() => {
-    const { headerInverse } = getThemeSettings();
-    return headerInverse;
-  });
+  const [themeSetting, setThemeSettingState] = useState(
+    initialSettings.themeSetting,
+  );
+
+  const [themeMenuComplement, setThemeMenuComplementState] = useState(
+    initialSettings.headerInverse,
+  );
 
   // Update theme setting
   const handleThemeSettingChange = (value) => {
@@ -41,8 +41,8 @@ export const ProfilePanel = ({ className }) => {
   };
 
   // Update header inverse
-  const handleThemeMenuComplimentChange = (value) => {
-    setThemeMenuComplimentState(value);
+  const handleThemeMenuComplementChange = (value) => {
+    setThemeMenuComplementState(value);
     updateHeaderInverse(value);
   };
 
@@ -77,8 +77,8 @@ export const ProfilePanel = ({ className }) => {
           <ThemeMenuComplement
             id="theme-menu-complement"
             labelText="Complement menu theme"
-            checked={themeMenuCompliment}
-            onChange={handleThemeMenuComplimentChange}
+            checked={themeMenuComplement}
+            onChange={handleThemeMenuComplementChange}
           />
         </ThemeSettings>
       </div>
