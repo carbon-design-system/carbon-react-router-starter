@@ -4,39 +4,45 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
     <!-- CRITICAL: Set theme attributes BEFORE CSS loads to prevent flash -->
     <script blocking="render">
-      (function() {
+      (function () {
         // Parse cookies synchronously
         const cookies = document.cookie.split(';').reduce((acc, cookie) => {
           const [name, value] = cookie.trim().split('=');
           if (name && value) acc[name] = decodeURIComponent(value);
           return acc;
         }, {});
-        
+
         // Set theme attributes immediately on documentElement
         const themeSetting = cookies['theme-setting'] || 'system';
         const headerInverse = cookies['header-inverse'] === 'true';
-        
-        document.documentElement.setAttribute('data-theme-setting', themeSetting);
-        document.documentElement.setAttribute('data-header-inverse', String(headerInverse));
+
+        document.documentElement.setAttribute(
+          'data-theme-setting',
+          themeSetting,
+        );
+        document.documentElement.setAttribute(
+          'data-header-inverse',
+          String(headerInverse),
+        );
       })();
     </script>
-    
+
     <!-- Inline critical CSS to prevent FOUC from font loading -->
     <style>
       /* Prevent flash by hiding body until fonts and theme are ready */
       body {
         visibility: hidden;
       }
-      
+
       /* Show body after page is ready */
       body.ready {
         visibility: visible;
       }
     </style>
-    
+
     <link rel="stylesheet" href="/src/index.scss" />
     <title>Carbon React starter template</title>
     <!--app-head-->
