@@ -37,5 +37,3 @@ const PageLayoutHeader = ({ children }) => (
 );
 PageLayoutHeader.displayName = 'PageLayoutHeader';
 PageLayout.Header = PageLayoutHeader;
-
-// Made with Bob

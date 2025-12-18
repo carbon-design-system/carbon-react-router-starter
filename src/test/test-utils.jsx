@@ -45,5 +45,3 @@ export function renderWithoutProviders(ui, renderOptions = {}) {
 
   return rtlRender(ui, { wrapper: Wrapper, ...renderOptions });
 }
-
-// Made with Bob

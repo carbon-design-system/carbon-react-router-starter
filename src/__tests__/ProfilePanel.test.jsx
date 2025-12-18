@@ -159,5 +159,3 @@ test('toggles menu complement when checkbox is clicked', async () => {
     });
   }
 });
-
-// Made with Bob
