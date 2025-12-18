@@ -25,3 +25,6 @@ hydrateRoot(
     </BrowserRouter>
   </StrictMode>,
 );
+
+// Remove visibility hidden after hydration to prevent FOUC
+document.body.classList.add('ready');
