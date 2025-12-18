@@ -8,16 +8,13 @@
 import { Route, Routes } from 'react-router';
 
 import { routes } from './config.js';
-import { ThemeLayout } from '../layouts/theme-layout.jsx';
 
 export const Router = () => {
   return (
     <Routes>
-      <Route element={<ThemeLayout />}>
-        {routes.map(({ element: Element, ...rest }) => (
-          <Route key={rest.path} {...rest} element={Element && <Element />} />
-        ))}
-      </Route>
+      {routes.map(({ element: Element, ...rest }) => (
+        <Route key={rest.path} {...rest} element={Element && <Element />} />
+      ))}
     </Routes>
   );
 };

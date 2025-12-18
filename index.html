@@ -4,6 +4,20 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Inline critical CSS to prevent FOUC from font loading -->
+    <style>
+      /* Prevent flash by hiding body until fonts and theme are ready */
+      body {
+        visibility: hidden;
+      }
+
+      /* Show body after page is ready */
+      body.ready {
+        visibility: visible;
+      }
+    </style>
+
     <link rel="stylesheet" href="/src/index.scss" />
     <title>Carbon React starter template</title>
     <!--app-head-->

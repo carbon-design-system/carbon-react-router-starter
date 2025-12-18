@@ -13,14 +13,22 @@ import { StaticRouter } from 'react-router';
 // App level imports
 import { Router } from './routes/index.jsx';
 import { getStatusCodeForPath } from './routes/utils.js';
+import { getThemeFromCookies } from './utils/cookies.js';
 
 /**
  * @param {string} url
  * @param {import('react-dom/server').RenderToPipeableStreamOptions} [options]
+ * @param {string} [cookies] - Cookie string from request headers
  */
-export function render(_url, options) {
+export function render(_url, options, cookies) {
   const url = `/${_url}`;
   const statusCode = getStatusCodeForPath(url);
+
+  // Get theme values from cookies
+  const { themeSetting, headerInverse } = getThemeFromCookies(cookies);
+
+  // Create HTML attributes for theme settings
+  const themeAttrs = ` data-theme-setting="${themeSetting}" data-header-inverse="${headerInverse}"`;
 
   const { pipe, abort } = renderToPipeableStream(
     <StrictMode>
@@ -33,5 +41,5 @@ export function render(_url, options) {
 
   const head = '<meta name="description" content="Server-side rendered page">';
 
-  return { pipe, head, abort, statusCode };
+  return { pipe, head, abort, statusCode, themeAttr: themeAttrs };
 }

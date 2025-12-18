@@ -5,14 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Content, Theme } from '@carbon/react';
+import { Content } from '@carbon/react';
 import { Children, Suspense } from 'react';
 import { Nav } from '../components/nav/Nav';
 import classNames from 'classnames';
-import { useThemeContext } from '../context/ThemeContext';
 
 export const PageLayout = ({ children, className, fallback }) => {
-  const { theme } = useThemeContext();
   const childArray = Children.toArray(children);
   const otherChildren = childArray.filter(
     (child) => child.type !== PageLayoutHeader,
@@ -23,12 +21,12 @@ export const PageLayout = ({ children, className, fallback }) => {
     <Suspense fallback={fallback}>
       <div className={classNames('cs--page-layout', className)}>
         <Nav />
-        <Theme theme={theme} as={Content}>
+        <Content className="cs--content">
           <div className="cs--page-layout__content">
             {Header}
             <div className="cs--page-layout__content-body">{otherChildren}</div>
           </div>
-        </Theme>
+        </Content>
       </div>
     </Suspense>
   );
