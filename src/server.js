@@ -69,7 +69,14 @@ app.use('*all', async (req, res) => {
     const { pipe, abort, statusCode, themeAttr } = render(
       url,
       {
-        onShellError() {
+        onShellError(error) {
+          // Improved error handling with debugging context
+          console.error('Shell rendering error:', {
+            url,
+            error: error.message,
+            stack: error.stack,
+            timestamp: new Date().toISOString(),
+          });
           res.status(500);
           res.set({ 'Content-Type': 'text/html' });
           res.send('<h1>Something went wrong</h1>');
@@ -102,7 +109,13 @@ app.use('*all', async (req, res) => {
         },
         onError(error) {
           didError = true;
-          console.error(error);
+          // Enhanced error logging with context
+          console.error('Streaming error:', {
+            url,
+            error: error.message,
+            stack: error.stack,
+            timestamp: new Date().toISOString(),
+          });
         },
       },
       cookies,
@@ -113,8 +126,17 @@ app.use('*all', async (req, res) => {
     }, ABORT_DELAY);
   } catch (e) {
     vite?.ssrFixStacktrace(e);
-    console.log(e.stack);
-    res.status(500).set('Content-Type', 'text/plain').end('Internal Server Error');
+    // Enhanced error logging with full context
+    console.error('Server error:', {
+      url: req.originalUrl,
+      error: e.message,
+      stack: e.stack,
+      timestamp: new Date().toISOString(),
+    });
+    res
+      .status(500)
+      .set('Content-Type', 'text/plain')
+      .end('Internal Server Error');
   }
 });
 
