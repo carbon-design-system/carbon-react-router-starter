@@ -7,7 +7,8 @@
 
 @use '@carbon/ibm-products/css/index.min';
 @use '@carbon/react' with (
-  $font-path: '@ibm/plex'
+  $font-path: '@ibm/plex',
+  $font-display: 'block'
 );
 @use '@carbon/react/scss/spacing' as *;
 @use '@carbon/react/scss/theme' as *;
