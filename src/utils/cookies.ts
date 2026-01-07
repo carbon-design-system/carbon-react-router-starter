@@ -5,45 +5,78 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import type { ThemeSetting } from '../types/theme';
+
 // Constants
 const COOKIE_MAX_AGE_ONE_YEAR = 31536000; // 1 year in seconds
 
 /**
+ * Cookie options for setting cookies
+ */
+interface CookieOptions {
+  maxAge?: number;
+  path?: string;
+  sameSite?: 'Strict' | 'Lax' | 'None';
+  secure?: boolean;
+}
+
+/**
+ * Theme values from cookies
+ */
+interface ThemeFromCookies {
+  themeSetting: ThemeSetting;
+  headerInverse: boolean;
+}
+
+/**
+ * Theme values to set in cookies
+ */
+interface ThemeValues {
+  themeSetting?: ThemeSetting;
+  headerInverse?: boolean;
+}
+
+/**
  * Parse cookies from a cookie string (from document.cookie or request headers)
  * Handles edge cases like cookies with '=' in their values
- * @param {string} cookieString - The cookie string to parse
- * @returns {Record<string, string>} Object with cookie name-value pairs
+ * @param cookieString - The cookie string to parse
+ * @returns Object with cookie name-value pairs
  */
-export function parseCookies(cookieString) {
+export function parseCookies(
+  cookieString: string | undefined,
+): Record<string, string> {
   if (!cookieString) return {};
 
-  return cookieString.split(';').reduce((cookies, cookie) => {
-    const trimmed = cookie.trim();
-    const equalsIndex = trimmed.indexOf('=');
+  return cookieString.split(';').reduce(
+    (cookies, cookie) => {
+      const trimmed = cookie.trim();
+      const equalsIndex = trimmed.indexOf('=');
 
-    if (equalsIndex > 0) {
-      const name = trimmed.substring(0, equalsIndex);
-      const value = trimmed.substring(equalsIndex + 1);
+      if (equalsIndex > 0) {
+        const name = trimmed.substring(0, equalsIndex);
+        const value = trimmed.substring(equalsIndex + 1);
 
-      if (name && value) {
-        try {
-          cookies[name] = decodeURIComponent(value);
-        } catch {
-          // If decoding fails, use the raw value
-          cookies[name] = value;
+        if (name && value) {
+          try {
+            cookies[name] = decodeURIComponent(value);
+          } catch {
+            // If decoding fails, use the raw value
+            cookies[name] = value;
+          }
         }
       }
-    }
-    return cookies;
-  }, {});
+      return cookies;
+    },
+    {} as Record<string, string>,
+  );
 }
 
 /**
  * Get a cookie value by name (client-side only)
- * @param {string} name - The cookie name
- * @returns {string | null} The cookie value or null if not found
+ * @param name - The cookie name
+ * @returns The cookie value or null if not found
  */
-export function getCookie(name) {
+export function getCookie(name: string): string | null {
   if (typeof document === 'undefined') return null;
 
   const cookies = parseCookies(document.cookie);
@@ -52,10 +85,10 @@ export function getCookie(name) {
 
 /**
  * Validate cookie value before setting
- * @param {string} value - The cookie value to validate
- * @returns {boolean} True if valid, false otherwise
+ * @param value - The cookie value to validate
+ * @returns True if valid, false otherwise
  */
-function isValidCookieValue(value) {
+function isValidCookieValue(value: string): boolean {
   // Check for invalid characters in cookie values
   // Cookies cannot contain control characters, whitespace, or certain special chars
   // eslint-disable-next-line no-control-regex
@@ -64,15 +97,15 @@ function isValidCookieValue(value) {
 
 /**
  * Set a cookie (client-side only)
- * @param {string} name - The cookie name
- * @param {string} value - The cookie value
- * @param {object} [options] - Cookie options
- * @param {number} [options.maxAge] - Max age in seconds (default: 1 year)
- * @param {string} [options.path] - Cookie path (default: '/')
- * @param {string} [options.sameSite] - SameSite attribute (default: 'Lax')
- * @param {boolean} [options.secure] - Secure flag (default: false in dev, true in prod)
+ * @param name - The cookie name
+ * @param value - The cookie value
+ * @param options - Cookie options
  */
-export function setCookie(name, value, options = {}) {
+export function setCookie(
+  name: string,
+  value: string,
+  options: CookieOptions = {},
+): void {
   if (typeof document === 'undefined') return;
 
   // Validate cookie value before encoding
@@ -105,10 +138,10 @@ export function setCookie(name, value, options = {}) {
 
 /**
  * Get theme values from cookies
- * @param {string} [cookieString] - Optional cookie string (for server-side)
- * @returns {{ themeSetting: string, headerInverse: boolean }} Object with themeSetting and headerInverse values
+ * @param cookieString - Optional cookie string (for server-side)
+ * @returns Object with themeSetting and headerInverse values
  */
-export function getThemeFromCookies(cookieString) {
+export function getThemeFromCookies(cookieString?: string): ThemeFromCookies {
   const cookies = cookieString
     ? parseCookies(cookieString)
     : parseCookies(typeof document !== 'undefined' ? document.cookie : '');
@@ -117,9 +150,11 @@ export function getThemeFromCookies(cookieString) {
   const headerInverse = cookies['header-inverse'] === 'true';
 
   // Validate theme setting value
-  const validThemeSettings = ['system', 'light', 'dark'];
-  const validatedThemeSetting = validThemeSettings.includes(themeSetting)
-    ? themeSetting
+  const validThemeSettings: ThemeSetting[] = ['system', 'light', 'dark'];
+  const validatedThemeSetting = validThemeSettings.includes(
+    themeSetting as ThemeSetting,
+  )
+    ? (themeSetting as ThemeSetting)
     : 'system';
 
   return {
@@ -130,14 +165,12 @@ export function getThemeFromCookies(cookieString) {
 
 /**
  * Set theme values in cookies (client-side only)
- * @param {object} values - Theme values to set
- * @param {string} [values.themeSetting] - Theme setting (system, light, dark)
- * @param {boolean} [values.headerInverse] - Header inverse setting
+ * @param values - Theme values to set
  */
-export function setThemeInCookies(values) {
+export function setThemeInCookies(values: ThemeValues): void {
   if (values.themeSetting !== undefined) {
     // Validate theme setting before setting cookie
-    const validThemeSettings = ['system', 'light', 'dark'];
+    const validThemeSettings: ThemeSetting[] = ['system', 'light', 'dark'];
     if (validThemeSettings.includes(values.themeSetting)) {
       setCookie('theme-setting', values.themeSetting);
     } else {
@@ -148,3 +181,5 @@ export function setThemeInCookies(values) {
     setCookie('header-inverse', String(values.headerInverse));
   }
 }
+
+// Made with Bob

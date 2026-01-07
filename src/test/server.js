@@ -10,7 +10,7 @@ import { setupServer } from 'msw/node';
 import { getNetworking } from './networking';
 import { getRouter } from './router';
 import { getRoutes } from '../routes/routes';
-import { port, base } from '../config/server-config.js';
+import { port, base } from '../config/server-config';
 
 const _setupServer = (...args) => {
   const mocks = [];

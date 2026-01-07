@@ -5,21 +5,30 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { getThemeFromCookies, setThemeInCookies } from './cookies.js';
+import { getThemeFromCookies, setThemeInCookies } from './cookies';
+import type { ThemeSetting } from '../types/theme';
+
+/**
+ * Theme settings return type
+ */
+interface ThemeSettings {
+  themeSetting: ThemeSetting;
+  headerInverse: boolean;
+}
 
 /**
  * Get current theme settings from cookies
- * @returns {Object} Object with themeSetting and headerInverse values
+ * @returns Object with themeSetting and headerInverse values
  */
-export function getThemeSettings() {
+export function getThemeSettings(): ThemeSettings {
   return getThemeFromCookies();
 }
 
 /**
  * Update theme setting and apply to HTML
- * @param {string} themeSetting - Theme setting (system, light, dark)
+ * @param themeSetting - Theme setting (system, light, dark)
  */
-export function setThemeSetting(themeSetting) {
+export function setThemeSetting(themeSetting: ThemeSetting): void {
   // Update cookie
   setThemeInCookies({ themeSetting });
 
@@ -31,9 +40,9 @@ export function setThemeSetting(themeSetting) {
 
 /**
  * Update header inverse setting and apply to HTML
- * @param {boolean} headerInverse - Header inverse setting
+ * @param headerInverse - Header inverse setting
  */
-export function setHeaderInverse(headerInverse) {
+export function setHeaderInverse(headerInverse: boolean): void {
   // Update cookie
   setThemeInCookies({ headerInverse });
 
@@ -51,7 +60,7 @@ export function setHeaderInverse(headerInverse) {
  * Call this once when the app starts
  * Only updates attributes if they're not already set by SSR
  */
-export function initializeTheme() {
+export function initializeTheme(): void {
   if (typeof document === 'undefined') return;
 
   const { themeSetting, headerInverse } = getThemeSettings();
@@ -89,3 +98,5 @@ export function initializeTheme() {
     );
   }
 }
+
+// Made with Bob

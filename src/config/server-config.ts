@@ -7,6 +7,8 @@
 
 // Server configuration constants
 // Extracted to avoid importing the full server during tests
-export const port = process.env.PORT || 5173;
-export const base = process.env.BASE || '/';
-export const baseUrl = `http://localhost:${port}`;
+export const port: number = Number(process.env.PORT) || 5173;
+export const base: string = process.env.BASE || '/';
+export const baseUrl: string = `http://localhost:${port}`;
+
+// Made with Bob

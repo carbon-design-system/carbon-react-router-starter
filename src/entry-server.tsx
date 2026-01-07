@@ -14,7 +14,7 @@ import { StaticRouter } from 'react-router';
 // App level imports
 import { Router } from './routes/index';
 import { getStatusCodeForPath } from './routes/utils';
-import { getThemeFromCookies } from './utils/cookies.js';
+import { getThemeFromCookies } from './utils/cookies';
 import type { RenderResult } from './types/server';
 
 export function render(

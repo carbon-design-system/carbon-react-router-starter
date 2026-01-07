@@ -10,7 +10,7 @@ import express from 'express';
 import { Transform } from 'node:stream';
 import type { ViteDevServer } from 'vite';
 import { getRoutes } from './routes/routes';
-import { port, base, baseUrl } from './config/server-config.js';
+import { port, base, baseUrl } from './config/server-config';
 import type { RenderFunction } from './types/server';
 
 // Constants
