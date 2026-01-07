@@ -4,12 +4,14 @@
 
 **Last Updated:** 2026-01-07
 
-## ⚠️ Known Issues
+## ✅ Recent Fixes
 
-- **ProfilePanel Component**: Temporarily disabled due to `@carbon-labs/react-theme-settings` compatibility issue
-  - See [`docs/ProfilePanel-Issue.md`](./ProfilePanel-Issue.md) for full details and resolution steps
-  - Does not block TypeScript migration progress
-  - Application fully functional without this component
+- **ProfilePanel Component**: ✅ RESOLVED - Now fully functional with `@carbon-labs/react-theme-settings` v0.18.0
+  - See [`docs/ProfilePanel-Issue.md`](./ProfilePanel-Issue.md) for resolution details
+  - Ready for TypeScript migration in Phase 5
+- **Dashboard Hydration**: ✅ RESOLVED - Fixed SSR hydration mismatch using `useSyncExternalStore`
+  - Proper external data source pattern implemented
+  - Random values now work correctly with SSR
 
 ### Completed Phases
 
@@ -315,7 +317,7 @@ export type RenderFunction = (
 #### 5.3 Other Components
 
 1. `src/components/footer/Footer.jsx` → `src/components/footer/Footer.tsx`
-2. `src/components/profilePanel/ProfilePanel.jsx` → `src/components/profilePanel/ProfilePanel.tsx`
+2. `src/components/profilePanel/ProfilePanel.jsx` → `src/components/profilePanel/ProfilePanel.tsx` ✅ (Now functional - ready to migrate)
 3. Remaining components in order of complexity
 
 ### Phase 6: Pages Migration
