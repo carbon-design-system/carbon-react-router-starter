@@ -2,7 +2,7 @@
 
 ## Migration Status
 
-**Last Updated:** 2025-01-19
+**Last Updated:** 2026-01-07
 
 ## ⚠️ Known Issues
 
@@ -37,17 +37,16 @@
   - ✅ Migrated `src/utils/local-storage.js` → `src/utils/local-storage.ts`
   - ✅ Migrated `src/routes/utils.js` → `src/routes/utils.ts`
   - ✅ Migrated `src/routes/config.js` → `src/routes/config.ts`
-  - ✅ Migrated `src/context/ThemeContext.jsx` → `src/context/ThemeContext.tsx`
+  - ✅ Migrated `src/routes/routes.js` → `src/routes/routes.ts`
   - ✅ Migrated `src/routes/index.jsx` → `src/routes/index.tsx`
   - ✅ Migrated `src/entry-client.jsx` → `src/entry-client.tsx`
   - ✅ Migrated `src/entry-server.jsx` → `src/entry-server.tsx`
   - ✅ Migrated `src/server.js` → `src/server.ts`
-  - ✅ Migrated `src/routes/routes.js` → `src/routes/routes.ts`
   - ✅ Migrated `src/service/message.js` → `src/service/message.ts`
   - ✅ Installed `tsx` for TypeScript execution in Node.js
   - ✅ Updated `package.json` scripts to use `tsx`
   - ✅ Updated `index.html` to reference TypeScript entry file
-  - ✅ Fixed SSR issues (ThemeProvider, localStorage browser checks)
+  - ✅ Fixed SSR issues (localStorage browser checks, theme handling)
   - ✅ All 33 tests passing
   - ✅ Application fully functional in browser
 
@@ -71,12 +70,16 @@ This document outlines a comprehensive plan to migrate the Carbon React Router S
 
 ### Key Files Identified
 
-- Entry points: `src/entry-client.jsx`, `src/entry-server.jsx`
-- Routing: `src/routes/index.jsx`, `src/routes/config.js`
-- Context: `src/context/ThemeContext.jsx`
-- Components: ~10 components in `src/components/`
-- Utilities: `src/utils/local-storage.js`
-- Tests: `src/__tests__/` (5 test files)
+- Entry points: `src/entry-client.tsx` ✅, `src/entry-server.tsx` ✅
+- Routing: `src/routes/index.tsx` ✅, `src/routes/config.ts` ✅, `src/routes/routes.ts` ✅, `src/routes/utils.ts` ✅
+- Components: ~10 components in `src/components/` (pending migration)
+- Layouts: `src/layouts/page-layout.jsx` (pending migration)
+- Pages: ~15 page components (pending migration)
+- Utilities: `src/utils/local-storage.ts` ✅, `src/utils/cookies.js`, `src/utils/theme.js`
+- Services: `src/service/message.ts` ✅, `src/service/externalHandlers.js`, `src/service/postHandlers.js`
+- API: `src/api/message.js`
+- Config: `src/config/server-config.js`
+- Tests: `src/__tests__/` (4 test files - pending migration)
 
 ### Current Dependencies
 
@@ -257,16 +260,7 @@ export type RenderFunction = (
    - Add type definitions for storage keys and values
    - Type the return values and parameters
 
-#### 3.2 Context Providers
-
-**Priority: HIGH** - Used throughout the app
-
-1. `src/context/ThemeContext.jsx` → `src/context/ThemeContext.tsx`
-   - Replace PropTypes with TypeScript interfaces
-   - Type all hooks and state
-   - Export typed context value
-
-#### 3.3 Route Configuration
+#### 3.2 Route Configuration
 
 **Priority: HIGH** - Core routing logic
 
@@ -295,12 +289,14 @@ export type RenderFunction = (
    - Type Express server configuration
    - Type middleware functions
 
-### Phase 4: Layouts Migration
+### Phase 4: Layouts and Config Migration
 
-**Priority: MEDIUM** - Shared layout components
+**Priority: MEDIUM** - Shared layout components and configuration
 
-1. `src/layouts/theme-layout.jsx` → `src/layouts/theme-layout.tsx`
-2. `src/layouts/page-layout.jsx` → `src/layouts/page-layout.tsx`
+1. `src/layouts/page-layout.jsx` → `src/layouts/page-layout.tsx`
+2. `src/config/server-config.js` → `src/config/server-config.ts`
+3. `src/utils/cookies.js` → `src/utils/cookies.ts`
+4. `src/utils/theme.js` → `src/utils/theme.ts`
 
 ### Phase 5: Components Migration (Incremental)
 
@@ -337,17 +333,20 @@ export type RenderFunction = (
 **Priority: LOW** - External integrations
 
 1. `src/api/message.js` → `src/api/message.ts`
-2. `src/service/message.js` → `src/service/message.ts`
+2. `src/service/externalHandlers.js` → `src/service/externalHandlers.ts`
+3. `src/service/postHandlers.js` → `src/service/postHandlers.ts`
 
 ### Phase 8: Tests Migration
 
 **Priority: LOW** - Can be done last
 
 1. Update test setup: `src/test/setup.js` → `src/test/setup.ts`
-2. Migrate test utilities: `src/test/test-utils.jsx` → `src/test/test-utils.tsx`
+2. Update test utilities:
+   - `src/test/test-utils.jsx` → `src/test/test-utils.tsx`
+   - `src/test/networking.js` → `src/test/networking.ts`
+   - `src/test/router.js` → `src/test/router.ts`
+   - `src/test/server.js` → `src/test/server.ts`
 3. Migrate individual test files:
-   - `src/__tests__/local-storage.test.js` → `src/__tests__/local-storage.test.ts`
-   - `src/__tests__/ThemeContext.test.jsx` → `src/__tests__/ThemeContext.test.tsx`
    - `src/__tests__/ProfilePanel.test.jsx` → `src/__tests__/ProfilePanel.test.tsx`
    - `src/__tests__/routes.config.test.js` → `src/__tests__/routes.config.test.ts`
    - `src/__tests__/routes.utils.test.js` → `src/__tests__/routes.utils.test.ts`
