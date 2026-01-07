@@ -6,17 +6,48 @@
  */
 
 import { Column, Grid, Tile } from '@carbon/react';
-import { useState } from 'react';
+import { useSyncExternalStore, useMemo } from 'react';
+
+// Simulated external data source - generates data once per tile instance
+// In a real app, this would be an API call or WebSocket subscription
+const createDataSource = () => {
+  let value = null;
+  const listeners = new Set();
+
+  return {
+    subscribe(callback) {
+      listeners.add(callback);
+      return () => listeners.delete(callback);
+    },
+    getSnapshot() {
+      if (value === null && typeof window !== 'undefined') {
+        value = Math.round(Math.random() * 1000);
+      }
+      return value;
+    },
+    getServerSnapshot() {
+      return null;
+    },
+  };
+};
 
 const NumberTile = () => {
-  const [activeUsers] = useState(() => Math.round(Math.random() * 1000));
+  // Create a stable data source instance per component
+  const dataSource = useMemo(() => createDataSource(), []);
+
+  // Use useSyncExternalStore to read from the external data source
+  const activeUsers = useSyncExternalStore(
+    dataSource.subscribe,
+    dataSource.getSnapshot,
+    dataSource.getServerSnapshot,
+  );
 
   return (
     <Column sm={4} md={4} lg={4} xlg={4}>
       <Tile className="cs--dashboard__tile cs--dashboard__tile--number">
         <dl>
           <dt>Active users</dt>
-          <dd>{activeUsers}</dd>
+          <dd>{activeUsers ?? '---'}</dd>
         </dl>
       </Tile>
     </Column>
