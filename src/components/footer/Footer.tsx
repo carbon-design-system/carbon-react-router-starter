@@ -6,8 +6,9 @@
  */
 
 import { AspectRatio, Column, Grid } from '@carbon/react';
+import { FC } from 'react';
 
-export const Footer = () => {
+export const Footer: FC = () => {
   return (
     <Grid as="footer" className="cs--footer">
       <Column sm={4} md={8} lg={8}>
@@ -19,3 +20,5 @@ export const Footer = () => {
     </Grid>
   );
 };
+
+// Made with Bob

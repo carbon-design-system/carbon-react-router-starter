@@ -1,11 +1,16 @@
 import { HeaderMenu, HeaderMenuItem } from '@carbon/react';
 import { Link as RouterLink } from 'react-router';
+import { FC } from 'react';
+import type { RouteConfigArray } from '../../types/routes';
 
 /**
  * Check if a menu path should be active based on the current path
  * Handles both exact matches and dynamic route segments
  */
-const isPathActive = (menuPath, currentPath) => {
+const isPathActive = (
+  menuPath: string | undefined,
+  currentPath: string,
+): boolean => {
   if (!menuPath || !currentPath) return false;
   // Exact match
   if (menuPath === currentPath) return true;
@@ -13,10 +18,18 @@ const isPathActive = (menuPath, currentPath) => {
   return currentPath.startsWith(`${menuPath}/`);
 };
 
-export const NavHeaderItems = ({ routesInHeader, currentPath }) => (
+interface NavHeaderItemsProps {
+  routesInHeader: RouteConfigArray;
+  currentPath: string;
+}
+
+export const NavHeaderItems: FC<NavHeaderItemsProps> = ({
+  routesInHeader,
+  currentPath,
+}) => (
   <>
     {routesInHeader.map(({ path, carbon }) =>
-      !carbon.inSubMenu && carbon?.label ? (
+      !carbon?.inSubMenu && carbon?.label ? (
         carbon.subMenu ? (
           <HeaderMenu
             aria-label={carbon.label}
@@ -26,11 +39,11 @@ export const NavHeaderItems = ({ routesInHeader, currentPath }) => (
             {carbon.subMenu.map((subRoute) => (
               <HeaderMenuItem
                 as={RouterLink}
-                to={subRoute.path}
+                to={subRoute.path!}
                 key={subRoute.path}
                 isActive={isPathActive(subRoute.path, currentPath)}
               >
-                {subRoute.carbon.label}
+                {subRoute.carbon?.label}
               </HeaderMenuItem>
             ))}
           </HeaderMenu>
@@ -38,13 +51,15 @@ export const NavHeaderItems = ({ routesInHeader, currentPath }) => (
           <HeaderMenuItem
             as={RouterLink}
             key={path}
-            to={path}
+            to={path!}
             isActive={isPathActive(path, currentPath)}
           >
-            {carbon?.label}
+            {carbon.label}
           </HeaderMenuItem>
         )
       ) : null,
     )}
   </>
 );
+
+// Made with Bob

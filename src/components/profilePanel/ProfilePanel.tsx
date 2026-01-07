@@ -5,9 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useState, FC } from 'react';
 
 import './profile-panel.scss';
 import { UserAvatar } from '@carbon/ibm-products';
@@ -21,27 +20,32 @@ import {
   setThemeSetting as updateThemeSetting,
   setHeaderInverse as updateHeaderInverse,
 } from '../../utils/theme';
+import type { ThemeSetting } from '../../types/theme';
 
-export const ProfilePanel = ({ className }) => {
+interface ProfilePanelProps {
+  className?: string;
+}
+
+export const ProfilePanel: FC<ProfilePanelProps> = ({ className }) => {
   // Get initial values from cookies (single call to avoid redundant parsing)
   const initialSettings = getThemeSettings();
 
-  const [themeSetting, setThemeSettingState] = useState(
+  const [themeSetting, setThemeSettingState] = useState<ThemeSetting>(
     initialSettings.themeSetting,
   );
 
-  const [themeMenuComplement, setThemeMenuComplementState] = useState(
+  const [themeMenuComplement, setThemeMenuComplementState] = useState<boolean>(
     initialSettings.headerInverse,
   );
 
   // Update theme setting
-  const handleThemeSettingChange = (value) => {
+  const handleThemeSettingChange = (value: ThemeSetting): void => {
     setThemeSettingState(value);
     updateThemeSetting(value);
   };
 
   // Update header inverse
-  const handleThemeMenuComplementChange = (value) => {
+  const handleThemeMenuComplementChange = (value: boolean): void => {
     setThemeMenuComplementState(value);
     updateHeaderInverse(value);
   };
@@ -86,8 +90,6 @@ export const ProfilePanel = ({ className }) => {
   );
 };
 
-ProfilePanel.propTypes = {
-  className: PropTypes.string,
-};
-
 export default ProfilePanel;
+
+// Made with Bob

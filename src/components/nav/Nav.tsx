@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useState } from 'react';
+import { useState, FC } from 'react';
 import {
   Header,
   HeaderGlobalAction,
@@ -21,8 +21,6 @@ import {
 } from '@carbon/react';
 
 import {
-  LogoGithub,
-  MagicWand,
   Search,
   Switcher as SwitcherIcon,
   UserAvatar,
@@ -34,18 +32,18 @@ import { routesInHeader, routesInSideNav } from '../../routes/config';
 import { NavHeaderItems } from './NavHeaderItems';
 import { NavSideItems } from './NavSideItems';
 
-export const Nav = () => {
+export const Nav: FC = () => {
   const location = useLocation();
   const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
-  const toggleNav = () => {
+  const toggleNav = (): void => {
     // Reason for this implementation of state change through an updater function:
     // https://react.dev/reference/react/useState#updating-state-based-on-the-previous-state
     setIsSideNavExpanded((isExpanded) => !isExpanded);
   };
 
-  const handleProfileOpen = () => {
+  const handleProfileOpen = (): void => {
     setIsProfileOpen((prev) => !prev);
   };
 
@@ -115,3 +113,5 @@ export const Nav = () => {
     </>
   );
 };
+
+// Made with Bob

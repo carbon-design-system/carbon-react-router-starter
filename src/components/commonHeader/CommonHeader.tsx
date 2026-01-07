@@ -6,8 +6,14 @@
  */
 
 import { AspectRatio, Column, Grid, Heading } from '@carbon/react';
+import { FC } from 'react';
 
-export const CommonHeader = ({ title, paragraphs }) => {
+interface CommonHeaderProps {
+  title: string;
+  paragraphs: string[];
+}
+
+export const CommonHeader: FC<CommonHeaderProps> = ({ title, paragraphs }) => {
   return (
     <Grid as="header" className="cs--common-header">
       <Column sm={4} md={8} lg={8}>
@@ -30,3 +36,5 @@ export const CommonHeader = ({ title, paragraphs }) => {
     </Grid>
   );
 };
+
+// Made with Bob
