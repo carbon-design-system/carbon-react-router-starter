@@ -27,5 +27,3 @@ const DashboardVisualizations = () => {
 };
 
 export default DashboardVisualizations;
-
-// Made with Bob

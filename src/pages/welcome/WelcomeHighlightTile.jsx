@@ -19,5 +19,3 @@ export const WelcomeHighlightTile = ({ title, children }) => {
     </Column>
   );
 };
-
-// Made with Bob

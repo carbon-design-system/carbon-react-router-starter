@@ -20,5 +20,3 @@ export const WelcomeRunSection = () => {
     </WelcomeCallout>
   );
 };
-
-// Made with Bob
