@@ -9,8 +9,9 @@ import { Button } from '@carbon/react';
 
 import { ArrowRight } from '@carbon/icons-react';
 import { CommonHeader } from '../../components/commonHeader/CommonHeader';
+import { FC } from 'react';
 
-export const WelcomeHeader = () => {
+export const WelcomeHeader: FC = () => {
   return (
     <CommonHeader
       title={'Welcome to the Carbon React starter template'}
@@ -33,3 +34,5 @@ export const WelcomeHeader = () => {
     />
   );
 };
+
+// Made with Bob

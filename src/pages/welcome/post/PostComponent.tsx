@@ -1,28 +1,43 @@
 import { getComments, getPost } from '../../../api/message.js';
 import { Heading, Section, Tile, Stack, Layer } from '@carbon/react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
+
+interface Post {
+  title: string;
+  body: string;
+}
+
+interface Comment {
+  id: number;
+  email: string;
+  body: string;
+}
+
+interface PostComponentProps {
+  postId?: number;
+}
 
 /**
  * Renders a single blog post and its comments.
  *
- * @param {Object} props
- * @param {number} [props.postId] - The ID of the post to display.
+ * @param props - Component props
+ * @param props.postId - The ID of the post to display.
  *   If not provided, defaults to 1 and renders the first post.
  */
-const PostComponent = ({ postId = 1 }) => {
-  const [post, setPost] = useState();
-  const [comments, setComments] = useState([]);
+const PostComponent: FC<PostComponentProps> = ({ postId = 1 }) => {
+  const [post, setPost] = useState<Post | undefined>();
+  const [comments, setComments] = useState<Comment[]>([]);
 
-  const loadPost = async (id) => {
+  const loadPost = async (id: number) => {
     try {
       const post = await getPost(id);
       setPost(post);
     } catch {
-      setPost('Failed to load message');
+      setPost(undefined);
     }
   };
 
-  const loadComments = async (id) => {
+  const loadComments = async (id: number) => {
     try {
       const comments = await getComments(id);
       setComments(comments);
@@ -76,3 +91,5 @@ const PostComponent = ({ postId = 1 }) => {
 };
 
 export default PostComponent;
+
+// Made with Bob

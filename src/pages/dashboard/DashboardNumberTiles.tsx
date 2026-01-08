@@ -6,32 +6,32 @@
  */
 
 import { Column, Grid, Tile } from '@carbon/react';
-import { useSyncExternalStore, useMemo } from 'react';
+import { useSyncExternalStore, useMemo, FC } from 'react';
 
 // Simulated external data source - generates data once per tile instance
 // In a real app, this would be an API call or WebSocket subscription
 const createDataSource = () => {
-  let value = null;
-  const listeners = new Set();
+  let value: number | null = null;
+  const listeners = new Set<() => void>();
 
   return {
-    subscribe(callback) {
+    subscribe(callback: () => void) {
       listeners.add(callback);
       return () => listeners.delete(callback);
     },
-    getSnapshot() {
+    getSnapshot(): number | null {
       if (value === null && typeof window !== 'undefined') {
         value = Math.round(Math.random() * 1000);
       }
       return value;
     },
-    getServerSnapshot() {
+    getServerSnapshot(): null {
       return null;
     },
   };
 };
 
-const NumberTile = () => {
+const NumberTile: FC = () => {
   // Create a stable data source instance per component
   const dataSource = useMemo(() => createDataSource(), []);
 
@@ -54,7 +54,7 @@ const NumberTile = () => {
   );
 };
 
-const DashboardNumberTiles = () => {
+const DashboardNumberTiles: FC = () => {
   return (
     <Grid>
       <NumberTile />

@@ -6,18 +6,19 @@
  */
 
 import { Footer } from '../../components/footer/Footer';
-import { WelcomeHeader } from './WelcomeHeader.jsx';
-import { PageLayout } from '../../layouts/page-layout.jsx';
+import { WelcomeHeader } from './WelcomeHeader';
+import { PageLayout } from '../../layouts/page-layout';
 import { WelcomeRunSection } from './WelcomeRunSection';
 import { WelcomeAboutSection } from './WelcomeAboutSection';
 import { WelcomeFeaturesSection } from './WelcomeFeaturesSection';
 import { WelcomeFetchingSection } from './WelcomeFetchingSection';
+import { FC } from 'react';
 
 // The styles are imported into index.scss by default.
 // Do the same unless you have a good reason not to.
 // import './welcome.scss';
 
-const Welcome = () => {
+const Welcome: FC = () => {
   return (
     <PageLayout
       className="cs--welcome"

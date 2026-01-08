@@ -6,31 +6,32 @@
  */
 import { CommonHeader } from '../../components/commonHeader/CommonHeader';
 import { PageLayout } from '../../layouts/page-layout';
-
 import { useLocation } from 'react-router';
+import { FC } from 'react';
 
-const Placeholder = () => {
+const NotFound: FC = () => {
   const location = useLocation();
 
   return (
     <PageLayout
-      className="cs--placeholder"
-      fallback={<p>Loading placeholder page...</p>}
+      className="cs--not-found"
+      fallback={<p>Loading not found page...</p>}
     >
       <CommonHeader
-        title={'This page is not ready yet'}
+        title="Page not found"
         paragraphs={[
-          <>Generally not a good idea to have pages under construction.</>,
-          <>This page is here to help demonstrate the global navigation.</>,
+          'This is not the page you were looking for.',
           <>
-            You are at the location served from route{' '}
-            <em>&lsquo;{location.pathname}&rsquo;</em>.
+            The route <em>&lsquo;{location.pathname}&rsquo;</em> is not
+            recognized.
           </>,
-          <>Maintained by fed-at-ibm, a chapter of the OIC.</>,
+          'Maintained by fed-at-ibm, a chapter of the OIC.',
         ]}
       />
     </PageLayout>
   );
 };
 
-export default Placeholder;
+export default NotFound;
+
+// Made with Bob

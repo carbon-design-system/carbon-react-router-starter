@@ -7,8 +7,14 @@
 
 import { WelcomeCallout } from './WelcomeCallout';
 import { WelcomeHighlightTile } from './WelcomeHighlightTile';
+import { FC, ReactNode } from 'react';
 
-const aboutItems = [
+interface AboutItem {
+  title: string;
+  content: ReactNode;
+}
+
+const aboutItems: AboutItem[] = [
   {
     title: 'Purpose',
     content: (
@@ -50,7 +56,7 @@ const aboutItems = [
   },
 ];
 
-export const WelcomeAboutSection = () => {
+export const WelcomeAboutSection: FC = () => {
   return (
     <WelcomeCallout
       className="cs--welcome__about"

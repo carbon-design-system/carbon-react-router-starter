@@ -6,8 +6,15 @@
  */
 
 import { CodeSnippet } from '@carbon/react';
+import { FC } from 'react';
 
-export const WelcomeCommandSnippet = ({ command }) => {
+interface WelcomeCommandSnippetProps {
+  command: string;
+}
+
+export const WelcomeCommandSnippet: FC<WelcomeCommandSnippetProps> = ({
+  command,
+}) => {
   return (
     <CodeSnippet type="single" feedback="Copied to clipboard">
       {command}

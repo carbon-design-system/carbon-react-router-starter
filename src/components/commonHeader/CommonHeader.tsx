@@ -6,11 +6,11 @@
  */
 
 import { AspectRatio, Column, Grid, Heading } from '@carbon/react';
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 
 interface CommonHeaderProps {
   title: string;
-  paragraphs: string[];
+  paragraphs: ReactNode[];
 }
 
 export const CommonHeader: FC<CommonHeaderProps> = ({ title, paragraphs }) => {

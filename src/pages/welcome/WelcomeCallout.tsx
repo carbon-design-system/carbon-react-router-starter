@@ -7,8 +7,19 @@
 
 import { Column, Grid, Heading, Section } from '@carbon/react';
 import classNames from 'classnames';
+import { FC, ReactNode } from 'react';
 
-export const WelcomeCallout = ({ children, className, heading }) => {
+interface WelcomeCalloutProps {
+  children: ReactNode;
+  className?: string;
+  heading: string;
+}
+
+export const WelcomeCallout: FC<WelcomeCalloutProps> = ({
+  children,
+  className,
+  heading,
+}) => {
   return (
     <Section as={Grid} className={classNames('cs--welcome__run', className)}>
       <Column sm={4} md={4} lg={8} xlg={4}>
