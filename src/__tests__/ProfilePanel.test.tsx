@@ -49,7 +49,7 @@ beforeEach(() => {
   vi.spyOn(cookieUtils, 'getThemeFromCookies').mockReturnValue({
     themeSetting: 'light',
     headerInverse: 'false',
-  });
+  } as any);
 
   // Mock getThemeSettings to return the same values
   vi.spyOn(themeUtils, 'getThemeSettings').mockReturnValue({
@@ -88,7 +88,7 @@ test('changes theme when theme switcher is used', async () => {
     // Look for a button that might represent dark theme
     // This could be by text content, aria-label, or other attributes
     return (
-      button.textContent.toLowerCase().includes('dark') ||
+      button.textContent?.toLowerCase().includes('dark') ||
       button.getAttribute('aria-label')?.toLowerCase().includes('dark')
     );
   });
@@ -159,3 +159,5 @@ test('toggles menu complement when checkbox is clicked', async () => {
     });
   }
 });
+
+// Made with Bob

@@ -8,6 +8,7 @@
 import { test, expect, describe, vi } from 'vitest';
 import { findMatchingRoute, getStatusCodeForPath } from '../routes/utils';
 import * as configModule from '../routes/config';
+import { RouteConfig } from '../types/routes';
 
 // Mock the routes from config.js
 vi.mock('../routes/config', () => {
@@ -44,28 +45,28 @@ describe('routes utils', () => {
     test('finds exact match for root path', () => {
       const route = findMatchingRoute('/');
       expect(route).toBeDefined();
-      expect(route.path).toBe('/');
-      expect(route.index).toBe(true);
+      expect(route?.path).toBe('/');
+      expect(route?.index).toBe(true);
     });
 
     test('finds exact match for dashboard path', () => {
       const route = findMatchingRoute('/dashboard');
       expect(route).toBeDefined();
-      expect(route.path).toBe('/dashboard');
-      expect(route.carbon.label).toBe('Dashboard');
+      expect(route?.path).toBe('/dashboard');
+      expect(route?.carbon?.label).toBe('Dashboard');
     });
 
     test('finds nested wildcard match', () => {
       const route = findMatchingRoute('/nested/something');
       expect(route).toBeDefined();
-      expect(route.path).toBe('/nested/*');
+      expect(route?.path).toBe('/nested/*');
     });
 
     test('returns wildcard route for non-existent path', () => {
       const route = findMatchingRoute('/non-existent');
       expect(route).toBeDefined();
-      expect(route.path).toBe('*');
-      expect(route.status).toBe(404);
+      expect(route?.path).toBe('*');
+      expect(route?.status).toBe(404);
     });
 
     test('handles paths with or without leading slash', () => {
@@ -73,7 +74,7 @@ describe('routes utils', () => {
       const routeWithoutSlash = findMatchingRoute('dashboard');
 
       expect(routeWithSlash).toEqual(routeWithoutSlash);
-      expect(routeWithSlash.path).toBe('/dashboard');
+      expect(routeWithSlash?.path).toBe('/dashboard');
     });
   });
 
@@ -96,7 +97,7 @@ describe('routes utils', () => {
       );
 
       if (wildcardIndex !== -1) {
-        const wildcardRoute = { ...modifiedRoutes[wildcardIndex] };
+        const wildcardRoute: RouteConfig = { ...modifiedRoutes[wildcardIndex] };
         delete wildcardRoute.status;
         modifiedRoutes[wildcardIndex] = wildcardRoute;
 
@@ -112,3 +113,5 @@ describe('routes utils', () => {
     });
   });
 });
+
+// Made with Bob

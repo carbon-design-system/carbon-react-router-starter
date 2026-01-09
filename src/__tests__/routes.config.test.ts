@@ -9,7 +9,6 @@ import { test, expect, describe } from 'vitest';
 import { routes, routesInHeader, routesInSideNav } from '../routes/config';
 import Dashboard from '../pages/dashboard/Dashboard';
 import NotFound from '../pages/not-found/NotFound';
-import Placeholder from '../pages/placeholder/Placeholder';
 import Welcome from '../pages/welcome/Welcome';
 
 describe('routes configuration', () => {
@@ -21,22 +20,22 @@ describe('routes configuration', () => {
     // Check that the index route is defined correctly
     const indexRoute = routes.find((route) => route.index === true);
     expect(indexRoute).toBeDefined();
-    expect(indexRoute.path).toBe('/');
-    expect(indexRoute.element).toBe(Welcome);
+    expect(indexRoute?.path).toBe('/');
+    expect(indexRoute?.element).toBe(Welcome);
 
     // Check that the NotFound route is defined correctly
     const notFoundRoute = routes.find((route) => route.path === '*');
     expect(notFoundRoute).toBeDefined();
-    expect(notFoundRoute.element).toBe(NotFound);
-    expect(notFoundRoute.status).toBe(404);
+    expect(notFoundRoute?.element).toBe(NotFound);
+    expect(notFoundRoute?.status).toBe(404);
 
     // Check that a regular route is defined correctly
     const dashboardRoute = routes.find((route) => route.path === '/dashboard');
     expect(dashboardRoute).toBeDefined();
-    expect(dashboardRoute.element).toBe(Dashboard);
-    expect(dashboardRoute.carbon).toBeDefined();
-    expect(dashboardRoute.carbon.label).toBe('Dashboard');
-    expect(dashboardRoute.carbon.inHeader).toBe(true);
+    expect(dashboardRoute?.element).toBe(Dashboard);
+    expect(dashboardRoute?.carbon).toBeDefined();
+    expect(dashboardRoute?.carbon?.label).toBe('Dashboard');
+    expect(dashboardRoute?.carbon?.inHeader).toBe(true);
   });
 
   test('routesInHeader contains only routes with inHeader flag', () => {
@@ -45,8 +44,8 @@ describe('routes configuration', () => {
     // All routes in routesInHeader should have carbon.inHeader === true
     routesInHeader.forEach((route) => {
       expect(route.carbon).toBeDefined();
-      expect(route.carbon.inHeader).toBe(true);
-      expect(route.carbon.inSubMenu).toBeFalsy();
+      expect(route.carbon?.inHeader).toBe(true);
+      expect(route.carbon?.inSubMenu).toBeFalsy();
     });
 
     // Check that all routes with inHeader flag are included
@@ -63,8 +62,8 @@ describe('routes configuration', () => {
     // All routes in routesInSideNav should have carbon.inSideNav === true
     routesInSideNav.forEach((route) => {
       expect(route.carbon).toBeDefined();
-      expect(route.carbon.inSideNav).toBe(true);
-      expect(route.carbon.inSubMenu).toBeFalsy();
+      expect(route.carbon?.inSideNav).toBe(true);
+      expect(route.carbon?.inSubMenu).toBeFalsy();
     });
 
     // Check that all routes with inSideNav flag are included
@@ -82,9 +81,9 @@ describe('routes configuration', () => {
     );
 
     routesWithSubMenu.forEach((route) => {
-      route.carbon.subMenu.forEach((subRoute) => {
+      route.carbon?.subMenu?.forEach((subRoute) => {
         expect(subRoute.carbon).toBeDefined();
-        expect(subRoute.carbon.inSubMenu).toBe(true);
+        expect(subRoute.carbon?.inSubMenu).toBe(true);
       });
     });
   });
@@ -113,3 +112,5 @@ describe('routes configuration', () => {
     });
   });
 });
+
+// Made with Bob

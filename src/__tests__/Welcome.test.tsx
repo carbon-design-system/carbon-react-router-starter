@@ -32,3 +32,5 @@ test('renders received message', async () => {
     await screen.findByText(/Welcome to the Carbon React starter template/i),
   ).toBeInTheDocument();
 });
+
+// Made with Bob
