@@ -5,18 +5,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render as rtlRender } from '@testing-library/react';
+import { render as rtlRender, RenderOptions } from '@testing-library/react';
 import { BrowserRouter } from 'react-router';
-import { StrictMode } from 'react';
+import { StrictMode, ReactElement, ReactNode } from 'react';
 import { Router } from '../routes';
+
+interface RenderWithAllProvidersOptions extends Omit<RenderOptions, 'wrapper'> {
+  route?: string;
+}
 
 /**
  * Renders a component with all providers (Router, etc.)
  * Use this for page components or components that need routing
  */
 export function renderWithAllProviders(
-  ui,
-  { route = '/', ...renderOptions } = {},
+  ui: ReactElement,
+  { route = '/', ...renderOptions }: RenderWithAllProvidersOptions = {},
 ) {
   // Push the route we want to test
   window.history.pushState({}, 'Test page', route);
@@ -38,8 +42,11 @@ export function renderWithAllProviders(
  * Renders a component without any providers
  * Use this for pure components that don't depend on any context
  */
-export function renderWithoutProviders(ui, renderOptions = {}) {
-  function Wrapper({ children }) {
+export function renderWithoutProviders(
+  ui: ReactElement,
+  renderOptions: RenderOptions = {},
+) {
+  function Wrapper({ children }: { children: ReactNode }) {
     return <StrictMode>{children}</StrictMode>;
   }
 

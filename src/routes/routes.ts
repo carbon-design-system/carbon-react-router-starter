@@ -6,11 +6,11 @@
  */
 
 import type { Express, RequestHandler } from 'express';
-import { getPost, getComments } from '../service/postHandlers.js';
+import { getPost, getComments } from '../service/postHandlers';
 import {
   getExternalPost,
   getExternalComments,
-} from '../service/externalHandlers.js';
+} from '../service/externalHandlers';
 
 export interface RouteHandlers {
   getPost: RequestHandler;

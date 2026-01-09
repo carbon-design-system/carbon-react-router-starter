@@ -1,4 +1,4 @@
-import { getComments, getPost } from '../../../api/message.js';
+import { getComments, getPost } from '../../../api/message';
 import { Heading, Section, Tile, Stack, Layer } from '@carbon/react';
 import { useEffect, useState, FC } from 'react';
 

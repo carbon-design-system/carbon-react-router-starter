@@ -10,22 +10,24 @@
  * These handlers call our "external" API routes to simulate API-to-API communication
  */
 
+import { Request, Response } from 'express';
+import { baseUrl } from '../config/server-config';
+
 /**
  * Get the base URL for the server
  * In production, this would be configured via environment variables
  */
-import { baseUrl } from '../config/server-config';
-
-const getBaseUrl = () => {
+const getBaseUrl = (): string => {
   return baseUrl;
 };
 
-export const getPost = async (req, res) => {
+export const getPost = async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
 
   // Validate that id is a positive integer
   if (!/^\d+$/.test(id)) {
-    return res.status(400).json({ message: 'Invalid post id' });
+    res.status(400).json({ message: 'Invalid post id' });
+    return;
   }
 
   try {
@@ -34,7 +36,8 @@ export const getPost = async (req, res) => {
 
     if (!response.ok) {
       const error = await response.json();
-      return res.status(response.status).json(error);
+      res.status(response.status).json(error);
+      return;
     }
 
     const blogpost = await response.json();
@@ -47,11 +50,15 @@ export const getPost = async (req, res) => {
   }
 };
 
-export const getComments = async (req, res) => {
+export const getComments = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
   const { postId } = req.query;
 
   if (!postId) {
-    return res.status(400).json({ message: 'Missing postId parameter' });
+    res.status(400).json({ message: 'Missing postId parameter' });
+    return;
   }
 
   try {
@@ -62,16 +69,17 @@ export const getComments = async (req, res) => {
 
     if (!response.ok) {
       const error = await response.json();
-      return res.status(response.status).json(error);
+      res.status(response.status).json(error);
+      return;
     }
 
     const comments = await response.json();
 
     // Return the comments
-    return res.json(comments);
+    res.json(comments);
   } catch (error) {
     console.error('Error fetching comments:', error);
-    return res.status(500).json({ message: 'Failed to fetch comments' });
+    res.status(500).json({ message: 'Failed to fetch comments' });
   }
 };
 
@@ -79,3 +87,5 @@ export default {
   getComments,
   getPost,
 };
+
+// Made with Bob

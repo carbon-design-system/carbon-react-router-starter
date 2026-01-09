@@ -5,21 +5,29 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export const getNetworking = () => {
-  const runningRequests = new Set();
+export interface Networking {
+  addRequests: (path: string) => void;
+  removeRequest: (path: string) => void;
+  verifyRunningRequests: () => void;
+  clearRunningRequests: () => void;
+  getRunningRequestCount: () => number;
+}
 
-  const addRequests = (path) => {
+export const getNetworking = (): Networking => {
+  const runningRequests = new Set<string>();
+
+  const addRequests = (path: string): void => {
     if (!process.env.HIDE_NETWORK_LOGGING)
       console.log('Calling BFF endpoint: ', path);
     runningRequests.add(path);
   };
 
-  const removeRequest = (path) => {
+  const removeRequest = (path: string): void => {
     if (!process.env.HIDE_NETWORK_LOGGING) console.log('Request done: ', path);
     runningRequests.delete(path);
   };
 
-  const verifyRunningRequests = () => {
+  const verifyRunningRequests = (): void => {
     if (runningRequests.size > 0) {
       const allPaths = Array.from(runningRequests).join(' , ');
       console.error(
@@ -32,9 +40,9 @@ export const getNetworking = () => {
     }
   };
 
-  const clearRunningRequests = () => runningRequests.clear();
+  const clearRunningRequests = (): void => runningRequests.clear();
 
-  const getRunningRequestCount = () => runningRequests.size;
+  const getRunningRequestCount = (): number => runningRequests.size;
 
   return {
     addRequests,
@@ -44,3 +52,5 @@ export const getNetworking = () => {
     getRunningRequestCount,
   };
 };
+
+// Made with Bob
