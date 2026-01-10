@@ -18,5 +18,3 @@ export const WelcomeCallout = ({ children, className, heading }) => {
     </Section>
   );
 };
-
-// Made with Bob

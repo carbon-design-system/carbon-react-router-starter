@@ -39,5 +39,3 @@ const Welcome = () => {
 };
 
 export default Welcome;
-
-// Made with Bob

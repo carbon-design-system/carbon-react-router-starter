@@ -64,5 +64,3 @@ export const WelcomeAboutSection = () => {
     </WelcomeCallout>
   );
 };
-
-// Made with Bob
