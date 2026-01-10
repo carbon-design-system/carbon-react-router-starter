@@ -13,7 +13,7 @@ import { CommonHeader } from '../../components/commonHeader/CommonHeader';
 export const WelcomeHeader = () => {
   return (
     <CommonHeader
-      title={'Welcome to the Carbon React starter template'}
+      title={'Welcome to the Carbon React Router starter'}
       paragraphs={[
         <>
           This is a boilerplate and a living guide for creating React
@@ -24,7 +24,7 @@ export const WelcomeHeader = () => {
         <>
           <Button
             renderIcon={ArrowRight}
-            href="https://github.com/carbon-design-system/carbon-react-router-starter/generate"
+            href="https://github.com/carbon-design-system/carbon-react-router-starter"
           >
             Use this template
           </Button>
