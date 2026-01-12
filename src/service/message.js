@@ -9,6 +9,17 @@
  * This file contains the functions that do async network requests
  */
 
+/**
+ * Express route handler that fetches a sample message from an external API.
+ * Currently uses JSONPlaceholder as a demo endpoint.
+ *
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @returns {Promise<void>} Sends JSON response with message or error
+ *
+ * @example
+ * app.get('/api/message', getMessage);
+ */
 export const getMessage = async (req, res) => {
   try {
     const response = await fetch(

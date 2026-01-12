@@ -8,12 +8,22 @@
 import { WelcomeCallout } from './WelcomeCallout';
 import { WelcomeFeatureTile } from './WelcomeFeatureTile';
 
+/**
+ * Features data for the welcome section.
+ * @type {Array<{title: string, feature: string}>}
+ */
 const features = [
   { title: 'Flexibility', feature: 'React 19' },
   { title: 'Feature 2', feature: 'Carbon Design v11' },
   { title: 'Feature 3', feature: 'Vite 6.0' },
 ];
 
+/**
+ * Welcome section displaying key features of the template.
+ * Shows feature tiles for React, Carbon Design, and Vite.
+ *
+ * @returns {JSX.Element} Rendered features section with feature tiles
+ */
 export const WelcomeFeaturesSection = () => {
   return (
     <WelcomeCallout className="cs--welcome__features" heading="Features">
@@ -23,5 +33,3 @@ export const WelcomeFeaturesSection = () => {
     </WelcomeCallout>
   );
 };
-
-// Made with Bob

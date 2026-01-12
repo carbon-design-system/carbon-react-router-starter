@@ -10,7 +10,9 @@ import { useEffect, useState } from 'react';
  *   If not provided, defaults to 1 and renders the first post.
  */
 const PostComponent = ({ postId = 1 }) => {
-  const [post, setPost] = useState();
+  const [post, setPost] = useState(
+    /** @type {{title?: string, body?: string} | undefined} */ (undefined),
+  );
   const [comments, setComments] = useState([]);
 
   const loadPost = async (id) => {
@@ -18,7 +20,7 @@ const PostComponent = ({ postId = 1 }) => {
       const post = await getPost(id);
       setPost(post);
     } catch {
-      setPost('Failed to load message');
+      setPost({ title: 'Error', body: 'Failed to load message' });
     }
   };
 

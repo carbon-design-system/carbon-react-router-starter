@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "checkJs": true,
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "target": "ES2022",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": false,
+    "strict": false,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "strictFunctionTypes": false,
+    "types": ["react", "react-dom"]
+  },
+  "include": ["src/**/*", "types.d.ts"],
+  "exclude": ["node_modules", "dist"]
+}

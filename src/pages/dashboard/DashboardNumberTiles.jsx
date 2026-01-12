@@ -35,5 +35,3 @@ const DashboardNumberTiles = () => {
 };
 
 export default DashboardNumberTiles;
-
-// Made with Bob

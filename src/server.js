@@ -71,10 +71,11 @@ app.use('*all', async (req, res) => {
       {
         onShellError(error) {
           // Improved error handling with debugging context
+          const err = /** @type {Error} */ (error);
           console.error('Shell rendering error:', {
             url,
-            error: error.message,
-            stack: error.stack,
+            error: err.message,
+            stack: err.stack,
             timestamp: new Date().toISOString(),
           });
           res.status(500);
@@ -110,10 +111,11 @@ app.use('*all', async (req, res) => {
         onError(error) {
           didError = true;
           // Enhanced error logging with context
+          const err = /** @type {Error} */ (error);
           console.error('Streaming error:', {
             url,
-            error: error.message,
-            stack: error.stack,
+            error: err.message,
+            stack: err.stack,
             timestamp: new Date().toISOString(),
           });
         },

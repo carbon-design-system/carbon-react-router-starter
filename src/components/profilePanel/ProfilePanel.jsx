@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useState } from 'react';
 
@@ -22,6 +21,18 @@ import {
   setHeaderInverse as updateHeaderInverse,
 } from '../../utils/theme';
 
+/**
+ * Profile panel component displaying user information and theme settings.
+ * Includes user avatar, name, email, and theme customization options with
+ * theme switcher and header inverse toggle.
+ *
+ * @param {Object} props - Component props
+ * @param {string} [props.className] - Optional CSS class name for styling customization
+ * @returns {JSX.Element} Rendered profile panel with user info and theme controls
+ *
+ * @example
+ * <ProfilePanel className="custom-panel" />
+ */
 export const ProfilePanel = ({ className }) => {
   // Get initial values from cookies (single call to avoid redundant parsing)
   const initialSettings = getThemeSettings();
@@ -84,10 +95,6 @@ export const ProfilePanel = ({ className }) => {
       </div>
     </div>
   );
-};
-
-ProfilePanel.propTypes = {
-  className: PropTypes.string,
 };
 
 export default ProfilePanel;

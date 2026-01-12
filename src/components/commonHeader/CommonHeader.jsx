@@ -7,6 +7,21 @@
 
 import { AspectRatio, Column, Grid, Heading } from '@carbon/react';
 
+/**
+ * Common header component displaying a title and paragraphs with a logo banner.
+ * Uses Carbon's Grid system with a 16:9 aspect ratio layout.
+ *
+ * @param {Object} props - Component props
+ * @param {string} props.title - Main heading text displayed in the header
+ * @param {(string|React.ReactNode)[]} props.paragraphs - Array of paragraph content (strings or React nodes) to display below the title
+ * @returns {JSX.Element} Rendered common header with title, paragraphs, and logo banner
+ *
+ * @example
+ * <CommonHeader
+ *   title="Welcome to Carbon"
+ *   paragraphs={["First paragraph", "Second paragraph"]}
+ * />
+ */
 export const CommonHeader = ({ title, paragraphs }) => {
   return (
     <Grid as="header" className="cs--common-header">

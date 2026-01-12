@@ -16,10 +16,28 @@
  */
 import { baseUrl } from '../config/server-config.js';
 
+/**
+ * Helper function to get the base URL for API calls.
+ *
+ * @returns {string} The base URL for the server
+ */
 const getBaseUrl = () => {
   return baseUrl;
 };
 
+/**
+ * Express route handler that fetches a blog post by ID.
+ * Validates the post ID and calls the external API endpoint.
+ *
+ * @param {Object} req - Express request object
+ * @param {Object} req.params - Request parameters
+ * @param {string} req.params.id - Post ID to fetch
+ * @param {Object} res - Express response object
+ * @returns {Promise<void>} Sends JSON response with post data or error
+ *
+ * @example
+ * app.get('/api/post/:id', getPost);
+ */
 export const getPost = async (req, res) => {
   const { id } = req.params;
 
@@ -47,6 +65,19 @@ export const getPost = async (req, res) => {
   }
 };
 
+/**
+ * Express route handler that fetches comments for a specific post.
+ * Validates the postId query parameter and calls the external API endpoint.
+ *
+ * @param {Object} req - Express request object
+ * @param {Object} req.query - Query parameters
+ * @param {string} req.query.postId - Post ID to fetch comments for
+ * @param {Object} res - Express response object
+ * @returns {Promise<void>} Sends JSON response with comments array or error
+ *
+ * @example
+ * app.get('/api/comments', getComments);
+ */
 export const getComments = async (req, res) => {
   const { postId } = req.query;
 

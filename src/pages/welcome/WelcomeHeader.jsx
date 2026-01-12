@@ -10,6 +10,12 @@ import { Button } from '@carbon/react';
 import { ArrowRight } from '@carbon/icons-react';
 import { CommonHeader } from '../../components/commonHeader/CommonHeader';
 
+/**
+ * Welcome page header component displaying the main title and introduction.
+ * Includes a call-to-action button to use the template.
+ *
+ * @returns {JSX.Element} Rendered welcome header with title, description, and CTA button
+ */
 export const WelcomeHeader = () => {
   return (
     <CommonHeader

@@ -25,10 +25,10 @@ import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
 
 export default [
-  { ignores: ['dist', 'vite.config.js'] },
+  { ignores: ['dist', 'vite.config.js', 'types.d.ts'] },
   {
     files: ['**/*.{js,mjs,cjs,jsx}'],
-    ignores: ['dist', 'vite.config.js'],
+    ignores: ['dist', 'vite.config.js', 'types.d.ts'],
     languageOptions: {
       /* added (globals.node) - for server side elements */
       globals: { ...globals.browser, ...globals.node, ...globals.jest },

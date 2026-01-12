@@ -34,6 +34,16 @@ import { routesInHeader, routesInSideNav } from '../../routes/config';
 import { NavHeaderItems } from './NavHeaderItems';
 import { NavSideItems } from './NavSideItems';
 
+/**
+ * Main navigation component providing header and side navigation.
+ * Includes header with branding, navigation items, global actions (search, profile, app switcher),
+ * collapsible side navigation, and profile panel.
+ *
+ * @returns {JSX.Element} Complete navigation structure with header and side nav
+ *
+ * @example
+ * <Nav />
+ */
 export const Nav = () => {
   const location = useLocation();
   const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);

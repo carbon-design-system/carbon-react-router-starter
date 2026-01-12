@@ -16,7 +16,7 @@ import { getStatusCodeForPath } from './routes/utils.js';
 import { getThemeFromCookies } from './utils/cookies.js';
 
 /**
- * @param {string} url
+ * @param {string} _url - The URL path to render
  * @param {import('react-dom/server').RenderToPipeableStreamOptions} [options]
  * @param {string} [cookies] - Cookie string from request headers
  */

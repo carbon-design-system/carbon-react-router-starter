@@ -8,6 +8,10 @@
 import { WelcomeCallout } from './WelcomeCallout';
 import { WelcomeHighlightTile } from './WelcomeHighlightTile';
 
+/**
+ * About items data for the welcome section.
+ * @type {Array<{title: string, content: JSX.Element}>}
+ */
 const aboutItems = [
   {
     title: 'Purpose',
@@ -50,6 +54,12 @@ const aboutItems = [
   },
 ];
 
+/**
+ * Welcome section explaining the purpose and usage of the template.
+ * Displays three highlight tiles covering purpose, consistency, and customization.
+ *
+ * @returns {JSX.Element} Rendered about section with informational tiles
+ */
 export const WelcomeAboutSection = () => {
   return (
     <WelcomeCallout
@@ -64,5 +74,3 @@ export const WelcomeAboutSection = () => {
     </WelcomeCallout>
   );
 };
-
-// Made with Bob

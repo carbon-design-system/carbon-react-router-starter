@@ -9,6 +9,12 @@ import { Column } from '@carbon/react';
 import { WelcomeCallout } from './WelcomeCallout';
 import { WelcomeCommandSnippet } from './WelcomeCommandSnippet';
 
+/**
+ * Welcome section displaying instructions to run the template.
+ * Shows required Node version and installation/run commands.
+ *
+ * @returns {JSX.Element} Rendered run instructions section with command snippets
+ */
 export const WelcomeRunSection = () => {
   return (
     <WelcomeCallout heading="Run the template">
@@ -20,5 +26,3 @@ export const WelcomeRunSection = () => {
     </WelcomeCallout>
   );
 };
-
-// Made with Bob

@@ -10,6 +10,13 @@ import { Suspense } from 'react';
 import { WelcomeCallout } from './WelcomeCallout';
 import PostComponent from './post/PostComponent';
 
+/**
+ * Welcome section demonstrating data fetching patterns.
+ * Explains the three-layer architecture (UI, API, Service) and shows
+ * a live example with the PostComponent.
+ *
+ * @returns {JSX.Element} Rendered data fetching example section with explanation and demo
+ */
 export const WelcomeFetchingSection = () => {
   return (
     <WelcomeCallout
@@ -51,5 +58,3 @@ export const WelcomeFetchingSection = () => {
     </WelcomeCallout>
   );
 };
-
-// Made with Bob

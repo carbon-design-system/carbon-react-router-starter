@@ -7,6 +7,12 @@
 
 import { AspectRatio, Column, Grid } from '@carbon/react';
 
+/**
+ * Footer component displaying copyright information.
+ * Uses Carbon's Grid and AspectRatio components for consistent layout.
+ *
+ * @returns {JSX.Element} Rendered footer with copyright text
+ */
 export const Footer = () => {
   return (
     <Grid as="footer" className="cs--footer">

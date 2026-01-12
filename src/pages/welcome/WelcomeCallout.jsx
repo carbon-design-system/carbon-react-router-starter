@@ -8,6 +8,21 @@
 import { Column, Grid, Heading, Section } from '@carbon/react';
 import classNames from 'classnames';
 
+/**
+ * Callout section component for highlighting important content on the welcome page.
+ * Displays a heading with an arrow prefix and child content in a responsive grid.
+ *
+ * @param {Object} props - Component props
+ * @param {React.ReactNode} props.children - Content to display in the callout section
+ * @param {string} [props.className] - Optional CSS class name for custom styling
+ * @param {string} props.heading - Heading text displayed with arrow prefix
+ * @returns {JSX.Element} Rendered callout section with heading and content
+ *
+ * @example
+ * <WelcomeCallout heading="Get Started" className="custom-callout">
+ *   <p>Follow these steps...</p>
+ * </WelcomeCallout>
+ */
 export const WelcomeCallout = ({ children, className, heading }) => {
   return (
     <Section as={Grid} className={classNames('cs--welcome__run', className)}>
@@ -18,5 +33,3 @@ export const WelcomeCallout = ({ children, className, heading }) => {
     </Section>
   );
 };
-
-// Made with Bob

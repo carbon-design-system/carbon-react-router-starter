@@ -9,6 +9,13 @@ import { Route, Routes } from 'react-router';
 
 import { routes } from './config.js';
 
+/**
+ * Main application router component.
+ * Dynamically generates routes from the routes configuration,
+ * rendering each route's element component.
+ *
+ * @returns {JSX.Element} React Router Routes component with all configured routes
+ */
 export const Router = () => {
   return (
     <Routes>

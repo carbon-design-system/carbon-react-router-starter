@@ -7,6 +7,20 @@
 
 import { Column, Tile } from '@carbon/react';
 
+/**
+ * Highlight tile component for displaying featured content on the welcome page.
+ * Uses Carbon's Tile component with custom styling for emphasis.
+ *
+ * @param {Object} props - Component props
+ * @param {string} props.title - Bold title text displayed at the top of the tile
+ * @param {React.ReactNode} props.children - Content to display below the title
+ * @returns {JSX.Element} Rendered highlight tile in a responsive column
+ *
+ * @example
+ * <WelcomeHighlightTile title="Featured">
+ *   <p>Important content here</p>
+ * </WelcomeHighlightTile>
+ */
 export const WelcomeHighlightTile = ({ title, children }) => {
   return (
     <Column sm={4} md={4} lg={8} xlg={4}>
@@ -19,5 +33,3 @@ export const WelcomeHighlightTile = ({ title, children }) => {
     </Column>
   );
 };
-
-// Made with Bob

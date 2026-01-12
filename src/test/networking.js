@@ -5,6 +5,24 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+/**
+ * Creates a networking utility for tracking and managing test requests.
+ * Provides methods to add, remove, verify, and clear running requests
+ * with optional console logging.
+ *
+ * @returns {Object} Networking utility object
+ * @returns {Function} returns.addRequests - Add a request to tracking
+ * @returns {Function} returns.removeRequest - Remove a request from tracking
+ * @returns {Function} returns.verifyRunningRequests - Verify no requests are running
+ * @returns {Function} returns.clearRunningRequests - Clear all tracked requests
+ * @returns {Function} returns.getRunningRequestCount - Get count of running requests
+ *
+ * @example
+ * const networking = getNetworking();
+ * networking.addRequests('/api/post/1');
+ * networking.removeRequest('/api/post/1');
+ * networking.verifyRunningRequests();
+ */
 export const getNetworking = () => {
   const runningRequests = new Set();
 

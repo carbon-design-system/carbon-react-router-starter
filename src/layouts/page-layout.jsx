@@ -10,12 +10,39 @@ import { Children, Suspense } from 'react';
 import { Nav } from '../components/nav/Nav';
 import classNames from 'classnames';
 
+/**
+ * Main page layout component providing consistent structure across pages.
+ * Includes navigation, content area, and support for a header section.
+ * Wraps content in Suspense for lazy loading support.
+ *
+ * @param {Object} props - Component props
+ * @param {React.ReactNode} props.children - Page content, can include PageLayout.Header
+ * @param {string} [props.className] - Optional CSS class name for custom styling
+ * @param {React.ReactNode} [props.fallback] - Fallback UI to show while content is loading
+ * @returns {JSX.Element} Rendered page layout with navigation and content
+ *
+ * @example
+ * <PageLayout className="custom-page" fallback={<p>Loading...</p>}>
+ *   <PageLayout.Header>
+ *     <h1>Page Title</h1>
+ *   </PageLayout.Header>
+ *   <p>Page content</p>
+ * </PageLayout>
+ */
 export const PageLayout = ({ children, className, fallback }) => {
   const childArray = Children.toArray(children);
   const otherChildren = childArray.filter(
-    (child) => child.type !== PageLayoutHeader,
+    (child) =>
+      typeof child === 'object' &&
+      'type' in child &&
+      child.type !== PageLayoutHeader,
   );
-  const Header = childArray.find((child) => child.type === PageLayoutHeader);
+  const Header = childArray.find(
+    (child) =>
+      typeof child === 'object' &&
+      'type' in child &&
+      child.type === PageLayoutHeader,
+  );
 
   return (
     <Suspense fallback={fallback}>
@@ -32,6 +59,14 @@ export const PageLayout = ({ children, className, fallback }) => {
   );
 };
 
+/**
+ * Header section component for PageLayout.
+ * Used as PageLayout.Header to provide a dedicated header area.
+ *
+ * @param {Object} props - Component props
+ * @param {React.ReactNode} props.children - Header content
+ * @returns {JSX.Element} Rendered header section
+ */
 const PageLayoutHeader = ({ children }) => (
   <div className="cs--page-layout__content-header">{children}</div>
 );
