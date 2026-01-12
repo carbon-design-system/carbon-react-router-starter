@@ -60,7 +60,8 @@ app.use('*all', async (req, res) => {
         ? await fs.readFile('./dist/client/index.html', 'utf-8')
         : '';
       template = templateHtml;
-      render = (await import('../dist/server/entry-server.js')).render;
+      render = (await import('../dist/server/entry-server.js' as string))
+        .render;
     }
 
     let didError = false;
