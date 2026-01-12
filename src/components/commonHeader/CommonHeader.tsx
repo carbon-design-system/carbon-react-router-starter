@@ -36,5 +36,3 @@ export const CommonHeader: FC<CommonHeaderProps> = ({ title, paragraphs }) => {
     </Grid>
   );
 };
-
-// Made with Bob

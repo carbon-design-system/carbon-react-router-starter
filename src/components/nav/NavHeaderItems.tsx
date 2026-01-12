@@ -61,5 +61,3 @@ export const NavHeaderItems: FC<NavHeaderItemsProps> = ({
     )}
   </>
 );
-
-// Made with Bob

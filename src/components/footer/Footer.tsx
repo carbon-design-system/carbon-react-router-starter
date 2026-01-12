@@ -20,5 +20,3 @@ export const Footer: FC = () => {
     </Grid>
   );
 };
-
-// Made with Bob

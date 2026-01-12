@@ -33,5 +33,3 @@ const NotFound: FC = () => {
 };
 
 export default NotFound;
-
-// Made with Bob

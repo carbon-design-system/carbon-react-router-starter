@@ -98,5 +98,3 @@ export function initializeTheme(): void {
     );
   }
 }
-
-// Made with Bob

@@ -70,5 +70,3 @@ export const WelcomeAboutSection: FC = () => {
     </WelcomeCallout>
   );
 };
-
-// Made with Bob

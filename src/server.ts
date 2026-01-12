@@ -145,5 +145,3 @@ app.use('*all', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server started at: ${baseUrl}`);
 });
-
-// Made with Bob

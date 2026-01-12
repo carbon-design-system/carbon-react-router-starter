@@ -74,5 +74,3 @@ export const NavSideItems: FC<NavSideItemsProps> = ({
     )}
   </>
 );
-
-// Made with Bob

@@ -34,5 +34,3 @@ const Placeholder: FC = () => {
 };
 
 export default Placeholder;
-
-// Made with Bob

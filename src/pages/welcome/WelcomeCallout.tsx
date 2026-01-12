@@ -29,5 +29,3 @@ export const WelcomeCallout: FC<WelcomeCalloutProps> = ({
     </Section>
   );
 };
-
-// Made with Bob

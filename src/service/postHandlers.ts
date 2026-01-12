@@ -87,5 +87,3 @@ export default {
   getComments,
   getPost,
 };
-
-// Made with Bob

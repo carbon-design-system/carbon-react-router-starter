@@ -25,5 +25,3 @@ export const WelcomeFeatureTile: FC<WelcomeFeatureTileProps> = ({
     </Column>
   );
 };
-
-// Made with Bob

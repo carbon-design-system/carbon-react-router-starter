@@ -148,5 +148,3 @@ export default {
   getExternalComments,
   getExternalPost,
 };
-
-// Made with Bob

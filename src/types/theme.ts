@@ -22,5 +22,3 @@ export interface LocalStorageValues {
   themeSetting: ThemeSetting;
   headerInverse: boolean;
 }
-
-// Made with Bob

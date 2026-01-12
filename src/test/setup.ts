@@ -59,5 +59,3 @@ export function setupAfterAll(server: SetupServer): void {
   console.log('[Test Setup: AfterAll] Closing server');
   server.close();
 }
-
-// Made with Bob

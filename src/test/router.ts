@@ -58,5 +58,3 @@ export const getRouter = (
     // TODO: add other verbs
   };
 };
-
-// Made with Bob

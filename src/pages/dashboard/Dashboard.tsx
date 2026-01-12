@@ -38,5 +38,3 @@ const Dashboard: FC = () => {
 };
 
 export default Dashboard;
-
-// Made with Bob

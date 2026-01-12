@@ -171,5 +171,3 @@ export const routesInHeader: RouteConfigArray = routesProcessed.filter(
 export const routesInSideNav: RouteConfigArray = routesProcessed.filter(
   (route) => route.carbon && route.carbon.inSideNav && !route.carbon.inSubMenu,
 );
-
-// Made with Bob

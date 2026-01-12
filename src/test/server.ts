@@ -63,5 +63,3 @@ const _setupServer = (...args: HttpHandler[]): TestServer => {
 };
 
 export const server = _setupServer();
-
-// Made with Bob

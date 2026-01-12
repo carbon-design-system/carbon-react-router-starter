@@ -91,5 +91,3 @@ export const ProfilePanel: FC<ProfilePanelProps> = ({ className }) => {
 };
 
 export default ProfilePanel;
-
-// Made with Bob

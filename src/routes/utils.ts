@@ -64,5 +64,3 @@ export function getStatusCodeForPath(pathname: string): number {
   const route = findMatchingRoute(pathname);
   return route?.status || 200;
 }
-
-// Made with Bob

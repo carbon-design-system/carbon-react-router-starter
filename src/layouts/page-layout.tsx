@@ -60,5 +60,3 @@ export const PageLayout: FC<PageLayoutProps> & {
 };
 
 PageLayout.Header = PageLayoutHeader;
-
-// Made with Bob

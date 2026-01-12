@@ -60,5 +60,3 @@ export const setLocalStorageValues = (
     });
   }
 };
-
-// Made with Bob

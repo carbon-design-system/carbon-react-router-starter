@@ -66,5 +66,3 @@ const DashboardNumberTiles: FC = () => {
 };
 
 export default DashboardNumberTiles;
-
-// Made with Bob

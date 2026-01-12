@@ -113,5 +113,3 @@ describe('routes utils', () => {
     });
   });
 });
-
-// Made with Bob

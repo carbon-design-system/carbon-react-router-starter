@@ -52,5 +52,3 @@ export const getNetworking = (): Networking => {
     getRunningRequestCount,
   };
 };
-
-// Made with Bob

@@ -181,5 +181,3 @@ export function setThemeInCookies(values: ThemeValues): void {
     setCookie('header-inverse', String(values.headerInverse));
   }
 }
-
-// Made with Bob

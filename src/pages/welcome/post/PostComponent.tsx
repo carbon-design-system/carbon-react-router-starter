@@ -91,5 +91,3 @@ const PostComponent: FC<PostComponentProps> = ({ postId = 1 }) => {
 };
 
 export default PostComponent;
-
-// Made with Bob

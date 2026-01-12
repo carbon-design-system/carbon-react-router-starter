@@ -29,5 +29,3 @@ export const getMessage = async (
     res.status(500).json({ message: 'Failed to fetch message' });
   }
 };
-
-// Made with Bob

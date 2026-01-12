@@ -28,5 +28,3 @@ export interface RouteConfig {
 }
 
 export type RouteConfigArray = RouteConfig[];
-
-// Made with Bob

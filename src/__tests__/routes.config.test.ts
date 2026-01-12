@@ -112,5 +112,3 @@ describe('routes configuration', () => {
     });
   });
 });
-
-// Made with Bob

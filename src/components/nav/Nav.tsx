@@ -113,5 +113,3 @@ export const Nav: FC = () => {
     </>
   );
 };
-
-// Made with Bob

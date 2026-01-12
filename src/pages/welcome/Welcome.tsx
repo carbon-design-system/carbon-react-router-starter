@@ -40,5 +40,3 @@ const Welcome: FC = () => {
 };
 
 export default Welcome;
-
-// Made with Bob

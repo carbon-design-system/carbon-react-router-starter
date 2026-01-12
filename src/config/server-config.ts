@@ -10,5 +10,3 @@
 export const port: number = Number(process.env.PORT) || 5173;
 export const base: string = process.env.BASE || '/';
 export const baseUrl: string = `http://localhost:${port}`;
-
-// Made with Bob

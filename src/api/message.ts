@@ -41,5 +41,3 @@ export const getComments = async (postId: number): Promise<Comment[]> => {
     throw new Error(`Failed to load comments: ${error}`);
   }
 };
-
-// Made with Bob

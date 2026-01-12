@@ -51,5 +51,3 @@ export const WelcomeFetchingSection: FC = () => {
     </WelcomeCallout>
   );
 };
-
-// Made with Bob

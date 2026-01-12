@@ -32,5 +32,3 @@ const DashboardVisualizations: FC = () => {
 };
 
 export default DashboardVisualizations;
-
-// Made with Bob

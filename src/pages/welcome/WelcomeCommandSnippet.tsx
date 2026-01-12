@@ -21,5 +21,3 @@ export const WelcomeCommandSnippet: FC<WelcomeCommandSnippetProps> = ({
     </CodeSnippet>
   );
 };
-
-// Made with Bob

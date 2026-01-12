@@ -21,5 +21,3 @@ export type RenderFunction = (
   options?: RenderToPipeableStreamOptions,
   cookies?: string,
 ) => RenderResult;
-
-// Made with Bob

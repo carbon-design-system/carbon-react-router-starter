@@ -62,5 +62,3 @@ const DashboardURLParameters: FC = () => {
 };
 
 export default DashboardURLParameters;
-
-// Made with Bob
