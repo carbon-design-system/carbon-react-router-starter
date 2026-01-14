@@ -7,10 +7,17 @@
 
 import react from '@vitejs/plugin-react-swc';
 import { defineConfig } from 'vite';
+import i18nextLoader from 'vite-plugin-i18next-loader';
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    i18nextLoader({
+      paths: ['./src/locales'],
+      namespaceResolution: 'basename',
+    }),
+  ],
   test: {
     globals: true,
     environment: 'jsdom',
