@@ -1,4 +1,4 @@
-name: Carbon React Router starter template CI
+name: Carbon React Router starter CI
 
 on: [push]
 
