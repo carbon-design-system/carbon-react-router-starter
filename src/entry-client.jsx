@@ -12,15 +12,19 @@ import { BrowserRouter } from 'react-router';
 import { Router } from './routes';
 
 // App level imports
-import { ThemeProvider } from './context/ThemeContext';
+import { initializeTheme } from './utils/theme';
+
+// Initialize theme on client load
+initializeTheme();
 
 hydrateRoot(
   document.getElementById('root'),
   <StrictMode>
-    <ThemeProvider>
-      <BrowserRouter>
-        <Router />
-      </BrowserRouter>
-    </ThemeProvider>
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
   </StrictMode>,
 );
+
+// Remove visibility hidden after hydration to prevent FOUC
+document.body.classList.add('ready');

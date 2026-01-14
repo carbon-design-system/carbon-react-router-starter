@@ -7,6 +7,7 @@
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { useState } from 'react';
 
 import './profile-panel.scss';
 import { UserAvatar } from '@carbon/ibm-products';
@@ -15,15 +16,35 @@ import {
   ThemeMenuComplement,
   ThemeSwitcher,
 } from '@carbon-labs/react-theme-settings';
-import { useThemeContext } from '../../context/ThemeContext';
+import {
+  getThemeSettings,
+  setThemeSetting as updateThemeSetting,
+  setHeaderInverse as updateHeaderInverse,
+} from '../../utils/theme';
 
 export const ProfilePanel = ({ className }) => {
-  const {
-    themeSetting,
-    setThemeSetting,
-    themeMenuCompliment,
-    setThemeMenuCompliment,
-  } = useThemeContext();
+  // Get initial values from cookies (single call to avoid redundant parsing)
+  const initialSettings = getThemeSettings();
+
+  const [themeSetting, setThemeSettingState] = useState(
+    initialSettings.themeSetting,
+  );
+
+  const [themeMenuComplement, setThemeMenuComplementState] = useState(
+    initialSettings.headerInverse,
+  );
+
+  // Update theme setting
+  const handleThemeSettingChange = (value) => {
+    setThemeSettingState(value);
+    updateThemeSetting(value);
+  };
+
+  // Update header inverse
+  const handleThemeMenuComplementChange = (value) => {
+    setThemeMenuComplementState(value);
+    updateHeaderInverse(value);
+  };
 
   const userProfile = {
     name: 'Anne Profile',
@@ -50,14 +71,14 @@ export const ProfilePanel = ({ className }) => {
       <div className="cs--profile-settings">
         <ThemeSettings>
           <ThemeSwitcher
-            onChange={(value) => setThemeSetting(value)}
+            onChange={handleThemeSettingChange}
             value={themeSetting}
           ></ThemeSwitcher>
           <ThemeMenuComplement
             id="theme-menu-complement"
             labelText="Complement menu theme"
-            checked={themeMenuCompliment}
-            onChange={(value) => setThemeMenuCompliment(value)}
+            checked={themeMenuComplement}
+            onChange={handleThemeMenuComplementChange}
           />
         </ThemeSettings>
       </div>

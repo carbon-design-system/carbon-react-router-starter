@@ -8,23 +8,91 @@ It is intended to be helping, not dictating. If you don't know exactly what to u
 
 ## Get started
 
-1. Instantiate this template locally without the git history
+1. Instantiate this template locally without the git history, specifying the name of the folder for the repository.
+
+   ```bash
+   npx degit https://github.com/carbon-design-system/carbon-react-router-starter new-folder
    ```
-   npx degit https://github.com/carbon-design-system/carbon-react-router-starter
+
+NOTE: In addition to starting with a clean history `degit` avoids the accidental creation of external repositories.
+
+2. Switch to the new folder
+
+   ```bash
+   cd new-folder
    ```
-1. Install the dependencies. _Requires Node 24_
-   ```
+
+3. Install the dependencies. _Requires Node 24_
+
+   ```bash
    nvm i # Optional, but desirable to make sure you have the supported version
    npm i
    ```
-1. Run the template
-   ```
+
+4. Run the template
+
+   ```bash
    npm run dev
    ```
 
 → Good, you're already set up!
 
 Create a production build with `npm run build`, but be aware that a server runtime is needed as this project uses server-side rendering.
+
+### Running production
+
+1. Build the project
+
+   ```bash
+   npm run build
+   ```
+
+2. Run the production build
+   1. Without compression
+
+   ```bash
+   npm run preview
+   ```
+
+   2. With compression, best for performance.
+
+   ```bash
+   npm run preview:prod
+   ```
+
+### Before connecting to github.ibm.com
+
+If you are not familiar with and have never configured your device to work with git, npm, node, ssh etc. then you might want to find a friendly developer to help with your setup. You will at a minimum need:
+
+- Node 24
+- Git
+- SSH
+- NPM
+- Your command line connected to git via ssh.
+
+### Connecting to github.ibm.com
+
+1. Create a new repository on github.ibm.com/your-org.
+   1. Set the repository name
+   2. Choose the visibility
+   3. Click "Create repository".
+2. Connect your repository.
+   1. Before the git instructions.
+
+   ```bash
+   git init
+   git add .
+   git commit -m 'feat: first commit'
+   ```
+
+   2. Then the instructions to push and existing repository from the command line, which will look something like the following:
+
+   ```bash
+   # Replace `your-ort` and `new-starter` with your own values
+   git remote add origin git@github.ibm.com:your-org/new-starter.git
+   git branch -M main
+   git push -u origin main
+   ```
 
 ## How does this work
 
