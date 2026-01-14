@@ -2,6 +2,9 @@ name: SSR Test
 
 on: [push]
 
+permissions:
+  contents: read
+
 jobs:
   ssr-test:
     runs-on: ubuntu-latest
