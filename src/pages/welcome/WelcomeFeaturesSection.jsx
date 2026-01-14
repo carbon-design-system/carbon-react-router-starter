@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { useTranslation } from 'react-i18next';
 import { WelcomeCallout } from './WelcomeCallout';
 import { WelcomeFeatureTile } from './WelcomeFeatureTile';
 
@@ -15,13 +16,16 @@ const features = [
 ];
 
 export const WelcomeFeaturesSection = () => {
+  const { t } = useTranslation();
+
   return (
-    <WelcomeCallout className="cs--welcome__features" heading="Features">
+    <WelcomeCallout
+      className="cs--welcome__features"
+      heading={t('welcome.features.heading', 'Features')}
+    >
       {features.map((item) => (
         <WelcomeFeatureTile key={item.feature} {...item} />
       ))}
     </WelcomeCallout>
   );
 };
-
-// Made with Bob

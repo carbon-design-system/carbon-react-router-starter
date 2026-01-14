@@ -7,41 +7,57 @@
 
 import { Column, Stack, UnorderedList, ListItem } from '@carbon/react';
 import { Suspense } from 'react';
+import { useTranslation } from 'react-i18next';
 import { WelcomeCallout } from './WelcomeCallout';
 import PostComponent from './post/PostComponent';
 
 export const WelcomeFetchingSection = () => {
+  const { t } = useTranslation();
+
   return (
     <WelcomeCallout
       className="cs--welcome__fetching"
-      heading="An example of data fetching"
+      heading={t('welcome.fetching.heading', 'An example of data fetching')}
     >
       <Column sm={2} md={4} lg={12} className="cs--welcome__dynamic-message">
         <Stack gap={3}>
           <p>
-            Below is a dynamically fetched message from an external API
-            endpoint. This showcases how to perform data fetching while keeping
-            components clean and separating network logic. Here is how it works:
+            {t(
+              'welcome.fetching.intro',
+              'Below is a dynamically fetched message from an external API endpoint. This showcases how to perform data fetching while keeping components clean and separating network logic. Here is how it works:',
+            )}
           </p>
           <UnorderedList>
             <ListItem>
-              <strong>UI layer</strong> - PostComponent.jsx manages React state
-              and renders the data using Carbon Design components
+              <strong>{t('welcome.fetching.uiLayer', 'UI layer')}</strong> -{' '}
+              {t(
+                'welcome.fetching.uiLayerDesc',
+                'PostComponent.jsx manages React state and renders the data using Carbon Design components',
+              )}
             </ListItem>
             <ListItem>
-              <strong>API layer</strong> - Client-side functions in{' '}
-              <code>api/message.js</code> handle HTTP requests to our Express
-              backend
+              <strong>{t('welcome.fetching.apiLayer', 'API layer')}</strong> -{' '}
+              {t(
+                'welcome.fetching.apiLayerDesc',
+                'Client-side functions in api/message.js handle HTTP requests to our Express backend',
+              )}
             </ListItem>
             <ListItem>
-              <strong>Service layer</strong> - Server-side handlers in{' '}
-              <code>service/postHandlers.js</code> proxy requests to external
-              APIs.
+              <strong>
+                {t('welcome.fetching.serviceLayer', 'Service layer')}
+              </strong>{' '}
+              -{' '}
+              {t(
+                'welcome.fetching.serviceLayerDesc',
+                'Server-side handlers in service/postHandlers.js proxy requests to external APIs.',
+              )}
             </ListItem>
           </UnorderedList>
           <p>
-            This pattern keeps your components focused on presentation while
-            centralizing data fetching logic for reusability and testability.
+            {t(
+              'welcome.fetching.summary',
+              'This pattern keeps your components focused on presentation while centralizing data fetching logic for reusability and testability.',
+            )}
           </p>
         </Stack>
         <Suspense>
@@ -51,5 +67,3 @@ export const WelcomeFetchingSection = () => {
     </WelcomeCallout>
   );
 };
-
-// Made with Bob
