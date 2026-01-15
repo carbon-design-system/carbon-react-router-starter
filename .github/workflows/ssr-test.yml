@@ -1,0 +1,35 @@
+name: SSR Test
+
+on: [push]
+
+permissions:
+  contents: read
+
+jobs:
+  ssr-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Read .nvmrc
+        run: echo "NODE_VERSION=$(cat .nvmrc)" >> $GITHUB_OUTPUT
+        id: nvm
+      - name: Use Node.js ${{ steps.nvm.outputs.NODE_VERSION }}
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ steps.nvm.outputs.NODE_VERSION }}
+      - run: npm ci
+      - name: Start dev server
+        run: npm run dev &
+      - name: Wait for server
+        run: npx wait-on http://localhost:5173 --timeout 60000
+      - name: Test SSR content
+        run: |
+          RESPONSE=$(curl -s -H 'Accept-Language: en' http://localhost:5173/)
+          # Assert response contains actual content, not just empty root
+          if echo "$RESPONSE" | grep -q 'Welcome to the Carbon React Router starter'; then
+            echo "SSR content verified"
+          else
+            echo "SSR check failed. Response:"
+            echo "$RESPONSE" | head -100
+            exit 1
+          fi

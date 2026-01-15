@@ -14,5 +14,3 @@ export const WelcomeCommandSnippet = ({ command }) => {
     </CodeSnippet>
   );
 };
-
-// Made with Bob
