@@ -26,7 +26,7 @@ jobs:
         run: |
           RESPONSE=$(curl -s -H 'Accept-Language: en' http://localhost:5173/)
           # Assert response contains actual content, not just empty root
-          if echo "$RESPONSE" | grep -q 'Welcome to the Carbon React starter template'; then
+          if echo "$RESPONSE" | grep -q 'Welcome to the Carbon React Router starter'; then
             echo "SSR content verified"
           else
             echo "SSR check failed. Response:"
