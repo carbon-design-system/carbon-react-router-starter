@@ -16,17 +16,16 @@
 .cs--welcome__features,
 .cs--welcome__tile,
 .cs--welcome__fetching,
-.cs--welcome__heading {
-  margin-block-start: $spacing-05;
-}
-
-.cs--welcome__dynamic-message {
+.cs--welcome__heading,
+.cs--welcome__dynamic-message,
+.cs--welcome__run-content {
   margin-block-start: $spacing-05;
 }
 
 .cs--welcome__tile {
-  min-block-size: calc(4 * $spacing-10);
-  block-size: calc(100% - $spacing-05);
+  @include breakpoint(lg) {
+    min-block-size: calc(4 * $spacing-10);
+  }
 }
 
 .cs--welcome__tile--highlight {

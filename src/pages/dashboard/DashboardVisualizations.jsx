@@ -9,7 +9,7 @@ import { Column, Grid, Tile } from '@carbon/react';
 
 const DataVisualization = ({ title }) => {
   return (
-    <Column sm={4} md={4} lg={8} xlg={8}>
+    <Column sm={4} md={8} lg={8} xlg={8}>
       <Tile className="cs--dashboard__tile cs--dashboard__tile--data">
         <strong>{title}</strong>
       </Tile>
