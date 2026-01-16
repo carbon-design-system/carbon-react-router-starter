@@ -20,6 +20,8 @@
   display: grid;
   grid-template-areas: 'title title' 'other other' 'image image';
   grid-template-columns: 1fr 1fr;
+  /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties -- need to control size of rows and columns */
+  grid-template-rows: auto 1fr;
 
   @include breakpoint(md) {
     grid-template-areas: 'title title' 'other image';
