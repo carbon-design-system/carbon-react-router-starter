@@ -9,26 +9,39 @@
 @use '@carbon/react/scss/type' as *;
 @use '@carbon/react/scss/breakpoint' as *;
 
+.cs--welcome__callout {
+  margin-block-start: $spacing-10;
+}
+
 .cs--welcome__about {
-  margin-block-start: $spacing-07;
-}
-
-.cs--welcome__features,
-.cs--welcome__tile,
-.cs--welcome__fetching,
-.cs--welcome__heading,
-.cs--welcome__dynamic-message,
-.cs--welcome__run-content {
-  margin-block-start: $spacing-05;
-}
-
-.cs--welcome__tile {
-  @include breakpoint(lg) {
-    min-block-size: calc(4 * $spacing-10);
+  @include breakpoint-up(md) {
+    grid-template-rows: repeat(1fr, 2);
   }
+
+  @include breakpoint-up(xlg) {
+    grid-template-rows: initial;
+  }
+
+  row-gap: $spacing-07;
 }
 
-.cs--welcome__tile--highlight {
+.cs--welcome__features {
+  row-gap: $spacing-07;
+}
+
+:where(.cs--welcome__about, .cs--welcome__features) .cs--welcome__heading {
+  // reduce space between callout and first tile when row gap applies
+  margin-block-end: calc(-1 * #{$spacing-05});
+}
+
+.cs--welcome__highlight-tile {
+  block-size: 100%;
+  padding-block-end: $spacing-07;
+
   /* stylelint-disable-next-line carbon/theme-use -- cs-brand color permitted in starter */
   background-color: var(--cs-brand);
+}
+
+.cs--welcome__feature-tile {
+  block-size: 100%;
 }
