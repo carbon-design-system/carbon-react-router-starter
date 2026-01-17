@@ -9,10 +9,6 @@
 @use '@carbon/react/scss/type' as *;
 @use '@carbon/react/scss/theme' as *;
 
-.cs--common-header {
-  margin-block-end: $spacing-09;
-}
-
 .cs--common-header__image-banner {
   display: flex;
   align-items: center;

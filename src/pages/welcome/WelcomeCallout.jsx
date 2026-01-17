@@ -10,7 +10,10 @@ import classNames from 'classnames';
 
 export const WelcomeCallout = ({ children, className, heading }) => {
   return (
-    <Section as={Grid} className={classNames('cs--welcome__run', className)}>
+    <Section
+      as={Grid}
+      className={classNames('cs--welcome__callout', className)}
+    >
       <Column sm={4} md={4} lg={8} xlg={4}>
         <Heading className="cs--welcome__heading">↳ {heading}</Heading>
       </Column>

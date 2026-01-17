@@ -11,8 +11,8 @@ import { WelcomeCommandSnippet } from './WelcomeCommandSnippet';
 
 export const WelcomeRunSection = () => {
   return (
-    <WelcomeCallout heading="Run the template">
-      <Column sm={4} md={8} lg={8} xlg={8}>
+    <WelcomeCallout className="cs--welcome__run" heading="Run the template">
+      <Column className="cs--welcome__run-content" sm={4} md={4} lg={8} xlg={8}>
         <p>This code requires node v.24</p>
         <WelcomeCommandSnippet command="npm i" />
         <WelcomeCommandSnippet command="npm run dev" />
