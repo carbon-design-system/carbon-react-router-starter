@@ -15,11 +15,11 @@
 
 .cs--welcome__about {
   @include breakpoint-up(md) {
-    grid-template-rows: repeat(1fr, 2);
+    grid-auto-rows: 1fr;
   }
 
   @include breakpoint-up(xlg) {
-    grid-template-rows: initial;
+    grid-auto-rows: initial;
   }
 
   row-gap: $spacing-07;
