@@ -1,5 +1,5 @@
 import { getComments, getPost } from '../../../api/message';
-import { Heading, Grid, Layer, Section, Stack, Tile } from '@carbon/react';
+import { Heading, Layer, Section, Stack, Tile } from '@carbon/react';
 import { useEffect, useState, FC } from 'react';
 
 interface Post {
