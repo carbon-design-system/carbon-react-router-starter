@@ -16,7 +16,7 @@ export const WelcomeFetchingSection: FC = () => {
       className="cs--welcome__fetching"
       heading="An example of data fetching"
     >
-      <Column sm={2} md={4} lg={12} className="cs--welcome__dynamic-message">
+      <Column sm={4} md={4} lg={12} className="cs--welcome__dynamic-message">
         <Stack gap={3}>
           <p>
             Below is a dynamically fetched message from an external API
@@ -44,6 +44,17 @@ export const WelcomeFetchingSection: FC = () => {
             centralizing data fetching logic for reusability and testability.
           </p>
         </Stack>
+      </Column>
+      <Column
+        sm={4}
+        md={8}
+        lg={12}
+        xlg={{
+          span: 12,
+          offset: 4,
+        }}
+        className="cs--welcome__dynamic-message"
+      >
         <Suspense>
           <PostComponent postId={1} />
         </Suspense>

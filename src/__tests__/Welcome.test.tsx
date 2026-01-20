@@ -29,6 +29,6 @@ test('renders received message', async () => {
 
   // Wait for the expected text to appear
   expect(
-    await screen.findByText(/Welcome to the Carbon React starter template/i),
+    await screen.findByText(/Welcome to the Carbon React Router starter/i),
   ).toBeInTheDocument();
 });

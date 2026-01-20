@@ -1,5 +1,5 @@
 import { getComments, getPost } from '../../../api/message';
-import { Heading, Section, Tile, Stack, Layer } from '@carbon/react';
+import { Heading, Grid, Layer, Section, Stack, Tile } from '@carbon/react';
 import { useEffect, useState, FC } from 'react';
 
 interface Post {
@@ -55,21 +55,21 @@ const PostComponent: FC<PostComponentProps> = ({ postId = 1 }) => {
   }, [postId]);
 
   return (
-    <Section as="article" level={3}>
-      <Heading>Posts</Heading>
+    <Section>
       <Tile>
-        <Stack gap={6}>
-          <Section as="article" level={3}>
-            <Section level={4}>
+        <Heading>Blog data retrieval example</Heading>
+        <Stack gap={3}>
+          <Section as="article">
+            <Section>
               <Heading>{post?.title ?? 'Loading...'}</Heading>
               <p>{post?.body}</p>
             </Section>
           </Section>
 
-          <Section as="article" level={5}>
+          <Section>
             <Stack gap={3}>
               <Heading>Comments</Heading>
-              <Section as="article" level={6}>
+              <Section as="div">
                 <Stack gap={3}>
                   {Array.isArray(comments) &&
                     comments.map((comment) => (
