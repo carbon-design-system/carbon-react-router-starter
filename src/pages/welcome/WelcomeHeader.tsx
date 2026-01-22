@@ -9,9 +9,7 @@ import { Button } from '@carbon/react';
 
 import { ArrowRight } from '@carbon/icons-react';
 import { CommonHeader } from '../../components/commonHeader/CommonHeader';
-import { FC } from 'react';
-
-export const WelcomeHeader: FC = () => {
+export const WelcomeHeader = () => {
   return (
     <CommonHeader
       title={'Welcome to the Carbon React Router starter'}

@@ -7,9 +7,7 @@
 import { CommonHeader } from '../../components/commonHeader/CommonHeader';
 import { PageLayout } from '../../layouts/page-layout';
 import { useLocation } from 'react-router';
-import { FC } from 'react';
-
-const NotFound: FC = () => {
+const NotFound = () => {
   const location = useLocation();
 
   return (

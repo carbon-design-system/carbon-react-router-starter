@@ -6,7 +6,7 @@
  */
 
 import classNames from 'classnames';
-import { useState, FC } from 'react';
+import { useState } from 'react';
 
 import './profile-panel.scss';
 import { UserAvatar } from '@carbon/ibm-products';
@@ -26,7 +26,7 @@ interface ProfilePanelProps {
   className?: string;
 }
 
-export const ProfilePanel: FC<ProfilePanelProps> = ({ className }) => {
+export const ProfilePanel = ({ className }: ProfilePanelProps) => {
   // Get initial values from cookies (single call to avoid redundant parsing)
   const initialSettings = getThemeSettings();
 

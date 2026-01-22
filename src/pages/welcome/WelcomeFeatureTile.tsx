@@ -6,17 +6,15 @@
  */
 
 import { Column, Tile } from '@carbon/react';
-import { FC } from 'react';
-
 interface WelcomeFeatureTileProps {
   title: string;
   feature: string;
 }
 
-export const WelcomeFeatureTile: FC<WelcomeFeatureTileProps> = ({
+export const WelcomeFeatureTile = ({
   title,
   feature,
-}) => {
+}: WelcomeFeatureTileProps) => {
   return (
     <Column className="cs--welcome__tile" sm={2} md={4} lg={4}>
       <Tile title={title}>

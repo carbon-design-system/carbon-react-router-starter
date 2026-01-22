@@ -11,12 +11,10 @@ import { PageHeader } from '@carbon/ibm-products';
 import DashboardURLParameters from './DashboardURLParameters';
 import DashboardNumberTiles from './DashboardNumberTiles';
 import DashboardVisualizations from './DashboardVisualizations';
-import { FC } from 'react';
-
 // The styles are imported into index.scss by default.
 // Do the same unless you have a good reason not to.
 
-const Dashboard: FC = () => {
+const Dashboard = () => {
   return (
     <PageLayout
       className="cs--dashboard"

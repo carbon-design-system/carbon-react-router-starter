@@ -1,6 +1,6 @@
 import { getComments, getPost } from '../../../api/message';
 import { Heading, Layer, Section, Stack, Tile } from '@carbon/react';
-import { useEffect, useState, FC } from 'react';
+import { useEffect, useState } from 'react';
 
 interface Post {
   title: string;
@@ -24,7 +24,7 @@ interface PostComponentProps {
  * @param props.postId - The ID of the post to display.
  *   If not provided, defaults to 1 and renders the first post.
  */
-const PostComponent: FC<PostComponentProps> = ({ postId = 1 }) => {
+const PostComponent = ({ postId = 1 }: PostComponentProps) => {
   const [post, setPost] = useState<Post | undefined>();
   const [comments, setComments] = useState<Comment[]>([]);
 

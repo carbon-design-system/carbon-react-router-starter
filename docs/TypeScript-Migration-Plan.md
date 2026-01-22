@@ -478,11 +478,7 @@ interface MyComponentProps {
   onAction: () => void;
 }
 
-const MyComponent: React.FC<MyComponentProps> = ({
-  title,
-  count,
-  onAction,
-}) => {
+const MyComponent = ({ title, count, onAction }: MyComponentProps) => {
   // component logic
 };
 ```

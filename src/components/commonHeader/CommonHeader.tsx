@@ -6,14 +6,14 @@
  */
 
 import { AspectRatio, Column, Grid, Heading } from '@carbon/react';
-import { FC, ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 interface CommonHeaderProps {
   title: string;
   paragraphs: ReactNode[];
 }
 
-export const CommonHeader: FC<CommonHeaderProps> = ({ title, paragraphs }) => {
+export const CommonHeader = ({ title, paragraphs }: CommonHeaderProps) => {
   return (
     <Grid as="header" className="cs--common-header">
       <Column sm={4} md={8} lg={8}>

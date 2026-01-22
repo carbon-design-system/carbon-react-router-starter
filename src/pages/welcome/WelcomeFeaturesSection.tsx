@@ -7,7 +7,6 @@
 
 import { WelcomeCallout } from './WelcomeCallout';
 import { WelcomeFeatureTile } from './WelcomeFeatureTile';
-import { FC } from 'react';
 
 interface Feature {
   title: string;
@@ -20,7 +19,7 @@ const features: Feature[] = [
   { title: 'Feature 3', feature: 'Vite 6.0' },
 ];
 
-export const WelcomeFeaturesSection: FC = () => {
+export const WelcomeFeaturesSection = () => {
   return (
     <WelcomeCallout className="cs--welcome__features" heading="Features">
       {features.map((item) => (

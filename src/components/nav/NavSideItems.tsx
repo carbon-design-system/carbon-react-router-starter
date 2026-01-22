@@ -1,6 +1,5 @@
 import { SideNavLink, SideNavMenu, SideNavMenuItem } from '@carbon/react';
 import { Link as RouterLink } from 'react-router';
-import { FC } from 'react';
 import type { RouteConfigArray, CarbonRoute } from '../../types/routes';
 
 type DestinationPropsWithPath = {
@@ -35,10 +34,10 @@ interface NavSideItemsProps {
   currentPath: string;
 }
 
-export const NavSideItems: FC<NavSideItemsProps> = ({
+export const NavSideItems = ({
   routesInSideNav,
   currentPath,
-}) => (
+}: NavSideItemsProps) => (
   <>
     {routesInSideNav.map(({ path, carbon }) =>
       !carbon?.inSubMenu && carbon?.label ? (

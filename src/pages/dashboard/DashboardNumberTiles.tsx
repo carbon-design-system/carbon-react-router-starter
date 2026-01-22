@@ -6,7 +6,7 @@
  */
 
 import { Column, Grid, Tile } from '@carbon/react';
-import { useSyncExternalStore, useMemo, FC } from 'react';
+import { useSyncExternalStore, useMemo } from 'react';
 
 // Simulated external data source - generates data once per tile instance
 // In a real app, this would be an API call or WebSocket subscription
@@ -31,7 +31,7 @@ const createDataSource = () => {
   };
 };
 
-const NumberTile: FC = () => {
+const NumberTile = () => {
   // Create a stable data source instance per component
   const dataSource = useMemo(() => createDataSource(), []);
 
@@ -54,7 +54,7 @@ const NumberTile: FC = () => {
   );
 };
 
-const DashboardNumberTiles: FC = () => {
+const DashboardNumberTiles = () => {
   return (
     <Grid>
       <NumberTile />

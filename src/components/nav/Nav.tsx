@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useState, FC } from 'react';
+import { useState } from 'react';
 import {
   Header,
   HeaderGlobalAction,
@@ -32,7 +32,7 @@ import { routesInHeader, routesInSideNav } from '../../routes/config';
 import { NavHeaderItems } from './NavHeaderItems';
 import { NavSideItems } from './NavSideItems';
 
-export const Nav: FC = () => {
+export const Nav = () => {
   const location = useLocation();
   const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);

@@ -1,6 +1,5 @@
 import { HeaderMenu, HeaderMenuItem } from '@carbon/react';
 import { Link as RouterLink } from 'react-router';
-import { FC } from 'react';
 import type { RouteConfigArray } from '../../types/routes';
 
 /**
@@ -23,10 +22,10 @@ interface NavHeaderItemsProps {
   currentPath: string;
 }
 
-export const NavHeaderItems: FC<NavHeaderItemsProps> = ({
+export const NavHeaderItems = ({
   routesInHeader,
   currentPath,
-}) => (
+}: NavHeaderItemsProps) => (
   <>
     {routesInHeader.map(({ path, carbon }) =>
       !carbon?.inSubMenu && carbon?.label ? (

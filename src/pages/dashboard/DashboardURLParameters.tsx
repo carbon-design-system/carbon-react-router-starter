@@ -7,9 +7,7 @@
 
 import { Column, Link, Tile, Stack, Grid } from '@carbon/react';
 import { useParams, useSearchParams } from 'react-router';
-import { FC } from 'react';
-
-const DashboardURLParameters: FC = () => {
+const DashboardURLParameters = () => {
   // Access path parameters (e.g., /dashboard/1234 -> id = "1234")
   const params = useParams<{ id?: string }>();
   const { id } = params;

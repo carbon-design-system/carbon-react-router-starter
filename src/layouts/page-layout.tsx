@@ -6,7 +6,7 @@
  */
 
 import { Content } from '@carbon/react';
-import { Children, Suspense, ReactNode, FC, ReactElement } from 'react';
+import { Children, Suspense, ReactNode, ReactElement } from 'react';
 import { Nav } from '../components/nav/Nav';
 import classNames from 'classnames';
 
@@ -20,14 +20,16 @@ interface PageLayoutHeaderProps {
   children: ReactNode;
 }
 
-const PageLayoutHeader: FC<PageLayoutHeaderProps> = ({ children }) => (
+const PageLayoutHeader = ({ children }: PageLayoutHeaderProps) => (
   <div className="cs--page-layout__content-header">{children}</div>
 );
 PageLayoutHeader.displayName = 'PageLayoutHeader';
 
-export const PageLayout: FC<PageLayoutProps> & {
-  Header: typeof PageLayoutHeader;
-} = ({ children, className, fallback }) => {
+export const PageLayout = ({
+  children,
+  className,
+  fallback,
+}: PageLayoutProps) => {
   const childArray = Children.toArray(children);
   const otherChildren = childArray.filter(
     (child): child is ReactElement =>
@@ -59,4 +61,6 @@ export const PageLayout: FC<PageLayoutProps> & {
   );
 };
 
-PageLayout.Header = PageLayoutHeader;
+PageLayout.Header = PageLayoutHeader as typeof PageLayoutHeader & {
+  displayName: string;
+};

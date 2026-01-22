@@ -8,9 +8,7 @@
 import { Column } from '@carbon/react';
 import { WelcomeCallout } from './WelcomeCallout';
 import { WelcomeCommandSnippet } from './WelcomeCommandSnippet';
-import { FC } from 'react';
-
-export const WelcomeRunSection: FC = () => {
+export const WelcomeRunSection = () => {
   return (
     <WelcomeCallout heading="Run the template">
       <Column sm={4} md={8} lg={8} xlg={8}>

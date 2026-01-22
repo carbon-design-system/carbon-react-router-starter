@@ -6,11 +6,11 @@
  */
 
 import { Column, Stack, UnorderedList, ListItem } from '@carbon/react';
-import { Suspense, FC } from 'react';
+import { Suspense } from 'react';
 import { WelcomeCallout } from './WelcomeCallout';
 import PostComponent from './post/PostComponent';
 
-export const WelcomeFetchingSection: FC = () => {
+export const WelcomeFetchingSection = () => {
   return (
     <WelcomeCallout
       className="cs--welcome__fetching"
