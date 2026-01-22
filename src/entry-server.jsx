@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,6 +14,7 @@ import { StaticRouter } from 'react-router';
 import { Router } from './routes/index.jsx';
 import { getStatusCodeForPath } from './routes/utils.js';
 import { getThemeFromCookies } from './utils/cookies.js';
+import { getCssForRoute } from './utils/css-manifest.js';
 
 /**
  * @param {string} url
@@ -30,6 +31,9 @@ export function render(_url, options, cookies) {
   // Create HTML attributes for theme settings
   const themeAttrs = ` data-theme-setting="${themeSetting}" data-header-inverse="${headerInverse}"`;
 
+  // Get CSS bundle for this route
+  const cssBundle = getCssForRoute(url);
+
   const { pipe, abort } = renderToPipeableStream(
     <StrictMode>
       <StaticRouter location={url}>
@@ -41,5 +45,5 @@ export function render(_url, options, cookies) {
 
   const head = '<meta name="description" content="Server-side rendered page">';
 
-  return { pipe, head, abort, statusCode, themeAttr: themeAttrs };
+  return { pipe, head, abort, statusCode, themeAttr: themeAttrs, cssBundle };
 }

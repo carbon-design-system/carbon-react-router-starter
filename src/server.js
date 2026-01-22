@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -66,7 +66,7 @@ app.use('*all', async (req, res) => {
 
     let didError = false;
 
-    const { pipe, abort, statusCode, themeAttr } = render(
+    const { pipe, abort, statusCode, themeAttr, cssBundle } = render(
       url,
       {
         onShellError(error) {
@@ -81,7 +81,7 @@ app.use('*all', async (req, res) => {
           res.set({ 'Content-Type': 'text/html' });
           res.send('<h1>Something went wrong</h1>');
         },
-        onShellReady() {
+        async onShellReady() {
           res.status(didError ? 500 : statusCode);
           res.set({ 'Content-Type': 'text/html' });
 
@@ -95,9 +95,46 @@ app.use('*all', async (req, res) => {
           const [htmlStart, htmlEnd] = template.split(`<!--app-html-->`);
 
           // Inject theme attribute into the html tag
-          const htmlStartWithTheme = themeAttr
+          let htmlStartWithTheme = themeAttr
             ? htmlStart.replace('<html', `<html${themeAttr}`)
             : htmlStart;
+
+          // Inject page-specific CSS if available
+          if (cssBundle) {
+            let pageCssLink = '';
+
+            if (isProduction) {
+              // In production, read the CSS manifest to get the hashed CSS filename
+              try {
+                const manifestPath = './dist/client/css-manifest.json';
+                const manifestContent = await fs.readFile(
+                  manifestPath,
+                  'utf-8',
+                );
+                const cssManifestProd = JSON.parse(manifestContent);
+
+                // Extract bundle name from path (e.g., 'src/pages/welcome/welcome.scss' -> 'welcome')
+                const bundleName = cssBundle.match(/pages\/([^/]+)\//)?.[1];
+
+                if (bundleName && cssManifestProd[bundleName]) {
+                  pageCssLink = `\n    <link id="page-specific-css" rel="stylesheet" crossorigin href="/${cssManifestProd[bundleName]}">`;
+                }
+              } catch (error) {
+                console.warn('Could not load CSS manifest:', error.message);
+              }
+            } else {
+              // In development, Vite handles CSS directly
+              pageCssLink = `\n    <link id="page-specific-css" rel="stylesheet" href="/${cssBundle}">`;
+            }
+
+            // Inject the CSS link just before </head> so it loads LAST
+            if (pageCssLink) {
+              htmlStartWithTheme = htmlStartWithTheme.replace(
+                '</head>',
+                `${pageCssLink}\n  </head>`,
+              );
+            }
+          }
 
           res.write(htmlStartWithTheme);
 

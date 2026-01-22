@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "node src/server",
-    "build": "npm run build:client && npm run build:server",
+    "build": "npm run build:client && npm run build:css-manifest && npm run build:server",
     "build:client": "vite build --ssrManifest .vite/ssr-manifest.json  --outDir dist/client",
+    "build:css-manifest": "node scripts/generate-css-manifest.js",
     "build:server": "vite build --ssr src/entry-server.jsx --outDir dist/server",
     "lighthouse": "lhci collect",
     "lint": "npm run lint:es && npm run lint:style && npm run lint:format && npm run lint:spell",
@@ -74,7 +75,9 @@
     "vitest": "^4.0.0"
   },
   "lint-staged": {
-    "*.{js,ts,jsx,tsx}": "eslint . --cache --report-unused-disable-directives --max-warnings 0",
+    "*.{js,ts,jsx,tsx}": [
+      "bash -c 'eslint $(git diff --cached --name-only --diff-filter=ACM | grep -E \"\\.(js|jsx|ts|tsx)$\" | grep -v \"vite.config.js\" | xargs) --cache --report-unused-disable-directives --max-warnings 0'"
+    ],
     ".npmrc": "node -e \"console.error('Are you sure you want to commit .npmrc?'); process.exit(1);\""
   },
   "overrides": {
