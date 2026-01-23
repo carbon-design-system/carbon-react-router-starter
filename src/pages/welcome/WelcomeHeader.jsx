@@ -18,7 +18,7 @@ export const WelcomeHeader = () => {
     <CommonHeader
       title={t(
         'welcomeHeader.title',
-        'Welcome to the Carbon React starter template',
+        'Welcome to the Carbon React Router starter',
       )}
       paragraphs={[
         <>
@@ -36,7 +36,7 @@ export const WelcomeHeader = () => {
         <>
           <Button
             renderIcon={ArrowRight}
-            href="https://github.com/carbon-design-system/carbon-react-router-starter/generate"
+            href="https://github.com/carbon-design-system/carbon-react-router-starter"
           >
             {t('welcomeHeader.button.useTemplate', 'Use this template')}
           </Button>

@@ -67,7 +67,7 @@ export const Nav = () => {
           aria-expanded={isSideNavExpanded}
         />
         <HeaderName as={RouterLink} to="/" prefix="Carbon">
-          {t('nav.header.name', 'React starter template')}
+          {t('nav.header.name', 'React starter')}
         </HeaderName>
         {routesInHeader.length > 0 && (
           <HeaderNavigation aria-label="fed-at-ibm">

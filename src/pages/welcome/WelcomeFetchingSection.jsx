@@ -19,7 +19,7 @@ export const WelcomeFetchingSection = () => {
       className="cs--welcome__fetching"
       heading={t('welcome.fetching.heading', 'An example of data fetching')}
     >
-      <Column sm={2} md={4} lg={12} className="cs--welcome__dynamic-message">
+      <Column sm={4} md={4} lg={12} className="cs--welcome__dynamic-message">
         <Stack gap={3}>
           <p>
             {t(
@@ -60,6 +60,17 @@ export const WelcomeFetchingSection = () => {
             )}
           </p>
         </Stack>
+      </Column>
+      <Column
+        sm={4}
+        md={8}
+        lg={12}
+        xlg={{
+          span: 12,
+          offset: 4,
+        }}
+        className="cs--welcome__dynamic-message"
+      >
         <Suspense>
           <PostComponent postId={1} />
         </Suspense>
