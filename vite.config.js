@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,6 +13,11 @@ import i18nextLoader from 'vite-plugin-i18next-loader';
 export default defineConfig({
   plugins: [
     react(),
+    /**
+     * Loads i18n translation JSON files from src/locales at build time.
+     * Files are resolved by basename (e.g., de.json becomes the 'de' namespace),
+     * making translations available to i18next without runtime file fetching.
+     */
     i18nextLoader({
       paths: ['./src/locales'],
       namespaceResolution: 'basename',

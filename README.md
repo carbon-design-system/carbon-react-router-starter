@@ -121,7 +121,17 @@ Where documenting inline is not possible or impractical, we have added explanati
 
 - **Server-side rendering:** Server-side rendering is a critical component for most applications to improve their performance. This means here that **the project is separated in two parts - client-side and server-side**.
 
-- **Internationalization (i18n):** The project includes built-in support for multiple languages using i18next with full SSR integration. German is included as a sample language. The app automatically detects the user's browser language from HTTP headers. To add a new language, create a JSON file in `src/locales/[language-code].json` (e.g., `fr.json`), add the language to `supportedLngs` in both `src/i18n.client.js` and `src/i18n.server.js`, and add your translations. Use translations in components with `const { t } = useTranslation(); t('key', 'English default')`. English text stays inline as defaults, other languages go in JSON files. To add a manual language switcher, use `const { i18n } = useTranslation()` and call `i18n.changeLanguage('de')` in a button's onClick handler.
+- **Internationalization (i18n):** This project uses [i18next](https://www.i18next.com/) for multi-language support. German is included as an example.
+
+  Translation files are stored in `src/locales/` as JSON files, one per language (e.g., `de.json` for German). These files are bundled into the application at build time using `vite-plugin-i18next-loader`, which means no additional network requests are needed to load translations.
+
+  The i18n setup is split between server and client. The server configuration lives in `src/i18n.server.js` and the client configuration in `src/i18n.client.js`. When a user visits the application, the server reads the `Accept-Language` header from their browser to determine their preferred language. The server then renders the page with the appropriate translations and passes the translation state to the client. The client loads this state before React hydration to ensure consistency. You can find detailed comments explaining this process in `src/entry-client.jsx`.
+
+  To add a new language, create a JSON file in `src/locales/` named with the language code (e.g., `fr.json` for French). Then add that language code to the `supportedLngs` array in both `src/i18n.client.js` and `src/i18n.server.js`.
+
+  In your components, use the `useTranslation` hook to access translations. The `t` function takes a translation key and an English fallback: `const { t } = useTranslation(); t('greeting', 'Hello')`. English text stays inline in your code as the default, while other languages are defined in their respective JSON files.
+
+  To switch languages programmatically, use the `i18n` instance from the same hook: `const { i18n } = useTranslation(); i18n.changeLanguage('de')`.
 
 - **Quality and productivity helpers:** This project contains quite a few helpers to help with consistency, productivity, and speed. For example, it has templates for unit and end-to-end testing. It also contains linters so your team doesn't have to lose time on code formatting.
   With time, we plan to add more helpers to help you monitor your accessibility and front-end performance.

@@ -81,7 +81,7 @@
     "vitest": "^4.0.0"
   },
   "lint-staged": {
-    "*.{js,ts,jsx,tsx}": "eslint . --cache --report-unused-disable-directives --max-warnings 0",
+    "*.{js,ts,jsx,tsx}": "eslint . --cache --report-unused-disable-directives --max-warnings 0 --no-warn-ignored",
     ".npmrc": "node -e \"console.error('Are you sure you want to commit .npmrc?'); process.exit(1);\""
   },
   "overrides": {
