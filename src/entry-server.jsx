@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -54,6 +54,14 @@ export function render(_url, i18n, options, cookies) {
     initialLanguage: i18n.language,
   };
 
+  /**
+   * Embed the i18n state into the HTML so the client can load it before
+   * React hydration. This allows the client's i18next instance to use the
+   * same translations the server used when rendering this page.
+   *
+   * The .replace() escapes '<' characters to prevent XSS if any translation
+   * strings contain HTML-like content.
+   */
   const head = `<meta name="description" content="Server-side rendered page">
 <script>window.__INITIAL_I18N_STATE__ = ${JSON.stringify(initialState).replace(/</g, '\\u003c')}</script>`;
 

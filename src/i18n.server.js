@@ -29,7 +29,14 @@ await i18next
     supportedLngs: ['en', 'de'],
     preload: ['en', 'de'], // Preload all languages on server
 
-    // Important for SSR
+    // useSuspense controls what happens when useTranslation() is called
+    // but translations aren't loaded yet. When true (the default), React
+    // suspends the component until translations are ready. When false,
+    // the component renders immediately and useTranslation returns ready: false.
+    //
+    // On the server, translations are preloaded so they should always be
+    // available. We set this to false as a safeguard to ensure rendering
+    // never suspends unexpectedly, which could cause issues with streaming SSR.
     useSuspense: false,
 
     // Return key if translation missing (useful with defaultValue pattern)
