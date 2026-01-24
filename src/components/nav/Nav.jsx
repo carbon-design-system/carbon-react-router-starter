@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -28,6 +28,7 @@ import {
   UserAvatar,
 } from '@carbon/icons-react';
 import { Link as RouterLink, useLocation } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import ProfilePanel from '../profilePanel/ProfilePanel';
 
 import { routesInHeader, routesInSideNav } from '../../routes/config';
@@ -35,6 +36,7 @@ import { NavHeaderItems } from './NavHeaderItems';
 import { NavSideItems } from './NavSideItems';
 
 export const Nav = () => {
+  const { t } = useTranslation();
   const location = useLocation();
   const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -54,14 +56,18 @@ export const Nav = () => {
       <Header aria-label="fed-at-ibm">
         <SkipToContent />
         <HeaderMenuButton
-          aria-label={isSideNavExpanded ? 'Close menu' : 'Open menu'}
+          aria-label={
+            isSideNavExpanded
+              ? t('nav.menu.close', 'Close menu')
+              : t('nav.menu.open', 'Open menu')
+          }
           onClick={toggleNav}
           isCollapsible={true}
           isActive={isSideNavExpanded}
           aria-expanded={isSideNavExpanded}
         />
         <HeaderName as={RouterLink} to="/" prefix="Carbon">
-          React starter
+          {t('nav.header.name', 'React starter')}
         </HeaderName>
         {routesInHeader.length > 0 && (
           <HeaderNavigation aria-label="fed-at-ibm">
@@ -72,17 +78,20 @@ export const Nav = () => {
           </HeaderNavigation>
         )}
         <HeaderGlobalBar>
-          <HeaderGlobalAction aria-label="Search">
+          <HeaderGlobalAction aria-label={t('nav.actions.search', 'Search')}>
             <Search size={20} />
           </HeaderGlobalAction>
           <HeaderGlobalAction
-            aria-label="User profile"
+            aria-label={t('nav.actions.userProfile', 'User profile')}
             tooltipAlignment="end"
             onClick={handleProfileOpen}
           >
             <UserAvatar size={20} />
           </HeaderGlobalAction>
-          <HeaderGlobalAction aria-label="App switcher" tooltipAlignment="end">
+          <HeaderGlobalAction
+            aria-label={t('nav.actions.appSwitcher', 'App switcher')}
+            tooltipAlignment="end"
+          >
             <SwitcherIcon size={20} />
           </HeaderGlobalAction>
         </HeaderGlobalBar>
@@ -92,7 +101,7 @@ export const Nav = () => {
         </HeaderPanel>
       </Header>
       <SideNav
-        aria-label="Side navigation"
+        aria-label={t('nav.sideNav.ariaLabel', 'Side navigation')}
         expanded={isSideNavExpanded}
         isPersistent={false}
       >

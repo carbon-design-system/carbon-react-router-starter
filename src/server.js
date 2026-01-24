@@ -10,6 +10,8 @@ import express from 'express';
 import { Transform } from 'node:stream';
 import { getRoutes } from './routes/routes.js';
 import { port, base, baseUrl } from './config/server-config.js';
+import i18nextMiddleware from 'i18next-http-middleware';
+import i18n from './i18n.server.js';
 
 // Constants
 const isProduction = process.env.NODE_ENV === 'production';
@@ -35,6 +37,14 @@ if (!isProduction) {
   app.use(compression());
   app.use(base, sirv('./dist/client', { extensions: [] }));
 }
+
+// Add i18next middleware for language detection
+app.use(
+  i18nextMiddleware.handle(i18n, {
+    ignoreRoutes: [], // Don't ignore any routes
+    removeLngFromUrl: false,
+  }),
+);
 
 // Register API routes
 getRoutes(app);
@@ -66,8 +76,9 @@ app.use('*all', async (req, res) => {
 
     let didError = false;
 
-    const { pipe, abort, statusCode, themeAttr } = render(
+    const { pipe, head, abort, statusCode, themeAttr } = render(
       url,
+      req.i18n,
       {
         onShellError(error) {
           // Improved error handling with debugging context
@@ -94,12 +105,13 @@ app.use('*all', async (req, res) => {
 
           const [htmlStart, htmlEnd] = template.split(`<!--app-html-->`);
 
-          // Inject theme attribute into the html tag
-          const htmlStartWithTheme = themeAttr
-            ? htmlStart.replace('<html', `<html${themeAttr}`)
-            : htmlStart;
+          // Inject head content (i18n state) and theme attribute into the html tag
+          let htmlStartProcessed = htmlStart.replace('<!--app-head-->', head);
+          htmlStartProcessed = themeAttr
+            ? htmlStartProcessed.replace('<html', `<html${themeAttr}`)
+            : htmlStartProcessed;
 
-          res.write(htmlStartWithTheme);
+          res.write(htmlStartProcessed);
 
           transformStream.on('finish', () => {
             res.end(htmlEnd);

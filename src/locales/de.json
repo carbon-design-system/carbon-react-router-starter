@@ -1,0 +1,92 @@
+{
+  "nav": {
+    "menu": {
+      "close": "Menü schließen",
+      "open": "Menü öffnen"
+    },
+    "header": {
+      "name": "React-Startvorlage"
+    },
+    "actions": {
+      "search": "Suchen",
+      "userProfile": "Benutzerprofil",
+      "appSwitcher": "App-Umschalter"
+    },
+    "sideNav": {
+      "ariaLabel": "Seitennavigation"
+    }
+  },
+  "footer": {
+    "title": "Fußzeile",
+    "copyright": "Copyright IBM 2025, 2026"
+  },
+  "profile": {
+    "settings": {
+      "complementMenuTheme": "Menü-Theme umkehren"
+    }
+  },
+  "commonHeader": {
+    "logoAlt": "fed-at-ibm Logo"
+  },
+  "dashboard": {
+    "loading": "Dashboard wird geladen..."
+  },
+  "notFound": {
+    "loading": "Fehlerseite wird geladen...",
+    "title": "Seite nicht gefunden",
+    "description": "Dies ist nicht die Seite, die Sie gesucht haben.",
+    "routeNotRecognized": "Die Route '{{pathname}}' ist nicht bekannt.",
+    "maintainer": "Betreut von fed-at-ibm, einem Chapter der OIC."
+  },
+  "placeholder": {
+    "loading": "Platzhalterseite wird geladen...",
+    "title": "Diese Seite ist noch nicht fertig",
+    "description1": "Generell ist es keine gute Idee, Seiten im Aufbau zu haben.",
+    "description2": "Diese Seite hilft, die globale Navigation zu demonstrieren.",
+    "routeInfo": "Sie befinden sich an der Route '{{pathname}}'.",
+    "maintainer": "Betreut von fed-at-ibm, einem Chapter der OIC."
+  },
+  "welcomeHeader": {
+    "title": "Willkommen zur Carbon React-Startvorlage",
+    "description1": "Dies ist eine Boilerplate und ein lebendiger Leitfaden für die Erstellung von React-Anwendungen mit dem Carbon Design System. Passen Sie es nach Bedarf an.",
+    "maintainer": "Betreut von fed-at-ibm, einem Chapter der OIC.",
+    "button": {
+      "useTemplate": "Diese Vorlage verwenden"
+    }
+  },
+  "welcome": {
+    "run": {
+      "heading": "Template starten",
+      "nodeRequirement": "Benötigt Node v.24"
+    },
+    "about": {
+      "heading": "Worum geht's?",
+      "purpose": {
+        "title": "Verwendungszweck",
+        "description": "Dieses Repository hilft beim Einstieg in das Carbon Design System mit React. Es spart Zeit durch eine fertig konfigurierte Basis für neue Projekte."
+      },
+      "consistency": {
+        "title": "Standards einhalten",
+        "description": "Nutzen Sie dies als Referenz, um IBM Design-Standards einzuhalten. Flexibel anpassbar, dabei konsistent in der User Experience."
+      },
+      "customize": {
+        "title": "Individuell anpassen",
+        "description": "Verstehen Sie dies als Startpunkt und Leitfaden, nicht als starres Framework. Passen Sie es an Ihre Anforderungen an oder nutzen Sie es als Inspiration."
+      }
+    },
+    "features": {
+      "heading": "Features"
+    },
+    "fetching": {
+      "heading": "Beispiel: Daten laden",
+      "intro": "Hier wird eine Nachricht dynamisch von einem externen API-Endpunkt geladen. Das zeigt, wie Sie Daten laden können, während Komponenten sauber und Netzwerklogik getrennt bleiben. So funktioniert es:",
+      "uiLayer": "UI-Schicht",
+      "uiLayerDesc": "PostComponent.jsx verwaltet den React-State und rendert die Daten mit Carbon Design-Komponenten",
+      "apiLayer": "API-Schicht",
+      "apiLayerDesc": "Client-seitige Funktionen in api/message.js verarbeiten HTTP-Anfragen an unser Express-Backend",
+      "serviceLayer": "Service-Schicht",
+      "serviceLayerDesc": "Server-seitige Handler in service/postHandlers.js leiten Anfragen an externe APIs weiter.",
+      "summary": "Dieses Muster hält Ihre Komponenten auf die Darstellung fokussiert, während die Datenabruflogik zentral für Wiederverwendbarkeit und Testbarkeit gebündelt wird."
+    }
+  }
+}
