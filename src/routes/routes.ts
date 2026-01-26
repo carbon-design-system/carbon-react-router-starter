@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { Express, RequestHandler } from 'express';
+import type { RequestHandler } from 'express';
 import { getPost, getComments } from '../service/postHandlers';
 
 /**
