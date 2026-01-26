@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use '@carbon/ibm-products/css/index.min';
+@use '@carbon/ibm-products/css/index-without-carbon-released-only.min';
 @use '@carbon/react' with (
   $font-path: '@ibm/plex',
   $font-display: 'block'

@@ -32,7 +32,9 @@ if (!isProduction) {
 } else {
   const compression = (await import('compression')).default;
   const sirv = (await import('sirv')).default;
-  app.use(compression());
+
+  // Enable compression (supports both gzip and brotli)
+  app.use(compression({ level: 6, brotli: { enabled: true, zlib: {} } }));
   app.use(base, sirv('./dist/client', { extensions: [] }));
 }
 

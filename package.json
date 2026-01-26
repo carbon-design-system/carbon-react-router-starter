@@ -3,11 +3,16 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "sideEffects": [
+    "**/*.scss",
+    "**/*.css"
+  ],
   "scripts": {
     "dev": "node src/server",
     "build": "npm run build:client && npm run build:server",
     "build:client": "vite build --ssrManifest .vite/ssr-manifest.json  --outDir dist/client",
     "build:server": "vite build --ssr src/entry-server.jsx --outDir dist/server",
+    "optimize:fonts": "glyphhanger --subset=*.woff2 --formats=woff2",
     "lighthouse": "lhci collect",
     "lint": "npm run lint:es && npm run lint:style && npm run lint:format && npm run lint:spell",
     "lint-fix": "npm run lint:es -- --fix && npm run lint:style -- --fix && npm run lint:format",
@@ -34,7 +39,8 @@
     "react-dom": "^19.0.0",
     "react-is": "^19.0.0",
     "react-router": "^7.5.2",
-    "sirv": "^3.0.0"
+    "sirv": "^3.0.0",
+    "express-static-gzip": "^2.1.8"
   },
   "devDependencies": {
     "@carbon-labs/vscode-snippets": "^0.2.0",
@@ -51,6 +57,7 @@
     "baseline-browser-mapping": "^2.9.12",
     "cross-env": "^10.0.0",
     "cspell": "^9.0.0",
+    "glyphhanger": "^5.0.0",
     "eslint": "^9.23.0",
     "eslint-config-prettier": "^10.1.2",
     "eslint-plugin-import": "^2.31.0",
