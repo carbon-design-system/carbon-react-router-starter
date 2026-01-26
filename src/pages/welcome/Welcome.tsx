@@ -12,6 +12,7 @@ import { WelcomeRunSection } from './WelcomeRunSection';
 import { WelcomeAboutSection } from './WelcomeAboutSection';
 import { WelcomeFeaturesSection } from './WelcomeFeaturesSection';
 import { WelcomeFetchingSection } from './WelcomeFetchingSection';
+
 // The styles are imported into index.scss by default.
 // Do the same unless you have a good reason not to.
 // import './welcome.scss';

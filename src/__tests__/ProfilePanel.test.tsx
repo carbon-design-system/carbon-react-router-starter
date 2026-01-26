@@ -45,11 +45,10 @@ beforeEach(() => {
   );
 
   // Mock cookie utilities to return default values
-  // Note: headerInverse is 'false' (string) which converts to false (boolean)
   vi.spyOn(cookieUtils, 'getThemeFromCookies').mockReturnValue({
     themeSetting: 'light',
-    headerInverse: 'false',
-  } as any);
+    headerInverse: false,
+  });
 
   // Mock getThemeSettings to return the same values
   vi.spyOn(themeUtils, 'getThemeSettings').mockReturnValue({

@@ -6,17 +6,16 @@
  */
 
 import { Column, Tile } from '@carbon/react';
-import { ReactNode } from 'react';
+import { PropsWithChildren } from 'react';
 
 interface WelcomeHighlightTileProps {
   title: string;
-  children: ReactNode;
 }
 
 export const WelcomeHighlightTile = ({
   title,
   children,
-}: WelcomeHighlightTileProps) => {
+}: PropsWithChildren<WelcomeHighlightTileProps>) => {
   return (
     <Column sm={4} md={4} lg={8} xlg={4}>
       <Tile className="cs--welcome__tile cs--welcome__tile--highlight">

@@ -6,6 +6,7 @@
  */
 
 import { CodeSnippet } from '@carbon/react';
+
 interface WelcomeCommandSnippetProps {
   command: string;
 }

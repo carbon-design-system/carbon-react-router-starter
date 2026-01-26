@@ -73,6 +73,8 @@ export default [
       ...pluginJs.configs.recommended.rules,
       /* import named is off because @carbon/react uses default exports in some components April 10th 2025 */
       'import/named': 'off',
+      /* Enforce blank line after imports */
+      'import/newline-after-import': ['error', { count: 1 }],
       /* no-unused-vars - ignore pattern for React component usage */
       'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': [
@@ -83,8 +85,8 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
-      /* no-irregular-whitespace 
-        - ignore to allow prettier of the text layout. April 10th 2025. 
+      /* no-irregular-whitespace
+        - ignore to allow prettier of the text layout. April 10th 2025.
 
         NOTE: Should be removable after https://github.com/Mikadv/carbon-react-starter/issues/32
         */

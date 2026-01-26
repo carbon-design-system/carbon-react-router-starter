@@ -6,6 +6,7 @@
  */
 
 import { Column, Grid, Tile } from '@carbon/react';
+
 interface DataVisualizationProps {
   title: string;
 }

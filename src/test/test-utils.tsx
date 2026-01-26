@@ -7,7 +7,7 @@
 
 import { render as rtlRender, RenderOptions } from '@testing-library/react';
 import { BrowserRouter } from 'react-router';
-import { StrictMode, ReactElement, ReactNode } from 'react';
+import { StrictMode, ReactElement, PropsWithChildren } from 'react';
 import { Router } from '../routes';
 
 interface RenderWithAllProvidersOptions extends Omit<RenderOptions, 'wrapper'> {
@@ -46,7 +46,7 @@ export function renderWithoutProviders(
   ui: ReactElement,
   renderOptions: RenderOptions = {},
 ) {
-  function Wrapper({ children }: { children: ReactNode }) {
+  function Wrapper({ children }: PropsWithChildren) {
     return <StrictMode>{children}</StrictMode>;
   }
 

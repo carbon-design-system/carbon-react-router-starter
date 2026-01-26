@@ -6,55 +6,111 @@
  */
 
 import { http, HttpResponse, HttpHandler } from 'msw';
+import type { Request, Response, RequestHandler } from 'express';
 import { Networking } from './networking';
+import { baseUrl } from '../config/server-config';
+import type { RouteRegistrar } from '../routes/routes';
 
 interface MockRequest {
-  params: Record<string, any>;
-  query: Record<string, any>;
+  params: Record<string, string>;
+  query: Record<string, string>;
 }
 
 interface MockResponse {
-  json: (data: any) => ReturnType<typeof HttpResponse.json>;
+  status: (code: number) => MockResponse;
+  json: (data: unknown) => ReturnType<typeof HttpResponse.json>;
 }
 
-type HandlerFunction = (req: MockRequest, res: MockResponse) => any;
+type HandlerFunction = (req: MockRequest, res: MockResponse) => unknown;
 
 export interface Router {
-  get: (path: string, noCache: boolean, ...args: HandlerFunction[]) => void;
+  get: (path: string, handler: HandlerFunction) => void;
 }
+
+/**
+ * Adapts an Express RequestHandler to work with the mock router's handler signature.
+ * This allows Express handlers to be used in tests without type assertions.
+ */
+const adaptExpressHandler = (
+  expressHandler: RequestHandler,
+): HandlerFunction => {
+  return (req: MockRequest, res: MockResponse) => {
+    // Create Express-compatible request object
+    const mockExpressReq = {
+      params: req.params,
+      query: req.query,
+    } as Request;
+
+    // Create Express-compatible response object
+    let statusCode = 200;
+    const mockExpressRes = {
+      status: (code: number) => {
+        statusCode = code;
+        return mockExpressRes;
+      },
+      json: (data: unknown) => {
+        return res.status(statusCode).json(data);
+      },
+    } as unknown as Response;
+
+    return expressHandler(mockExpressReq, mockExpressRes, () => {}) as unknown;
+  };
+};
 
 export const getRouter = (
   mocks: HttpHandler[],
   networking: Networking,
-): Router => {
+): RouteRegistrar => {
   const apiRoute = (
     verb: 'get' | 'post' | 'put' | 'delete',
     path: string,
-    handler: HandlerFunction,
+    handler: RequestHandler,
   ): void => {
-    const mock = http[verb](path, async () => {
+    // Adapt Express handler to work with our mock router
+    const adaptedHandler: HandlerFunction = adaptExpressHandler(handler);
+
+    // Convert relative path to absolute URL for MSW
+    const absolutePath = path.startsWith('http') ? path : `${baseUrl}${path}`;
+    const mock = http[verb](absolutePath, async ({ request, params }) => {
+      // Extract query parameters from URL
+      const url = new URL(request.url);
+      const query: Record<string, string> = {};
+      url.searchParams.forEach((value, key) => {
+        query[key] = value;
+      });
+
       const req: MockRequest = {
-        params: {},
-        query: {},
+        params: params as Record<string, string>,
+        query,
       };
 
+      let statusCode = 200;
+
       const res: MockResponse = {
-        json: (data: any) => {
+        status: (code: number) => {
+          statusCode = code;
+          return res;
+        },
+        json: (data: unknown) => {
           networking.removeRequest(path);
-          return HttpResponse.json(data);
+          return HttpResponse.json(data as Record<string, unknown>, {
+            status: statusCode,
+          });
         },
       };
 
       networking.addRequests(path);
-      return handler(req, res);
+      const result = adaptedHandler(req, res);
+      // Ensure we return a proper MSW response
+      return result as ReturnType<typeof HttpResponse.json>;
     });
 
     mocks.push(mock);
   };
 
   return {
-    get: (path: string, _noCache: boolean, ...args: HandlerFunction[]) =>
-      apiRoute('get', path, args[args.length - 1]),
+    get: (path: string, handler: RequestHandler) =>
+      apiRoute('get', path, handler),
     // TODO: add other verbs
   };
 };

@@ -7,6 +7,7 @@
 import { CommonHeader } from '../../components/commonHeader/CommonHeader';
 import { PageLayout } from '../../layouts/page-layout';
 import { useLocation } from 'react-router';
+
 const Placeholder = () => {
   const location = useLocation();
 

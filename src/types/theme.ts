@@ -5,20 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+/**
+ * User's theme preference setting.
+ * - 'system': Follow the operating system's theme preference
+ * - 'light': Always use light theme (g10)
+ * - 'dark': Always use dark theme (g100)
+ */
 export type ThemeSetting = 'system' | 'light' | 'dark';
-export type CarbonTheme = 'g10' | 'g100';
-
-export interface ThemeContextValue {
-  themeSetting: ThemeSetting;
-  setThemeSetting: (value: ThemeSetting) => void;
-  themeMenuCompliment: boolean;
-  setThemeMenuCompliment: (value: boolean) => void;
-  theme: CarbonTheme;
-  themeMenu: CarbonTheme;
-  ready: boolean;
-}
-
-export interface LocalStorageValues {
-  themeSetting: ThemeSetting;
-  headerInverse: boolean;
-}

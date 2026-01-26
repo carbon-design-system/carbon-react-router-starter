@@ -7,6 +7,14 @@
 
 import type { Express, RequestHandler } from 'express';
 import { getPost, getComments } from '../service/postHandlers';
+
+/**
+ * Common interface for route registration that works with both Express and test routers.
+ * This allows getRoutes to work with different router implementations without type assertions.
+ */
+export interface RouteRegistrar {
+  get: (path: string, handler: RequestHandler) => void;
+}
 import {
   getExternalPost,
   getExternalComments,
@@ -42,7 +50,7 @@ export const defaultExternalHandlers: ExternalHandlers = {
  * @param externalHandlers - External API mock handlers (can be mocked for testing)
  */
 export const getRoutes = (
-  app: Express,
+  app: RouteRegistrar,
   handlers: RouteHandlers = routeHandlers,
   externalHandlers: ExternalHandlers = defaultExternalHandlers,
 ): void => {

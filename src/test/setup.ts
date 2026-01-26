@@ -6,6 +6,7 @@
  */
 
 import { SetupServer } from 'msw/node';
+import '@testing-library/jest-dom/vitest';
 
 // Mocking methods which are not implemented in JSDOM
 // If some code uses a method which JSDOM (the DOM implementation used by Jest) hasn't implemented yet,

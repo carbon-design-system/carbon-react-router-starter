@@ -6,21 +6,22 @@
  */
 
 import { Content } from '@carbon/react';
-import { Children, Suspense, ReactNode, ReactElement } from 'react';
+import {
+  Children,
+  Suspense,
+  ReactNode,
+  ReactElement,
+  PropsWithChildren,
+} from 'react';
 import { Nav } from '../components/nav/Nav';
 import classNames from 'classnames';
 
 interface PageLayoutProps {
-  children: ReactNode;
   className?: string;
   fallback?: ReactNode;
 }
 
-interface PageLayoutHeaderProps {
-  children: ReactNode;
-}
-
-const PageLayoutHeader = ({ children }: PageLayoutHeaderProps) => (
+const PageLayoutHeader = ({ children }: PropsWithChildren) => (
   <div className="cs--page-layout__content-header">{children}</div>
 );
 PageLayoutHeader.displayName = 'PageLayoutHeader';
@@ -29,22 +30,17 @@ export const PageLayout = ({
   children,
   className,
   fallback,
-}: PageLayoutProps) => {
+}: PropsWithChildren<PageLayoutProps>) => {
   const childArray = Children.toArray(children);
-  const otherChildren = childArray.filter(
-    (child): child is ReactElement =>
-      typeof child === 'object' &&
-      child !== null &&
-      'type' in child &&
-      child.type !== PageLayoutHeader,
-  );
-  const Header = childArray.find(
-    (child): child is ReactElement =>
-      typeof child === 'object' &&
-      child !== null &&
-      'type' in child &&
-      child.type === PageLayoutHeader,
-  );
+
+  const isHeader = (child: unknown): child is ReactElement =>
+    typeof child === 'object' &&
+    child !== null &&
+    'type' in child &&
+    child.type === PageLayoutHeader;
+
+  const otherChildren = childArray.filter((child) => !isHeader(child));
+  const Header = childArray.find(isHeader);
 
   return (
     <Suspense fallback={fallback}>

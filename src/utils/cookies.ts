@@ -8,39 +8,68 @@
 import type { ThemeSetting } from '../types/theme';
 
 // Constants
-const COOKIE_MAX_AGE_ONE_YEAR = 31536000; // 1 year in seconds
+/** Cookie max age: 1 year in seconds */
+const COOKIE_MAX_AGE_ONE_YEAR = 31536000;
 
 /**
  * Cookie options for setting cookies
+ *
+ * Used when setting cookies to control their behavior and security.
  */
 interface CookieOptions {
+  /** Max age in seconds (default: 1 year) */
   maxAge?: number;
+  /** Cookie path (default: '/') */
   path?: string;
+  /** SameSite attribute (default: 'Lax') */
   sameSite?: 'Strict' | 'Lax' | 'None';
+  /** Secure flag (default: false in dev, true in prod) */
   secure?: boolean;
 }
 
 /**
- * Theme values from cookies
+ * Theme values from cookies (Read operation)
+ *
+ * Structure returned when reading theme preferences from cookies.
+ * Both fields are REQUIRED because defaults are always provided:
+ * - themeSetting defaults to 'system' if not set
+ * - headerInverse defaults to false if not set
+ *
+ * Used for both client-side and server-side rendering to maintain
+ * consistent theme state.
+ *
+ * @see ThemeValues for the write operation interface
  */
 interface ThemeFromCookies {
+  /** Theme setting preference (system, light, or dark) - always present */
   themeSetting: ThemeSetting;
+  /** Whether the header uses inverse/complementary colors - always present */
   headerInverse: boolean;
 }
 
 /**
- * Theme values to set in cookies
+ * Theme values to set in cookies (Write operation)
+ *
+ * Structure used when updating theme preferences in cookies.
+ * Both properties are OPTIONAL to allow partial updates - you can update
+ * just the theme setting, just the header inverse, or both.
+ *
+ * Note: While this could be defined as `Partial<ThemeFromCookies>`, keeping
+ * it separate provides better documentation and makes the read/write distinction
+ * explicit in the type system.
+ *
+ * @see ThemeFromCookies for the read operation interface
  */
 interface ThemeValues {
+  /** Theme setting preference to update (optional) */
   themeSetting?: ThemeSetting;
+  /** Header inverse setting to update (optional) */
   headerInverse?: boolean;
 }
 
 /**
- * Parse cookies from a cookie string (from document.cookie or request headers)
- * Handles edge cases like cookies with '=' in their values
- * @param cookieString - The cookie string to parse
- * @returns Object with cookie name-value pairs
+ * Parse cookies from a cookie string (from document.cookie or request headers).
+ * Handles edge cases like cookies with '=' in their values.
  */
 export function parseCookies(
   cookieString: string | undefined,
@@ -72,9 +101,7 @@ export function parseCookies(
 }
 
 /**
- * Get a cookie value by name (client-side only)
- * @param name - The cookie name
- * @returns The cookie value or null if not found
+ * Get a cookie value by name (client-side only).
  */
 export function getCookie(name: string): string | null {
   if (typeof document === 'undefined') return null;
@@ -84,9 +111,8 @@ export function getCookie(name: string): string | null {
 }
 
 /**
- * Validate cookie value before setting
- * @param value - The cookie value to validate
- * @returns True if valid, false otherwise
+ * Validate cookie value before setting.
+ * Checks for invalid characters in cookie values (control characters, whitespace, special chars).
  */
 function isValidCookieValue(value: string): boolean {
   // Check for invalid characters in cookie values
@@ -96,10 +122,8 @@ function isValidCookieValue(value: string): boolean {
 }
 
 /**
- * Set a cookie (client-side only)
- * @param name - The cookie name
- * @param value - The cookie value
- * @param options - Cookie options
+ * Set a cookie (client-side only).
+ * Validates the cookie value and applies security defaults.
  */
 export function setCookie(
   name: string,
@@ -137,9 +161,9 @@ export function setCookie(
 }
 
 /**
- * Get theme values from cookies
- * @param cookieString - Optional cookie string (for server-side)
- * @returns Object with themeSetting and headerInverse values
+ * Get theme values from cookies.
+ * Can be used client-side (reads from document.cookie) or server-side (pass cookie string).
+ * Always returns both values with defaults applied.
  */
 export function getThemeFromCookies(cookieString?: string): ThemeFromCookies {
   const cookies = cookieString
@@ -164,8 +188,8 @@ export function getThemeFromCookies(cookieString?: string): ThemeFromCookies {
 }
 
 /**
- * Set theme values in cookies (client-side only)
- * @param values - Theme values to set
+ * Set theme values in cookies (client-side only).
+ * Supports partial updates - you can set just themeSetting, just headerInverse, or both.
  */
 export function setThemeInCookies(values: ThemeValues): void {
   if (values.themeSetting !== undefined) {

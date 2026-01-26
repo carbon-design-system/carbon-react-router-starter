@@ -27,8 +27,22 @@ interface Comment {
 export const getPost = async (postId: number): Promise<Post> => {
   try {
     const response = await fetch(`/api/post/${postId}`);
+
+    if (!response.ok) {
+      const errorData = (await response.json().catch(() => ({}))) as {
+        message?: string;
+      };
+      const errorMessage =
+        errorData.message ||
+        `HTTP error ${response.status}: ${response.statusText}`;
+      throw new Error(errorMessage);
+    }
+
     return await response.json();
   } catch (error) {
+    if (error instanceof Error) {
+      throw error;
+    }
     throw new Error(`Failed to load post: ${error}`);
   }
 };
@@ -36,8 +50,22 @@ export const getPost = async (postId: number): Promise<Post> => {
 export const getComments = async (postId: number): Promise<Comment[]> => {
   try {
     const response = await fetch(`/api/comments?postId=${postId}`);
+
+    if (!response.ok) {
+      const errorData = (await response.json().catch(() => ({}))) as {
+        message?: string;
+      };
+      const errorMessage =
+        errorData.message ||
+        `HTTP error ${response.status}: ${response.statusText}`;
+      throw new Error(errorMessage);
+    }
+
     return await response.json();
   } catch (error) {
+    if (error instanceof Error) {
+      throw error;
+    }
     throw new Error(`Failed to load comments: ${error}`);
   }
 };
