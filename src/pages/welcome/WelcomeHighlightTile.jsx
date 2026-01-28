@@ -10,7 +10,7 @@ import { Column, Tile } from '@carbon/react';
 export const WelcomeHighlightTile = ({ title, children }) => {
   return (
     <Column sm={4} md={4} lg={8} xlg={4}>
-      <Tile className="cs--welcome__tile cs--welcome__tile--highlight">
+      <Tile className="cs--welcome__highlight-tile">
         <strong>{title}</strong>
         <br />
         <br />
