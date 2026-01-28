@@ -1,0 +1,51 @@
+/**
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/type' as *;
+
+.details-form-page {
+  padding-block: $spacing-09;
+  padding-inline: $spacing-06;
+  min-block-size: 60vh;
+}
+
+.details-form-container {
+  position: relative;
+  padding-block: $spacing-07;
+  padding-inline: $spacing-06;
+}
+
+.cat-illustration {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  inline-size: 100px;
+  block-size: 100px;
+  color: $text-primary;
+}
+
+.form-title {
+  @include type-style('heading-05');
+
+  margin-block-end: $spacing-09;
+}
+
+form {
+  .cds--text-input-wrapper {
+    margin-block-end: $spacing-07;
+  }
+
+  .cds--toggle {
+    margin-block-end: $spacing-09;
+  }
+
+  .cds--btn {
+    margin-block-start: $spacing-05;
+  }
+}

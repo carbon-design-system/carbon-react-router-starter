@@ -6,6 +6,8 @@
  */
 import { MagicWand, LogoGithub } from '@carbon/icons-react';
 import Dashboard from '../pages/dashboard/Dashboard';
+import DetailsForm from '../pages/details-form/DetailsForm';
+import Assets from '../pages/assets/Assets';
 import NotFound from '../pages/not-found/NotFound';
 import Placeholder from '../pages/placeholder/Placeholder';
 import Welcome from '../pages/welcome/Welcome';
@@ -47,6 +49,22 @@ export const routes = [
   {
     path: '/dashboard/:id',
     element: Dashboard,
+  },
+  {
+    path: '/details',
+    element: DetailsForm,
+    carbon: {
+      label: 'Details Form',
+      inHeader: true,
+    },
+  },
+  {
+    path: '/assets',
+    element: Assets,
+    carbon: {
+      label: 'Assets',
+      inHeader: true,
+    },
   },
   {
     path: '/link-1',

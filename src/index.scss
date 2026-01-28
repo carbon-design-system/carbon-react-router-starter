@@ -24,6 +24,8 @@
 @use 'layouts/page-layout';
 @use 'pages/welcome/welcome';
 @use 'pages/dashboard/dashboard';
+@use 'pages/details-form/details-form';
+@use 'pages/assets/assets';
 @use 'components/commonHeader/commonHeader';
 @use 'components/footer/footer';
 
