@@ -37,7 +37,7 @@
     "sirv": "^3.0.0"
   },
   "devDependencies": {
-    "@carbon-labs/vscode-snippets": "^0.2.0",
+    "@carbon-labs/vscode-snippets": "^0.4.0",
     "@double-great/stylelint-a11y": "^3.0.4",
     "@eslint/js": "^9.21.0",
     "@testing-library/dom": "^10.4.1",
