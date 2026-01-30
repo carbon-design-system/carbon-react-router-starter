@@ -7,7 +7,7 @@
 
 import { AspectRatio, Column, Grid, Heading } from '@carbon/react';
 
-export const CommonHeader = ({ title, paragraphs }) => {
+export const CommonHeader = ({ title, paragraphs, action }) => {
   return (
     <Grid as="header" className="cs--common-header">
       <Column sm={4} md={8} lg={8}>
@@ -16,6 +16,7 @@ export const CommonHeader = ({ title, paragraphs }) => {
           {paragraphs.map((paragraph, i) => (
             <p key={`common-header-paragraph-${i}`}>{paragraph}</p>
           ))}
+          {action}
         </AspectRatio>
       </Column>
       <Column sm={4} md={8} lg={8}>
