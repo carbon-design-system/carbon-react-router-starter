@@ -141,6 +141,37 @@ app.use('*all', async (req, res) => {
 });
 
 // Start http server
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Server started at: ${baseUrl}`);
 });
+
+// Graceful shutdown handler
+function gracefulShutdown(signal) {
+  console.log(`\n${signal} received. Closing server gracefully...`);
+
+  server.close(() => {
+    console.log('HTTP server closed');
+
+    // Close Vite dev server if running
+    if (vite) {
+      vite.close().then(() => {
+        console.log('Vite dev server closed');
+        process.exit(0);
+      });
+    } else {
+      process.exit(0);
+    }
+  });
+
+  // Force close after 10 seconds
+  setTimeout(() => {
+    console.error(
+      'Could not close connections in time, forcefully shutting down',
+    );
+    process.exit(1);
+  }, 10000);
+}
+
+// Handle shutdown signals
+process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
+process.on('SIGINT', () => gracefulShutdown('SIGINT'));
