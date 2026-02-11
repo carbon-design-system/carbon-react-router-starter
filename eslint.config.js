@@ -82,10 +82,6 @@ export default [
         NOTE: Should be removable after https://github.com/Mikadv/carbon-react-starter/issues/32
         */
       'no-irregular-whitespace': ['error', { skipJSXText: true }],
-      // Allow optional chaining
-      'import-x/namespace': 'off',
-      // Allow using component name for default import (common React pattern)
-      'import-x/no-named-as-default': 'off',
     },
   },
 ];
