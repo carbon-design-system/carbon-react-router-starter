@@ -10,23 +10,23 @@ import { AspectRatio, Column, Grid, Heading } from '@carbon/react';
 export const CommonHeader = ({ title, paragraphs, action }) => {
   return (
     <Grid as="header" className="cs--common-header">
-      <Column sm={4} md={8} lg={8}>
-        <AspectRatio as="section" ratio="16x9">
+      <Column sm={4} md={8} lg={16}>
+        <div className="cs--common-header__content">
           <Heading className="cs--common-header__title">{title}</Heading>
-          {paragraphs.map((paragraph, i) => (
-            <p key={`common-header-paragraph-${i}`}>{paragraph}</p>
-          ))}
+          <div className="cs--common-header__other">
+            {paragraphs.map((paragraph, i) => (
+              <p key={`common-header-paragraph-${i}`}>{paragraph}</p>
+            ))}
+          </div>
+          <div className="cs--common-header__image-banner">
+            <img
+              src="/icon.dark.svg?version=0.1.0"
+              className="cs--common-header__logo"
+              alt="fed-at-ibm logo"
+            />
+          </div>
           {action}
-        </AspectRatio>
-      </Column>
-      <Column sm={4} md={8} lg={8}>
-        <AspectRatio ratio="16x9" className="cs--common-header__image-banner">
-          <img
-            src="/icon.dark.svg?version=0.1.0"
-            className="cs--common-header__logo"
-            alt="fed-at-ibm logo"
-          />
-        </AspectRatio>
+        </div>
       </Column>
     </Grid>
   );
