@@ -46,6 +46,7 @@
   margin-inline: auto;
   align-items: center;
   justify-content: center;
+  /* stylelint-disable-next-line carbon/theme-use -- this is intended non-Carbon branding */
   background: radial-gradient(
     closest-side,
     var(--cs-brand-alt) 40%,
