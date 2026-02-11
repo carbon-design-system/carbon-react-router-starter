@@ -28,7 +28,7 @@ import {
   UserAvatar,
 } from '@carbon/icons-react';
 import { Link as RouterLink, useLocation } from 'react-router';
-import ProfilePanel from '../profilePanel/ProfilePanel';
+import { ProfilePanel } from '../profilePanel/ProfilePanel';
 
 import { routesInHeader, routesInSideNav } from '../../routes/config';
 import { NavHeaderItems } from './NavHeaderItems';
