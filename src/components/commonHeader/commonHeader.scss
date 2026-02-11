@@ -10,11 +10,6 @@
 @use '@carbon/react/scss/theme' as *;
 @use '@carbon/react/scss/breakpoint' as *;
 
-.cs--common-header {
-  position: relative;
-  margin-block-end: $spacing-09;
-}
-
 .cs--common-header__content {
   // This CSS follow the principles of a condensed carbon grid with 2x2
   display: grid;

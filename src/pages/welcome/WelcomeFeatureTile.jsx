@@ -9,7 +9,7 @@ import { Column, Tile } from '@carbon/react';
 
 export const WelcomeFeatureTile = ({ title, feature }) => {
   return (
-    <Column className="cs--welcome__tile" sm={2} md={4} lg={4}>
+    <Column className="cs--welcome__feature-tile" sm={2} md={4} lg={4}>
       <Tile title={title}>
         <strong>{feature}</strong>
       </Tile>

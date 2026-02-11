@@ -21,15 +21,15 @@ export const WelcomeHeader = () => {
           needed.
         </>,
         <>Maintained by fed-at-ibm, a chapter of the OIC.</>,
-        <>
-          <Button
-            renderIcon={ArrowRight}
-            href="https://github.com/carbon-design-system/carbon-react-router-starter"
-          >
-            Use this template
-          </Button>
-        </>,
       ]}
+      action={
+        <Button
+          renderIcon={ArrowRight}
+          href="https://github.com/carbon-design-system/carbon-react-router-starter"
+        >
+          Use this template
+        </Button>
+      }
     />
   );
 };

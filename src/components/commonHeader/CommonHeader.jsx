@@ -7,7 +7,7 @@
 
 import { AspectRatio, Column, Grid, Heading } from '@carbon/react';
 
-export const CommonHeader = ({ title, paragraphs }) => {
+export const CommonHeader = ({ title, paragraphs, action }) => {
   return (
     <Grid as="header" className="cs--common-header">
       <Column sm={4} md={8} lg={16}>
@@ -25,6 +25,7 @@ export const CommonHeader = ({ title, paragraphs }) => {
               alt="fed-at-ibm logo"
             />
           </div>
+          {action}
         </div>
       </Column>
     </Grid>
