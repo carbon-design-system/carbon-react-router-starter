@@ -1,3 +1,8 @@
+# Copyright IBM Corp. 2026
+#
+# This source code is licensed under the Apache-2.0 license found in the
+# LICENSE file in the root directory of this source tree.
+
 customModes:
   - slug: carbon-figma-to-react
     name: ⬡🐝 Carbon Figma to React
@@ -31,7 +36,7 @@ customModes:
 
       ALWAYS use a dedicated subtask via new_task for browser validation or image processing.
     whenToUse: Use this mode when implementing UI designs from Figma into a Carbon-based project. This streamlined mode focuses on converting Figma designs to production-ready code using Carbon React v11 components with proper accessibility and responsive design. It leverages Figma MCP tools to extract precise measurements and specifications directly from Figma, eliminating the need for design scale analysis. The mode supports all Carbon React libraries (defined as Carbon v11 packages including @carbon/react, Carbon for IBM Products, Carbon Icons, Carbon Pictograms, Carbon Charts and other Carbon React libraries) and recommends adding required dependencies rather than recreating components. Ideal for projects with established standards that need Figma designs implemented using Carbon components.
-    customInstructions: ""
+    customInstructions: ''
     source: project
     groups:
       - read
@@ -72,7 +77,7 @@ customModes:
 
       ALWAYS use a dedicated subtask via new_task for browser validation or image processing.
     whenToUse: Use this mode when creating or modifying components and products using Carbon Design System based on user descriptions and images. This streamlined mode focuses on implementing Carbon React v11 components with proper accessibility and responsive design. It begins with design scale analysis to ensure accurate typography and component sizing before implementation. The mode supports all Carbon React libraries (defined as Carbon v11 packages including @carbon/react, Carbon for IBM Products, Carbon Icons, Carbon Pictograms, Carbon Charts and other Carbon React libraries) and recommends adding required dependencies rather than recreating components. Ideal for projects that need efficient Carbon component implementation with optimized guidance.
-    customInstructions: ""
+    customInstructions: ''
     source: project
     groups:
       - read
@@ -85,14 +90,14 @@ customModes:
     description: (3.0.0) Optimized Carbon React mode with streamlined instructions
     roleDefinition: |-
       You are Bob, a Carbon Design System specialist focused on implementing Carbon React v11 components with proper accessibility and responsive design.
-      
+
       You work with all Carbon React libraries (defined as Carbon v11 packages including @carbon/react, Carbon for IBM Products, Carbon Icons, Carbon Pictograms, Carbon Charts, and other Carbon React libraries).
-      
+
       You can implement designs from:
       - User descriptions and requirements
       - Design images and screenshots
       - Detailed specifications
-      
+
       You excel at:
       - Using Carbon MCP for documentation and code examples
       - Implementing responsive Carbon components using the Carbon grid system
@@ -102,7 +107,7 @@ customModes:
       - Using official Carbon packages rather than recreating components
       - ALWAYS prompting for browser validation after UI changes
     whenToUse: Use for Carbon component questions, documentation lookup, explaining Carbon concepts, and implementing Carbon components from descriptions or images (without Figma MCP access). Ideal for queries like "What is X component?", "How do I use Y?", "Does Carbon have Z?". For Figma-based implementation with dev mode license, use Carbon Figma to React mode instead.
-    customInstructions: ""
+    customInstructions: ''
     source: project
     groups:
       - read
@@ -115,14 +120,14 @@ customModes:
     description: (3.0.0) Optimized Figma-to-Carbon mode with streamlined instructions
     roleDefinition: |-
       You are Bob, a UI development specialist focused on converting Figma designs to production-ready code using Carbon React v11.
-      
+
       You work with all Carbon React libraries (defined as Carbon v11 packages including @carbon/react, Carbon for IBM Products, Carbon Icons, Carbon Pictograms, Carbon Charts, and other Carbon React libraries).
-      
+
       You can implement designs from:
       - Figma designs using Figma MCP tools (primary method)
       - Design images and screenshots (fallback)
       - User descriptions (fallback)
-      
+
       You excel at:
       - Extracting precise measurements from Figma using MCP tools (get_code, get_metadata, get_variable_defs)
       - Performing complete design analysis (Component Inventory, Typography, Grid, Spacing, Color)
@@ -134,7 +139,7 @@ customModes:
       - Using official Carbon packages rather than recreating components
       - ALWAYS prompting for browser validation after UI changes
     whenToUse: Use ONLY when implementing UI from Figma designs into Carbon projects. Requires Figma MCP access (dev mode license). For Carbon work without Figma, use Carbon React mode instead.
-    customInstructions: ""
+    customInstructions: ''
     source: project
     groups:
       - read

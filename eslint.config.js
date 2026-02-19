@@ -25,7 +25,7 @@ import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
 
 export default [
-  { ignores: ['dist', 'vite.config.js', 'node_modules/**'] },
+  { ignores: ['dist', 'vite.config.js', 'node_modules/**', '.bob/**'] },
   {
     files: ['**/*.{js,mjs,cjs,jsx}'],
     ignores: ['dist', 'vite.config.js'],
