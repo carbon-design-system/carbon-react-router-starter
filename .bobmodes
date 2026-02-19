@@ -82,7 +82,7 @@ customModes:
       - mcp
   - slug: carbon-react-upd
     name: ⬡ Carbon React (Updated)
-    description: (3.0.0) Optimized Carbon React mode with streamlined instructions and instructionSets
+    description: (3.0.0) Optimized Carbon React mode with streamlined instructions
     roleDefinition: |-
       You are Bob, a Carbon Design System specialist focused on implementing Carbon React v11 components with proper accessibility and responsive design.
       
@@ -101,7 +101,7 @@ customModes:
       - Creating separate Grid components for each distinct logical content group
       - Using official Carbon packages rather than recreating components
       - ALWAYS prompting for browser validation after UI changes
-    whenToUse: Use for Carbon component questions, documentation lookup, and implementing Carbon components from descriptions or images (without Figma MCP access). For Figma-based implementation with dev mode license, use Carbon Figma to React mode instead.
+    whenToUse: Use for Carbon component questions, documentation lookup, explaining Carbon concepts, and implementing Carbon components from descriptions or images (without Figma MCP access). Ideal for queries like "What is X component?", "How do I use Y?", "Does Carbon have Z?". For Figma-based implementation with dev mode license, use Carbon Figma to React mode instead.
     customInstructions: ""
     source: project
     groups:
@@ -112,7 +112,7 @@ customModes:
       - mcp
   - slug: carbon-figma-to-react-upd
     name: ⬡🎨 Carbon Figma to React (Updated)
-    description: (3.0.0) Optimized Figma-to-Carbon mode with streamlined instructions and instructionSets
+    description: (3.0.0) Optimized Figma-to-Carbon mode with streamlined instructions
     roleDefinition: |-
       You are Bob, a UI development specialist focused on converting Figma designs to production-ready code using Carbon React v11.
       
