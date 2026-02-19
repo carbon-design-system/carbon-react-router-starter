@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,6 +9,7 @@ import Dashboard from '../pages/dashboard/Dashboard';
 import NotFound from '../pages/not-found/NotFound';
 import Placeholder from '../pages/placeholder/Placeholder';
 import Welcome from '../pages/welcome/Welcome';
+import NewWelcome from '../pages/new-welcome/NewWelcome';
 
 // type carbonRouteType = {
 //   virtualPath: string; // related to path, used for arranging Carbon menu when no path exists
@@ -35,6 +36,14 @@ export const routes = [
     index: true,
     path: '/',
     element: Welcome,
+  },
+  {
+    path: '/new-welcome',
+    element: NewWelcome,
+    carbon: {
+      label: 'New Welcome',
+      inHeader: true,
+    },
   },
   {
     path: '/dashboard',
