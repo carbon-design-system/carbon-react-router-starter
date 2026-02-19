@@ -76,7 +76,7 @@
     "*.{js,ts,jsx,tsx,scss,css,html,yml,yaml}": [
       "node scripts/check-copyright.js --fix",
       "git add",
-      "eslint . --cache --report-unused-disable-directives --max-warnings 0"
+      "npm run lint"
     ],
     ".npmrc": "node -e \"console.error('Are you sure you want to commit .npmrc?'); process.exit(1);\""
   },
