@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<design_analysis>
+    <overview>
+        Guidance for analyzing and implementing Carbon components from images,
+        screenshots, and user descriptions without Figma MCP access.
+    </overview>
+
+    <design_scale_analysis priority="critical">
+        <title>Design Scale Analysis (MANDATORY for Images)</title>
+        <description>
+            Understanding the scale and dimensions of the original design is a CRITICAL first step
+            that significantly impacts implementation accuracy. Design scale analysis MUST ALWAYS
+            be performed for any images provided, and the design scale MUST ALWAYS be applied to
+            any sizes measured in the image.
+        </description>
+
+        <mandatory_requirements>
+            <requirement priority="critical">
+                <title>AUTOMATICALLY perform design scale analysis</title>
+                <description>
+                    Design scale analysis MUST be performed AUTOMATICALLY for ANY images provided.
+                    This is NOT optional and MUST be done immediately without waiting for user prompting.
+                </description>
+            </requirement>
+            <requirement priority="critical">
+                <title>Always apply design scale to measurements</title>
+                <description>
+                    The calculated design scale MUST be applied to ALL sizes measured in any image.
+                    This ensures accurate implementation of typography, spacing, and component dimensions.
+                </description>
+            </requirement>
+            <requirement priority="critical">
+                <title>Use ONLY the mandatory question format</title>
+                <description>
+                    When asking about image dimensions, you MUST ONLY use this EXACT format:
+                    "The image you have provided is [width]px x [height]px. Which of the following describes the image best?"
+                    
+                    With EXACTLY these three options:
+                    1. "The image is the actual size of our UI."
+                    2. "The image is smaller, scale up so that [dimension] is [larger]px."
+                    3. "The image is larger, scale down so that [dimension] is [smaller]px."
+                </description>
+            </requirement>
+        </mandatory_requirements>
+
+        <scale_analysis_workflow>
+            <step number="1">
+                <title>Determine design dimensions</title>
+                <action>Identify the dimensions of provided images and ask for scale using ONLY the mandatory question format</action>
+                <mandatory_example><![CDATA[
+<ask_followup_question>
+<question>The image you have provided is 1920px x 1080px. Which of the following describes the image best?</question>
+<follow_up>
+<suggest>The image is the actual size of our UI.</suggest>
+<suggest>The image is smaller, scale up so that the width is 1920px.</suggest>
+<suggest>The image is larger, scale down so that the width is 1280px.</suggest>
+</follow_up>
+</ask_followup_question>
+                ]]>                </mandatory_example>
+            </step>
+
+            <step number="2">
+                <title>Calculate scale factor</title>
+                <action>Calculate the scale factor based on user's response</action>
+                <formula>Scale Factor = Target Size / Current Size</formula>
+                <examples>
+                    <example>
+                        <scenario>Image is 1920px wide, should be 1280px</scenario>
+                        <calculation>Scale Factor = 1280 / 1920 = 0.667</calculation>
+                        <result>All measurements should be multiplied by 0.667</result>
+                    </example>
+                    <example>
+                        <scenario>Image is 800px wide, should be 1280px</scenario>
+                        <calculation>Scale Factor = 1280 / 800 = 1.6</calculation>
+                        <result>All measurements should be multiplied by 1.6</result>
+                    </example>
+                </examples>
+            </step>
+
+            <step number="3">
+                <title>Apply scale to all measurements</title>
+                <action>Apply the calculated scale factor to ALL measurements from the image</action>
+                <critical_rule>
+                    EVERY measurement taken from the image MUST be multiplied by the scale factor
+                    before mapping to Carbon tokens or using in implementation.
+                </critical_rule>
+                <example><![CDATA[
+// Image shows 20px text, scale factor is 1.6
+// Actual size: 20px × 1.6 = 32px → heading-05
+
+// Image shows 12px spacing, scale factor is 1.6
+// Actual size: 12px × 1.6 = 19.2px ≈ 16px → $spacing-05
+                ]]>                </example>
+            </step>
+        </scale_analysis_workflow>
+
+        <carbon_reference_sizes>
+            <title>Carbon Component and Token Reference</title>
+            <description>
+                Use these reference sizes when analyzing scaled designs to map to Carbon tokens.
+            </description>
+            <type_scale>
+                <type name="heading-01" size="14px" weight="600" />
+                <type name="heading-02" size="16px" weight="600" />
+                <type name="heading-03" size="20px" weight="400" />
+                <type name="heading-04" size="28px" weight="400" />
+                <type name="heading-05" size="32px" weight="400" />
+                <type name="heading-06" size="42px" weight="300" />
+                <type name="heading-07" size="54px" weight="300" />
+                <type name="body-short-01" size="14px" weight="400" />
+                <type name="body-short-02" size="16px" weight="400" />
+                <type name="body-long-01" size="14px" weight="400" />
+                <type name="body-long-02" size="16px" weight="400" />
+                <type name="label-01" size="12px" weight="400" />
+                <type name="label-02" size="14px" weight="400" />
+            </type_scale>
+            <spacing_tokens>
+                <token name="$spacing-03" value="8px" />
+                <token name="$spacing-05" value="16px" />
+                <token name="$spacing-06" value="24px" />
+                <token name="$spacing-07" value="32px" />
+                <token name="$spacing-09" value="48px" />
+            </spacing_tokens>
+            <component_sizes>
+                <component name="Button">
+                    <size type="default" height="48px" />
+                    <size type="small" height="32px" />
+                    <size type="field" height="40px" />
+                </component>
+                <component name="TextInput">
+                    <size type="default" height="40px" />
+                    <size type="small" height="32px" />
+                </component>
+                <component name="Icon">
+                    <size type="small" dimensions="16×16px" />
+                    <size type="medium" dimensions="20×20px" />
+                    <size type="large" dimensions="24×24px" />
+                    <size type="xlarge" dimensions="32×32px" />
+                </component>
+            </component_sizes>
+        </carbon_reference_sizes>
+    </design_scale_analysis>
+
+    <image_analysis priority="high">
+        <title>Complete Image Analysis Workflow</title>
+        <description>
+            After establishing design scale, perform complete analysis to identify
+            Carbon components, layout structure, and implementation approach.
+        </description>
+
+        <analysis_workflow>
+            <step number="1">
+                <title>Component Identification</title>
+                <action>Identify all UI elements and map to Carbon components</action>
+                <guidance>
+                    <point>Look for standard patterns (buttons, inputs, tables, cards, tiles)</point>
+                    <point>Identify component variants (primary/secondary buttons, clickable tiles, etc.)</point>
+                    <point>Note any custom components that need to be built with Carbon primitives</point>
+                    <point>Use Carbon MCP to verify component availability and correct package</point>
+                </guidance>
+                <example><![CDATA[
+// Use Carbon MCP to search for components
+<use_mcp_tool>
+<server_name>carbon-mcp</server_name>
+<tool_name>code_search</tool_name>
+<arguments>
+{
+  "query": "Button primary secondary",
+  "size": 3,
+  "filters": {
+    "component_type": "React"
+  }
+}
+</arguments>
+</use_mcp_tool>
+                ]]>                </example>
+            </step>
+
+            <step number="2">
+                <title>Layout Analysis</title>
+                <action>Analyze layout structure and grid requirements</action>
+                <guidance>
+                    <point>Identify logical content groups (header, content sections, footer)</point>
+                    <point>Each logical group needs its own Grid component</point>
+                    <point>Estimate column spans based on visual proportions</point>
+                    <point>Note responsive behavior requirements</point>
+                </guidance>
+                <estimation_guidelines>
+                    <title>Column Span Estimation</title>
+                    <guideline>Full-width elements → sm={4} md={8} lg={16}</guideline>
+                    <guideline>Half-width elements → sm={4} md={4} lg={8}</guideline>
+                    <guideline>Third-width elements → sm={4} md={4} lg={5} or lg={6}</guideline>
+                    <guideline>Quarter-width elements → sm={4} md={4} lg={4}</guideline>
+                    <guideline>Tiles that wrap → Each tile gets equal columns that add up to 16 at lg</guideline>
+                </estimation_guidelines>
+                <example_analysis><![CDATA[
+Layout Analysis:
+1. Header Section (separate Grid):
+   - Full width: lg={16}
+   
+2. Content Section (separate Grid):
+   - 3 tiles side-by-side on desktop
+   - Each tile: sm={4} md={4} lg={5} (first two) and lg={6} (last one)
+   - Stack vertically on mobile
+   
+3. Footer Section (separate Grid):
+   - Full width: lg={16}
+                ]]>                </example_analysis>
+            </step>
+
+            <step number="3">
+                <title>Typography and Spacing</title>
+                <action>Identify typography hierarchy and spacing patterns</action>
+                <guidance>
+                    <point>Map headings to Carbon type tokens (heading-01 through heading-07)</point>
+                    <point>Identify body text styles (body-short-01, body-short-02, body-long-01, body-long-02)</point>
+                    <point>Estimate spacing using Carbon spacing scale (8px increments)</point>
+                    <point>Use Carbon MCP to look up exact token values if needed</point>
+                </guidance>
+                <typography_mapping>
+                    <title>Common Typography Patterns</title>
+                    <pattern>Large page titles → heading-04 or heading-05</pattern>
+                    <pattern>Section headings → heading-03</pattern>
+                    <pattern>Card/tile titles → heading-02</pattern>
+                    <pattern>Small labels → label-01 or label-02</pattern>
+                    <pattern>Body text → body-long-01 or body-short-01</pattern>
+                    <pattern>Helper text → helper-text-01</pattern>
+                </typography_mapping>
+                <spacing_estimation>
+                    <title>Spacing Estimation</title>
+                    <pattern>Tight spacing (8px) → $spacing-03</pattern>
+                    <pattern>Comfortable spacing (16px) → $spacing-05</pattern>
+                    <pattern>Section spacing (24px) → $spacing-06</pattern>
+                    <pattern>Large spacing (32px) → $spacing-07</pattern>
+                    <pattern>Extra large spacing (48px) → $spacing-09</pattern>
+                </spacing_estimation>
+            </step>
+
+            <step number="4">
+                <title>Color and Theme</title>
+                <action>Identify theme and color usage</action>
+                <guidance>
+                    <point>Determine which Carbon theme is being used (white, g10, g90, g100)</point>
+                    <point>Identify layer usage (background color changes indicating layers)</point>
+                    <point>Note any custom colors that need theme tokens</point>
+                    <point>Look for elevated surfaces that might need Layer component</point>
+                </guidance>
+                <theme_identification>
+                    <theme name="white">Light theme with white background</theme>
+                    <theme name="g10">Light theme with subtle gray background</theme>
+                    <theme name="g90">Dark theme with dark gray background</theme>
+                    <theme name="g100">Darkest theme with black background</theme>
+                </theme_identification>
+                <layer_indicators>
+                    <indicator>Cards or panels with different background than page</indicator>
+                    <indicator>Nested containers with distinct backgrounds</indicator>
+                    <indicator>Modal dialogs or overlays</indicator>
+                    <indicator>Form sections with grouped backgrounds</indicator>
+                </layer_indicators>
+            </step>
+
+            <step number="5" priority="critical">
+                <title>Present Analysis to User</title>
+                <action>Share findings with user before implementation</action>
+                <required_sections>
+                    <section priority="critical">Component Inventory - List all Carbon components needed with variants</section>
+                    <section priority="critical">Layout Structure - Grid configuration with column spans for all breakpoints</section>
+                    <section priority="critical">Typography - Type token mapping for all text elements</section>
+                    <section priority="critical">Spacing - Estimated spacing tokens between elements</section>
+                    <section>Color/Theme - Theme identification and layer usage</section>
+                </required_sections>
+                <critical_rule>
+                    ALWAYS pause after presenting the analysis and wait for user confirmation
+                    before proceeding with implementation.
+                </critical_rule>
+                <example_presentation><![CDATA[
+Based on the image provided, here's my analysis:
+
+## Component Inventory
+- Button (primary) - for main action
+- Button (secondary) - for cancel action
+- TextInput - for email field
+- PasswordInput - for password field
+- Tile - for feature cards (3 tiles)
+- Grid, Column - for layout
+
+## Layout Structure
+1. Header Section (separate Grid):
+   - Full width: sm={4} md={8} lg={16}
+
+2. Form Section (separate Grid):
+   - Form container: sm={4} md={6} lg={8} (centered)
+
+3. Features Section (separate Grid):
+   - 3 tiles: sm={4} md={4} lg={5}, lg={5}, lg={6}
+
+## Typography
+- Page title: heading-04
+- Section headings: heading-03
+- Tile titles: heading-02
+- Body text: body-long-01
+- Form labels: label-01
+
+## Spacing
+- Between sections: $spacing-09 (48px)
+- Between form fields: $spacing-05 (16px)
+- Tile internal padding: $spacing-05 (16px)
+
+## Theme
+- White theme (light background)
+- No layer changes detected
+
+Would you like me to proceed with this implementation approach?
+                ]]>                </example_presentation>
+            </step>
+        </analysis_workflow>
+
+        <image_analysis_limitations>
+            <title>Limitations and Workarounds</title>
+            <limitations>
+                <limitation>Cannot extract exact pixel measurements</limitation>
+                <limitation>Must estimate spacing and sizing</limitation>
+                <limitation>May need user clarification on specific details</limitation>
+                <limitation>Cannot access design system variables or tokens directly</limitation>
+            </limitations>
+            <workarounds>
+                <workaround>Use Carbon MCP to research component APIs and examples</workaround>
+                <workaround>Estimate using Carbon spacing scale (8px increments)</workaround>
+                <workaround>Ask user for clarification when details are ambiguous</workaround>
+                <workaround>Use standard Carbon patterns and conventions</workaround>
+            </workarounds>
+        </image_analysis_limitations>
+    </image_analysis>
+
+    <description_based_implementation priority="high">
+        <title>Implementing from User Descriptions</title>
+        <description>
+            When users describe desired functionality without providing designs,
+            guide them through requirements gathering and propose Carbon-based solutions.
+        </description>
+
+        <requirements_gathering>
+            <title>Gathering Requirements</title>
+            <steps>
+                <step>Clarify the component's purpose and user interactions</step>
+                <step>Identify required functionality and data</step>
+                <step>Determine layout and responsive requirements</step>
+                <step>Confirm accessibility requirements</step>
+                <step>Understand any specific design preferences</step>
+            </steps>
+            <example_questions>
+                <question>What is the primary purpose of this component?</question>
+                <question>What actions should users be able to perform?</question>
+                <question>What data needs to be displayed or collected?</question>
+                <question>Should it work on mobile devices?</question>
+                <question>Are there any specific accessibility requirements?</question>
+            </example_questions>
+        </requirements_gathering>
+
+        <component_recommendation>
+            <title>Recommending Carbon Components</title>
+            <guidance>
+                <point>Use Carbon MCP to search for similar patterns and examples</point>
+                <point>Recommend official Carbon components over custom builds</point>
+                <point>Propose composition of multiple components when needed</point>
+                <point>Present options with pros/cons when multiple approaches exist</point>
+                <point>Explain how Carbon components meet the requirements</point>
+            </guidance>
+            <example><![CDATA[
+User: "I need a login form"
+
+Analysis and Proposal:
+
+## Component Inventory
+- TextInput (for username/email)
+- PasswordInput (for password)
+- Button (primary for submit)
+- Link (for "Forgot password")
+- Checkbox (optional "Remember me")
+- Form (wrapper)
+
+## Layout Proposal
+- Single column form centered on page
+- Form container: sm={4} md={6} lg={8}
+- Stack inputs vertically with $spacing-05 between
+
+## Implementation Approach
+1. Use Form component as wrapper
+2. TextInput with proper labelText and validation
+3. PasswordInput with show/hide toggle
+4. Button with type="submit"
+5. Link for password recovery
+
+## Accessibility Features
+- Proper labels for all inputs (labelText prop)
+- Error states with clear messages (invalid, invalidText props)
+- Keyboard navigation support (built into Carbon components)
+- Screen reader announcements (ARIA attributes included)
+
+Would you like me to proceed with this approach, or would you like to adjust anything?
+            ]]>            </example>
+        </component_recommendation>
+
+        <iterative_refinement>
+            <title>Iterative Refinement</title>
+            <description>
+                Work with the user to refine the implementation based on their feedback.
+            </description>
+            <approach>
+                <step>Present initial proposal with component choices</step>
+                <step>Get user feedback on the approach</step>
+                <step>Refine based on feedback</step>
+                <step>Implement once approach is confirmed</step>
+            </approach>
+        </iterative_refinement>
+    </description_based_implementation>
+
+    <design_fidelity_without_figma>
+        <title>Design Fidelity Guidelines</title>
+        <description>
+            When working from images or descriptions, aim for Carbon-compliant
+            implementations that match the intent rather than pixel-perfect recreation.
+        </description>
+
+        <principles>
+            <principle priority="high">
+                <title>Use Standard Carbon Components and Patterns</title>
+                <description>
+                    Leverage Carbon's built-in components rather than creating custom solutions.
+                    This ensures consistency, accessibility, and maintainability.
+                </description>
+            </principle>
+            <principle priority="high">
+                <title>Follow Carbon Spacing Scale</title>
+                <description>
+                    Use Carbon spacing tokens (8px increments) rather than arbitrary values.
+                    This maintains visual rhythm and consistency.
+                </description>
+            </principle>
+            <principle priority="high">
+                <title>Use Carbon Type Tokens</title>
+                <description>
+                    Map typography to Carbon type tokens rather than custom font sizes.
+                    This ensures proper hierarchy and readability.
+                </description>
+            </principle>
+            <principle priority="medium">
+                <title>Clarify Ambiguous Details</title>
+                <description>
+                    When details are unclear from images or descriptions, ask the user
+                    for clarification rather than making assumptions.
+                </description>
+            </principle>
+        </principles>
+
+        <when_to_ask_questions>
+            <title>When to Ask for Clarification</title>
+            <scenarios>
+                <scenario>Ambiguous component variants (e.g., which button kind to use)</scenario>
+                <scenario>Unclear responsive behavior</scenario>
+                <scenario>Uncertain about data structure or content</scenario>
+                <scenario>Multiple valid implementation approaches</scenario>
+                <scenario>Specific interaction patterns not shown in image</scenario>
+            </scenarios>
+            <example><![CDATA[
+<ask_followup_question>
+<question>I see three cards in the design. Should these be clickable tiles that navigate somewhere, or static tiles for displaying information?</question>
+<follow_up>
+<suggest>Clickable tiles that navigate to detail pages</suggest>
+<suggest>Static tiles for displaying information only</suggest>
+<suggest>Expandable tiles that show more content when clicked</suggest>
+</follow_up>
+</ask_followup_question>
+            ]]>            </example>
+        </when_to_ask_questions>
+    </design_fidelity_without_figma>
+
+    <common_patterns>
+        <title>Common Implementation Patterns</title>
+        <description>
+            Frequently used patterns when implementing from images or descriptions.
+        </description>
+
+        <pattern name="Login/Sign-in Form">
+            <components>
+                <component>Form</component>
+                <component>TextInput (email/username)</component>
+                <component>PasswordInput</component>
+                <component>Button (primary)</component>
+                <component>Link (forgot password)</component>
+                <component>Checkbox (remember me - optional)</component>
+            </components>
+            <layout>
+                <grid>Single Grid with centered form</grid>
+                <column>sm={4} md={6} lg={8}</column>
+            </layout>
+        </pattern>
+
+        <pattern name="Dashboard with Tiles">
+            <components>
+                <component>Grid (for header)</component>
+                <component>Grid (for tiles - separate)</component>
+                <component>Tile or ClickableTile</component>
+            </components>
+            <layout>
+                <grid>Separate Grids for header and tiles</grid>
+                <tiles>sm={4} md={4} lg={4} for 4-column layout</tiles>
+            </layout>
+        </pattern>
+
+        <pattern name="Data Table with Actions">
+            <components>
+                <component>DataTable</component>
+                <component>TableToolbar</component>
+                <component>TableToolbarSearch</component>
+                <component>TableToolbarContent</component>
+                <component>Button (toolbar actions)</component>
+                <component>Pagination</component>
+            </components>
+            <layout>
+                <grid>Single Grid with full-width table</grid>
+                <column>sm={4} md={8} lg={16}</column>
+            </layout>
+        </pattern>
+
+        <pattern name="Modal Dialog">
+            <components>
+                <component>Modal or ComposedModal</component>
+                <component>ModalHeader</component>
+                <component>ModalBody</component>
+                <component>ModalFooter</component>
+                <component>Button (primary and secondary)</component>
+            </components>
+            <note>Modals don't use Grid - they have their own layout system</note>
+        </pattern>
+    </common_patterns>
+
+    <carbon_mcp_integration>
+        <title>Using Carbon MCP for Design Analysis</title>
+        <description>
+            Leverage Carbon MCP to enhance design analysis and implementation.
+        </description>
+
+        <research_workflow>
+            <step number="1">
+                <action>Search for similar components or patterns</action>
+                <example><![CDATA[
+<use_mcp_tool>
+<server_name>carbon-mcp</server_name>
+<tool_name>code_search</tool_name>
+<arguments>
+{
+  "query": "login form TextInput PasswordInput",
+  "size": 3,
+  "filters": {
+    "component_type": "React"
+  }
+}
+</arguments>
+</use_mcp_tool>
+                ]]>                </example>
+            </step>
+            <step number="2">
+                <action>Review documentation for component guidelines</action>
+                <example><![CDATA[
+<use_mcp_tool>
+<server_name>carbon-mcp</server_name>
+<tool_name>docs_search</tool_name>
+<arguments>
+{
+  "query": "TextInput usage validation",
+  "size": 5,
+  "filters": {
+    "component_id": "text-input",
+    "page_type": "usage"
+  }
+}
+</arguments>
+</use_mcp_tool>
+                ]]>                </example>
+            </step>
+            <step number="3">
+                <action>Verify component props and API</action>
+                <description>
+                    Use code examples from Carbon MCP to understand correct prop usage
+                </description>
+            </step>
+        </research_workflow>
+    </carbon_mcp_integration>
+</design_analysis>

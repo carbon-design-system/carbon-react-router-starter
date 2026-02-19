@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<figma_integration_guidelines>
+    <overview>
+    This document provides essential guidelines for implementing Figma designs using Carbon Design System components,
+    ensuring UI components follow Carbon principles while adhering to project-specific standards.
+    </overview>
+
+    <figma_design_analysis_workflow>
+        <title>Figma Design Analysis Workflow</title>
+        <description>
+        A structured approach to analyzing Figma designs before implementation, ensuring accurate
+        translation of design intent to Carbon components.
+        </description>
+
+        <workflow_steps>
+            <step number="1">
+                <title>Component Inventory</title>
+                <description>Identify all Carbon components used in the design</description>
+                <action>
+                    <point>Use get_metadata to identify all components in the design</point>
+                    <point>Map Figma components to Carbon components</point>
+                    <point>Document any custom components that need to be created</point>
+                </action>
+                <example><![CDATA[
+<use_mcp_tool>
+<server_name>Figma Dev Mode MCP</server_name>
+<tool_name>get_metadata</tool_name>
+<arguments>
+{
+  "nodeId": "123:456"
+}
+</arguments>
+</use_mcp_tool>
+
+// Example component inventory:
+// - Carbon Button (primary, secondary)
+// - Carbon Tile
+// - Carbon DataTable
+// - Custom card component (will need to be built with Carbon components)
+                ]]>                </example>
+            </step>
+
+            <step number="2">
+                <title>Typography Analysis</title>
+                <description>Map typography in the design to Carbon type tokens</description>
+                <action>
+                    <point>Use get_code to extract typography styles</point>
+                    <point>Map to Carbon type tokens (heading-01, body-short-01, etc.)</point>
+                    <point>Document any custom typography that doesn't match Carbon tokens</point>
+                </action>
+            </step>
+
+            <step number="3">
+                <title>Grid Analysis</title>
+                <description>Analyze layout grid and determine column spans</description>
+                <action>
+                    <point>Identify grid variant used (default, narrow, condensed)</point>
+                    <point>Look for layout components in the design (Auto Layout, frames, containers)
+                        as they may inform grid calculations and reveal intended structure</point>
+                    <point>Identify floating elements (modals, side panels) that should NOT use Grid</point>
+                    <point>Calculate column spans for all grid-based components at all breakpoints</point>
+                    <point>Use the formula: Math.ceil((width in pixels) / ((grid width) / (number of columns)))</point>
+                </action>
+                <note>
+                    Layout components in Figma (such as Auto Layout frames, grid overlays, or container 
+                    components) often indicate the designer's intended grid structure and can help 
+                    identify logical content groups and appropriate column spans.
+                </note>
+                <example><![CDATA[
+            // Grid Analysis:
+            // - Container width: 1200px (lg breakpoint)
+            // - Grid variant: default (32px gutters)
+            // - Layout component detected: Auto Layout frame with 3 equal columns
+            // - Header: lg={16} md={8} sm={4} (full width)
+            // - Main content: lg={10} md={5} sm={4}
+            // - Sidebar: lg={6} md={3} sm={4}
+                ]]>                </example>
+            </step>
+
+            <step number="4">
+                <title>Spacing Analysis</title>
+                <description>Map spacing in the design to Carbon spacing tokens</description>
+                <action>
+                    <point>Use get_metadata to extract spacing between elements</point>
+                    <point>Measure visual spacing in the design, not Figma element bounds</point>
+                    <point>Map to Carbon spacing tokens ($spacing-03, $spacing-05, etc.)</point>
+                    <point>Document any spacing that doesn't align with Carbon tokens</point>
+                </action>
+
+                <spacing_guidelines>
+                    <guideline priority="high">
+                        Use the closest Carbon spacing tokens when other layout criteria 
+                        (such as Carbon Grid) do not apply
+                    </guideline>
+
+                    <guideline priority="high">
+                        Be cautious with margins as they collapse in some circumstances, 
+                        which can result in smaller than expected spacing. Consider using 
+                        padding or gap properties when consistent spacing is critical.
+                    </guideline>
+
+                    <guideline priority="high">
+                        Spacing should match the visual layout of the design and not be 
+                        affected by non-visible artifacts in Figma that may overflow the 
+                        visual size of an element.
+                    </guideline>
+                </spacing_guidelines>
+
+                <note>
+                    When measuring spacing in Figma, focus on the visual distance between 
+                    elements as they appear in the design, not the technical bounds of Figma 
+                    layers which may include invisible overflow or padding.
+                </note>
+
+                <example><![CDATA[
+            // Spacing Analysis:
+            // - Visual gap between header and content: 24px → $spacing-06
+            // - Card internal padding: 16px → $spacing-05
+            // - Gap between tiles: 16px → use gap property with $spacing-05 (avoids margin collapse)
+            // - Note: Figma layer shows 32px bounds but visual spacing is 24px (ignore overflow)
+                ]]>                </example>
+            </step>
+
+            <step number="5">
+                <title>Color and Theme Analysis</title>
+                <description>Identify theme and map colors to Carbon tokens</description>
+                <action>
+                    <point>Use get_variable_defs to extract color variables</point>
+                    <point>Identify which Carbon theme is being used (white, g10, g90, g100)</point>
+                    <point>Map colors to Carbon theme tokens ($text-primary, $layer, etc.)</point>
+                    <point>Identify layer changes: When elements have background colors matching layer-aware values ($layer-01, $layer-02, $layer-03), evaluate if they should be implemented as Layer components</point>
+                </action>
+                <layer_detection>
+                    <title>Detecting Layers in Figma</title>
+                    <description>
+                        Figma designs often don't explicitly indicate Carbon's layer system. Look for these indicators:
+                    </description>
+                    <indicators>
+                        <indicator priority="high">Background color changes that match Carbon layer token values</indicator>
+                        <indicator priority="high">Nested containers with distinct background colors</indicator>
+                        <indicator priority="high">Cards, panels, or sections elevated above the base background</indicator>
+                        <indicator>Modal dialogs or overlays (typically require Layer)</indicator>
+                        <indicator>Form sections or grouped content with different backgrounds</indicator>
+                    </indicators>
+                    <evaluation_criteria>
+                        <criterion>Does the element have a background color matching $layer-01, $layer-02, or $layer-03?</criterion>
+                        <criterion>Is the element a container for other components that need proper theming?</criterion>
+                        <criterion>Would nested Carbon components benefit from automatic layer context?</criterion>
+                        <criterion>Does the design show visual hierarchy through background color changes?</criterion>
+                    </evaluation_criteria>
+                    <implementation_decision>
+                        <rule priority="high">If an element has a background matching a layer token value AND contains Carbon components, implement it as a Layer component</rule>
+                        <rule priority="high">If an element is purely decorative with a layer-like color but contains no Carbon components, use custom styling instead</rule>
+                        <rule>When in doubt, prefer Layer components for containers with Carbon components inside</rule>
+                    </implementation_decision>
+                    <layer_usage_guidelines>
+                        <title>Layer Component Usage Guidelines</title>
+                        <guideline priority="critical">
+                            <title>Rely on Nesting and Context</title>
+                            <description>
+                                NEVER manually set the layer level using the `level` prop. The Layer component
+                                automatically manages layer levels through nesting and context. Each nested Layer
+                                increments the layer level automatically.
+                            </description>
+                            <correct_usage><![CDATA[
+// CORRECT: Let nesting determine layer level
+<>
+  <ComponentOnBaseLayer />
+  <Layer>
+    <ComponentOnLayer01 />
+    <Layer>
+      <ComponentOnLayer02 />
+    </Layer>
+  </Layer>
+</>
+                            ]]>                            </correct_usage>
+                            <incorrect_usage><![CDATA[
+// INCORRECT: Don't manually set level
+<Layer level={2}>
+  <ComponentOnLayer02 />
+</Layer>
+                            ]]>                            </incorrect_usage>
+                        </guideline>
+                        <guideline priority="critical">
+                            <title>Use withBackground for Visible Layers</title>
+                            <description>
+                                The Layer component does NOT set its own background color by default - it only
+                                provides context for child components. When a Figma design shows a visible
+                                background color change (matching a layer token), use the `withBackground` prop
+                                to apply the background color. This matches how designs typically depict layers.
+                            </description>
+                            <when_to_use_withBackground>
+                                <use>When the design shows a visible background color for the container</use>
+                            </when_to_use_withBackground>
+                            <when_not_to_use_withBackground>
+                                <use>When child components handle their own backgrounds (e.g., Tile, TextInput)</use>
+                            </when_not_to_use_withBackground>
+                            <correct_usage><![CDATA[
+// CORRECT: Use withBackground when design shows visible background
+<Layer withBackground>
+  <div className="card-content">
+    <h2>Card Title</h2>
+    <p>Card content with proper layer context</p>
+  </div>
+</Layer>
+
+// CORRECT: Without withBackground when children handle backgrounds
+<Layer>
+  <Tile>This Tile sets its own background</Tile>
+  <TextInput labelText="Input" />
+</Layer>
+                            ]]>                            </correct_usage>
+                            <incorrect_usage><![CDATA[
+// INCORRECT: Using custom background instead of withBackground
+<Layer>
+  <div style={{ backgroundColor: '#f4f4f4' }}>
+    <h2>Card Title</h2>
+  </div>
+</Layer>
+
+// INCORRECT: Using withBackground when children already handle backgrounds
+<Layer withBackground>
+  <Tile>Tile already has background</Tile>
+</Layer>
+                            ]]>                            </incorrect_usage>
+                        </guideline>
+                    </layer_usage_guidelines>
+                </layer_detection>
+            </step>
+
+            <step number="6">
+                <title>Present Analysis to User</title>
+                <description>Share findings and confirm approach before implementation</description>
+                <action>
+                    <point>ALWAYS pause after design analysis to discuss with the user</point>
+                    <point>Confirm component choices and implementation approach</point>
+                    <point>Address any questions or concerns before proceeding</point>
+                </action>
+            </step>
+        </workflow_steps>
+    </figma_design_analysis_workflow>
+
+    <design_fidelity>
+        <title>Design Fidelity Guidelines</title>
+
+        <principle>
+        Create accurate implementations based on Figma designs following Carbon guidelines.
+        The only exception to pixel-perfect implementation is widths dictated by grid or global layouts.
+        </principle>
+
+        <do_not_innovate>
+            <title>Do Not Innovate</title>
+            <examples>
+                <example>Swap out icons</example>
+                <example>Change visual hierarchy or element positions</example>
+                <example>Add features not in the design</example>
+                <example>Modify color schemes or typography</example>
+            </examples>
+        </do_not_innovate>
+
+        <implementation_techniques>
+            <title>Implementation Techniques</title>
+
+            <technique name="Measurement Extraction">
+                <steps>
+                    <step>Use get_code and get_metadata to extract precise measurements</step>
+                    <step>Map to Carbon spacing tokens</step>
+                    <step>Document spacing that doesn't align with 2x grid</step>
+                </steps>
+            </technique>
+
+            <technique name="Color Mapping">
+                <steps>
+                    <step>Extract colors with get_variable_defs</step>
+                    <step>Map to Carbon theme tokens first ($text-primary, $layer)</step>
+                    <step>Fall back to color tokens only when necessary</step>
+                    <step>Never use hardcoded color values</step>
+                </steps>
+            </technique>
+
+            <technique name="Typography Implementation">
+                <steps>
+                    <step>Extract typography with get_code</step>
+                    <step>Map to Carbon type tokens (heading-01, body-short-01, etc.)</step>
+                    <step>Use Carbon type mixins rather than custom CSS</step>
+                    <step>Example: @include carbon--type-style('heading-01')</step>
+                </steps>
+            </technique>
+        </implementation_techniques>
+
+        <icon_usage>
+            <title>Icon Usage</title>
+            <critical_guidelines>
+                <guideline priority="high">Use the exact icon found in the design</guideline>
+                <guideline>Do not substitute icons even if semantically similar</guideline>
+            </critical_guidelines>
+
+            <example><![CDATA[
+// Correct usage
+import { Add } from '@carbon/icons-react';
+
+// Used in components
+<Button renderIcon={ArrowRight}>Clone the template</Button>
+            ]]>            </example>
+        </icon_usage>
+    </design_fidelity>
+
+    <component_mapping>
+        <title>Figma to Carbon Component Mapping</title>
+        <description>
+        Guidelines for mapping Figma components to their Carbon equivalents.
+        </description>
+
+        <mapping_guidelines>
+            <guideline priority="high">Always use official Carbon components rather than custom implementations</guideline>
+            <guideline>When a Figma component doesn't match a Carbon component exactly, use the closest match and adapt as needed</guideline>
+            <guideline>Document any significant differences between the Figma design and Carbon implementation</guideline>
+        </mapping_guidelines>
+
+        <common_mappings>
+            <mapping figma="Button" carbon="Button">
+                <notes>Map Figma button styles to Carbon button kinds (primary, secondary, etc.)</notes>
+            </mapping>
+            <mapping figma="Input field" carbon="TextInput">
+                <notes>Map to appropriate variant (default, inline, etc.)</notes>
+            </mapping>
+            <mapping figma="Dropdown" carbon="Dropdown or ComboBox">
+                <notes>Use ComboBox for searchable dropdowns, Dropdown for standard selects</notes>
+            </mapping>
+            <mapping figma="Card" carbon="Tile">
+                <notes>Map to appropriate Tile variant (default, clickable, expandable)</notes>
+            </mapping>
+            <mapping figma="Table" carbon="DataTable">
+                <notes>Identify if sorting, filtering, or pagination is needed</notes>
+            </mapping>
+        </common_mappings>
+    </component_mapping>
+
+    <responsive_design>
+        <title>Responsive Design Guidelines</title>
+
+        <critical_guidelines>
+            <guideline priority="high">All implementations must be responsive across all Carbon breakpoints</guideline>
+            <guideline priority="high">Use a mobile-first approach with breakpoint-up mixins</guideline>
+            <guideline priority="high">Design components to work with Carbon's grid system</guideline>
+            <guideline>Create separate Grid components for each distinct logical content group</guideline>
+            <guideline>Test implementations at all breakpoints</guideline>
+        </critical_guidelines>
+
+        <carbon_breakpoints>
+            <breakpoint name="sm" width="320px" columns="4" description="Small screens (mobile)" />
+            <breakpoint name="md" width="672px" columns="8" description="Medium screens (tablet)" />
+            <breakpoint name="lg" width="1056px" columns="16" description="Large screens (desktop)" />
+            <breakpoint name="xlg" width="1312px" columns="16" description="Extra large screens" />
+            <breakpoint name="max" width="1584px" columns="16" description="Maximum width" />
+        </carbon_breakpoints>
+
+        <grid_system>
+            <title>Carbon Grid System Usage</title>
+            <critical_guidelines>
+                <guideline priority="high">ALWAYS use Carbon Grid for all page layouts</guideline>
+                <guideline priority="high">Configure responsive column widths for all breakpoints (sm, md, lg)</guideline>
+                <guideline>Follow the Carbon 4/8/16 column grid system</guideline>
+            </critical_guidelines>
+
+            <grid_variants>
+                <variant name="default">
+                    <description>Standard Carbon grid with 32px horizontal gap between elements</description>
+                    <usage>Use for most layouts</usage>
+                </variant>
+                <variant name="narrow">
+                    <description>Reduced horizontal gap (16px) for denser layouts</description>
+                    <usage>Use when space is limited and content density is important</usage>
+                </variant>
+                <variant name="condensed">
+                    <description>Minimal horizontal gap (0px) for very compact layouts</description>
+                    <usage>Use only for specialized interfaces requiring maximum content density</usage>
+                </variant>
+            </grid_variants>
+
+            <column_calculation>
+                <description>
+                    Calculate the number of columns an element should span based on its width using:
+                    Math.ceil((width in pixels) / ((grid width) / (number of columns)))
+                </description>
+
+                <guideline priority="high">
+                    When column settings are calculated for lg, xlg or max then apply the 
+                    calculated number of columns to lg unless otherwise instructed.
+                </guideline>
+
+                <example><![CDATA[
+// Example calculation for a 400px wide element in a 1200px container (lg breakpoint)
+// Grid width: 1200px (container width is less than max 1584px)
+// Number of columns at lg breakpoint: 16
+// Column span = Math.ceil(400 / (1200 / 16)) = Math.ceil(400 / 75) = Math.ceil(5.33) = 6
+// Therefore, use <Column lg={6}>
+                ]]>                </example>
+            </column_calculation>
+        </grid_system>
+    </responsive_design>
+
+    <figma_mcp_tools>
+        <title>Figma MCP Tools Reference</title>
+        <description>
+            Essential tools for extracting design information from Figma.
+        </description>
+
+        <tool name="get_code">
+            <description>Generate UI code for a node</description>
+            <when_to_use>
+                <use>Extract CSS properties and styles</use>
+                <use>Get initial code structure for components</use>
+                <use>Extract typography and spacing values</use>
+            </when_to_use>
+            <example><![CDATA[
+<use_mcp_tool>
+<server_name>Figma Dev Mode MCP</server_name>
+<tool_name>get_code</tool_name>
+<arguments>
+{
+  "nodeId": "123:456",
+  "clientLanguages": "javascript,html,css",
+  "clientFrameworks": "react"
+}
+</arguments>
+</use_mcp_tool>
+            ]]>            </example>
+        </tool>
+
+        <tool name="get_metadata">
+            <description>Get structure overview with node IDs, types, names, positions and sizes</description>
+            <when_to_use>
+                <use>Analyze component hierarchy</use>
+                <use>Extract precise measurements and positions</use>
+                <use>Identify component relationships</use>
+            </when_to_use>
+            <example><![CDATA[
+<use_mcp_tool>
+<server_name>Figma Dev Mode MCP</server_name>
+<tool_name>get_metadata</tool_name>
+<arguments>
+{
+  "nodeId": "123:456"
+}
+</arguments>
+</use_mcp_tool>
+            ]]>            </example>
+        </tool>
+
+        <tool name="get_variable_defs">
+            <description>Get variable definitions (colors, fonts, sizes, spacings)</description>
+            <when_to_use>
+                <use>Extract design tokens and variables</use>
+                <use>Map Figma variables to Carbon tokens</use>
+                <use>Identify theme colors and typography</use>
+            </when_to_use>
+            <example><![CDATA[
+<use_mcp_tool>
+<server_name>Figma Dev Mode MCP</server_name>
+<tool_name>get_variable_defs</tool_name>
+<arguments>
+{
+  "nodeId": "123:456"
+}
+</arguments>
+</use_mcp_tool>
+            ]]>            </example>
+        </tool>
+
+        <tool name="get_screenshot">
+            <description>Generate a screenshot for a node</description>
+            <when_to_use>
+                <use>Capture visual reference for implementation</use>
+                <use>Document design for discussion</use>
+            </when_to_use>
+            <example><![CDATA[
+<use_mcp_tool>
+<server_name>Figma Dev Mode MCP</server_name>
+<tool_name>get_screenshot</tool_name>
+<arguments>
+{
+  "nodeId": "123:456"
+}
+</arguments>
+</use_mcp_tool>
+            ]]>            </example>
+        </tool>
+    </figma_mcp_tools>
+
+    <figma_implementation_challenges>
+        <title>Common Figma Implementation Challenges</title>
+
+        <challenge>
+            <name>Design Discrepancies</name>
+            <description>When Figma measurements don't match Carbon's spacing tokens</description>
+            <solution>
+                <step>Identify the closest Carbon spacing token:
+                    <rules>
+                        <rule>For measurements within 2px of a token, use the exact token</rule>
+                        <rule>For measurements between tokens, choose the smaller token if difference is less than 4px</rule>
+                        <rule>For measurements between tokens, choose the larger token if visual density is important</rule>
+                    </rules>
+                </step>
+                <step>Document the decision and apply the token consistently</step>
+            </solution>
+            <example><![CDATA[
+// Figma shows 19px spacing, closest Carbon token is $spacing-05 (16px)
+.my-component {
+  // Using $spacing-05 as closest match to design's 19px
+  margin-bottom: $spacing-05;
+}
+      ]]>            </example>
+        </challenge>
+
+        <challenge>
+            <name>Component Limitations</name>
+            <description>When Carbon component doesn't support a design feature</description>
+            <solution>
+                <step>Consider composition approach (combining multiple components) when:
+                    <criteria>
+                        <criterion>The desired functionality can be achieved by combining existing components</criterion>
+                        <criterion>The custom styling needed is minimal and doesn't affect component behavior</criterion>
+                    </criteria>
+                </step>
+                <step>Evaluate custom styling when changes are primarily visual, not behavioral</step>
+                <step>Document any limitations and discuss with the user</step>
+            </solution>
+            <example><![CDATA[
+// Design shows a DataTable with custom row actions that Carbon doesn't support directly
+// Solution: Compose with ActionMenu component
+<DataTable rows={rows} headers={headers}>
+  {({ rows, getRowProps }) => (
+    <TableBody>
+      {rows.map(row => (
+        <TableRow {...getRowProps({ row })}>
+          {row.cells.map(cell => (
+            <TableCell key={cell.id}>{cell.value}</TableCell>
+          ))}
+          <TableCell>
+            <ActionMenu actions={customActions} />
+          </TableCell>
+        </TableRow>
+      ))}
+    </TableBody>
+  )}
+</DataTable>
+      ]]>            </example>
+        </challenge>
+
+        <challenge>
+            <name>Theme Inconsistencies</name>
+            <description>When design uses non-standard colors</description>
+            <solution>
+                <step>Map to nearest theme token:
+                    <rules>
+                        <rule>Use the Carbon color palette reference specific to the identified theme</rule>
+                        <rule>Verify the selected token maintains appropriate contrast</rule>
+                        <rule>For UI elements, prioritize semantic tokens (interactive-01) over base color tokens</rule>
+                    </rules>
+                </step>
+                <step>Ensure theme compatibility across all required themes</step>
+            </solution>
+            <example><![CDATA[
+// Design shows #0f62fe which is close to $interactive-01
+.my-component {
+  // Using $interactive-01 instead of hardcoded #0f62fe for theme compatibility
+  color: $interactive-01;
+}
+      ]]>            </example>
+        </challenge>
+    </figma_implementation_challenges>
+
+    <figma_to_token_mapping>
+        <title>Figma to Carbon Token Mapping</title>
+        <description>
+            Process for mapping Figma design elements to Carbon tokens.
+        </description>
+
+        <mapping_process>
+            <step>
+                <title>Extract Measurements</title>
+                <description>Use Figma MCP tools to extract precise measurements</description>
+                <example><![CDATA[
+<use_mcp_tool>
+<server_name>Figma Dev Mode MCP</server_name>
+<tool_name>get_metadata</tool_name>
+<arguments>
+{
+  "nodeId": "123:456"
+}
+</arguments>
+</use_mcp_tool>
+                ]]>                </example>
+            </step>
+
+            <step>
+                <title>Map to Carbon Tokens</title>
+                <description>Find the closest Carbon token for each measurement</description>
+                <mapping_table>
+                    <mapping figma="8px" carbon="$spacing-03" />
+                    <mapping figma="16px" carbon="$spacing-05" />
+                    <mapping figma="24px" carbon="$spacing-06" />
+                    <mapping figma="32px" carbon="$spacing-07" />
+                    <mapping figma="48px" carbon="$spacing-09" />
+                </mapping_table>
+            </step>
+
+            <step>
+                <title>Document Non-Standard Values</title>
+                <description>Document any measurements that don't align with Carbon's 2x grid</description>
+                <example><![CDATA[
+// Figma shows 19px spacing which doesn't align with Carbon tokens
+// Using $spacing-05 (16px) as the closest match
+                ]]>                </example>
+            </step>
+        </mapping_process>
+    </figma_to_token_mapping>
+
+    <debugging_figma_implementations>
+        <title>Debugging Figma Implementations</title>
+
+        <technique>
+            <name>Visual Comparison</name>
+            <description>Compare rendered output with Figma design</description>
+            <steps>
+                <step>Use browser inspector to examine rendered elements</step>
+                <step>Compare dimensions, spacing, colors, and typography with Figma specs</step>
+                <step>Identify any discrepancies between implementation and design</step>
+            </steps>
+        </technique>
+
+        <technique>
+            <name>Figma Reference</name>
+            <description>Keep Figma design open for reference during debugging</description>
+            <steps>
+                <step>Use get_screenshot to capture reference images</step>
+                <step>Compare browser rendering with Figma reference</step>
+                <step>Document any differences for discussion with the user</step>
+            </steps>
+        </technique>
+    </debugging_figma_implementations>
+</figma_integration_guidelines>
+
+<!-- Made with Bob -->

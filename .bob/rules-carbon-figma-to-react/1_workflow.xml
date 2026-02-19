@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow_instructions>
+    <overview>
+    This workflow guides the implementation of Carbon Design System components from Figma designs,
+    ensuring adherence to project-specific standards with a collaborative approach.
+    </overview>
+
+    <mandatory_requirements priority="highest">
+        <requirement id="complete_analysis">
+            <title>COMPLETE DESIGN ANALYSIS WITH USER CONFIRMATION</title>
+            <description>
+                When working with Figma designs, you MUST perform and present a COMPLETE design analysis.
+                This analysis MUST include ALL of the following sections:
+                
+                1. Component Inventory - List ALL Carbon components needed with variants and customizations
+                2. Typography Analysis - Map ALL text elements to Carbon type tokens
+                3. Grid Analysis - Define grid structure for ALL page sections with column spans for ALL breakpoints
+                4. Spacing Analysis - Document ALL spacing using Carbon spacing tokens
+                
+                This is NOT optional and MUST be completed BEFORE any implementation begins.
+                After presenting this analysis, you MUST pause and ask for user confirmation
+                before proceeding with implementation.
+            </description>
+        </requirement>
+
+        <requirement id="separate_grids">
+            <title>MANDATORY SEPARATE GRIDS FOR LOGICAL CONTENT GROUPS</title>
+            <description>
+                EVERY distinct logical content group MUST be placed in its own Grid component.
+                
+                A logical content group is defined as:
+                - Content elements that should wrap together responsively
+                - Elements that form a cohesive functional unit (e.g. header, list of tiles, footer)
+                - Content under the same heading or subheading
+                - Elements with the same presentation style that should behave as a unit
+                
+                Different logical content groups (that should NOT wrap together) MUST use separate Grid components.
+                This is NOT optional and must be implemented automatically.
+                
+                Failure to use separate grids for distinct logical content groups is a critical error
+                that must be avoided in all implementations.
+            </description>
+        </requirement>
+    </mandatory_requirements>
+
+    <collaborative_workflow>
+        <title>Collaborative Implementation Workflow</title>
+        <prerequisite priority="critical">
+            <title>Pre-Integration Analysis</title>
+            <description>
+                Before starting implementation, conduct pre-integration analysis as defined in 9_integration_best_practices.xml.
+                This includes analyzing existing patterns, verifying component compatibility, reading local component source,
+                and checking build system configuration.
+            </description>
+            <reference>See 9_integration_best_practices.xml for detailed pre-integration analysis guidance</reference>
+        </prerequisite>
+        <steps>
+            <step number="1">
+                <action>Create or identify location for new element or page</action>
+                <guidance>
+                    <point>Consider project structure and naming conventions</point>
+                    <point>Identify appropriate file paths</point>
+                </guidance>
+            </step>
+
+            <step number="2">
+                <action>Select the component, section or page in Figma</action>
+                <guidance>
+                    <point>Start with individual components before larger sections</point>
+                    <point>Select the specific element to implement</point>
+                </guidance>
+            </step>
+
+            <step number="3">
+                <action>Turn off auto approval until ready for code editing</action>
+            </step>
+
+            <step number="4">
+                <action>Discuss the design</action>
+                <sub_steps>
+                    <sub_step>Tell Bob what is selected in Figma (provide nodeId, URL, or description)</sub_step>
+                    <sub_step>Ask Bob to identify components needed and describe implementation approach</sub_step>
+                </sub_steps>
+            </step>
+
+            <step number="5">
+                <action>Discuss and refine until shared understanding is reached</action>
+                <guidance>Address components/features not represented in Figma</guidance>
+            </step>
+
+            <step number="6">
+                <action>Turn on auto approvals for code editing</action>
+            </step>
+
+            <step number="7" priority="critical">
+                <action>Research Carbon component syntax using Carbon MCP before implementation</action>
+                <guidance>
+                    <point priority="critical">MANDATORY: Bob must use Carbon MCP to research correct component syntax and API before writing or updating ANY Carbon component code</point>
+                    <point>Use code_search to find implementation examples with correct props and usage patterns</point>
+                    <point>Use docs_search to understand component guidelines and best practices</point>
+                    <point>This step is REQUIRED even if the component is already used in the project</point>
+                </guidance>
+            </step>
+
+            <step number="8">
+                <action>Ask Bob to implement the design</action>
+            </step>
+
+            <step number="9">
+                <action>Review, refine and revisit until satisfied</action>
+            </step>
+
+            <step number="9">
+                <action>Commit changes at logical completion points</action>
+            </step>
+        </steps>
+    </collaborative_workflow>
+
+    <implementation_process>
+        <phase name="analysis_planning">
+            <title>Analysis and Planning Phase</title>
+            <steps>
+                <step number="1">
+                    <action>Verify access to Figma design (nodeId, URL, or image)</action>
+                </step>
+
+                <step number="2" priority="critical">
+                    <action>Collect details using Figma MCP tools</action>
+                    <workflow>
+                        <item>Use get_code for component structure and styling</item>
+                        <item>Use get_screenshot for visual reference</item>
+                        <item>Use get_metadata for complex designs</item>
+                        <item>Use get_variable_defs for design tokens</item>
+                    </workflow>
+                </step>
+
+                <step number="3">
+                    <action>Analyze Figma annotations and comments</action>
+                    <guidance>Review ALL annotations within the selection and document them</guidance>
+                </step>
+
+                <step number="4" priority="critical">
+                    <action>Create and present complete structured assessment</action>
+                    <guidance>
+                        <point>This step is MANDATORY and must be completed for all design tasks</point>
+                        <point>ALL sections must be included in EVERY design analysis</point>
+                        <point>Present this analysis BEFORE proceeding with implementation</point>
+                        <point>After presenting the analysis, pause and ask for user confirmation</point>
+                    </guidance>
+                    <sections id="design_analysis_requirements">
+                        <section name="Component Inventory" mandatory="true">
+                            List ALL Carbon components needed with variants and customizations.
+                            Include specific props and configurations required.
+                            
+                            Also list any other components (local components or components from non-Carbon packages)
+                            that will be used in the implementation.
+                        </section>
+                        <section name="Typography Analysis" mandatory="true">
+                            Document ALL text elements and corresponding Carbon type tokens.
+                            Map each text style to the appropriate Carbon token.
+                        </section>
+                        <section name="Grid Analysis" mandatory="true">
+                            Document grid structure with SEPARATE GRIDS for each logical content group.
+                            Specify column spans for ALL breakpoints (sm, md, lg) for EVERY component.
+                        </section>
+                        <section name="Spacing Analysis" mandatory="true">
+                            Identify ALL spacing between elements and map to Carbon spacing tokens.
+                            Document margins, padding, and gaps using appropriate tokens.
+                        </section>
+                    </sections>
+                </step>
+
+                <step number="5" priority="critical">
+                    <action>Pause for user confirmation</action>
+                    <guidance>
+                        <point>After presenting the complete design analysis, ALWAYS pause</point>
+                        <point>Ask the user to confirm or provide feedback on the analysis</point>
+                        <point>Only proceed with implementation after receiving user confirmation</point>
+                    </guidance>
+                    <example><![CDATA[
+<ask_followup_question>
+<question>I've completed the design analysis above. Would you like me to proceed with implementation based on this analysis, or would you like to discuss or modify any aspects of it first?</question>
+<follow_up>
+<suggest>The analysis looks good. Please proceed with implementation.</suggest>
+<suggest>Let's discuss some aspects of the analysis before implementation.</suggest>
+<suggest>Please modify the analysis based on these additional requirements: [user would specify]</suggest>
+</follow_up>
+</ask_followup_question>
+                    ]]>                    </example>
+                </step>
+
+                <step number="6">
+                    <action>Conduct accessibility assessment</action>
+                    <guidance>
+                        <point>Evaluate against IBM Accessibility Requirements</point>
+                        <point>Check WCAG compliance (Perceivable, Operable, Understandable, Robust)</point>
+                        <point>Document concerns with severity ratings and solutions</point>
+                    </guidance>
+                </step>
+
+                <step number="7">
+                    <action>Identify any component customizations needed</action>
+                </step>
+            </steps>
+        </phase>
+
+        <phase name="preparation">
+            <title>Preparation Phase</title>
+            <steps>
+                <step number="8">
+                    <action>Create Todo list with browser validation for UI tasks</action>
+                    <example><![CDATA[
+<update_todo_list>
+<todos>
+[ ] Analyze Figma design and component requirements
+[ ] Set up component structure and files
+[ ] Implement base component functionality
+[ ] Style component according to Figma design
+[ ] Add responsive behavior
+[ ] Validate implementation in browser against Figma design
+[ ] Address validation issues
+[ ] Finalize documentation
+</todos>
+</update_todo_list>
+                    ]]>                    </example>
+                </step>
+
+                <step number="9">
+                    <action>Discuss any issues found in analysis</action>
+                </step>
+            </steps>
+        </phase>
+
+        <phase name="implementation">
+            <title>Implementation Phase</title>
+            <mandatory_step priority="critical">
+                <title>MANDATORY Carbon MCP Syntax Check</title>
+                <description>
+                    Before writing or updating ANY Carbon component code, you MUST use Carbon MCP to verify
+                    the correct syntax, props, and usage patterns. This is REQUIRED for:
+                    - New Carbon component implementations
+                    - Updates to existing Carbon component code
+                    - Any modifications to Carbon component props or structure
+                    
+                    NO EXCEPTIONS. This step cannot be skipped under any circumstances.
+                </description>
+                <enforcement>
+                    Failure to check Carbon MCP before writing Carbon component code is a critical error
+                    that may result in incorrect implementations, missed bug fixes, or outdated conventions.
+                </enforcement>
+            </mandatory_step>
+            <guidelines>
+                <guideline priority="critical">MANDATORY: Use Carbon MCP to verify component syntax before writing or updating ANY Carbon component code</guideline>
+                <guideline priority="high">Break down large UI sections into separate components</guideline>
+                <guideline priority="critical">ALWAYS use Carbon Grid system for page layouts</guideline>
+                <guideline priority="high">Do NOT use Grid for floating elements (modals, side panels, tooltips) that overlay the page</guideline>
+                <guideline priority="critical">EVERY distinct logical content group MUST be in its own Grid component</guideline>
+                <guideline priority="critical">ALWAYS use separate Grid components for vertically separated areas</guideline>
+                <guideline priority="critical">ALWAYS read local component source files before first use to understand their complete API</guideline>
+                <guideline priority="high">When using non-Carbon components, check for existing features (properties, child components) that may simplify the solution before implementation.</guideline>
+                <guideline>Use Carbon React v11 and IBM Products components</guideline>
+                <guideline>Don't add features not in the design</guideline>
+                <guideline>Don't use deprecated props/components</guideline>
+                <guideline>Implement responsive layouts using Carbon's grid</guideline>
+            </guidelines>
+
+            <grid_implementation_rules>
+                <rule priority="critical">
+                    <title>Separate Grids for Logical Content Groups</title>
+                    <description>
+                        EVERY distinct logical content group MUST be placed in its own Grid component.
+                        
+                        Different logical content groups (that should NOT wrap together) MUST use separate Grid components.
+                        This is NOT optional and must be implemented automatically.
+                        
+                        See the mandatory requirements section for the full definition of logical content groups.
+                    </description>
+                    <examples>
+                        <correct><![CDATA[
+// CORRECT: Separate grids for different logical content groups
+<>
+  {/* Header section - one logical content group */}
+  <Grid>
+    <Column sm={4} md={8} lg={16}>
+      <h1>Dashboard</h1>
+    </Column>
+  </Grid>
+  
+  {/* Stats section - another logical content group where tiles should wrap together */}
+  <Grid>
+    <Column sm={4} md={4} lg={4}>
+      <Tile>Metric 1</Tile>
+    </Column>
+    <Column sm={4} md={4} lg={4}>
+      <Tile>Metric 2</Tile>
+    </Column>
+    <Column sm={4} md={4} lg={4}>
+      <Tile>Metric 3</Tile>
+    </Column>
+    {/* These tiles will wrap together as a cohesive unit */}
+  </Grid>
+  
+  {/* Recent activity section - different logical content group with different presentation */}
+  <Grid>
+    <Column sm={4} md={8} lg={16}>
+      <h2>Recent Activity</h2>
+    </Column>
+  </Grid>
+  
+  {/* Activity content - should wrap as its own unit */}
+  <Grid>
+    <Column sm={4} md={8} lg={16}>
+      <DataTable {...dataTableProps} />
+    </Column>
+  </Grid>
+</>
+                        ]]>                        </correct>
+                        <incorrect><![CDATA[
+// INCORRECT: Single grid for multiple logical content groups
+<>
+  <Grid>
+    {/* Header section */}
+    <Column sm={4} md={8} lg={16}>
+      <h1>Dashboard</h1>
+    </Column>
+    
+    {/* Stats tiles - should wrap together as a unit */}
+    <Column sm={4} md={4} lg={4}>
+      <Tile>Metric 1</Tile>
+    </Column>
+    <Column sm={4} md={4} lg={4}>
+      <Tile>Metric 2</Tile>
+    </Column>
+    
+    {/* Different logical content group with different presentation */}
+    <Column sm={4} md={8} lg={16}>
+      <h2>Recent Activity</h2>
+    </Column>
+    
+    {/* Activity content - different logical content group */}
+    <Column sm={4} md={8} lg={16}>
+      <DataTable {...dataTableProps} />
+    </Column>
+    
+    {/* Problem: These elements won't wrap properly as separate logical content groups */}
+  </Grid>
+</>
+                        ]]>                        </incorrect>
+                    </examples>
+                </rule>
+            </grid_implementation_rules>
+        </phase>
+
+        <phase name="validation_completion">
+            <title>Validation and Completion Phase</title>
+            <steps>
+                <step number="10" priority="critical">
+                    <action>Validate design analysis completeness</action>
+                    <guidance>
+                        <point>Verify that a COMPLETE design analysis was performed and presented</point>
+                        <point>Confirm all required sections were included (Component Inventory, Typography Analysis, Grid Analysis, Spacing Analysis)</point>
+                        <point>Verify that separate grids were used for all distinct logical content groups</point>
+                    </guidance>
+                    <validation_checklist>
+                        <item>Was a complete Component Inventory provided?</item>
+                        <item>Was a complete Typography Analysis provided?</item>
+                        <item>Was a complete Grid Analysis provided?</item>
+                        <item>Was a complete Spacing Analysis provided?</item>
+                        <item>Were separate Grid components used for each logical content group?</item>
+                        <item>Were elements that should wrap together as a unit placed in the same Grid?</item>
+                    </validation_checklist>
+                </step>
+
+                <step number="11" priority="critical">
+                    <action>Validate implementation in browser</action>
+                    <guidance>
+                        <point>Browser validation is MANDATORY for UI tasks</point>
+                        <point>ALWAYS offer user choice between manual and automated validation</point>
+                        <point>Manual validation is recommended to conserve IBM Bob budget</point>
+                        <point>Refer to 6_browser_validation_subtask.xml for detailed guidance</point>
+                    </guidance>
+                    <example><![CDATA[
+<ask_followup_question>
+<question>Browser validation is required to ensure the implementation meets all requirements. How would you like to proceed?</question>
+<follow_up>
+<suggest>I will validate the implementation in the browser myself (recommended - conserves IBM Bob budget)</suggest>
+<suggest>Automate validation in the browser (use sparingly - consumes IBM Bob budget)</suggest>
+</follow_up>
+</ask_followup_question>
+                    ]]>                </example>
+                </step>
+
+                <step number="12">
+                    <action>Get user confirmation after validation</action>
+                </step>
+
+                <step number="13">
+                    <action>Address user feedback</action>
+                </step>
+            </steps>
+
+            <rules>
+                <rule priority="critical">Complete design analysis with user confirmation is MANDATORY for ALL Figma implementations</rule>
+                <rule priority="critical">Browser validation is MANDATORY for UI updates</rule>
+                <rule priority="critical">Users must choose between manual or automated validation</rule>
+                <rule priority="high">Manual validation is recommended to conserve IBM Bob budget</rule>
+                <rule priority="high">Never mark UI tasks complete without validation</rule>
+                <rule priority="critical">
+                    <title>Grid Containment for Logical Content Groups</title>
+                    <description>
+                        EVERY distinct logical content group MUST be contained within its own Grid component.
+                        Different logical content groups (that should NOT wrap together) MUST use separate Grid components.
+                        
+                        See the mandatory requirements section for the full definition of logical content groups.
+                    </description>
+                </rule>
+            </rules>
+        </phase>
+    </implementation_process>
+
+    <carbon_specific_guidance>
+        <title>Carbon Implementation Considerations</title>
+        <items>
+            <item title="Component Selection">
+                Choose appropriate components from Carbon React libraries matching requirements.
+                Consider component composition for complex requirements.
+                Use MCP to research component options and best practices.
+            </item>
+
+            <item title="Props Configuration">
+                Verify props against Carbon documentation.
+                Note event handler naming differences from standard React patterns.
+            </item>
+
+            <item title="Grid Layout">
+                <points>
+                    <point>Use Carbon Grid system for all layouts</point>
+                    <point>Configure responsive column widths (sm, md, lg)</point>
+                    <point>Create separate Grid components for each distinct logical content group</point>
+                </points>
+            </item>
+
+            <item title="Carbon Libraries">
+                <example><![CDATA[
+// Components from Carbon React libraries
+import { Button, Tile, Grid, Column } from '@carbon/react';
+
+// Carbon Icons
+import { Add, Search } from '@carbon/icons-react';
+
+// IBM Products components (when needed)
+import { ProductiveCard, SidePanel } from '@carbon/ibm-products';
+                ]]>                </example>
+            </item>
+        </items>
+    </carbon_specific_guidance>
+
+    <other_components_guidance>
+        <title>Other Components Guidance</title>
+
+        <definition>
+            <description>
+                By "other components" we mean local components created within the project,
+                or components from non-Carbon packages installed locally (e.g., React Router,
+                third-party React libraries, form libraries, etc.).
+            </description>
+        </definition>
+
+        <review_process priority="critical">
+            <title>MANDATORY Component Review Process</title>
+            <description>
+                Before implementing with other components, you MUST review the component thoroughly
+                to understand its capabilities and avoid unnecessary custom implementations.
+                
+                This is a MANDATORY step that MUST be completed BEFORE using any non-Carbon component.
+                Failure to review component APIs before use is a critical error.
+            </description>
+            <steps>
+                <step priority="critical">Read the component source file to understand its complete API</step>
+                <step priority="critical">Review component documentation and API reference if available</step>
+                <step priority="critical">Check available properties that may provide needed functionality</step>
+                <step priority="critical">Look for child components or composition patterns that can be leveraged</step>
+                <step priority="high">Examine existing usage examples in the codebase</step>
+            </steps>
+            <enforcement>
+                <rule>ALWAYS use read_file to examine local component source code before first use</rule>
+                <rule>Document all available props and their purposes in your analysis</rule>
+                <rule>Never assume component behavior - always verify by reading the source</rule>
+                <rule>If a component has specialized props (like renderPageHeader), you MUST use them</rule>
+            </enforcement>
+        </review_process>
+
+        <design_analysis_requirements>
+            <requirement priority="high">
+                List other components in the Component Inventory section of design analysis
+            </requirement>
+            <requirement priority="high">
+                Document which properties and features will be used from each component
+            </requirement>
+        </design_analysis_requirements>
+
+        <best_practices>
+            <practice priority="critical">ALWAYS read component source files before first use to understand complete API</practice>
+            <practice priority="high">Prefer using built-in component features over custom implementations</practice>
+            <practice priority="high">Check for existing properties before adding custom logic</practice>
+            <practice priority="high">When using non-Carbon components, check for existing features (properties, child components) that may simplify the solution before implementation.</practice>
+            <practice>Look for child component patterns that can be composed</practice>
+            <practice>Review component examples in the codebase for established patterns</practice>
+        </best_practices>
+
+        <examples>
+            <example name="Using Built-in Features">
+                <description>Leveraging React Router's built-in active state instead of custom logic</description>
+                <code><![CDATA[
+// Good: Using built-in isActive prop from React Router
+import { NavLink } from 'react-router-dom';
+
+<NavLink
+  to="/dashboard" className={({ isActive }) => isActive ? 'active' : ''}
+>
+  Dashboard
+</NavLink>
+
+// Bad: Manually tracking active state
+const [isActive, setIsActive] = useState(false);
+// ... custom logic to track active state
+                ]]>                </code>
+            </example>
+
+            <example name="Reading Component Source Before Use">
+                <description>Always read local component source files to understand their API before using them</description>
+                <code><![CDATA[
+// MANDATORY: Before using PageLayout for the first time, read its source
+<read_file>
+<args>
+  <file>
+    <path>src/layouts/page-layout.jsx</path>
+  </file>
+</args>
+</read_file>
+
+// After reading, you discover the renderPageHeader prop
+// Good: Using the component's intended API
+<PageLayout renderPageHeader={() => <PageHeader {...props} />}>
+  {children}
+</PageLayout>
+
+// Bad: Not reading the source and missing the renderPageHeader prop
+<PageLayout>
+  <PageHeader {...props} />
+  {children}
+</PageLayout>
+                ]]>                </code>
+            </example>
+        </examples>
+    </other_components_guidance>
+</workflow_instructions>
+
+<!-- Made with Bob -->

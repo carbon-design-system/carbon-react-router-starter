@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<integration_best_practices>
+    <overview>
+    Essential guidance for systematic integration of Carbon components into existing projects,
+    emphasizing pre-integration analysis, configuration verification, and targeted modifications.
+    These practices ensure minimal, surgical changes that respect existing patterns.
+    </overview>
+
+    <pre_integration_analysis priority="critical">
+        <title>Pre-Integration Analysis</title>
+        <description>
+      Before implementing any new feature or component, conduct thorough analysis of existing
+      patterns to ensure consistency and avoid unnecessary changes.
+        </description>
+
+        <step number="1" priority="critical">
+            <action>Analyze existing patterns first</action>
+            <guidance>
+                <point>Use search_files to find similar functionality or component usage across the codebase</point>
+                <point>Use list_code_definition_names to understand the project's architectural patterns</point>
+                <point>Use read_file to examine how other pages/features implement comparable UI elements</point>
+                <point>Identify which component libraries are already in use and their usage patterns</point>
+            </guidance>
+            <rationale>
+        Understanding existing patterns prevents introducing inconsistent approaches and
+        ensures new implementations align with established project conventions.
+            </rationale>
+            <example><![CDATA[
+// Before adding a new form component, search for existing form patterns
+<search_files>
+<path>src</path>
+<regex>TextInput|Form|validation</regex>
+<file_pattern>*.jsx</file_pattern>
+</search_files>
+
+// Examine existing form implementations
+<read_file>
+<args>
+  <file>
+    <path>src/components/UserForm.jsx</path>
+  </file>
+</args>
+</read_file>
+      ]]>            </example>
+        </step>
+
+        <step number="2" priority="critical">
+            <action>Verify component source and compatibility</action>
+            <guidance>
+                <point>Use read_file to check if the component is already imported/used elsewhere in the project</point>
+                <point>Confirm which package the component comes from (e.g., @carbon/react vs @carbon/ibm-products)</point>
+                <point>Use read_file on configuration files (package.json, vite.config.js, webpack.config.js) to check build system setup</point>
+                <point priority="critical">MANDATORY: Check for SSR indicators using MULTIPLE methods (see SSR detection checklist below)</point>
+                <point>Review the component's documentation for integration requirements and browser-only code warnings</point>
+                <point priority="critical">If package contains browser-only code AND project uses SSR, plan for dynamic imports BEFORE implementation</point>
+            </guidance>
+            <rationale>
+        Verifying compatibility before implementation prevents build errors and ensures
+        components work correctly with the project's build system. SSR detection must be
+        thorough as missing SSR indicators leads to build failures.
+            </rationale>
+            <ssr_detection_checklist priority="critical">
+                <title>MANDATORY SSR Detection Checklist</title>
+                <description>
+            ALWAYS perform ALL of these checks before adding packages with potential browser-only code:
+                </description>
+                <check number="1" priority="critical">
+                    <action>Check for SSR entry files</action>
+                    <tool_usage><![CDATA[
+// Use list_files to check src directory
+<list_files>
+<path>src</path>
+<recursive>false</recursive>
+</list_files>
+
+// Use search_files to find server files
+<search_files>
+<path>.</path>
+<regex>entry-server|server\.(js|ts|jsx|tsx)$</regex>
+<file_pattern>*</file_pattern>
+</search_files>
+                    ]]>                    </tool_usage>
+                    <indicators>
+                        <indicator>entry-server.js, entry-server.jsx, entry-server.ts, entry-server.tsx</indicator>
+                        <indicator>server.js or server.ts in root or src directory</indicator>
+                    </indicators>
+                </check>
+                <check number="2" priority="critical">
+                    <action>Check vite.config.js for SSR configuration</action>
+                    <tool_usage><![CDATA[
+<read_file>
+<args>
+  <file>
+    <path>vite.config.js</path>
+  </file>
+</args>
+</read_file>
+                    ]]>                    </tool_usage>
+                    <indicators>
+                        <indicator>ssr: { } configuration block</indicator>
+                        <indicator>ssr.external or ssr.noExternal arrays</indicator>
+                    </indicators>
+                </check>
+                <check number="3" priority="high">
+                    <action>Check package.json for SSR scripts</action>
+                    <tool_usage><![CDATA[
+<read_file>
+<args>
+  <file>
+    <path>package.json</path>
+  </file>
+</args>
+</read_file>
+                    ]]>                    </tool_usage>
+                    <indicators>
+                        <indicator>Scripts like build:ssr, dev:ssr, preview:ssr</indicator>
+                        <indicator>Dependencies like @vitejs/plugin-react-ssr</indicator>
+                    </indicators>
+                </check>
+                <critical_rule>
+            If ANY SSR indicator is found, you MUST plan for dynamic imports with React.lazy()
+            for any package containing browser-only code. Do NOT proceed with top-level imports.
+                </critical_rule>
+            </ssr_detection_checklist>
+            <example><![CDATA[
+// Check build configuration for SSR compatibility
+<read_file>
+<args>
+  <file>
+    <path>vite.config.js</path>
+  </file>
+</args>
+</read_file>
+
+// Check if component is already used
+<search_files>
+<path>src</path>
+<regex>import.*ProductiveCard.*from</regex>
+<file_pattern>*.jsx</file_pattern>
+</search_files>
+      ]]>            </example>
+        </step>
+
+        <step number="3" priority="critical">
+            <action>Read local component source before using</action>
+            <guidance>
+                <point>MANDATORY: Use read_file to read the source code of ANY local component before using it for the first time</point>
+                <point>Understand the component's props, especially render props or special integration points</point>
+                <point>Check for patterns like renderPageHeader, actionBarItems, or similar that indicate how to add content</point>
+                <point>Document available props and their purposes in your analysis</point>
+                <point>Never assume how a component works - always verify by reading its implementation</point>
+            </guidance>
+            <rationale>
+        Reading component source prevents misuse and ensures you leverage all available
+        features rather than creating unnecessary custom implementations.
+            </rationale>
+            <enforcement>
+                <rule priority="critical">ALWAYS use read_file to examine local component source code before first use</rule>
+                <rule priority="critical">Document all available props and their purposes in your analysis</rule>
+                <rule priority="critical">Never assume component behavior - always verify by reading the source</rule>
+                <rule priority="critical">If a component has specialized props (like renderPageHeader), you MUST use them</rule>
+            </enforcement>
+        </step>
+
+        <step number="4" priority="high">
+            <action>Start with minimal viable implementation</action>
+            <guidance>
+                <point>Use the simplest approach that matches existing project patterns</point>
+                <point>Avoid introducing new component libraries or patterns unless necessary</point>
+                <point>Prefer extending existing patterns over creating new ones</point>
+                <point>Keep changes surgical and minimal</point>
+            </guidance>
+            <key_question>
+        "How does this project already solve similar problems?" - Always use tools to check
+        existing implementations before introducing new patterns.
+            </key_question>
+        </step>
+    </pre_integration_analysis>
+
+    <configuration_verification priority="critical">
+        <title>Configuration Verification (Before Implementation)</title>
+        <description>
+      Configuration issues must be identified and resolved BEFORE starting UI implementation.
+      Deferring configuration fixes leads to wasted effort and potential rework.
+        </description>
+
+        <step number="1" priority="critical">
+            <action>Check build system compatibility with comprehensive SSR detection</action>
+            <guidance>
+                <point priority="critical">Use read_file to examine build configuration files (vite.config.js, webpack.config.js, etc.)</point>
+                <point priority="critical">MANDATORY: Check for SSR entry files (entry-server.js, server.js) using list_files and search_files</point>
+                <point priority="critical">Before adding any new package, verify if it's compatible with the project's build system</point>
+                <point priority="critical">Check if the package contains browser-only code that conflicts with SSR/SSG</point>
+                <point priority="high">Search package documentation for known compatibility issues</point>
+                <point priority="critical">If SSR is detected, determine if dynamic imports with React.lazy() are needed BEFORE implementation</point>
+            </guidance>
+            <comprehensive_ssr_check priority="critical">
+                <title>Complete SSR Detection Process</title>
+                <description>
+            Perform ALL of these checks to ensure SSR is properly detected:
+                </description>
+                <check_sequence>
+                    <check number="1">
+                        <action>Check for SSR entry files</action>
+                        <files_to_check>
+                            <file>src/entry-server.js</file>
+                            <file>src/entry-server.jsx</file>
+                            <file>src/entry-server.ts</file>
+                            <file>src/entry-server.tsx</file>
+                            <file>server.js</file>
+                            <file>server.ts</file>
+                            <file>src/server.js</file>
+                            <file>src/server.ts</file>
+                        </files_to_check>
+                        <critical_note>
+                    These files indicate SSR even if vite.config.js doesn't show explicit SSR config.
+                    Their presence is the MOST RELIABLE indicator of SSR usage.
+                        </critical_note>
+                    </check>
+                    <check number="2">
+                        <action>Check vite.config.js for SSR configuration</action>
+                        <look_for>
+                            <item>ssr: { } configuration block</item>
+                            <item>ssr.external array</item>
+                            <item>ssr.noExternal array</item>
+                        </look_for>
+                    </check>
+                    <check number="3">
+                        <action>Check package.json for SSR-related scripts</action>
+                        <look_for>
+                            <item>build:ssr, dev:ssr, preview:ssr scripts</item>
+                            <item>@vitejs/plugin-react-ssr dependency</item>
+                        </look_for>
+                    </check>
+                </check_sequence>
+            </comprehensive_ssr_check>
+            <example><![CDATA[
+// Check Vite configuration for SSR setup
+<read_file>
+<args>
+  <file>
+    <path>vite.config.js</path>
+  </file>
+</args>
+</read_file>
+
+// Look for SSR indicators
+<search_files>
+<path>.</path>
+<regex>ssr:|entry-server|server\.js</regex>
+<file_pattern>*.js</file_pattern>
+</search_files>
+      ]]>            </example>
+        </step>
+
+        <step number="2" priority="critical">
+            <action>Apply configuration fixes immediately and completely</action>
+            <guidance>
+                <point priority="critical">When a configuration change is identified as necessary, apply it BEFORE implementing UI components</point>
+                <point priority="critical">For SSR projects with browser-only packages: BOTH add to ssr.external AND use dynamic imports with React.lazy()</point>
+                <point priority="critical">Use apply_diff to make configuration changes with exact SEARCH/REPLACE blocks</point>
+                <point priority="critical">Verify configuration syntax is correct (proper nesting, correct property names)</point>
+                <point priority="critical">Use read_file after changes to confirm they were applied correctly</point>
+            </guidance>
+            <rationale>
+        Fixing configuration issues first prevents build errors during UI implementation
+        and avoids the need to backtrack and fix configuration later. For SSR projects,
+        BOTH configuration changes AND code changes (dynamic imports) are required.
+            </rationale>
+            <ssr_configuration_requirements priority="critical">
+                <title>REQUIRED Steps for Browser-Only Packages in SSR Projects</title>
+                <description>
+            When adding packages with browser-only code to SSR projects, you MUST complete
+            BOTH configuration updates AND implementation changes:
+                </description>
+                <requirement number="1" priority="critical">
+                    <title>Update vite.config.js ssr.external</title>
+                    <description>Add the package to the ssr.external array</description>
+                    <note>This alone is NOT sufficient - you must also use dynamic imports</note>
+                </requirement>
+                <requirement number="2" priority="critical">
+                    <title>Use dynamic imports with React.lazy()</title>
+                    <description>
+                Implement components using React.lazy() and Suspense to ensure they only
+                load on the client side. Do NOT use top-level imports for browser-only packages.
+                    </description>
+                </requirement>
+                <critical_rule>
+            BOTH steps are required. Adding to ssr.external without dynamic imports will still
+            cause build errors. Using dynamic imports without ssr.external may also cause issues.
+                </critical_rule>
+            </ssr_configuration_requirements>
+            <example><![CDATA[
+// Apply SSR configuration fix immediately
+<apply_diff>
+<path>vite.config.js</path>
+<diff>
+<<<<<<< SEARCH
+:start_line:15
+-------
+export default defineConfig({
+  plugins: [react()],
+=======
+export default defineConfig({
+  plugins: [react()],
+  ssr: {
+    external: ['@carbon/ibm-products']
+  },
+>>>>>>> REPLACE
+</diff>
+</apply_diff>
+
+// Verify the change was applied correctly
+<read_file>
+<args>
+  <file>
+    <path>vite.config.js</path>
+    <line_range>10-25</line_range>
+  </file>
+</args>
+</read_file>
+      ]]>            </example>
+        </step>
+
+        <step number="3" priority="critical">
+            <action>Validate configuration before proceeding</action>
+            <guidance>
+                <point>After making configuration changes, use read_file to verify the syntax is valid</point>
+                <point>Check that all required properties are set correctly (e.g., ssr.external, ssr.noExternal)</point>
+                <point>Ensure configuration changes match the documented solution for the specific issue</point>
+                <point>Never assume configuration changes worked without verification</point>
+            </guidance>
+            <critical_rule>
+        Fix ALL configuration issues BEFORE starting UI implementation. Don't defer configuration updates.
+            </critical_rule>
+        </step>
+    </configuration_verification>
+
+    <targeted_code_modifications priority="high">
+        <title>Targeted Code Modifications</title>
+        <description>
+      Make precise, minimal changes to accomplish the task while preserving existing code
+      structure and patterns.
+        </description>
+
+        <principle number="1" priority="high">
+            <title>Minimize file modifications</title>
+            <guidance>
+                <point>Only modify files that are absolutely necessary for the feature</point>
+                <point>Use list_files and search_files to identify the minimal set of files that need changes</point>
+                <point>Avoid touching unrelated code or files</point>
+                <point>Keep changes isolated to the specific functionality being added</point>
+            </guidance>
+        </principle>
+
+        <principle number="2" priority="critical">
+            <title>Use targeted edits with apply_diff</title>
+            <guidance>
+                <point>Use apply_diff with exact SEARCH/REPLACE blocks for surgical edits</point>
+                <point>Make precise, line-specific changes rather than rewriting entire sections</point>
+                <point>Preserve existing code structure, formatting, and style</point>
+                <point>Only change what needs to change - nothing more</point>
+            </guidance>
+            <example><![CDATA[
+// Good: Targeted edit adding a single import
+<apply_diff>
+<path>src/components/Dashboard.jsx</path>
+<diff>
+<<<<<<< SEARCH
+:start_line:1
+-------
+import { Grid, Column } from '@carbon/react';
+=======
+import { Grid, Column, Button } from '@carbon/react';
+>>>>>>> REPLACE
+</diff>
+</apply_diff>
+
+// Bad: Rewriting entire import section when only one import is needed
+      ]]>            </example>
+        </principle>
+
+        <principle number="3" priority="high">
+            <title>Batch related changes</title>
+            <guidance>
+                <point>Group all related changes to a single file in one apply_diff operation</point>
+                <point>Use multiple SEARCH/REPLACE blocks within a single diff when possible</point>
+                <point>Plan all changes to a file before executing them</point>
+                <point>Avoid making multiple separate edits to the same file</point>
+            </guidance>
+            <example><![CDATA[
+// Good: Multiple related changes in one apply_diff
+<apply_diff>
+<path>src/components/Dashboard.jsx</path>
+<diff>
+<<<<<<< SEARCH
+:start_line:1
+-------
+import { Grid, Column } from '@carbon/react';
+=======
+import { Grid, Column, Button } from '@carbon/react';
+>>>>>>> REPLACE
+
+<<<<<<< SEARCH
+:start_line:25
+-------
+      </Column>
+    </Grid>
+  );
+=======
+      </Column>
+    </Grid>
+    <Grid>
+      <Column sm={4} md={8} lg={16}>
+        <Button>New Action</Button>
+      </Column>
+    </Grid>
+  );
+>>>>>>> REPLACE
+</diff>
+</apply_diff>
+      ]]>            </example>
+        </principle>
+
+        <principle number="4" priority="high">
+            <title>Compartmentalize new functionality</title>
+            <guidance>
+                <point>Use write_to_file to create new files for new features rather than adding to existing files when appropriate</point>
+                <point>Keep feature-specific code in dedicated modules/components</point>
+                <point>Use clear separation of concerns (e.g., separate handler files, style files)</point>
+                <point>Make additions that can be easily removed if needed</point>
+            </guidance>
+        </principle>
+
+        <principle number="5" priority="high">
+            <title>Preserve existing patterns</title>
+            <guidance>
+                <point>Use read_file to understand existing code style, indentation, and conventions</point>
+                <point>Match the existing patterns exactly</point>
+                <point>Don't introduce new patterns or refactor existing ones</point>
+                <point>Keep the same import organization and structure</point>
+            </guidance>
+            <key_principle>
+        "Change only what you must, touch only what you need" - Every line changed should
+        have a clear, necessary purpose.
+            </key_principle>
+        </principle>
+    </targeted_code_modifications>
+
+    <ui_component_rendering_verification priority="critical">
+        <title>UI Component Rendering Verification</title>
+        <description>
+      Ensure components render correctly by understanding their rendering context and
+      integration points before implementation.
+        </description>
+
+        <step number="1" priority="critical">
+            <action>Understand component rendering context</action>
+            <guidance>
+                <point>Use read_file to understand where and how the component will render</point>
+                <point>Check if parent components have specific requirements for child rendering</point>
+                <point>Verify that the chosen implementation approach matches the component's API</point>
+                <point>Never assume a component will render without understanding its rendering mechanism</point>
+            </guidance>
+        </step>
+
+        <step number="2" priority="critical">
+            <action>Verify component integration points</action>
+            <guidance>
+                <point>MANDATORY: Use read_file to read the parent component's source code before integrating</point>
+                <point>Check if the parent component has specific props or patterns for adding child elements</point>
+                <point>Verify that your implementation approach is compatible with the parent's rendering logic</point>
+                <point>Look for render props, slots, or specific child component patterns</point>
+            </guidance>
+            <example><![CDATA[
+// Before adding content to PageLayout, read its source
+<read_file>
+<args>
+  <file>
+    <path>src/layouts/PageLayout.jsx</path>
+  </file>
+</args>
+</read_file>
+
+// After reading, you discover it has a renderPageHeader prop
+// Use the correct integration point
+<PageLayout renderPageHeader={() => <PageHeader {...props} />}>
+  {children}
+</PageLayout>
+      ]]>            </example>
+        </step>
+
+        <step number="3" priority="high">
+            <action>Validate rendering implementation</action>
+            <guidance>
+                <point>After implementing UI components, plan to verify they actually appear in the rendered output</point>
+                <point>Don't assume components render correctly without visual confirmation</point>
+                <point>If a component doesn't render, use read_file to investigate the parent's rendering logic immediately</point>
+                <point>Consider using browser validation to check if elements exist in the DOM</point>
+            </guidance>
+        </step>
+
+        <step number="4" priority="high">
+            <action>Complete styling integration</action>
+            <guidance>
+                <point>Use read_file to check existing style files and patterns</point>
+                <point>Ensure all necessary style imports are added (e.g., @use statements in SCSS)</point>
+                <point>Verify styles are loaded for the component library</point>
+                <point>Match existing styling conventions (CSS modules, SCSS, etc.)</point>
+            </guidance>
+            <critical_rule>
+        Always read component source code before using it. Never guess at integration points.
+            </critical_rule>
+        </step>
+    </ui_component_rendering_verification>
+
+    <systematic_problem_resolution priority="critical">
+        <title>Systematic Problem Resolution</title>
+        <description>
+      When issues arise, resolve them systematically by identifying all root causes and
+      fixing them in the correct order.
+        </description>
+
+        <step number="1" priority="critical">
+            <action>Identify root causes completely</action>
+            <guidance>
+                <point>When an error occurs, use read_file to examine all potentially affected files</point>
+                <point>Identify ALL root causes, not just the first one</point>
+                <point>Check for both configuration issues AND implementation issues</point>
+                <point>List all potential issues before starting fixes</point>
+            </guidance>
+        </step>
+
+        <step number="2" priority="critical">
+            <action>Fix issues in logical order</action>
+            <sequence>
+                <item number="1">Fix configuration/setup issues FIRST (build system, SSR compatibility)</item>
+                <item number="2">Then resolve implementation issues (component integration, rendering)</item>
+                <item number="3">Finally address styling and polish</item>
+            </sequence>
+            <rationale>
+        Don't skip prerequisite fixes to get to UI implementation faster. Configuration
+        issues must be resolved before implementation can succeed.
+            </rationale>
+        </step>
+
+        <step number="3" priority="high">
+            <action>Verify each fix independently</action>
+            <guidance>
+                <point>After each fix, use read_file to verify it was applied correctly</point>
+                <point>Don't chain multiple fixes without validation between them</point>
+                <point>Test incrementally rather than fixing everything at once</point>
+                <point>Use apply_diff for each distinct fix to maintain clarity</point>
+            </guidance>
+        </step>
+
+        <step number="4" priority="high">
+            <action>Complete implementation fully</action>
+            <guidance>
+                <point>Ensure all necessary files are modified (configuration, components, styles)</point>
+                <point>Use list_files to verify all required files exist</point>
+                <point>Verify all integration points are properly connected</point>
+                <point>Plan for browser validation to check end-to-end functionality</point>
+            </guidance>
+            <critical_rule>
+        Fix configuration issues BEFORE implementation issues. Verify each fix before proceeding.
+            </critical_rule>
+        </step>
+    </systematic_problem_resolution>
+
+    <tool_usage_best_practices priority="high">
+        <title>Tool Usage Best Practices</title>
+        <description>
+      Effective use of available tools is essential for understanding context, making
+      informed decisions, and verifying changes.
+        </description>
+
+        <practice number="1" priority="critical">
+            <title>Always use tools for verification</title>
+            <guidance>
+                <point>Use read_file to verify file contents before and after changes</point>
+                <point>Use search_files to find existing patterns and implementations</point>
+                <point>Use list_code_definition_names to understand code structure</point>
+                <point>Use list_files to verify file existence and project structure</point>
+            </guidance>
+        </practice>
+
+        <practice number="2" priority="critical">
+            <title>Read before writing</title>
+            <guidance>
+                <point>Always use read_file to understand existing code before modifying it</point>
+                <point>Never assume file contents - always verify</point>
+                <point>Read configuration files to understand build system setup</point>
+                <point>Read component source to understand integration points</point>
+            </guidance>
+        </practice>
+
+        <practice number="3" priority="high">
+            <title>Verify after changes</title>
+            <guidance>
+                <point>Use read_file after apply_diff or write_to_file to confirm changes were applied correctly</point>
+                <point>Check that syntax is valid and formatting is preserved</point>
+                <point>Verify that all intended changes were made</point>
+                <point>Confirm no unintended changes occurred</point>
+            </guidance>
+            <key_principle>
+        "Read, Plan, Execute, Verify" - Always use tools to understand before changing,
+        and verify after changing.
+            </key_principle>
+        </practice>
+    </tool_usage_best_practices>
+
+    <implementation_checklist>
+        <title>Implementation Checklist</title>
+        <description>
+      Use this checklist to ensure all critical steps are completed before, during, and
+      after implementation.
+        </description>
+
+        <phase name="before_starting">
+            <title>Before Starting Implementation</title>
+            <items>
+                <item priority="critical">Used search_files to find similar functionality</item>
+                <item priority="critical">Used read_file to examine existing patterns</item>
+                <item priority="critical">Used read_file to check build configuration for SSR/compatibility issues</item>
+                <item priority="critical">Used read_file to read local component source code</item>
+                <item priority="high">Identified minimal set of files to modify</item>
+            </items>
+        </phase>
+
+        <phase name="during_configuration">
+            <title>During Configuration</title>
+            <items>
+                <item priority="critical">Applied ALL necessary configuration changes BEFORE UI implementation</item>
+                <item priority="critical">Used read_file to verify configuration changes were applied correctly</item>
+                <item priority="critical">Confirmed configuration syntax is valid</item>
+            </items>
+        </phase>
+
+        <phase name="during_implementation">
+            <title>During Implementation</title>
+            <items>
+                <item priority="critical">Used apply_diff with multiple SEARCH/REPLACE blocks for related changes</item>
+                <item priority="high">Preserved existing code patterns and style</item>
+                <item priority="high">Created new files for new features when appropriate</item>
+                <item priority="high">Added all necessary style imports</item>
+            </items>
+        </phase>
+
+        <phase name="after_implementation">
+            <title>After Implementation</title>
+            <items>
+                <item priority="critical">Used read_file to verify all changes were applied correctly</item>
+                <item priority="high">Confirmed all integration points are properly connected</item>
+                <item priority="high">Planned for browser validation to test end-to-end functionality</item>
+            </items>
+        </phase>
+    </implementation_checklist>
+
+    <integration_with_workflow>
+        <title>Integration with Existing Workflow</title>
+        <description>
+      These integration best practices complement and enhance the existing workflow defined
+      in 1_workflow.xml. They should be applied throughout all phases of implementation.
+        </description>
+        <reference>
+      See 1_workflow.xml for the complete component creation workflow. These integration
+      practices should be applied during the Analysis and Planning Phase (before step 4)
+      and throughout the Implementation Phase.
+        </reference>
+    </integration_with_workflow>
+</integration_best_practices>
+
+<!-- Made with Bob -->

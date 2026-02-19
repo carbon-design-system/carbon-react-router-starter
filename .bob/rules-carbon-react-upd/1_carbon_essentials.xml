@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<carbon_essentials>
+    <overview>
+        Core Carbon Design System knowledge needed for any Carbon-related task,
+        including component discovery, Carbon MCP usage, and fundamental design tokens.
+    </overview>
+
+    <carbon_mcp_usage priority="critical">
+        <title>Using Carbon MCP for Documentation and Code Examples</title>
+        <description>
+            The Carbon MCP server provides two essential tools for working with Carbon:
+            docs_search for documentation and code_search for implementation examples.
+        </description>
+
+        <tool name="docs_search">
+            <purpose>Search Carbon and IBM Products documentation for design, usage, style, accessibility, and general content</purpose>
+            <when_to_use>
+                <use>Understanding component guidelines and best practices</use>
+                <use>Learning about design patterns and usage</use>
+                <use>Finding accessibility requirements</use>
+                <use>Researching styling approaches</use>
+            </when_to_use>
+            <usage_patterns>
+                <pattern name="Component Documentation">
+                    <description>Search for specific component documentation</description>
+                    <example><![CDATA[
+<use_mcp_tool>
+<server_name>carbon-mcp</server_name>
+<tool_name>docs_search</tool_name>
+<arguments>
+{
+  "query": "Button usage guidelines",
+  "size": 5,
+  "filters": {
+    "component_id": "button",
+    "page_type": "usage"
+  }
+}
+</arguments>
+</use_mcp_tool>
+                    ]]>                    </example>
+                </pattern>
+                <pattern name="AI Chat Documentation">
+                    <description>Search AI Chat documentation (DO NOT use component filters)</description>
+                    <critical_rule>
+                        For AI Chat documentation, query by API, symbol, or topic name.
+                        DO NOT use component_id or component_type filters.
+                    </critical_rule>
+                    <example><![CDATA[
+<use_mcp_tool>
+<server_name>carbon-mcp</server_name>
+<tool_name>docs_search</tool_name>
+<arguments>
+{
+  "query": "AI Chat PublicChatState configuration",
+  "size": 5
+}
+</arguments>
+</use_mcp_tool>
+                    ]]>                    </example>
+                </pattern>
+                <pattern name="General Topics">
+                    <description>Search for design patterns, accessibility, or general guidance</description>
+                    <example><![CDATA[
+<use_mcp_tool>
+<server_name>carbon-mcp</server_name>
+<tool_name>docs_search</tool_name>
+<arguments>
+{
+  "query": "form validation patterns accessibility",
+  "size": 5
+}
+</arguments>
+</use_mcp_tool>
+                    ]]>                    </example>
+                </pattern>
+            </usage_patterns>
+        </tool>
+
+        <tool name="code_search">
+            <purpose>Search Carbon React/Web Components code examples, icons, pictograms, and AI Chat example code</purpose>
+            <when_to_use>
+                <use>Finding implementation examples with correct props</use>
+                <use>Understanding component API usage</use>
+                <use>Discovering available component variants</use>
+                <use>Learning integration patterns</use>
+            </when_to_use>
+            <usage_patterns>
+                <pattern name="React Component Examples">
+                    <description>Search for React component implementation examples</description>
+                    <example><![CDATA[
+<use_mcp_tool>
+<server_name>carbon-mcp</server_name>
+<tool_name>code_search</tool_name>
+<arguments>
+{
+  "query": "DataTable with pagination sorting",
+  "size": 3,
+  "filters": {
+    "component_type": "React"
+  }
+}
+</arguments>
+</use_mcp_tool>
+                    ]]>                    </example>
+                </pattern>
+                <pattern name="AI Chat Examples">
+                    <description>Search AI Chat code examples (include framework in query)</description>
+                    <critical_rule>
+                        For AI Chat examples, include "ai chat" plus the framework name in the query.
+                        DO NOT use component_type filter.
+                    </critical_rule>
+                    <example><![CDATA[
+<use_mcp_tool>
+<server_name>carbon-mcp</server_name>
+<tool_name>code_search</tool_name>
+<arguments>
+{
+  "query": "ai chat react basic example",
+  "size": 3
+}
+</arguments>
+</use_mcp_tool>
+                    ]]>                    </example>
+                </pattern>
+                <pattern name="Icons and Pictograms">
+                    <description>Search for icons or pictograms (DO NOT use component_type filter)</description>
+                    <example><![CDATA[
+<use_mcp_tool>
+<server_name>carbon-mcp</server_name>
+<tool_name>code_search</tool_name>
+<arguments>
+{
+  "query": "Add icon usage",
+  "size": 3
+}
+</arguments>
+</use_mcp_tool>
+                    ]]>                    </example>
+                </pattern>
+            </usage_patterns>
+        </tool>
+
+        <research_workflow priority="critical">
+            <title>MANDATORY: Research Before Implementation</title>
+            <rule>
+                ALWAYS use Carbon MCP to research correct component syntax and API
+                BEFORE writing or updating ANY Carbon component code
+            </rule>
+            <steps>
+                <step number="1">Use code_search to find implementation examples</step>
+                <step number="2">Use docs_search to understand guidelines and best practices</step>
+                <step number="3">Review examples for correct props and usage patterns</step>
+                <step number="4">Implement using verified patterns</step>
+            </steps>
+        </research_workflow>
+    </carbon_mcp_usage>
+
+    <carbon_packages priority="high">
+        <title>Carbon React Libraries and Packages</title>
+        <description>
+            Carbon React libraries are defined as Carbon v11 packages. Always prefer
+            using official packages over recreating components.
+        </description>
+
+        <package name="@carbon/react">
+            <description>Core Carbon React components</description>
+            <common_components>
+                <component>Button, TextInput, Dropdown, ComboBox</component>
+                <component>DataTable, Pagination, Search</component>
+                <component>Grid, Column, FlexGrid</component>
+                <component>Tile, ClickableTile, ExpandableTile</component>
+                <component>Modal, ComposedModal, ModalHeader, ModalBody, ModalFooter</component>
+                <component>Tabs, Tab, TabList, TabPanels, TabPanel</component>
+                <component>Accordion, AccordionItem</component>
+                <component>Breadcrumb, BreadcrumbItem</component>
+                <component>Tag, Link, Loading</component>
+                <component>Layer (for theme context)</component>
+            </common_components>
+            <import_pattern><![CDATA[
+import { Button, TextInput, Grid, Column } from '@carbon/react';
+            ]]>            </import_pattern>
+        </package>
+
+        <package name="@carbon/ibm-products">
+            <description>IBM-specific product components (Carbon for IBM Products)</description>
+            <common_components>
+                <component>PageHeader, Tearsheet, SidePanel</component>
+                <component>CreateTearsheet, CreateTearsheetStep</component>
+                <component>AboutModal, HTTPErrors</component>
+                <component>Datagrid, useDatagrid</component>
+                <component>EmptyState, NotificationsPanel</component>
+            </common_components>
+            <import_pattern><![CDATA[
+import { PageHeader, Tearsheet } from '@carbon/ibm-products';
+            ]]>            </import_pattern>
+        </package>
+
+        <package name="@carbon/web-components">
+            <description>Web Components including AI Chat</description>
+            <components>
+                <component>clabs-chat (AI Chat component)</component>
+                <component>Other web components</component>
+            </components>
+            <special_requirements priority="critical">
+                <requirement>Browser-only code - requires SSR handling if project uses SSR</requirement>
+                <requirement>Must use React.lazy() for dynamic import in SSR projects</requirement>
+                <requirement>See working_practices.xml for SSR awareness guidance</requirement>
+            </special_requirements>
+            <import_pattern><![CDATA[
+// For SSR projects, use dynamic import
+import '@carbon/web-components/es/components/chat/index.js';
+            ]]>            </import_pattern>
+        </package>
+
+        <package name="@carbon/icons-react">
+            <description>Carbon icon components for React</description>
+            <usage>Use for all icons in the application</usage>
+            <import_pattern><![CDATA[
+import { Add, Edit, Delete, ArrowRight } from '@carbon/icons-react';
+
+// Usage in components
+<Button renderIcon={Add}>Add Item</Button>
+            ]]>            </import_pattern>
+        </package>
+
+        <package name="@carbon/pictograms-react">
+            <description>Carbon pictogram components for React</description>
+            <usage>Use for larger illustrative graphics</usage>
+            <import_pattern><![CDATA[
+import { CloudUpload } from '@carbon/pictograms-react';
+            ]]>            </import_pattern>
+        </package>
+
+        <package name="@carbon/charts-react">
+            <description>Carbon chart components for data visualization</description>
+            <common_charts>
+                <chart>LineChart, AreaChart, BarChart</chart>
+                <chart>PieChart, DonutChart, GaugeChart</chart>
+                <chart>ScatterChart, BubbleChart</chart>
+            </common_charts>
+            <import_pattern><![CDATA[
+import { LineChart } from '@carbon/charts-react';
+import '@carbon/charts-react/styles.css';
+            ]]>            </import_pattern>
+        </package>
+
+        <package_selection_guidelines>
+            <guideline priority="high">
+                Always use official Carbon packages rather than recreating components
+            </guideline>
+            <guideline priority="high">
+                Add required dependencies when needed (recommend to user)
+            </guideline>
+            <guideline>
+                Check if component exists in @carbon/react first, then @carbon/ibm-products
+            </guideline>
+            <guideline>
+                Use Carbon MCP to verify component availability and correct package
+            </guideline>
+        </package_selection_guidelines>
+    </carbon_packages>
+
+    <design_tokens priority="high">
+        <title>Carbon Design Tokens</title>
+        <description>
+            Carbon provides design tokens for consistent styling. Always use tokens
+            instead of hardcoded values to ensure theme compatibility.
+        </description>
+
+        <theme_tokens>
+            <title>Theme Tokens (Semantic)</title>
+            <description>
+                Semantic tokens that adapt to the current theme. Always prefer theme
+                tokens over color tokens for theme adaptability.
+            </description>
+            <common_tokens>
+                <token name="$background">Base background color</token>
+                <token name="$layer">Context-aware layer background (use instead of $layer-01)</token>
+                <token name="$layer-01">First layer background</token>
+                <token name="$layer-02">Second layer background</token>
+                <token name="$layer-03">Third layer background</token>
+                <token name="$field">Form field background</token>
+                <token name="$text-primary">Primary text color</token>
+                <token name="$text-secondary">Secondary text color</token>
+                <token name="$text-placeholder">Placeholder text color</token>
+                <token name="$text-on-color">Text on colored backgrounds</token>
+                <token name="$link-primary">Primary link color</token>
+                <token name="$icon-primary">Primary icon color</token>
+                <token name="$border-subtle">Subtle border color</token>
+                <token name="$border-strong">Strong border color</token>
+                <token name="$interactive">Interactive element color</token>
+            </common_tokens>
+            <usage_example><![CDATA[
+.my-component {
+  background-color: $layer;
+  color: $text-primary;
+  border: 1px solid $border-subtle;
+}
+            ]]>            </usage_example>
+        </theme_tokens>
+
+        <spacing_tokens>
+            <title>Spacing Tokens</title>
+            <description>
+                Tokens for consistent spacing throughout the UI. Use Carbon MCP to
+                look up current token values. Spacing follows 8px increments.
+            </description>
+            <common_tokens>
+                <token name="$spacing-01">2px</token>
+                <token name="$spacing-02">4px</token>
+                <token name="$spacing-03">8px</token>
+                <token name="$spacing-04">12px</token>
+                <token name="$spacing-05">16px</token>
+                <token name="$spacing-06">24px</token>
+                <token name="$spacing-07">32px</token>
+                <token name="$spacing-08">40px</token>
+                <token name="$spacing-09">48px</token>
+                <token name="$spacing-10">64px</token>
+                <token name="$spacing-11">80px</token>
+                <token name="$spacing-12">96px</token>
+                <token name="$spacing-13">160px</token>
+            </common_tokens>
+            <usage_example><![CDATA[
+.my-component {
+  padding: $spacing-05;
+  margin-bottom: $spacing-06;
+  gap: $spacing-03;
+}
+            ]]>            </usage_example>
+        </spacing_tokens>
+
+        <typography_tokens>
+            <title>Typography Tokens</title>
+            <description>
+                Type tokens for consistent typography. Use type mixins instead of
+                manual font declarations.
+            </description>
+            <type_scale>
+                <token name="heading-01">14px / 18px (smallest heading)</token>
+                <token name="heading-02">16px / 22px</token>
+                <token name="heading-03">20px / 26px</token>
+                <token name="heading-04">28px / 36px</token>
+                <token name="heading-05">32px / 40px</token>
+                <token name="heading-06">42px / 50px</token>
+                <token name="heading-07">54px / 64px (largest heading)</token>
+                <token name="body-short-01">14px / 18px (compact body)</token>
+                <token name="body-short-02">16px / 22px</token>
+                <token name="body-long-01">14px / 20px (readable body)</token>
+                <token name="body-long-02">16px / 24px</token>
+                <token name="code-01">12px / 16px (monospace)</token>
+                <token name="code-02">14px / 20px (monospace)</token>
+                <token name="label-01">12px / 16px (small labels)</token>
+                <token name="label-02">14px / 18px</token>
+                <token name="helper-text-01">12px / 16px</token>
+                <token name="helper-text-02">14px / 18px</token>
+            </type_scale>
+            <usage_example><![CDATA[
+.my-heading {
+  @include type-style('heading-03');
+}
+
+.my-body-text {
+  @include type-style('body-long-01');
+}
+            ]]>            </usage_example>
+        </typography_tokens>
+
+        <layer_system>
+            <title>Layer System for Theme Context</title>
+            <description>
+                The Layer component provides theme context for nested components.
+                Use it when you need background color changes that match layer tokens.
+            </description>
+            <critical_guidelines>
+                <guideline priority="critical">
+                    NEVER manually set the layer level using the level prop.
+                    Let nesting determine layer level automatically.
+                </guideline>
+                <guideline priority="critical">
+                    Use withBackground prop when the design shows a visible background color.
+                    Without withBackground, Layer only provides context without setting background.
+                </guideline>
+            </critical_guidelines>
+            <usage_example><![CDATA[
+import { Layer } from '@carbon/react';
+
+// Correct: Nesting determines layer level
+<>
+  <ComponentOnBaseLayer />
+  <Layer withBackground>
+    <ComponentOnLayer01 />
+    <Layer withBackground>
+      <ComponentOnLayer02 />
+    </Layer>
+  </Layer>
+</>
+
+// Incorrect: Don't manually set level
+<Layer level={2}>  {/* ❌ Don't do this */}
+  <ComponentOnLayer02 />
+</Layer>
+            ]]>            </usage_example>
+        </layer_system>
+    </design_tokens>
+
+    <component_discovery>
+        <title>Component Discovery Process</title>
+        <description>
+            Process for finding the right Carbon component for a given use case.
+        </description>
+        <steps>
+            <step number="1">
+                <action>Identify the UI pattern or functionality needed</action>
+                <example>Need a data table with sorting and pagination</example>
+            </step>
+            <step number="2">
+                <action>Use Carbon MCP code_search to find similar examples</action>
+                <example><![CDATA[
+<use_mcp_tool>
+<server_name>carbon-mcp</server_name>
+<tool_name>code_search</tool_name>
+<arguments>
+{
+  "query": "DataTable sorting pagination",
+  "size": 3,
+  "filters": {
+    "component_type": "React"
+  }
+}
+</arguments>
+</use_mcp_tool>
+                ]]>                </example>
+            </step>
+            <step number="3">
+                <action>Use Carbon MCP docs_search to understand component guidelines</action>
+                <example><![CDATA[
+<use_mcp_tool>
+<server_name>carbon-mcp</server_name>
+<tool_name>docs_search</tool_name>
+<arguments>
+{
+  "query": "DataTable usage guidelines",
+  "size": 5,
+  "filters": {
+    "component_id": "data-table",
+    "page_type": "usage"
+  }
+}
+</arguments>
+</use_mcp_tool>
+                ]]>                </example>
+            </step>
+            <step number="4">
+                <action>Review examples and documentation to understand props and patterns</action>
+            </step>
+            <step number="5">
+                <action>Implement using verified patterns from Carbon MCP</action>
+            </step>
+        </steps>
+    </component_discovery>
+
+    <quick_reference>
+        <title>Quick Reference</title>
+        <common_patterns>
+            <pattern name="Basic Layout">
+                <code><![CDATA[
+import { Grid, Column } from '@carbon/react';
+
+<Grid>
+  <Column sm={4} md={8} lg={16}>
+    <h1>Page Title</h1>
+  </Column>
+</Grid>
+                ]]>                </code>
+            </pattern>
+            <pattern name="Form with Validation">
+                <code><![CDATA[
+import { TextInput, Button, Form } from '@carbon/react';
+
+<Form>
+  <TextInput
+    id="email" labelText="Email" invalid={hasError}
+    invalidText="Please enter a valid email" />
+  <Button type="submit">Submit</Button>
+</Form>
+                ]]>                </code>
+            </pattern>
+            <pattern name="Modal Dialog">
+                <code><![CDATA[
+import { Modal } from '@carbon/react';
+
+<Modal
+  open={isOpen}
+  onRequestClose={() => setIsOpen(false)}
+  modalHeading="Confirm Action" primaryButtonText="Confirm" secondaryButtonText="Cancel">
+  <p>Are you sure you want to proceed?</p>
+</Modal>
+                ]]>                </code>
+            </pattern>
+        </common_patterns>
+    </quick_reference>
+</carbon_essentials>

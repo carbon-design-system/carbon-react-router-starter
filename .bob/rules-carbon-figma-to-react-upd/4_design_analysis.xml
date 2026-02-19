@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<design_analysis>
+    <overview>
+        Comprehensive guidance for analyzing designs from Figma (with MCP),
+        images, screenshots, or user descriptions. Figma MCP is the primary
+        method, with image and description analysis as fallbacks.
+    </overview>
+
+    <figma_analysis priority="critical">
+        <title>Figma Design Analysis with MCP</title>
+        <description>
+            When users provide Figma designs, use Figma MCP tools to extract precise
+            measurements and specifications directly from Figma. This is the primary
+            and preferred method for design analysis.
+        </description>
+
+        <figma_mcp_tools>
+            <title>Figma MCP Tools Reference</title>
+            <description>
+                Essential tools for extracting design information from Figma.
+            </description>
+
+            <tool name="get_code">
+                <description>Generate UI code for a node</description>
+                <when_to_use>
+                    <use>Extract CSS properties and styles</use>
+                    <use>Get initial code structure for components</use>
+                    <use>Extract typography and spacing values</use>
+                </when_to_use>
+                <example><![CDATA[
+<use_mcp_tool>
+<server_name>Figma Dev Mode MCP</server_name>
+<tool_name>get_code</tool_name>
+<arguments>
+{
+  "nodeId": "123:456",
+  "clientLanguages": "javascript,html,css",
+  "clientFrameworks": "react"
+}
+</arguments>
+</use_mcp_tool>
+                ]]>                </example>
+            </tool>
+
+            <tool name="get_metadata">
+                <description>Get structure overview with node IDs, types, names, positions and sizes</description>
+                <when_to_use>
+                    <use>Analyze component hierarchy</use>
+                    <use>Extract precise measurements and positions</use>
+                    <use>Identify component relationships</use>
+                    <use>Calculate column spans based on exact widths</use>
+                </when_to_use>
+                <example><![CDATA[
+<use_mcp_tool>
+<server_name>Figma Dev Mode MCP</server_name>
+<tool_name>get_metadata</tool_name>
+<arguments>
+{
+  "nodeId": "123:456"
+}
+</arguments>
+</use_mcp_tool>
+                ]]>                </example>
+            </tool>
+
+            <tool name="get_variable_defs">
+                <description>Get variable definitions (colors, fonts, sizes, spacings)</description>
+                <when_to_use>
+                    <use>Extract design tokens and variables</use>
+                    <use>Map Figma variables to Carbon tokens</use>
+                    <use>Identify theme colors and typography</use>
+                </when_to_use>
+                <example><![CDATA[
+<use_mcp_tool>
+<server_name>Figma Dev Mode MCP</server_name>
+<tool_name>get_variable_defs</tool_name>
+<arguments>
+{
+  "nodeId": "123:456"
+}
+</arguments>
+</use_mcp_tool>
+                ]]>                </example>
+            </tool>
+
+            <tool name="get_screenshot">
+                <description>Generate a screenshot for a node</description>
+                <when_to_use>
+                    <use>Capture visual reference for implementation</use>
+                    <use>Document design for discussion</use>
+                </when_to_use>
+                <example><![CDATA[
+<use_mcp_tool>
+<server_name>Figma Dev Mode MCP</server_name>
+<tool_name>get_screenshot</tool_name>
+<arguments>
+{
+  "nodeId": "123:456"
+}
+</arguments>
+</use_mcp_tool>
+                ]]>                </example>
+            </tool>
+        </figma_mcp_tools>
+
+        <figma_analysis_workflow priority="critical">
+            <title>Complete Figma Design Analysis Workflow</title>
+            <description>
+                A structured approach to analyzing Figma designs before implementation,
+                ensuring accurate translation of design intent to Carbon components.
+            </description>
+
+            <mandatory_requirement priority="critical">
+                <title>COMPLETE ANALYSIS WITH USER CONFIRMATION</title>
+                <description>
+                    You MUST perform and present a COMPLETE design analysis including ALL
+                    of the following sections. This is NOT optional and MUST be completed
+                    BEFORE any implementation begins. After presenting this analysis, you
+                    MUST pause and ask for user confirmation before proceeding.
+                </description>
+            </mandatory_requirement>
+
+            <step number="1">
+                <title>Component Inventory</title>
+                <action>Identify all Carbon components used in the design</action>
+                <guidance>
+                    <point>Use get_metadata to identify all components in the design</point>
+                    <point>Map Figma components to Carbon components</point>
+                    <point>Document any custom components that need to be created</point>
+                    <point>Note component variants (primary/secondary buttons, clickable tiles, etc.)</point>
+                </guidance>
+                <example><![CDATA[
+<use_mcp_tool>
+<server_name>Figma Dev Mode MCP</server_name>
+<tool_name>get_metadata</tool_name>
+<arguments>
+{
+  "nodeId": "123:456"
+}
+</arguments>
+</use_mcp_tool>
+
+// Example component inventory:
+// - Carbon Button (primary, secondary)
+// - Carbon Tile (clickable)
+// - Carbon DataTable
+// - Custom card component (will need to be built with Carbon components)
+                ]]>                </example>
+            </step>
+
+            <step number="2">
+                <title>Typography Analysis</title>
+                <action>Map typography in the design to Carbon type tokens</action>
+                <guidance>
+                    <point>Use get_code to extract typography styles</point>
+                    <point>Map to Carbon type tokens (heading-01, body-short-01, etc.)</point>
+                    <point>Document any custom typography that doesn't match Carbon tokens</point>
+                </guidance>
+                <example><![CDATA[
+Typography Analysis:
+- Page title: 32px/40px → heading-05
+- Section headings: 20px/26px → heading-03
+- Card titles: 16px/22px → heading-02
+- Body text: 14px/20px → body-long-01
+- Labels: 12px/16px → label-01
+                ]]>                </example>
+            </step>
+
+            <step number="3" priority="critical">
+                <title>Grid Analysis</title>
+                <action>Analyze layout grid and determine column spans</action>
+                <guidance>
+                    <point>Identify grid variant used (default, narrow, condensed)</point>
+                    <point>Look for layout components in the design (Auto Layout, frames, containers) as they may inform grid calculations and reveal intended structure</point>
+                    <point>Identify floating elements (modals, side panels) that should NOT use Grid</point>
+                    <point priority="critical">Calculate column spans for ALL grid-based components at ALL breakpoints (sm, md, lg)</point>
+                    <point>Use the formula: Math.ceil((width in pixels) / ((grid width) / (number of columns)))</point>
+                    <point priority="critical">Identify logical content groups - each needs its own Grid component</point>
+                </guidance>
+                <note>
+                    Layout components in Figma (such as Auto Layout frames, grid overlays, or container
+                    components) often indicate the designer's intended grid structure and can help
+                    identify logical content groups and appropriate column spans.
+                </note>
+                <example><![CDATA[
+Grid Analysis:
+- Container width: 1200px (lg breakpoint)
+- Grid variant: default (32px gutters)
+- Layout component detected: Auto Layout frame with 3 equal columns
+
+Logical Content Groups:
+1. Header Section (separate Grid):
+   - Full width: sm={4} md={8} lg={16}
+
+2. Content Section (separate Grid):
+   - Main content: sm={4} md={5} lg={10}
+   - Sidebar: sm={4} md={3} lg={6}
+
+3. Tiles Section (separate Grid):
+   - 3 tiles: sm={4} md={4} lg={5}, lg={5}, lg={6}
+                ]]>                </example>
+            </step>
+
+            <step number="4">
+                <title>Spacing Analysis</title>
+                <action>Map spacing in the design to Carbon spacing tokens</action>
+                <guidance>
+                    <point>Use get_metadata to extract spacing between elements</point>
+                    <point priority="high">Measure visual spacing in the design, not Figma element bounds</point>
+                    <point>Map to Carbon spacing tokens ($spacing-03, $spacing-05, etc.)</point>
+                    <point>Document any spacing that doesn't align with Carbon tokens</point>
+                </guidance>
+                <spacing_guidelines>
+                    <guideline priority="high">
+                        Use the closest Carbon spacing tokens when other layout criteria
+                        (such as Carbon Grid) do not apply
+                    </guideline>
+                    <guideline priority="high">
+                        Be cautious with margins as they collapse in some circumstances.
+                        Consider using padding or gap properties when consistent spacing is critical.
+                    </guideline>
+                    <guideline priority="high">
+                        Spacing should match the visual layout of the design and not be
+                        affected by non-visible artifacts in Figma that may overflow the
+                        visual size of an element.
+                    </guideline>
+                </spacing_guidelines>
+                <example><![CDATA[
+Spacing Analysis:
+- Visual gap between header and content: 24px → $spacing-06
+- Card internal padding: 16px → $spacing-05
+- Gap between tiles: 16px → use gap property with $spacing-05 (avoids margin collapse)
+- Note: Figma layer shows 32px bounds but visual spacing is 24px (ignore overflow)
+                ]]>                </example>
+            </step>
+
+            <step number="5">
+                <title>Color and Theme Analysis</title>
+                <action>Identify theme and map colors to Carbon tokens</action>
+                <guidance>
+                    <point>Use get_variable_defs to extract color variables</point>
+                    <point>Identify which Carbon theme is being used (white, g10, g90, g100)</point>
+                    <point>Map colors to Carbon theme tokens ($text-primary, $layer, etc.)</point>
+                    <point priority="high">Identify layer changes: When elements have background colors matching layer-aware values ($layer-01, $layer-02, $layer-03), evaluate if they should be implemented as Layer components</point>
+                </guidance>
+                <layer_detection>
+                    <title>Detecting Layers in Figma</title>
+                    <description>
+                        Figma designs often don't explicitly indicate Carbon's layer system.
+                        Look for these indicators:
+                    </description>
+                    <indicators>
+                        <indicator priority="high">Background color changes that match Carbon layer token values</indicator>
+                        <indicator priority="high">Nested containers with distinct background colors</indicator>
+                        <indicator priority="high">Cards, panels, or sections elevated above the base background</indicator>
+                        <indicator>Modal dialogs or overlays (typically require Layer)</indicator>
+                        <indicator>Form sections or grouped content with different backgrounds</indicator>
+                    </indicators>
+                    <evaluation_criteria>
+                        <criterion>Does the element have a background color matching $layer-01, $layer-02, or $layer-03?</criterion>
+                        <criterion>Is the element a container for other components that need proper theming?</criterion>
+                        <criterion>Would nested Carbon components benefit from automatic layer context?</criterion>
+                        <criterion>Does the design show visual hierarchy through background color changes?</criterion>
+                    </evaluation_criteria>
+                    <implementation_decision>
+                        <rule priority="high">If an element has a background matching a layer token value AND contains Carbon components, implement it as a Layer component</rule>
+                        <rule priority="high">If an element is purely decorative with a layer-like color but contains no Carbon components, use custom styling instead</rule>
+                        <rule>When in doubt, prefer Layer components for containers with Carbon components inside</rule>
+                    </implementation_decision>
+                </layer_detection>
+                <layer_usage_guidelines>
+                    <guideline priority="critical">
+                        <title>Rely on Nesting and Context</title>
+                        <description>
+                            NEVER manually set the layer level using the level prop. The Layer component
+                            automatically manages layer levels through nesting and context.
+                        </description>
+                        <correct_usage><![CDATA[
+// CORRECT: Let nesting determine layer level
+<>
+  <ComponentOnBaseLayer />
+  <Layer>
+    <ComponentOnLayer01 />
+    <Layer>
+      <ComponentOnLayer02 />
+    </Layer>
+  </Layer>
+</>
+                        ]]>                        </correct_usage>
+                    </guideline>
+                    <guideline priority="critical">
+                        <title>Use withBackground for Visible Layers</title>
+                        <description>
+                            The Layer component does NOT set its own background color by default.
+                            When a Figma design shows a visible background color change, use the
+                            withBackground prop to apply the background color.
+                        </description>
+                        <correct_usage><![CDATA[
+// CORRECT: Use withBackground when design shows visible background
+<Layer withBackground>
+  <div className="card-content">
+    <h2>Card Title</h2>
+    <p>Card content with proper layer context</p>
+  </div>
+</Layer>
+                        ]]>                        </correct_usage>
+                    </guideline>
+                </layer_usage_guidelines>
+            </step>
+
+            <step number="6" priority="critical">
+                <title>Present Complete Analysis to User</title>
+                <action>Share ALL findings and confirm approach before implementation</action>
+                <required_sections priority="critical">
+                    <section>Component Inventory - List ALL Carbon components needed with variants</section>
+                    <section>Typography Analysis - Map ALL text elements to Carbon type tokens</section>
+                    <section>Grid Analysis - Define grid structure for ALL page sections with column spans for ALL breakpoints</section>
+                    <section>Spacing Analysis - Document ALL spacing using Carbon spacing tokens</section>
+                    <section>Color/Theme Analysis - Theme identification and layer usage</section>
+                </required_sections>
+                <critical_rule>
+                    ALWAYS pause after presenting the complete analysis and wait for user
+                    confirmation before proceeding with implementation. This is MANDATORY.
+                </critical_rule>
+            </step>
+        </figma_analysis_workflow>
+
+        <design_fidelity>
+            <title>Design Fidelity Guidelines for Figma</title>
+            <principle>
+                Create accurate implementations based on Figma designs following Carbon guidelines.
+                The only exception to pixel-perfect implementation is widths dictated by grid or global layouts.
+            </principle>
+            <do_not_innovate>
+                <title>Do Not Innovate</title>
+                <examples>
+                    <example>Swap out icons</example>
+                    <example>Change visual hierarchy or element positions</example>
+                    <example>Add features not in the design</example>
+                    <example>Modify color schemes or typography</example>
+                </examples>
+            </do_not_innovate>
+            <icon_usage>
+                <critical_rule>Use the exact icon found in the design</critical_rule>
+                <rule>Do not substitute icons even if semantically similar</rule>
+            </icon_usage>
+        </design_fidelity>
+    </figma_analysis>
+
+    <image_analysis priority="high">
+        <title>Analyzing Design Images and Screenshots (Fallback)</title>
+        <description>
+            When Figma MCP is not available or when users provide screenshots/images,
+            use this analysis approach. This is a fallback method when Figma MCP cannot be used.
+        </description>
+
+        <when_to_use>
+            <use>User provides screenshots or images instead of Figma links</use>
+            <use>Figma MCP is not accessible</use>
+            <use>Design is from a source other than Figma</use>
+        </when_to_use>
+
+        <analysis_steps>
+            <step number="1">
+                <title>Component Identification</title>
+                <action>Identify all UI elements and map to Carbon components</action>
+                <guidance>
+                    <point>Look for standard patterns (buttons, inputs, tables, cards, tiles)</point>
+                    <point>Identify component variants</point>
+                    <point>Note any custom components needed</point>
+                    <point>Use Carbon MCP to verify component availability</point>
+                </guidance>
+            </step>
+
+            <step number="2">
+                <title>Layout Analysis</title>
+                <action>Analyze layout structure and estimate grid requirements</action>
+                <guidance>
+                    <point>Identify logical content groups (each needs its own Grid)</point>
+                    <point>Estimate column spans based on visual proportions</point>
+                    <point>Note responsive behavior requirements</point>
+                </guidance>
+                <estimation_guidelines>
+                    <guideline>Full-width → sm={4} md={8} lg={16}</guideline>
+                    <guideline>Half-width → sm={4} md={4} lg={8}</guideline>
+                    <guideline>Third-width → sm={4} md={4} lg={5} or lg={6}</guideline>
+                    <guideline>Quarter-width → sm={4} md={4} lg={4}</guideline>
+                </estimation_guidelines>
+            </step>
+
+            <step number="3">
+                <title>Typography and Spacing</title>
+                <action>Identify typography hierarchy and estimate spacing</action>
+                <guidance>
+                    <point>Map headings to Carbon type tokens</point>
+                    <point>Estimate spacing using Carbon spacing scale (8px increments)</point>
+                </guidance>
+            </step>
+
+            <step number="4" priority="critical">
+                <title>Present Analysis</title>
+                <action>Share findings and confirm before implementation</action>
+                <required_sections>
+                    <section>Component Inventory</section>
+                    <section>Layout Structure with estimated column spans</section>
+                    <section>Typography mapping</section>
+                    <section>Estimated spacing</section>
+                </required_sections>
+            </step>
+        </analysis_steps>
+
+        <limitations>
+            <limitation>Cannot extract exact pixel measurements</limitation>
+            <limitation>Must estimate spacing and sizing</limitation>
+            <limitation>May need user clarification on details</limitation>
+        </limitations>
+    </image_analysis>
+
+    <description_based_implementation priority="medium">
+        <title>Implementing from User Descriptions (Fallback)</title>
+        <description>
+            When users describe desired functionality without providing designs,
+            guide them through requirements gathering and propose Carbon-based solutions.
+        </description>
+
+        <when_to_use>
+            <use>User describes functionality without visual design</use>
+            <use>No Figma design or images provided</use>
+            <use>Exploratory implementation based on requirements</use>
+        </when_to_use>
+
+        <requirements_gathering>
+            <step>Clarify the component's purpose and user interactions</step>
+            <step>Identify required functionality and data</step>
+            <step>Determine layout and responsive requirements</step>
+            <step>Confirm accessibility requirements</step>
+        </requirements_gathering>
+
+        <component_recommendation>
+            <guidance>
+                <point>Use Carbon MCP to search for similar patterns</point>
+                <point>Recommend official Carbon components over custom builds</point>
+                <point>Propose composition of multiple components when needed</point>
+                <point>Present options with pros/cons</point>
+            </guidance>
+        </component_recommendation>
+    </description_based_implementation>
+
+    <method_priority>
+        <title>Design Analysis Method Priority</title>
+        <description>
+            Use methods in this order of preference:
+        </description>
+        <priority_order>
+            <method priority="1">Figma with MCP - Most accurate, preferred method</method>
+            <method priority="2">Images/Screenshots - Estimation-based fallback</method>
+            <method priority="3">User Descriptions - Requirements-based fallback</method>
+        </priority_order>
+    </method_priority>
+</design_analysis>

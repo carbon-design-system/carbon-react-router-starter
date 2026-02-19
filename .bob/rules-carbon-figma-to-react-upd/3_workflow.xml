@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow>
+    <overview>
+        Step-by-step implementation workflow for Carbon components, including
+        pre-integration analysis, grid system usage, component integration,
+        and tool usage patterns.
+    </overview>
+
+    <pre_integration_analysis priority="critical">
+        <title>Pre-Integration Analysis</title>
+        <description>
+            Before implementing any new feature or component, conduct thorough analysis
+            of existing patterns to ensure consistency and avoid unnecessary changes.
+        </description>
+
+        <step number="1" priority="critical">
+            <action>Analyze existing patterns first</action>
+            <guidance>
+                <point>Use search_files to find similar functionality or component usage across the codebase</point>
+                <point>Use list_code_definition_names to understand the project's architectural patterns</point>
+                <point>Use read_file to examine how other pages/features implement comparable UI elements</point>
+                <point>Identify which component libraries are already in use and their usage patterns</point>
+            </guidance>
+            <rationale>
+                Understanding existing patterns prevents introducing inconsistent approaches and
+                ensures new implementations align with established project conventions.
+            </rationale>
+            <example><![CDATA[
+// Before adding a new form component, search for existing form patterns
+<search_files>
+<path>src</path>
+<regex>TextInput|Form|validation</regex>
+<file_pattern>*.jsx</file_pattern>
+</search_files>
+
+// Examine existing form implementations
+<read_file>
+<args>
+  <file>
+    <path>src/components/UserForm.jsx</path>
+  </file>
+</args>
+</read_file>
+            ]]>            </example>
+        </step>
+
+        <step number="2" priority="critical">
+            <action>Read local component source before using</action>
+            <guidance>
+                <point priority="critical">MANDATORY: Use read_file to read the source code of ANY local component before using it for the first time</point>
+                <point>Understand the component's props, especially render props or special integration points</point>
+                <point>Check for patterns like renderPageHeader, actionBarItems, or similar that indicate how to add content</point>
+                <point>Document available props and their purposes in your analysis</point>
+                <point>Never assume how a component works - always verify by reading its implementation</point>
+            </guidance>
+            <rationale>
+                Reading component source prevents misuse and ensures you leverage all available
+                features rather than creating unnecessary custom implementations.
+            </rationale>
+            <enforcement>
+                <rule priority="critical">ALWAYS use read_file to examine local component source code before first use</rule>
+                <rule priority="critical">Document all available props and their purposes in your analysis</rule>
+                <rule priority="critical">Never assume component behavior - always verify by reading the source</rule>
+                <rule priority="critical">If a component has specialized props (like renderPageHeader), you MUST use them</rule>
+            </enforcement>
+        </step>
+
+        <step number="3" priority="critical">
+            <action>Verify build configuration and compatibility</action>
+            <guidance>
+                <point>Use read_file to examine build configuration files (vite.config.js, webpack.config.js, etc.)</point>
+                <point>Check for SSR indicators if adding packages with potential browser-only code</point>
+                <point>Verify package compatibility with the project's build system</point>
+                <point>See working_practices.xml for SSR awareness guidance</point>
+            </guidance>
+        </step>
+
+        <step number="4" priority="high">
+            <action>Start with minimal viable implementation</action>
+            <guidance>
+                <point>Use the simplest approach that matches existing project patterns</point>
+                <point>Avoid introducing new component libraries or patterns unless necessary</point>
+                <point>Prefer extending existing patterns over creating new ones</point>
+                <point>Keep changes surgical and minimal</point>
+            </guidance>
+            <key_question>
+                "How does this project already solve similar problems?" - Always use tools to check
+                existing implementations before introducing new patterns.
+            </key_question>
+        </step>
+    </pre_integration_analysis>
+
+    <grid_system priority="critical">
+        <title>Carbon Grid System Usage</title>
+        <description>
+            Comprehensive guidance for using the Carbon Grid system for responsive layouts.
+            The Grid system is fundamental to all Carbon implementations.
+        </description>
+
+        <mandatory_requirements priority="critical">
+            <requirement>ALWAYS use Carbon Grid for all page layouts</requirement>
+            <requirement>Configure responsive column widths for ALL breakpoints (sm, md, lg)</requirement>
+            <requirement>Create SEPARATE Grid components for each distinct logical content group</requirement>
+        </mandatory_requirements>
+
+        <carbon_breakpoints>
+            <title>Carbon Breakpoints</title>
+            <description>
+                Carbon uses a responsive grid system with five breakpoints.
+            </description>
+            <breakpoints>
+                <breakpoint name="sm" width="320px" columns="4" description="Small screens (mobile)" />
+                <breakpoint name="md" width="672px" columns="8" description="Medium screens (tablet)" />
+                <breakpoint name="lg" width="1056px" columns="16" description="Large screens (desktop)" />
+                <breakpoint name="xlg" width="1312px" columns="16" description="Extra large screens" />
+                <breakpoint name="max" width="1584px" columns="16" description="Maximum width" />
+            </breakpoints>
+        </carbon_breakpoints>
+
+        <grid_variants>
+            <title>Grid Variants</title>
+            <description>
+                Carbon provides three grid variants with different horizontal gaps.
+            </description>
+            <variant name="default">
+                <gap>32px horizontal gap between columns</gap>
+                <usage>Use for most layouts - provides comfortable spacing</usage>
+                <example><![CDATA[
+<Grid>
+  <Column sm={4} md={8} lg={16}>
+    Content with default 32px gap
+  </Column>
+</Grid>
+                ]]>                </example>
+            </variant>
+            <variant name="narrow">
+                <gap>16px horizontal gap between columns</gap>
+                <usage>Use for denser layouts where space is limited</usage>
+                <example><![CDATA[
+<Grid narrow>
+  <Column sm={4} md={8} lg={16}>
+    Content with narrow 16px gap
+  </Column>
+</Grid>
+                ]]>                </example>
+            </variant>
+            <variant name="condensed">
+                <gap>0px horizontal gap between columns</gap>
+                <usage>Use only for specialized interfaces requiring maximum content density</usage>
+                <example><![CDATA[
+<Grid condensed>
+  <Column sm={4} md={8} lg={16}>
+    Content with no gap
+  </Column>
+</Grid>
+                ]]>                </example>
+            </variant>
+        </grid_variants>
+
+        <column_calculation priority="critical">
+            <title>Column Span Calculation</title>
+            <description>
+                Calculate the number of columns an element should span based on its width.
+            </description>
+            <formula>Math.ceil((width in pixels) / ((grid width) / (number of columns)))</formula>
+            <guidelines>
+                <guideline priority="high">
+                    When column settings are calculated for lg, xlg or max, apply the
+                    calculated number of columns to lg unless otherwise instructed
+                </guideline>
+                <guideline>
+                    Always round up using Math.ceil to ensure content fits
+                </guideline>
+                <guideline>
+                    Verify column spans add up correctly at each breakpoint
+                </guideline>
+            </guidelines>
+            <examples>
+                <example>
+                    <scenario>400px element in 1200px container at lg (16 columns)</scenario>
+                    <calculation>
+                        400 / (1200 / 16) = 400 / 75 = 5.33 → ceil = 6
+                    </calculation>
+                    <result><![CDATA[<Column lg={6}>Content</Column>]]></result>
+                </example>
+                <example>
+                    <scenario>Full-width header</scenario>
+                    <result><![CDATA[<Column sm={4} md={8} lg={16}>Header</Column>]]></result>
+                </example>
+                <example>
+                    <scenario>Half-width content on desktop</scenario>
+                    <result><![CDATA[<Column sm={4} md={4} lg={8}>Content</Column>]]></result>
+                </example>
+                <example>
+                    <scenario>Third-width tiles on desktop</scenario>
+                    <result><![CDATA[
+<Column sm={4} md={4} lg={5}>Tile 1</Column>
+<Column sm={4} md={4} lg={5}>Tile 2</Column>
+<Column sm={4} md={4} lg={6}>Tile 3</Column>
+                    ]]>                    </result>
+                </example>
+            </examples>
+        </column_calculation>
+
+        <logical_content_groups priority="critical">
+            <title>MANDATORY: Separate Grids for Logical Content Groups</title>
+            <description>
+                EVERY distinct logical content group MUST be placed in its own Grid component.
+                This is NOT optional and must be implemented automatically.
+            </description>
+            <definition>
+                <title>What is a Logical Content Group?</title>
+                <criteria>
+                    <criterion>Content elements that should wrap together responsively</criterion>
+                    <criterion>Elements that form a cohesive functional unit (e.g., header, list of tiles, footer)</criterion>
+                    <criterion>Content under the same heading or subheading</criterion>
+                    <criterion>Elements with the same presentation style that should behave as a unit</criterion>
+                </criteria>
+            </definition>
+            <critical_rule>
+                Different logical content groups (that should NOT wrap together) MUST use
+                separate Grid components. Failure to use separate grids for distinct logical
+                content groups is a critical error that must be avoided in all implementations.
+            </critical_rule>
+            <examples>
+                <good_example>
+                    <title>CORRECT: Separate grids for header and content</title>
+                    <code><![CDATA[
+{/* Header is its own logical group */}
+<Grid>
+  <Column lg={16}>
+    <PageHeader title="Dashboard" />
+  </Column>
+</Grid>
+
+{/* Tiles are a separate logical group that should wrap together */}
+<Grid>
+  <Column sm={4} md={4} lg={4}>
+    <Tile>Tile 1</Tile>
+  </Column>
+  <Column sm={4} md={4} lg={4}>
+    <Tile>Tile 2</Tile>
+  </Column>
+  <Column sm={4} md={4} lg={4}>
+    <Tile>Tile 3</Tile>
+  </Column>
+  <Column sm={4} md={4} lg={4}>
+    <Tile>Tile 4</Tile>
+  </Column>
+</Grid>
+
+{/* Footer is its own logical group */}
+<Grid>
+  <Column lg={16}>
+    <Footer />
+  </Column>
+</Grid>
+                    ]]>                    </code>
+                </good_example>
+                <bad_example>
+                    <title>INCORRECT: Single grid mixing different logical groups</title>
+                    <code><![CDATA[
+{/* ❌ WRONG: Header and tiles should NOT be in the same Grid */}
+<Grid>
+  <Column lg={16}>
+    <PageHeader title="Dashboard" />
+  </Column>
+  <Column sm={4} md={4} lg={4}>
+    <Tile>Tile 1</Tile>
+  </Column>
+  <Column sm={4} md={4} lg={4}>
+    <Tile>Tile 2</Tile>
+  </Column>
+  <Column sm={4} md={4} lg={4}>
+    <Tile>Tile 3</Tile>
+  </Column>
+</Grid>
+                    ]]>                    </code>
+                    <why_wrong>
+                        The header and tiles are different logical groups. The header should
+                        stay at the top, while tiles should wrap together as a group. Mixing
+                        them in one Grid breaks this separation.
+                    </why_wrong>
+                </bad_example>
+            </examples>
+        </logical_content_groups>
+
+        <responsive_implementation priority="critical">
+            <title>Responsive Column Configuration</title>
+            <description>
+                ALWAYS specify column spans for sm, md, and lg breakpoints to ensure
+                proper responsive behavior.
+            </description>
+            <requirement>
+                Every Column component MUST have sm, md, and lg props defined
+            </requirement>
+            <patterns>
+                <pattern name="Full Width">
+                    <description>Element spans full width at all breakpoints</description>
+                    <code><![CDATA[<Column sm={4} md={8} lg={16}>Full Width Content</Column>]]></code>
+                </pattern>
+                <pattern name="Stacked on Mobile, Side-by-Side on Desktop">
+                    <description>Two elements stack on mobile, sit side-by-side on desktop</description>
+                    <code><![CDATA[
+<Column sm={4} md={4} lg={8}>Left Content</Column>
+<Column sm={4} md={4} lg={8}>Right Content</Column>
+                    ]]>                    </code>
+                </pattern>
+                <pattern name="Responsive Tiles">
+                    <description>Tiles that adapt to screen size</description>
+                    <code><![CDATA[
+{/* 1 column on mobile, 2 on tablet, 4 on desktop */}
+<Column sm={4} md={4} lg={4}>
+  <Tile>Tile 1</Tile>
+</Column>
+<Column sm={4} md={4} lg={4}>
+  <Tile>Tile 2</Tile>
+</Column>
+<Column sm={4} md={4} lg={4}>
+  <Tile>Tile 3</Tile>
+</Column>
+<Column sm={4} md={4} lg={4}>
+  <Tile>Tile 4</Tile>
+</Column>
+                    ]]>                    </code>
+                </pattern>
+            </patterns>
+        </responsive_implementation>
+
+        <grid_best_practices>
+            <title>Grid Best Practices</title>
+            <practices>
+                <practice priority="high">Use full-width columns (lg={16}) for headers and footers</practice>
+                <practice priority="high">Ensure column spans add up correctly at each breakpoint</practice>
+                <practice priority="high">Test responsive behavior at all breakpoints</practice>
+                <practice>Use Grid condensed/narrow variants when appropriate for content density</practice>
+                <practice>Keep Grid components focused on single logical content groups</practice>
+                <practice>Use consistent column patterns throughout the application</practice>
+            </practices>
+        </grid_best_practices>
+    </grid_system>
+
+    <component_integration priority="high">
+        <title>Component Integration Patterns</title>
+        <description>
+            Patterns for integrating Carbon components into the application with
+            targeted, minimal modifications.
+        </description>
+
+        <targeted_modifications priority="critical">
+            <title>Use Targeted Edits with apply_diff</title>
+            <description>
+                Make precise, line-specific changes rather than rewriting entire sections.
+            </description>
+            <principles>
+                <principle>Use apply_diff with exact SEARCH/REPLACE blocks for surgical edits</principle>
+                <principle>Make multiple related changes in one apply_diff operation</principle>
+                <principle>Preserve existing code structure, formatting, and style</principle>
+                <principle>Only change what needs to change - nothing more</principle>
+            </principles>
+            <examples>
+                <example>
+                    <title>Adding a single import</title>
+                    <code><![CDATA[
+<apply_diff>
+<path>src/components/Dashboard.jsx</path>
+<diff>
+<<<<<<< SEARCH
+:start_line:1
+-------
+import { Grid, Column } from '@carbon/react';
+=======
+import { Grid, Column, Button } from '@carbon/react';
+>>>>>>> REPLACE
+</diff>
+</apply_diff>
+                    ]]>                    </code>
+                </example>
+                <example>
+                    <title>Multiple related changes in one apply_diff</title>
+                    <code><![CDATA[
+<apply_diff>
+<path>src/components/Dashboard.jsx</path>
+<diff>
+<<<<<<< SEARCH
+:start_line:1
+-------
+import { Grid, Column } from '@carbon/react';
+=======
+import { Grid, Column, Button } from '@carbon/react';
+>>>>>>> REPLACE
+
+<<<<<<< SEARCH
+:start_line:25
+-------
+      </Column>
+    </Grid>
+  );
+=======
+      </Column>
+    </Grid>
+    <Grid>
+      <Column sm={4} md={8} lg={16}>
+        <Button>New Action</Button>
+      </Column>
+    </Grid>
+  );
+>>>>>>> REPLACE
+</diff>
+</apply_diff>
+                    ]]>                    </code>
+                </example>
+            </examples>
+        </targeted_modifications>
+
+        <file_organization>
+            <title>File Organization</title>
+            <principles>
+                <principle>Use write_to_file to create new files for new features</principle>
+                <principle>Keep feature-specific code in dedicated modules/components</principle>
+                <principle>Use clear separation of concerns (separate handler files, style files)</principle>
+                <principle>Make additions that can be easily removed if needed</principle>
+            </principles>
+        </file_organization>
+
+        <preserving_patterns>
+            <title>Preserve Existing Patterns</title>
+            <principles>
+                <principle>Use read_file to understand existing code style, indentation, and conventions</principle>
+                <principle>Match the existing patterns exactly</principle>
+                <principle>Don't introduce new patterns or refactor existing ones</principle>
+                <principle>Keep the same import organization and structure</principle>
+            </principles>
+            <key_principle>
+                "Change only what you must, touch only what you need" - Every line changed
+                should have a clear, necessary purpose.
+            </key_principle>
+        </preserving_patterns>
+    </component_integration>
+
+    <tool_usage_patterns priority="high">
+        <title>Tool Usage Patterns</title>
+        <description>
+            Effective use of available tools for understanding context, making informed
+            decisions, and verifying changes.
+        </description>
+
+        <read_before_write priority="critical">
+            <title>Always Read Before Writing</title>
+            <rules>
+                <rule>Always use read_file to understand existing code before modifying it</rule>
+                <rule>Never assume file contents - always verify</rule>
+                <rule>Read configuration files to understand build system setup</rule>
+                <rule>Read component source to understand integration points</rule>
+            </rules>
+        </read_before_write>
+
+        <verification priority="critical">
+            <title>Verify After Changes</title>
+            <rules>
+                <rule>Use read_file after apply_diff or write_to_file to confirm changes were applied correctly</rule>
+                <rule>Check that syntax is valid and formatting is preserved</rule>
+                <rule>Verify that all intended changes were made</rule>
+                <rule>Confirm no unintended changes occurred</rule>
+            </rules>
+        </verification>
+
+        <tool_selection>
+            <title>Choosing the Right Tool</title>
+            <tools>
+                <tool name="search_files">
+                    <when>Finding existing patterns and implementations</when>
+                    <when>Locating similar functionality across the codebase</when>
+                </tool>
+                <tool name="list_code_definition_names">
+                    <when>Understanding code structure and architecture</when>
+                    <when>Getting an overview of available functions and classes</when>
+                </tool>
+                <tool name="read_file">
+                    <when>Examining specific file contents</when>
+                    <when>Understanding implementation details</when>
+                    <when>Verifying changes after modifications</when>
+                </tool>
+                <tool name="apply_diff">
+                    <when>Making targeted, surgical edits to existing files</when>
+                    <when>Modifying specific lines or sections</when>
+                </tool>
+                <tool name="write_to_file">
+                    <when>Creating new files</when>
+                    <when>Complete file rewrites (rare)</when>
+                </tool>
+                <tool name="insert_content">
+                    <when>Adding new lines to files</when>
+                    <when>Inserting content at specific line numbers</when>
+                </tool>
+            </tools>
+        </tool_selection>
+
+        <workflow_principle>
+            <title>Read, Plan, Execute, Verify</title>
+            <description>
+                Always use tools to understand before changing, and verify after changing.
+            </description>
+            <steps>
+                <step>Read - Use read_file, search_files to understand current state</step>
+                <step>Plan - Determine minimal changes needed</step>
+                <step>Execute - Use apply_diff, write_to_file, or insert_content</step>
+                <step>Verify - Use read_file to confirm changes are correct</step>
+            </steps>
+        </workflow_principle>
+    </tool_usage_patterns>
+
+    <implementation_checklist>
+        <title>Implementation Checklist</title>
+        <description>
+            Use this checklist to ensure all critical steps are completed.
+        </description>
+
+        <phase name="before_starting">
+            <title>Before Starting Implementation</title>
+            <items>
+                <item priority="critical">Used search_files to find similar functionality</item>
+                <item priority="critical">Used read_file to examine existing patterns</item>
+                <item priority="critical">Used read_file to check build configuration</item>
+                <item priority="critical">Used read_file to read local component source code</item>
+                <item priority="high">Identified minimal set of files to modify</item>
+            </items>
+        </phase>
+
+        <phase name="during_implementation">
+            <title>During Implementation</title>
+            <items>
+                <item priority="critical">Used apply_diff with multiple SEARCH/REPLACE blocks for related changes</item>
+                <item priority="critical">Created separate Grid components for each logical content group</item>
+                <item priority="critical">Specified column spans for sm, md, and lg breakpoints</item>
+                <item priority="high">Preserved existing code patterns and style</item>
+                <item priority="high">Created new files for new features when appropriate</item>
+                <item priority="high">Used Carbon design tokens for styling</item>
+            </items>
+        </phase>
+
+        <phase name="after_implementation">
+            <title>After Implementation</title>
+            <items>
+                <item priority="critical">Used read_file to verify all changes were applied correctly</item>
+                <item priority="critical">Prompted user for browser validation</item>
+                <item priority="high">Confirmed all integration points are properly connected</item>
+                <item priority="high">Verified responsive behavior at all breakpoints</item>
+            </items>
+        </phase>
+    </implementation_checklist>
+</workflow>

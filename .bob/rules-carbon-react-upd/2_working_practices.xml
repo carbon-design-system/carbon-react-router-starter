@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<working_practices>
+    <overview>
+        Essential guidance for working effectively with Carbon Design System,
+        including accessibility, styling, troubleshooting, browser validation,
+        and SSR awareness.
+    </overview>
+
+    <accessibility_guidelines priority="critical">
+        <title>Accessibility Guidelines</title>
+        <description>
+            Ensuring accessibility compliance when implementing Carbon components,
+            following IBM accessibility standards and WCAG guidelines.
+        </description>
+
+        <core_principles>
+            <principle name="Perceivable">
+                <description>Information and user interface components must be presentable to users in ways they can perceive</description>
+                <guidelines>
+                    <guideline priority="high">
+                        <rule>Provide text alternatives for non-text content</rule>
+                        <implementation>
+                            <technique>Add alt text to all images</technique>
+                            <technique>Provide aria-label for interactive elements without visible text</technique>
+                            <technique>Use iconDescription prop for icon-only buttons</technique>
+                        </implementation>
+                        <example><![CDATA[
+// Image with alt text
+<img src="chart.png" alt="Bar chart showing sales data for Q1 2023" />
+
+// Icon button with proper accessibility
+import { Button } from '@carbon/react';
+import { Add } from '@carbon/icons-react';
+
+<Button
+  hasIconOnly
+  renderIcon={Add}
+  iconDescription="Add new item" tooltipPosition="bottom" tooltipAlignment="center" />
+                        ]]>                        </example>
+                    </guideline>
+                    <guideline priority="high">
+                        <rule>Don't rely solely on color to convey information</rule>
+                        <implementation>
+                            <technique>Use icons or text in addition to color</technique>
+                            <technique>Ensure sufficient color contrast (4.5:1 for normal text, 3:1 for large text)</technique>
+                            <technique>Use Carbon theme tokens which ensure proper contrast</technique>
+                        </implementation>
+                    </guideline>
+                </guidelines>
+            </principle>
+
+            <principle name="Operable">
+                <description>User interface components and navigation must be operable</description>
+                <guidelines>
+                    <guideline priority="high">
+                        <rule>Ensure keyboard accessibility for all interactive elements</rule>
+                        <implementation>
+                            <technique>Test all interactions using only the keyboard</technique>
+                            <technique>Ensure focus states are visible</technique>
+                            <technique>Maintain logical tab order</technique>
+                            <technique>Provide keyboard shortcuts where appropriate</technique>
+                        </implementation>
+                        <example><![CDATA[
+// Carbon components handle keyboard navigation automatically
+<Button onClick={handleClick}>
+  Accessible Button
+</Button>
+
+// For custom interactive elements, ensure keyboard support
+<div
+  role="button" tabIndex={0}
+  onClick={handleClick}
+  onKeyDown={(e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      handleClick();
+    }
+  }}
+>
+  Custom Interactive Element
+</div>
+                        ]]>                        </example>
+                    </guideline>
+                    <guideline priority="high">
+                        <rule>Provide clear focus indicators</rule>
+                        <implementation>
+                            <technique>Use Carbon's built-in focus styles</technique>
+                            <technique>Never remove focus outlines without providing alternatives</technique>
+                        </implementation>
+                    </guideline>
+                </guidelines>
+            </principle>
+
+            <principle name="Understandable">
+                <description>Information and operation of user interface must be understandable</description>
+                <guidelines>
+                    <guideline priority="high">
+                        <rule>Provide clear labels and instructions</rule>
+                        <implementation>
+                            <technique>Use labelText prop for all form inputs</technique>
+                            <technique>Provide helperText for additional guidance</technique>
+                            <technique>Use clear, descriptive error messages</technique>
+                        </implementation>
+                        <example><![CDATA[
+<TextInput
+  id="email" labelText="Email address" helperText="We'll never share your email" invalid={hasError}
+  invalidText="Please enter a valid email address" />
+                        ]]>                        </example>
+                    </guideline>
+                    <guideline priority="high">
+                        <rule>Ensure consistent navigation and interaction patterns</rule>
+                        <implementation>
+                            <technique>Use standard Carbon components for consistency</technique>
+                            <technique>Maintain consistent placement of navigation elements</technique>
+                        </implementation>
+                    </guideline>
+                </guidelines>
+            </principle>
+
+            <principle name="Robust">
+                <description>Content must be robust enough to be interpreted by a wide variety of user agents</description>
+                <guidelines>
+                    <guideline priority="high">
+                        <rule>Use semantic HTML and ARIA attributes correctly</rule>
+                        <implementation>
+                            <technique>Use appropriate HTML elements (button, nav, main, etc.)</technique>
+                            <technique>Add ARIA attributes only when necessary</technique>
+                            <technique>Ensure ARIA attributes are used correctly</technique>
+                        </implementation>
+                    </guideline>
+                </guidelines>
+            </principle>
+        </core_principles>
+
+        <carbon_accessibility_features>
+            <title>Carbon Component Accessibility Features</title>
+            <description>
+                Carbon components are built with accessibility in mind. Leverage these
+                built-in features rather than implementing custom solutions.
+            </description>
+            <features>
+                <feature>Keyboard navigation support</feature>
+                <feature>Screen reader announcements</feature>
+                <feature>Focus management</feature>
+                <feature>ARIA attributes</feature>
+                <feature>Color contrast compliance</feature>
+            </features>
+        </carbon_accessibility_features>
+    </accessibility_guidelines>
+
+    <styling_guidelines priority="high">
+        <title>Styling Guidelines</title>
+        <description>
+            Essential guidance for styling Carbon components using SCSS,
+            focusing on token usage, theming, and best practices.
+        </description>
+
+        <token_usage priority="critical">
+            <title>Always Use Carbon Design Tokens</title>
+            <rules>
+                <rule priority="critical">Always prefer theme tokens over color tokens for theme adaptability</rule>
+                <rule priority="critical">Always prefer context-aware layer tokens ($layer) over numbered variants ($layer-01)</rule>
+                <rule priority="critical">Always use spacing tokens instead of hardcoded values</rule>
+                <rule priority="critical">Use type mixins instead of manual font declarations</rule>
+            </rules>
+            <example><![CDATA[
+// CORRECT: Using tokens
+.my-component {
+  background-color: $layer;
+  color: $text-primary;
+  padding: $spacing-05;
+  margin-bottom: $spacing-06;
+  border: 1px solid $border-subtle;
+  
+  @include type-style('body-long-01');
+}
+
+// INCORRECT: Hardcoded values
+.my-component {
+  background-color: #f4f4f4;  // ❌ Don't hardcode colors
+  color: #161616;             // ❌ Use $text-primary
+  padding: 16px;              // ❌ Use $spacing-05
+  font-size: 14px;            // ❌ Use type-style mixin
+  line-height: 20px;          // ❌ Use type-style mixin
+}
+            ]]>            </example>
+        </token_usage>
+
+        <scss_best_practices>
+            <title>SCSS Best Practices</title>
+            <practices>
+                <practice priority="high">
+                    <title>Import Carbon styles correctly</title>
+                    <example><![CDATA[
+// In your main SCSS file
+@use '@carbon/react';
+
+// Or import specific modules
+@use '@carbon/react/scss/spacing';
+@use '@carbon/react/scss/theme';
+@use '@carbon/react/scss/type';
+                    ]]>                    </example>
+                </practice>
+                <practice priority="high">
+                    <title>Use custom class names for styling</title>
+                    <description>
+                        Avoid modifying Carbon component styles directly. Use custom
+                        class names and wrapper elements instead.
+                    </description>
+                    <example><![CDATA[
+// CORRECT: Custom class name
+.my-custom-button {
+  margin-top: $spacing-05;
+}
+
+<Button className="my-custom-button">Click me</Button>
+
+// INCORRECT: Modifying Carbon classes
+.cds--btn {  // ❌ Don't modify Carbon internal classes
+  margin-top: 16px;
+}
+                    ]]>                    </example>
+                </practice>
+                <practice priority="medium">
+                    <title>Organize styles by component</title>
+                    <description>
+                        Keep component styles in separate SCSS files alongside components
+                    </description>
+                    <example><![CDATA[
+// MyComponent.jsx
+import './my-component.scss';
+
+// my-component.scss
+.my-component {
+  padding: $spacing-05;
+  
+  &__header {
+    @include type-style('heading-03');
+    margin-bottom: $spacing-05;
+  }
+  
+  &__content {
+    @include type-style('body-long-01');
+  }
+}
+                    ]]>                    </example>
+                </practice>
+            </practices>
+        </scss_best_practices>
+
+        <responsive_styling>
+            <title>Responsive Styling</title>
+            <description>
+                Use Carbon breakpoint mixins for responsive styles
+            </description>
+            <breakpoint_mixins>
+                <mixin name="sm">320px and up</mixin>
+                <mixin name="md">672px and up</mixin>
+                <mixin name="lg">1056px and up</mixin>
+                <mixin name="xlg">1312px and up</mixin>
+                <mixin name="max">1584px and up</mixin>
+            </breakpoint_mixins>
+            <example><![CDATA[
+@use '@carbon/react/scss/breakpoint' as *;
+
+.my-component {
+  padding: $spacing-05;
+  
+  @include breakpoint(md) {
+    padding: $spacing-07;
+  }
+  
+  @include breakpoint(lg) {
+    padding: $spacing-09;
+  }
+}
+            ]]>            </example>
+        </responsive_styling>
+    </styling_guidelines>
+
+    <troubleshooting priority="high">
+        <title>Troubleshooting Common Issues</title>
+        <description>
+            Common issues when implementing Carbon components and their solutions.
+        </description>
+
+        <common_issues>
+            <issue category="Component Rendering">
+                <title>Components Not Rendering</title>
+                <symptoms>
+                    <symptom>Component is not visible in the UI</symptom>
+                    <symptom>No errors in console</symptom>
+                </symptoms>
+                <possible_causes>
+                    <cause>Missing or incorrect imports</cause>
+                    <cause>Component not included in the component tree</cause>
+                    <cause>Conditional rendering logic preventing display</cause>
+                    <cause>CSS display: none or visibility: hidden applied</cause>
+                </possible_causes>
+                <solutions>
+                    <solution>Verify import statements are correct</solution>
+                    <solution>Check conditional rendering logic</solution>
+                    <solution>Ensure component is properly included in the component tree</solution>
+                    <solution>Inspect element in browser dev tools to check computed styles</solution>
+                </solutions>
+            </issue>
+
+            <issue category="Layout">
+                <title>Layout Issues</title>
+                <symptoms>
+                    <symptom>Components not aligned correctly</symptom>
+                    <symptom>Unexpected spacing or overflow</symptom>
+                    <symptom>Responsive behavior not working</symptom>
+                </symptoms>
+                <possible_causes>
+                    <cause>Incorrect Grid or Column usage</cause>
+                    <cause>Missing responsive props (sm, md, lg)</cause>
+                    <cause>CSS conflicts with custom styles</cause>
+                    <cause>Not using separate Grids for logical content groups</cause>
+                </possible_causes>
+                <solutions>
+                    <solution>Verify Grid and Column props for all breakpoints</solution>
+                    <solution>Ensure separate Grid components for distinct logical content groups</solution>
+                    <solution>Check for CSS conflicts using browser dev tools</solution>
+                    <solution>Review grid calculations and column spans</solution>
+                </solutions>
+            </issue>
+
+            <issue category="Styling">
+                <title>Styling Not Applied</title>
+                <symptoms>
+                    <symptom>Custom styles not appearing</symptom>
+                    <symptom>Theme tokens not working</symptom>
+                </symptoms>
+                <possible_causes>
+                    <cause>SCSS file not imported</cause>
+                    <cause>CSS specificity issues</cause>
+                    <cause>Incorrect token usage</cause>
+                    <cause>Missing @use '@carbon/react' import</cause>
+                </possible_causes>
+                <solutions>
+                    <solution>Ensure SCSS file is imported in component</solution>
+                    <solution>Check CSS specificity and use more specific selectors if needed</solution>
+                    <solution>Verify token names are correct</solution>
+                    <solution>Add @use '@carbon/react' at top of SCSS file</solution>
+                </solutions>
+            </issue>
+
+            <issue category="Build Errors">
+                <title>Build or Import Errors</title>
+                <symptoms>
+                    <symptom>Module not found errors</symptom>
+                    <symptom>Build fails with SCSS errors</symptom>
+                </symptoms>
+                <possible_causes>
+                    <cause>Missing package dependencies</cause>
+                    <cause>Incorrect import paths</cause>
+                    <cause>Version mismatches</cause>
+                </possible_causes>
+                <solutions>
+                    <solution>Install missing packages (npm install @carbon/react)</solution>
+                    <solution>Verify import paths are correct</solution>
+                    <solution>Check package.json for version compatibility</solution>
+                    <solution>Clear node_modules and reinstall if needed</solution>
+                </solutions>
+            </issue>
+        </common_issues>
+
+        <systematic_approach priority="critical">
+            <title>Systematic Problem Resolution</title>
+            <description>
+                When issues arise, follow this systematic approach to identify and
+                resolve root causes in the correct order.
+            </description>
+            <steps>
+                <step number="1">
+                    <action>Identify all root causes completely</action>
+                    <guidance>
+                        <point>Use read_file to examine all potentially affected files</point>
+                        <point>Identify ALL root causes, not just the first one</point>
+                        <point>Check for both configuration issues AND implementation issues</point>
+                        <point>List all potential issues before starting fixes</point>
+                    </guidance>
+                </step>
+                <step number="2">
+                    <action>Fix issues in logical order</action>
+                    <sequence>
+                        <item number="1">Fix configuration/setup issues FIRST (build system, dependencies)</item>
+                        <item number="2">Then resolve implementation issues (component integration, rendering)</item>
+                        <item number="3">Finally address styling and polish</item>
+                    </sequence>
+                </step>
+                <step number="3">
+                    <action>Verify each fix independently</action>
+                    <guidance>
+                        <point>After each fix, use read_file to verify it was applied correctly</point>
+                        <point>Don't chain multiple fixes without validation between them</point>
+                        <point>Test incrementally rather than fixing everything at once</point>
+                    </guidance>
+                </step>
+            </steps>
+        </systematic_approach>
+    </troubleshooting>
+
+    <browser_validation priority="critical">
+        <title>Browser Validation</title>
+        <description>
+            Browser validation is a vital step after making UI changes. Manual validation
+            is token budget friendly and should be preferred in most cases.
+        </description>
+
+        <when_to_prompt priority="critical">
+            <rule>ALWAYS prompt for browser validation after ANY UI changes are made</rule>
+        </when_to_prompt>
+
+        <validation_prompt>
+            <question>Browser validation is a vital step. Validating manually is token budget friendly and should be preferred in most cases. Can you confirm that you have validated manually?</question>
+            <options>
+                <option value="yes_all_good">Yes, all good</option>
+                <option value="yes_with_comments">Yes, I have comments</option>
+                <option value="skip">No, skipping this time</option>
+                <option value="automate" mode="advanced">Automate for me</option>
+            </options>
+        </validation_prompt>
+
+        <response_handling>
+            <response type="yes_all_good">
+                <action>Proceed to attempt_completion</action>
+            </response>
+            <response type="yes_with_comments">
+                <action>Address user's feedback and iterate on the implementation</action>
+            </response>
+            <response type="skip">
+                <action>Proceed to attempt_completion with note about skipped validation</action>
+            </response>
+            <response type="automate">
+                <action>Create new_task in Advanced mode for automated validation</action>
+                <critical_rule>MUST use new_task - never attempt browser automation in current task</critical_rule>
+            </response>
+        </response_handling>
+
+        <automation_requirements priority="critical">
+            <title>Requirements for Automated Validation</title>
+            <rules>
+                <rule priority="critical">Browser automation MUST use new_task with Advanced mode</rule>
+                <rule priority="critical">Never attempt browser automation in current task</rule>
+                <rule>Provide clear validation instructions in the subtask</rule>
+                <rule>Specify what to validate (layout, functionality, accessibility, responsiveness)</rule>
+            </rules>
+            <example><![CDATA[
+<new_task>
+<mode>advanced</mode>
+<message>Validate the [component name] implementation in the browser:
+
+1. Navigate to [URL or local path]
+2. Verify the following:
+   - Component renders correctly
+   - Layout matches design at breakpoints: sm (375px), md (768px), lg (1280px)
+   - All interactive elements are functional
+   - Keyboard navigation works properly
+   - No console errors
+
+3. Test specific functionality:
+   - [List specific features to test]
+
+4. Report any issues found with screenshots if possible</message>
+</new_task>
+            ]]>            </example>
+        </automation_requirements>
+
+        <validation_checklist>
+            <title>Manual Validation Checklist</title>
+            <description>
+                When users validate manually, they should check these aspects:
+            </description>
+            <checks>
+                <check>Visual rendering matches design/requirements</check>
+                <check>Layout is responsive at all breakpoints (sm, md, lg)</check>
+                <check>All interactive elements are functional</check>
+                <check>Keyboard navigation works properly</check>
+                <check>No console errors or warnings</check>
+                <check>Accessibility features work (screen reader, focus states)</check>
+            </checks>
+        </validation_checklist>
+    </browser_validation>
+
+    <ssr_awareness priority="medium">
+        <title>SSR Project Compatibility</title>
+        <description>
+            When working in SSR (Server-Side Rendering) projects, certain packages with
+            browser-only code require special handling. This is a compatibility concern
+            to be aware of, not a major workflow change.
+        </description>
+
+        <when_to_check>
+            <check>Before adding packages that might contain browser-only code</check>
+            <check>Specifically: @carbon/web-components (includes AI Chat)</check>
+            <check>Also: certain visualization libraries or browser-specific packages</check>
+        </when_to_check>
+
+        <detection priority="high">
+            <title>Detecting SSR Projects</title>
+            <description>
+                Check for these indicators to determine if the project uses SSR:
+            </description>
+            <indicators>
+                <indicator priority="critical">entry-server.js/jsx/ts/tsx files in src/ directory</indicator>
+                <indicator priority="critical">server.js or server.ts files in root or src/</indicator>
+                <indicator priority="high">ssr: {} configuration block in vite.config.js</indicator>
+                <indicator priority="medium">SSR-related scripts in package.json (build:ssr, dev:ssr)</indicator>
+            </indicators>
+            <detection_method>
+                <step>Use list_files to check src/ directory for entry-server files</step>
+                <step>Use read_file to check vite.config.js for ssr configuration</step>
+                <step>Use read_file to check package.json for SSR scripts</step>
+            </detection_method>
+        </detection>
+
+        <packages_requiring_handling>
+            <package name="@carbon/web-components" priority="critical">
+                <reason>Contains browser-only code (Web Components, AI Chat)</reason>
+                <components>
+                    <component>clabs-chat (AI Chat)</component>
+                    <component>Other web components</component>
+                </components>
+            </package>
+        </packages_requiring_handling>
+
+        <solution priority="high">
+            <title>Handling Browser-Only Packages in SSR Projects</title>
+            <description>
+                When SSR is detected AND you need to add a browser-only package,
+                apply BOTH of these steps:
+            </description>
+            <step number="1">
+                <action>Add package to ssr.external in vite.config.js</action>
+                <example><![CDATA[
+// vite.config.js
+export default defineConfig({
+  ssr: {
+    external: ['@carbon/web-components']
+  }
+});
+                ]]>                </example>
+            </step>
+            <step number="2">
+                <action>Use React.lazy() for dynamic import in component</action>
+                <example><![CDATA[
+// ChatWrapper.jsx - Wrapper component
+import { lazy, Suspense } from 'react';
+
+const AIChatComponent = lazy(() => import('./AIChatComponent'));
+
+export function ChatWrapper() {
+  return (
+    <Suspense fallback={<div>Loading chat...</div>}>
+      <AIChatComponent />
+    </Suspense>
+  );
+}
+
+// AIChatComponent.jsx - Actual implementation
+import '@carbon/web-components/es/components/chat/index.js';
+
+export default function AIChatComponent() {
+  return (
+    <clabs-chat>
+      {/* AI Chat configuration */}
+    </clabs-chat>
+  );
+}
+                ]]>                </example>
+            </step>
+            <critical_note>
+                BOTH steps are required. Adding to ssr.external without dynamic imports
+                OR using dynamic imports without ssr.external may still cause issues.
+            </critical_note>
+        </solution>
+
+        <quick_reference>
+            <title>SSR Quick Reference</title>
+            <rules>
+                <rule>@carbon/web-components (including AI Chat) = browser-only package</rule>
+                <rule>If SSR detected → Add to ssr.external + Use React.lazy()</rule>
+                <rule>If no SSR → Import normally at top level</rule>
+            </rules>
+        </quick_reference>
+    </ssr_awareness>
+</working_practices>
