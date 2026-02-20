@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<accessibility_guidelines>
+    <overview>
+    Essential guidance for ensuring accessibility compliance when implementing Carbon Design System components,
+    following IBM accessibility standards and WCAG guidelines.
+    </overview>
+
+    <core_principles>
+        <principle name="Perceivable">
+            <description>Information and user interface components must be presentable to users in ways they can perceive.</description>
+            <key_guidelines>
+                <guideline priority="high">
+                    <rule>Provide text alternatives for non-text content</rule>
+                    <implementation>
+                        <technique>Add alt text to all images</technique>
+                        <technique>Provide aria-label for interactive elements without visible text</technique>
+                    </implementation>
+                    <example><![CDATA[
+// Image with alt text
+<img src="chart.png" alt="Bar chart showing sales data for Q1 2023" />
+
+// Icon button with aria-label
+import { Button } from '@carbon/react';
+import { Add } from '@carbon/icons-react';
+
+<Button
+  hasIconOnly
+  renderIcon={Add}
+  iconDescription="Add new item" tooltipPosition="bottom" tooltipAlignment="center" />
+          ]]>                    </example>
+                </guideline>
+
+                <guideline priority="high">
+                    <rule>Don't rely solely on color to convey information</rule>
+                    <implementation>
+                        <technique>Use icons or text in addition to color</technique>
+                        <technique>Ensure sufficient color contrast (4.5:1 for normal text)</technique>
+                    </implementation>
+                </guideline>
+            </key_guidelines>
+        </principle>
+
+        <principle name="Operable">
+            <description>User interface components and navigation must be operable.</description>
+            <key_guidelines>
+                <guideline priority="high">
+                    <rule>Ensure keyboard accessibility for all interactive elements</rule>
+                    <implementation>
+                        <technique>Test all interactions using only the keyboard</technique>
+                        <technique>Ensure focus states are visible</technique>
+                        <technique>Use appropriate semantic elements (button for actions, a for links)</technique>
+                    </implementation>
+                </guideline>
+
+                <guideline priority="high">
+                    <rule>Provide ways to help users navigate and find content</rule>
+                    <implementation>
+                        <technique>Use descriptive page titles</technique>
+                        <technique>Implement proper heading structure (h1-h6)</technique>
+                        <technique>Use landmarks (main, nav, aside) appropriately</technique>
+                    </implementation>
+                </guideline>
+            </key_guidelines>
+        </principle>
+
+        <principle name="Understandable">
+            <description>Information and operation of the user interface must be understandable.</description>
+            <key_guidelines>
+                <guideline priority="high">
+                    <rule>Make interfaces appear and operate in predictable ways</rule>
+                    <implementation>
+                        <technique>Maintain consistent navigation</technique>
+                        <technique>Use standard Carbon patterns</technique>
+                        <technique>Don't change context automatically on focus or input</technique>
+                    </implementation>
+                </guideline>
+
+                <guideline priority="high">
+                    <rule>Help users avoid and correct mistakes</rule>
+                    <implementation>
+                        <technique>Provide clear error messages</technique>
+                        <technique>Offer suggestions for correction</technique>
+                    </implementation>
+                    <example><![CDATA[
+// Form validation with error message
+import { TextInput } from '@carbon/react';
+
+<TextInput
+  id="email" labelText="Email" invalid={!isValidEmail}
+  invalidText="Please enter a valid email address" value={email}
+  onChange={handleEmailChange}
+/>
+          ]]>                    </example>
+                </guideline>
+            </key_guidelines>
+        </principle>
+
+        <principle name="Robust">
+            <description>Content must be robust enough to be interpreted by a wide variety of user agents, including assistive technologies.</description>
+            <key_guidelines>
+                <guideline priority="high">
+                    <rule>Ensure compatibility with current and future user tools</rule>
+                    <implementation>
+                        <technique>Use valid HTML</technique>
+                        <technique>Provide name, role, and value for all UI components</technique>
+                        <technique>Test with screen readers and other assistive technologies</technique>
+                    </implementation>
+                </guideline>
+            </key_guidelines>
+        </principle>
+    </core_principles>
+
+    <carbon_specific_guidance>
+        <title>Carbon-Specific Accessibility Guidelines</title>
+        <key_guidelines>
+            <!-- Form Element Guidelines -->
+            <guideline priority="high">Always provide descriptive text labels for all input fields</guideline>
+            <guideline priority="high">Group related input fields logically to improve screen reader navigation</guideline>
+            <guideline priority="high">Provide clear, descriptive error messages for invalid inputs</guideline>
+
+            <!-- Interactive Element Guidelines -->
+            <guideline priority="high">Include descriptive text alternatives for all icon-only interactive elements</guideline>
+            <guideline>Ensure all interactive elements have visible focus indicators</guideline>
+
+            <!-- Data Display Guidelines -->
+            <guideline priority="high">Include descriptive headers for all tabular data</guideline>
+            <guideline>Ensure proper reading order for complex data structures</guideline>
+
+            <!-- Dialog and Modal Guidelines -->
+            <guideline priority="high">Provide descriptive labels and headings for all dialogs</guideline>
+            <guideline priority="high">Return keyboard focus to the triggering element when dialogs close</guideline>
+        </key_guidelines>
+
+        <key_concepts>
+            <concept>
+                <title>Accessible Forms</title>
+                <description>
+          Create accessible forms by:
+          - Using descriptive labels for all input fields
+          - Grouping related fields logically
+          - Providing clear error messages and validation feedback
+          - Ensuring keyboard navigability between fields
+                </description>
+            </concept>
+            <concept>
+                <title>Focus Management</title>
+                <description>
+          Proper focus management is critical for keyboard accessibility:
+          - Ensure all interactive elements can receive focus
+          - Maintain a logical tab order that follows visual layout
+          - Provide visible focus indicators for all interactive elements
+          - Trap focus appropriately in modal dialogs
+                </description>
+            </concept>
+        </key_concepts>
+    </carbon_specific_guidance>
+
+    <testing_checklist>
+        <title>Accessibility Testing Checklist</title>
+        <items>
+            <item priority="high">
+                <check>Keyboard navigation: Can all interactive elements be accessed and operated using only the keyboard?</check>
+                <how_to_test>
+                    <step>Use Tab to navigate through the interface</step>
+                    <step>Use Enter/Space to activate buttons</step>
+                    <step>Ensure focus is visible at all times</step>
+                </how_to_test>
+            </item>
+
+            <item priority="high">
+                <check>Screen reader compatibility: Can all content and functionality be accessed using a screen reader?</check>
+                <how_to_test>
+                    <step>Test with VoiceOver (macOS), NVDA or JAWS (Windows)</step>
+                    <step>Verify all content is announced correctly</step>
+                    <step>Check that interactive elements have appropriate roles and labels</step>
+                </how_to_test>
+            </item>
+
+            <item priority="high">
+                <check>Color contrast: Do all text elements have sufficient contrast against their background?</check>
+                <how_to_test>
+                    <step>Use browser developer tools to check contrast ratios</step>
+                    <step>Ensure text meets minimum contrast requirements (4.5:1 for normal text, 3:1 for large text)</step>
+                </how_to_test>
+            </item>
+
+            <item>
+                <check>Form validation: Are form errors clearly identified and described?</check>
+                <how_to_test>
+                    <step>Submit forms with invalid data</step>
+                    <step>Check that errors are visually indicated</step>
+                    <step>Verify error messages are clear and helpful</step>
+                </how_to_test>
+            </item>
+        </items>
+    </testing_checklist>
+
+    <common_accessibility_issues>
+        <issue>
+            <title>Missing Form Labels</title>
+            <description>Form fields without proper labels</description>
+            <impact>Screen reader users cannot identify the purpose of form fields</impact>
+            <solution>Always use the labelText prop for all form components</solution>
+        </issue>
+
+        <issue>
+            <title>Keyboard Traps</title>
+            <description>Focus gets trapped in a component with no way to exit</description>
+            <impact>Keyboard users cannot navigate away from the component</impact>
+            <solution>Ensure all modals and dialogs can be closed with Escape key</solution>
+        </issue>
+
+        <issue>
+            <title>Missing Alternative Text</title>
+            <description>Images without alt text or icon buttons without descriptions</description>
+            <impact>Screen reader users miss important visual information</impact>
+            <solution>Add alt text to all images and iconDescription to all icon buttons</solution>
+        </issue>
+
+        <issue>
+            <title>Low Color Contrast</title>
+            <description>Text with insufficient contrast against its background</description>
+            <impact>Users with low vision or color blindness cannot read the text</impact>
+            <solution>Use Carbon theme tokens which are designed for proper contrast</solution>
+        </issue>
+    </common_accessibility_issues>
+
+    <resources>
+        <resource>
+            <title>IBM Equal Access Toolkit</title>
+            <url>https://www.ibm.com/able/toolkit/</url>
+            <description>Comprehensive accessibility guidance from IBM</description>
+        </resource>
+
+        <resource>
+            <title>Carbon Design System Accessibility</title>
+            <url>https://carbondesignsystem.com/guidelines/accessibility/overview/</url>
+            <description>Carbon-specific accessibility guidelines</description>
+        </resource>
+    </resources>
+</accessibility_guidelines>
+
+<!-- Made with Bob -->

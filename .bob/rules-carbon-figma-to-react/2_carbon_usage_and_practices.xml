@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<carbon_components_guidelines>
+    <overview>
+    Essential guidance for implementing with Carbon Design System components in React applications,
+    focusing on component selection, usage patterns, and best practices.
+    </overview>
+
+    <data_model_schemas>
+        <title>Data Model and Schema Understanding</title>
+        <description>
+      Understanding the data structures returned by Carbon MCP tools is essential for effective querying and code generation.
+        </description>
+
+        <schema name="Code Search Results">
+            <description>Storybook-based component code examples from Carbon Core and IBM Products</description>
+            <fields>
+                <field name="component_id">Normalized ID (e.g., "accordion", "about-modal")</field>
+                <field name="component_name">Display name</field>
+                <field name="component_type">"React" or "Web Components"</field>
+                <field name="ibm_products">"yes" (IBM Products) or "no" (Carbon Core)</field>
+                <field name="variants[]">Array with variant_id, example, props_used, props_schema, variant_is_default</field>
+                <field name="imports">Import statements</field>
+                <field name="storybook_url">Link to Storybook</field>
+                <field name="iframe_url">Embedded view URL</field>
+                <field name="canonical_url">Canonical documentation URL</field>
+            </fields>
+            <search_fields>
+                <field name="component_aliases_text">Alternative names</field>
+                <field name="search_tokens">Searchable tokens</field>
+                <field name="search_blob">Full-text search content</field>
+                <field name="storybook_title">Storybook hierarchy title</field>
+            </search_fields>
+        </schema>
+
+        <schema name="Docs Search Results">
+            <description>Chunked documentation content for design/development guidance</description>
+            <fields>
+                <field name="component_id">Component identifier</field>
+                <field name="topic_id">Topic identifier</field>
+                <field name="page_type">"usage", "style", "accessibility", etc.</field>
+                <field name="section_heading">Section title</field>
+                <field name="chunk_text">Content chunk</field>
+                <field name="chunk_ordinal">Chunk position</field>
+                <field name="chunk_ordinal_max">Total chunks</field>
+                <field name="breadcrumbs">Navigation path</field>
+                <field name="last_crawled_at">Last update timestamp</field>
+            </fields>
+        </schema>
+
+        <schema name="AI Chat Documents">
+            <description>Carbon AI Chat documentation served via docs_search</description>
+            <fields>
+                <field name="section_heading">Section title</field>
+                <field name="titleline">Document title</field>
+                <field name="section_slug_phrase">URL-friendly section identifier</field>
+                <field name="api_symbols_text">API symbols referenced</field>
+                <field name="url_filename">Source filename</field>
+                <field name="chunk_summary">Brief content summary</field>
+                <field name="chunk_title">Chunk-specific title</field>
+                <field name="chunk_text">Content text</field>
+                <field name="anchor_url">Section anchor link</field>
+                <field name="page_url">Full page URL</field>
+                <field name="last_crawled_at">Last update timestamp</field>
+            </fields>
+            <example_entities>
+                <entity>PublicChatState</entity>
+                <entity>ChatInstance</entity>
+                <entity>PublicConfig</entity>
+                <entity>Assistant</entity>
+                <entity>migration-1.0.0</entity>
+            </example_entities>
+        </schema>
+
+        <schema name="AI Chat Code Results">
+            <description>Carbon AI Chat code examples served via code_search</description>
+            <fields>
+                <field name="doc_id">Document identifier</field>
+                <field name="rag_id">Retrieval identifier</field>
+                <field name="example_root">Example category (basic, custom-element, history, watsonx, watch-state)</field>
+                <field name="framework">"react" or "web-components"</field>
+                <field name="example">Example name</field>
+                <field name="path">File path within example</field>
+                <field name="filename">File name</field>
+                <field name="title">Example title</field>
+                <field name="url">Documentation URL</field>
+                <field name="tags">Categorization tags</field>
+                <field name="component_name">Component identifier</field>
+                <field name="component_type">Framework type</field>
+                <field name="description">Example description</field>
+                <field name="search_tokens">Searchable tokens</field>
+                <field name="imports_tokens">Import statement tokens</field>
+                <field name="code">Code content</field>
+                <field name="raw">Raw file content</field>
+                <field name="last_updated">Last modification timestamp</field>
+                <field name="doc_type">Document type classifier</field>
+                <field name="version">Version identifier</field>
+                <field name="chunk_id">Globally unique chunk identifier (doc_id::file_id::chunk_no)</field>
+                <field name="file_id">File identifier within example</field>
+                <field name="example_files">Array of all files in the example</field>
+            </fields>
+            <completeness_note>
+                Server automatically provides complete files when detecting file-specific queries,
+                reconstructing multi-chunk files into single complete results.
+                Check for is_complete_file: true in results.
+            </completeness_note>
+        </schema>
+    </data_model_schemas>
+
+    <component_categories>
+        <category name="Layout Components">
+            <description>Components for structuring page layouts and organizing content</description>
+            <overview>
+                Primary layout system for all Carbon applications.
+            </overview>
+            <key_guidelines>
+                <guideline priority="high">Always specify column spans for all breakpoints (sm, md, lg)</guideline>
+                <guideline priority="high">Use the Carbon grid system for all layouts</guideline>
+                <guideline>Use narrow prop (16px gutters) for denser layouts</guideline>
+            </key_guidelines>
+            <key_concept>
+                <title>Responsive Column Spans</title>
+                <description>
+          The Carbon grid system uses different column counts at different breakpoints:
+          - Small (sm): 4 columns total
+          - Medium (md): 8 columns total
+          - Large (lg): 16 columns total
+          
+          Always specify spans for all breakpoints to ensure proper responsive behavior.
+                </description>
+            </key_concept>
+        </category>
+
+        <category name="Form Components">
+            <description>Components for user input and form creation</description>
+            <key_guidelines>
+                <guideline priority="high">Always provide unique IDs for form elements</guideline>
+                <guideline priority="high">Include descriptive labels for all form fields</guideline>
+                <guideline>Use helper text to provide additional context when needed</guideline>
+                <guideline>Implement proper validation with clear error messages</guideline>
+            </key_guidelines>
+            <key_concept>
+                <title>Form Accessibility</title>
+                <description>
+          Ensure form components are accessible by:
+          - Using proper labeling (labelText prop)
+          - Providing clear error states (invalid and invalidText props)
+          - Ensuring keyboard navigability
+          - Using appropriate ARIA attributes when needed
+                </description>
+            </key_concept>
+        </category>
+
+        <category name="Data Display Components">
+            <description>Components for displaying structured data and content</description>
+            <key_guidelines>
+                <guideline priority="high">Choose the appropriate data display component based on data type and volume</guideline>
+                <guideline priority="high">Implement proper pagination for large datasets</guideline>
+                <guideline>Provide clear sorting and filtering options when applicable</guideline>
+            </key_guidelines>
+            <key_concept>
+                <title>Data Density Considerations</title>
+                <description>
+          When displaying large datasets, consider:
+          - Using compact variants for high-density data displays
+          - Implementing pagination to manage large datasets
+          - Providing sorting and filtering capabilities
+          - Using zebra striping for better row distinction in tables
+                </description>
+            </key_concept>
+        </category>
+
+        <category name="Navigation Components">
+            <description>Components for user navigation and wayfinding</description>
+            <key_guidelines>
+                <guideline priority="high">Choose navigation patterns that match users' mental models</guideline>
+                <guideline priority="high">Clearly indicate the current location in the navigation hierarchy</guideline>
+                <guideline>Maintain consistent navigation patterns throughout the application</guideline>
+            </key_guidelines>
+            <key_concept>
+                <title>Responsive Navigation Patterns</title>
+                <description>
+          Navigation components should adapt appropriately across different screen sizes:
+          - Consider how navigation transforms on smaller screens
+          - Use progressive disclosure for complex navigation on mobile
+          - Ensure touch targets are appropriately sized on touch devices
+                </description>
+            </key_concept>
+            <component name="Breadcrumb">
+                <critical_rule priority="high">
+                    The last breadcrumb item (current page) MUST use isCurrentPage prop and MUST NOT have an href.
+                    Use noTrailingSlash to omit adding a slash after the current page.
+                </critical_rule>
+                <reference>Use Carbon MCP to search "breadcrumb isCurrentPage" for implementation examples</reference>
+            </component>
+        </category>
+    </component_categories>
+
+    <implementation_patterns>
+        <pattern name="Controlled Components">
+            <description>
+        Pattern for managing component state externally, providing full control over behavior.
+            </description>
+            <example><![CDATA[
+import { useState } from 'react';
+import { TextInput } from '@carbon/react';
+
+const ControlledInput = () => {
+  const [value, setValue] = useState('');
+  
+  return (
+    <TextInput
+      id="controlled-input" labelText="Controlled Input" value={value}
+      onChange={(e) => setValue(e.target.value)}
+    />
+  );
+};
+      ]]>            </example>
+            <when_to_use>
+                <scenario>When you need to react to input changes</scenario>
+                <scenario>When form state needs to be managed centrally</scenario>
+                <scenario>When input validation is required</scenario>
+            </when_to_use>
+        </pattern>
+
+        <pattern name="Responsive Adaptation">
+            <description>
+        Pattern for adapting component behavior and appearance across different screen sizes.
+            </description>
+            <example><![CDATA[
+import { Grid, Column } from '@carbon/react';
+
+const ResponsiveLayout = () => {
+  return (
+    <Grid>
+      {/* Full width on mobile, half width on larger screens */}
+      <Column sm={4} md={4} lg={8}>
+        <div>Left content</div>
+      </Column>
+      
+      {/* Full width on mobile, half width on larger screens */}
+      <Column sm={4} md={4} lg={8}>
+        <div>Right content</div>
+      </Column>
+      
+      {/* Hidden on mobile, visible on larger screens */}
+      <Column sm={0} md={8} lg={16}>
+        <div>Additional content (hidden on mobile)</div>
+      </Column>
+    </Grid>
+  );
+};
+      ]]>            </example>
+            <when_to_use>
+                <scenario>When creating responsive layouts</scenario>
+                <scenario>When content priority changes across screen sizes</scenario>
+                <scenario>When implementing progressive disclosure</scenario>
+            </when_to_use>
+        </pattern>
+
+        <pattern name="Carbon MCP Syntax Verification" priority="critical">
+            <description>
+        MANDATORY pattern for verifying Carbon component syntax before implementation.
+        This pattern MUST be followed for ALL Carbon component code, whether new or existing.
+            </description>
+            <workflow>
+                <step number="1">Research component using Carbon MCP code_search</step>
+                <step number="2">Review implementation examples and prop usage</step>
+                <step number="3">Verify import statements and component structure</step>
+                <step number="4">Check for any recent updates or bug fixes</step>
+                <step number="5">Implement using verified syntax</step>
+            </workflow>
+            <example><![CDATA[
+// STEP 1: Research component syntax using Carbon MCP
+<use_mcp_tool>
+<server_name>carbon-mcp</server_name>
+<tool_name>code_search</tool_name>
+<arguments>
+{
+  "query": "Button implementation example"
+}
+</arguments>
+</use_mcp_tool>
+
+// STEP 2: Review the results to understand correct usage
+
+// STEP 3: Implement using verified syntax
+import { Button } from '@carbon/react';
+
+const MyComponent = () => {
+  return (
+    <Button kind="primary" size="lg">
+      Submit
+    </Button>
+  );
+};
+      ]]>            </example>
+            <when_to_use>
+                <scenario priority="critical">Before writing ANY new Carbon component code</scenario>
+                <scenario priority="critical">Before updating ANY existing Carbon component code</scenario>
+                <scenario priority="critical">Before modifying Carbon component props or structure</scenario>
+            </when_to_use>
+            <enforcement>
+                This pattern is MANDATORY and cannot be skipped. Failure to verify syntax with Carbon MCP
+                before writing Carbon component code is a critical error.
+            </enforcement>
+        </pattern>
+    </implementation_patterns>
+
+    <component_selection_guidance>
+        <title>Component Selection Guidelines</title>
+        <guidelines>
+            <guideline priority="critical">
+                <rule>MANDATORY: Always use Carbon MCP to verify component syntax before writing or updating ANY Carbon component code</rule>
+                <rationale>
+                    Carbon MCP provides the authoritative source for correct component syntax, props, and usage patterns.
+                    This ensures you implement components correctly and catch any bug fixes or convention updates,
+                    regardless of whether the component is new to the project or already in use.
+                </rationale>
+                <enforcement>
+                    This is a MANDATORY step that CANNOT be skipped. Use code_search and docs_search tools
+                    to research the correct implementation before writing any Carbon component code.
+                </enforcement>
+            </guideline>
+
+            <guideline priority="high">
+                <rule>Use standard Carbon components whenever possible</rule>
+                <rationale>Ensures consistency, accessibility, and maintainability</rationale>
+            </guideline>
+
+            <guideline priority="high">
+                <rule>Don't modify core Carbon component behavior</rule>
+                <rationale>Prevents inconsistent user experiences and potential accessibility issues</rationale>
+            </guideline>
+
+            <guideline priority="high">
+                <rule>Never use deprecated component properties</rule>
+                <rationale>Ensures forward compatibility and follows best practices</rationale>
+            </guideline>
+
+            <guideline priority="high">
+                <rule>We do not need to set layer properties for Carbon components</rule>
+                <rationale>Carbon components have their own layer set if needed</rationale>
+            </guideline>
+        </guidelines>
+
+        <decision_tree>
+            <question>Is there a Carbon library component that matches the requirement?</question>
+            <answers>
+                <answer value="yes">
+                    <action>Use the Carbon library component as designed</action>
+                </answer>
+                <answer value="partially">
+                    <action>Compose multiple Carbon components to meet the requirement</action>
+                </answer>
+                <answer value="no">
+                    <action>Create a custom component using Carbon tokens and patterns</action>
+                </answer>
+            </answers>
+        </decision_tree>
+    </component_selection_guidance>
+
+    <common_pitfalls>
+        <pitfall>
+            <title>Direct DOM Manipulation</title>
+            <description>Directly manipulating DOM elements of Carbon components</description>
+            <why_problematic>Breaks component encapsulation and can cause unexpected behavior</why_problematic>
+            <solution>Use component props and state to control behavior</solution>
+        </pitfall>
+
+        <pitfall>
+            <title>Inline Styles</title>
+            <description>Using inline styles to override Carbon component styling</description>
+            <why_problematic>Breaks theme consistency and can cause specificity issues</why_problematic>
+            <solution>Use Carbon's SCSS variables and mixins in separate stylesheets</solution>
+        </pitfall>
+
+        <pitfall>
+            <title>Fixed Dimensions</title>
+            <description>Setting fixed width/height on components</description>
+            <why_problematic>Prevents responsive behavior and can cause layout issues</why_problematic>
+            <solution>Use Carbon's Grid system and relative units</solution>
+        </pitfall>
+
+        <pitfall>
+            <title>Missing Accessibility Attributes</title>
+            <description>Omitting required accessibility attributes</description>
+            <why_problematic>Creates barriers for users with disabilities</why_problematic>
+            <solution>Always include required accessibility attributes (aria-label, aria-describedby, etc.)</solution>
+        </pitfall>
+    </common_pitfalls>
+
+    <mcp_and_package_reference>
+        <title>Carbon MCP Tools and Package Information</title>
+        <description>
+      For comprehensive guidance on using the Carbon MCP server tools and working with Carbon React packages,
+      refer to the dedicated file: 8_carbon_mcp_and_packages.xml
+        </description>
+        <what_you_will_find>
+            <item>Detailed Carbon MCP tool documentation (docs_search, code_search)</item>
+            <item>Complete Carbon React package catalog with import examples</item>
+            <item>Installation and styling requirements for each package</item>
+            <item>Best practices for using official Carbon components</item>
+        </what_you_will_find>
+    </mcp_and_package_reference>
+</carbon_components_guidelines>
+
+<!-- Made with Bob -->
