@@ -120,3 +120,89 @@
     color: $text-secondary;
   }
 }
+
+.recently-run-jobs {
+  padding-block: $spacing-07;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-block-end: $spacing-08;
+  }
+
+  &__title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: $spacing-03;
+  }
+
+  &__title {
+    @include type-style('heading-03');
+
+    margin: 0;
+  }
+
+  &__tooltip-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: $icon-primary;
+    display: flex;
+    align-items: center;
+  }
+
+  &__tiles {
+    margin-block-start: 0;
+    row-gap: $spacing-05;
+  }
+
+  &__tile {
+    block-size: 189px;
+    padding: $spacing-05;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__tile-main {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-05;
+  }
+
+  &__tile-icon {
+    color: $icon-primary;
+  }
+
+  &__tile-text {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-02;
+  }
+
+  &__tile-label {
+    @include type-style('label-01');
+
+    color: $text-secondary;
+  }
+
+  &__tile-title {
+    @include type-style('heading-02');
+
+    margin: 0;
+  }
+
+  &__tile-caption {
+    @include type-style('helper-text-01');
+
+    color: $text-secondary;
+  }
+
+  &__tile-arrow {
+    display: flex;
+    justify-content: flex-end;
+    color: $icon-primary;
+  }
+}
