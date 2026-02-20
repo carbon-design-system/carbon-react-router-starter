@@ -219,6 +219,7 @@
 
   &__table-area {
     margin-block-start: 0;
+    padding-inline-end: $spacing-07; // to match narrow grid used elsewhere
   }
 
   &__filter {
