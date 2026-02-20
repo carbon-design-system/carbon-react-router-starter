@@ -206,3 +206,45 @@
     color: $icon-primary;
   }
 }
+
+.connections-section {
+  padding-block: $spacing-07;
+
+  &__title {
+    @include type-style('heading-03');
+
+    margin: 0;
+    margin-block-end: $spacing-08;
+  }
+
+  &__table-area {
+    margin-block-start: 0;
+  }
+
+  &__filter {
+    background-color: $layer-01;
+    display: flex;
+    flex-direction: column;
+    block-size: 100%;
+  }
+
+  &__filter-label {
+    @include type-style('heading-compact-01');
+
+    padding: $spacing-04 $spacing-05;
+    color: $text-primary;
+  }
+
+  .cds--tabs--vertical {
+    background-color: $layer-01;
+    flex: 1;
+  }
+
+  .cds--tabs--vertical .cds--tabs__nav {
+    background-color: $layer-01;
+  }
+
+  .count {
+    margin-inline-start: auto;
+  }
+}
