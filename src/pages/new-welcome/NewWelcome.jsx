@@ -7,6 +7,7 @@
 
 import { PageLayout } from '../../layouts/page-layout.jsx';
 import { NewWelcomeHeader } from './NewWelcomeHeader.jsx';
+import { JumpBackIn } from './JumpBackIn.jsx';
 
 // The styles are imported into index.scss by default.
 // Do the same unless you have a good reason not to.
@@ -21,6 +22,7 @@ const NewWelcome = () => {
       <PageLayout.Header>
         <NewWelcomeHeader />
       </PageLayout.Header>
+      <JumpBackIn />
     </PageLayout>
   );
 };

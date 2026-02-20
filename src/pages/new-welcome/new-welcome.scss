@@ -13,6 +13,12 @@
   padding-inline-start: $spacing-05;
 }
 
+.cs--new-welcome {
+  .cs--page-layout__content-header {
+    margin-block-end: 0;
+  }
+}
+
 .new-welcome-header {
   padding-block: $spacing-09 $spacing-10;
   background: linear-gradient(to bottom, $layer 0%, $layer-accent 100%);
@@ -68,5 +74,49 @@
 
     color: $text-secondary;
     margin: 0;
+  }
+}
+
+.jump-back-in {
+  background-color: $layer;
+  padding-block: $spacing-09;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-05;
+    margin-block-end: $spacing-07;
+  }
+
+  &__title {
+    @include type-style('heading-03');
+
+    margin: 0;
+  }
+
+  &__label {
+    @include type-style('label-01');
+
+    display: flex;
+    align-items: center;
+    gap: $spacing-03;
+    color: $text-secondary;
+  }
+
+  &__paths {
+    margin-block-start: 0;
+    row-gap: $spacing-05;
+  }
+
+  &__path-item {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-02;
+  }
+
+  &__path-label {
+    @include type-style('label-01');
+
+    color: $text-secondary;
   }
 }
