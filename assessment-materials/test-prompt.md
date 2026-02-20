@@ -75,6 +75,23 @@ The implementation should:
 6. Use separate Grid components for logical content groups
 7. Work correctly in the browser
 
+## Preview Components
+
+The status indicators in the Connections table may require a **preview or unstable component** from `@carbon/react`.
+
+**You are explicitly authorized to use preview/unstable components** for implementing status indicators. When researching with Carbon MCP:
+
+- Search for components that display status or state indicators
+- Look for components with "preview" or "unstable" status markers
+- Check component documentation for usage with status states (failed, pending, successful, in-progress)
+
+## Browser Validation
+
+**When prompted for browser validation:**
+
+- Choose automated validation in the browser
+- This is required for the assessment to capture screenshots and verify the implementation
+
 ## Notes
 
 - You may use placeholder data for the connections table
