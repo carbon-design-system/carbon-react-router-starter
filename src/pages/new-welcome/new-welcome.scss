@@ -1,0 +1,72 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/type' as *;
+
+.narrow-grid-adjustment {
+  padding-inline-start: $spacing-05;
+}
+
+.new-welcome-header {
+  padding-block: $spacing-09 $spacing-10;
+  background: linear-gradient(to bottom, $layer 0%, $layer-accent 100%);
+
+  &__title {
+    @include type-style('heading-05');
+
+    margin-block-end: $spacing-10;
+  }
+
+  &__content {
+    margin-block-start: $spacing-05;
+  }
+
+  &__intro {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-06;
+    margin-block-end: $spacing-07;
+  }
+
+  &__value-prop {
+    @include type-style('body-long-01');
+
+    color: $text-primary;
+  }
+
+  &__tiles {
+    margin-block-start: 0;
+    row-gap: $spacing-05;
+  }
+
+  &__tile {
+    block-size: 164px;
+    padding: $spacing-05;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-03;
+  }
+
+  &__tile-icon {
+    color: $icon-primary;
+  }
+
+  &__tile-title {
+    @include type-style('heading-02');
+
+    margin: 0;
+  }
+
+  &__tile-description {
+    @include type-style('body-short-01');
+
+    color: $text-secondary;
+    margin: 0;
+  }
+}
