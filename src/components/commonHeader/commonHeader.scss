@@ -10,6 +10,11 @@
 @use '@carbon/react/scss/theme' as *;
 @use '@carbon/react/scss/breakpoint' as *;
 
+.cs--common-header {
+  padding-block-start: $spacing-05;
+  margin-block-end: $spacing-05;
+}
+
 .cs--common-header__content {
   // This CSS follow the principles of a condensed carbon grid with 2x2
   display: grid;
@@ -17,7 +22,6 @@
   grid-template-columns: 1fr 1fr;
   /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties -- need to control size of rows and columns */
   grid-template-rows: auto 1fr;
-  padding-block-start: $spacing-05;
 
   @include breakpoint(md) {
     grid-template-areas: 'title title' 'other image';

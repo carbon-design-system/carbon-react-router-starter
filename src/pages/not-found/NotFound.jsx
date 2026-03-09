@@ -16,19 +16,17 @@ const NotFound = () => {
       className="cs--not-found"
       fallback={<p>Loading not found page...</p>}
     >
-      <PageLayout.Header>
-        <CommonHeader
-          title={'Page not found'}
-          paragraphs={[
-            <>This is not the page you were looking for.</>,
-            <>
-              The route <em>&lsquo;{location.pathname}&rsquo;</em> is not
-              recognized.
-            </>,
-            <>Maintained by fed-at-ibm, a chapter of the OIC.</>,
-          ]}
-        />
-      </PageLayout.Header>
+      <CommonHeader
+        title={'Page not found'}
+        paragraphs={[
+          <>This is not the page you were looking for.</>,
+          <>
+            The route <em>&lsquo;{location.pathname}&rsquo;</em> is not
+            recognized.
+          </>,
+          <>Maintained by fed-at-ibm, a chapter of the OIC.</>,
+        ]}
+      />
     </PageLayout>
   );
 };

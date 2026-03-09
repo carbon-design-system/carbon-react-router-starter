@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,9 +21,7 @@ const Dashboard = () => {
       className="cs--dashboard"
       fallback={<p>Loading dashboard page...</p>}
     >
-      <PageLayout.Header>
-        <PageHeader title="Dashboard" />
-      </PageLayout.Header>
+      <PageHeader title="Dashboard" className="cs--dashboard__header" />
 
       <DashboardURLParameters />
 

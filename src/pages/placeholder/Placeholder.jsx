@@ -17,20 +17,18 @@ const Placeholder = () => {
       className="cs--placeholder"
       fallback={<p>Loading placeholder page...</p>}
     >
-      <PageLayout.Header>
-        <CommonHeader
-          title={'This page is not ready yet'}
-          paragraphs={[
-            <>Generally not a good idea to have pages under construction.</>,
-            <>This page is here to help demonstrate the global navigation.</>,
-            <>
-              You are at the location served from route{' '}
-              <em>&lsquo;{location.pathname}&rsquo;</em>.
-            </>,
-            <>Maintained by fed-at-ibm, a chapter of the OIC.</>,
-          ]}
-        />
-      </PageLayout.Header>
+      <CommonHeader
+        title={'This page is not ready yet'}
+        paragraphs={[
+          <>Generally not a good idea to have pages under construction.</>,
+          <>This page is here to help demonstrate the global navigation.</>,
+          <>
+            You are at the location served from route{' '}
+            <em>&lsquo;{location.pathname}&rsquo;</em>.
+          </>,
+          <>Maintained by fed-at-ibm, a chapter of the OIC.</>,
+        ]}
+      />
     </PageLayout>
   );
 };
