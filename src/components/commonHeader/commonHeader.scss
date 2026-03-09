@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,6 +17,7 @@
   grid-template-columns: 1fr 1fr;
   /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties -- need to control size of rows and columns */
   grid-template-rows: auto 1fr;
+  padding-block-start: $spacing-05;
 
   @include breakpoint(md) {
     grid-template-areas: 'title title' 'other image';

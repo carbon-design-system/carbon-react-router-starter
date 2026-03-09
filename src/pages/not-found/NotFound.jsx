@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,17 +16,19 @@ const NotFound = () => {
       className="cs--not-found"
       fallback={<p>Loading not found page...</p>}
     >
-      <CommonHeader
-        title={'Page not found'}
-        paragraphs={[
-          <>This is not the page you were looking for.</>,
-          <>
-            The route <em>&lsquo;{location.pathname}&rsquo;</em> is not
-            recognized.
-          </>,
-          <>Maintained by fed-at-ibm, a chapter of the OIC.</>,
-        ]}
-      />
+      <PageLayout.Header>
+        <CommonHeader
+          title={'Page not found'}
+          paragraphs={[
+            <>This is not the page you were looking for.</>,
+            <>
+              The route <em>&lsquo;{location.pathname}&rsquo;</em> is not
+              recognized.
+            </>,
+            <>Maintained by fed-at-ibm, a chapter of the OIC.</>,
+          ]}
+        />
+      </PageLayout.Header>
     </PageLayout>
   );
 };

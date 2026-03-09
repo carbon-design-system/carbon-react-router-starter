@@ -23,7 +23,9 @@ const Welcome = () => {
       className="cs--welcome"
       fallback={<p>Loading welcome page...</p>}
     >
-      <WelcomeHeader />
+      <PageLayout.Header>
+        <WelcomeHeader />
+      </PageLayout.Header>
 
       <WelcomeRunSection />
 
