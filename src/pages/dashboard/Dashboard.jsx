@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { useTranslation } from 'react-i18next';
+
 import { Footer } from '../../components/footer/Footer';
 import { PageLayout } from '../../layouts/page-layout';
 import { PageHeader } from '@carbon/ibm-products';
@@ -16,12 +18,17 @@ import DashboardVisualizations from './DashboardVisualizations';
 // Do the same unless you have a good reason not to.
 
 const Dashboard = () => {
+  const { t } = useTranslation();
+
   return (
     <PageLayout
       className="cs--dashboard"
-      fallback={<p>Loading dashboard page...</p>}
+      fallback={<p>{t('dashboard.loading', 'Loading dashboard page...')}</p>}
     >
-      <PageHeader title="Dashboard" className="cs--dashboard__header" />
+      <PageHeader
+        title={t('dashboard.title', 'Dashboard')}
+        className="cs--dashboard__header"
+      />
 
       <DashboardURLParameters />
 
