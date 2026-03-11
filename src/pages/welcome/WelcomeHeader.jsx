@@ -33,15 +33,15 @@ export const WelcomeHeader = () => {
             'Maintained by fed-at-ibm, a chapter of the OIC.',
           )}
         </>,
-        <>
-          <Button
-            renderIcon={ArrowRight}
-            href="https://github.com/carbon-design-system/carbon-react-router-starter"
-          >
-            {t('welcomeHeader.button.useTemplate', 'Use this template')}
-          </Button>
-        </>,
       ]}
+      action={
+        <Button
+          renderIcon={ArrowRight}
+          href="https://github.com/carbon-design-system/carbon-react-router-starter"
+        >
+          {t('welcomeHeader.button.useTemplate', 'Use this template')}
+        </Button>
+      }
     />
   );
 };

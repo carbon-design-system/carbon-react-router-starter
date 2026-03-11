@@ -14,8 +14,11 @@ export const WelcomeRunSection = () => {
   const { t } = useTranslation();
 
   return (
-    <WelcomeCallout heading={t('welcome.run.heading', 'Run the template')}>
-      <Column sm={4} md={8} lg={8} xlg={8}>
+    <WelcomeCallout
+      className="cs--welcome__run"
+      heading={t('welcome.run.heading', 'Run the template')}
+    >
+      <Column className="cs--welcome__run-content" sm={4} md={4} lg={8} xlg={8}>
         <p>
           {t('welcome.run.nodeRequirement', 'This code requires node v.24')}
         </p>
