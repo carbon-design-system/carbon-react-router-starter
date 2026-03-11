@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,6 +16,7 @@ import {
   ThemeMenuComplement,
   ThemeSwitcher,
 } from '@carbon-labs/react-theme-settings';
+import { useTranslation } from 'react-i18next';
 import {
   getThemeSettings,
   setThemeSetting as updateThemeSetting,
@@ -23,6 +24,8 @@ import {
 } from '../../utils/theme';
 
 export const ProfilePanel = ({ className }) => {
+  const { t } = useTranslation();
+
   // Get initial values from cookies (single call to avoid redundant parsing)
   const initialSettings = getThemeSettings();
 
@@ -76,7 +79,10 @@ export const ProfilePanel = ({ className }) => {
           ></ThemeSwitcher>
           <ThemeMenuComplement
             id="theme-menu-complement"
-            labelText="Complement menu theme"
+            labelText={t(
+              'profile.settings.complementMenuTheme',
+              'Complement menu theme',
+            )}
             checked={themeMenuComplement}
             onChange={handleThemeMenuComplementChange}
           />

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -40,6 +40,7 @@ export const routes = [
     path: '/dashboard',
     element: Dashboard,
     carbon: {
+      labelKey: 'routes.dashboard',
       label: 'Dashboard',
       inHeader: true,
     },
@@ -52,6 +53,7 @@ export const routes = [
     path: '/link-1',
     element: Placeholder,
     carbon: {
+      labelKey: 'routes.link1',
       label: 'Link 1',
       inHeader: true,
     },
@@ -60,6 +62,7 @@ export const routes = [
     path: '/link-2',
     element: Placeholder,
     carbon: {
+      labelKey: 'routes.link2',
       label: 'Link 2',
       inHeader: true,
     },
@@ -68,6 +71,7 @@ export const routes = [
     path: '/link-3',
     element: Placeholder,
     carbon: {
+      labelKey: 'routes.link3',
       label: 'Link 3',
       inHeader: true,
     },
@@ -75,6 +79,7 @@ export const routes = [
   {
     path: '/link-4',
     carbon: {
+      labelKey: 'routes.link4',
       label: 'Link 4',
       inHeader: true,
     },
@@ -83,6 +88,7 @@ export const routes = [
     path: '/link-4/sub-link-1',
     element: Placeholder,
     carbon: {
+      labelKey: 'routes.link4.subLink1',
       label: 'Sub-link 1',
     },
   },
@@ -90,6 +96,7 @@ export const routes = [
     path: '/link-4/sub-link-2',
     element: Placeholder,
     carbon: {
+      labelKey: 'routes.link4.subLink2',
       label: 'Sub-link 2',
     },
   },
@@ -97,6 +104,7 @@ export const routes = [
     path: '/link-4/sub-link-3',
     element: Placeholder,
     carbon: {
+      labelKey: 'routes.link4.subLink3',
       label: 'Sub-link 3',
     },
   },
@@ -104,6 +112,7 @@ export const routes = [
     carbon: {
       virtualPath: '/getting-started',
       inSideNav: true,
+      labelKey: 'routes.gettingStarted',
       label: 'Getting Started',
       icon: MagicWand,
       href: `https://github.com/carbon-design-system/carbon-react-router-starter?tab=readme-ov-file#get-started`,
@@ -112,6 +121,7 @@ export const routes = [
   {
     carbon: {
       virtualPath: '/getting-started/how',
+      labelKey: 'routes.gettingStarted.how',
       label: 'How does this work',
       href: `https://github.com/carbon-design-system/carbon-react-router-starter?tab=readme-ov-file#how-does-this-work`,
     },
@@ -119,6 +129,7 @@ export const routes = [
   {
     carbon: {
       virtualPath: '/getting-started/up-to-date',
+      labelKey: 'routes.gettingStarted.upToDate',
       label: 'Keeping this up to date',
       href: `https://github.com/carbon-design-system/carbon-react-router-starter?tab=readme-ov-file#keeping-this-up-to-date`,
     },
@@ -126,6 +137,7 @@ export const routes = [
   {
     carbon: {
       virtualPath: '/getting-started/report',
+      labelKey: 'routes.gettingStarted.report',
       label: 'Report problems',
       href: `https://github.com/carbon-design-system/carbon-react-router-starter?tab=readme-ov-file#report-problems`,
     },
@@ -134,6 +146,7 @@ export const routes = [
     carbon: {
       virtualPath: '/github',
       inSideNav: true,
+      labelKey: 'routes.github',
       label: 'GitHub',
       icon: LogoGithub,
       href: `https://github.com/carbon-design-system/carbon-react-router-starter`,
