@@ -7,8 +7,11 @@
 
 import { Column, Link, Tile, Stack, Grid } from '@carbon/react';
 import { useParams, useSearchParams } from 'react-router';
+import { useTranslation } from 'react-i18next';
 
 const DashboardURLParameters = () => {
+  const { t } = useTranslation();
+
   // Access path parameters (e.g., /dashboard/1234 -> id = "1234")
   const params = useParams();
   const { id } = params;
@@ -23,12 +26,23 @@ const DashboardURLParameters = () => {
       <Column sm={4} md={8} lg={16}>
         <Tile className="cs--dashboard__tile">
           <Stack gap={5}>
-            <strong>URL parameters example</strong>
-            {nameParam && <h2 style={{ margin: 0 }}>Hello {nameParam}! 👋</h2>}
+            <strong>
+              {t('dashboard.urlParameters.title', 'URL parameters example')}
+            </strong>
+            {nameParam && (
+              <h2 style={{ margin: 0 }}>
+                {t('dashboard.urlParameters.greeting', 'Hello {{name}}! 👋', {
+                  name: nameParam,
+                })}
+              </h2>
+            )}
             <p>
-              This demonstrates how to access both path parameters and query
-              parameters from the URL. <br />
-              Try accessing:{' '}
+              {t(
+                'dashboard.urlParameters.description',
+                'This demonstrates how to access both path parameters and query parameters from the URL.',
+              )}
+              <br />
+              {t('dashboard.urlParameters.tryAccessing', 'Try accessing:')}{' '}
               <Link href="/dashboard/1234?q=xyz&name=Anne">
                 /dashboard/1234?q=xyz&name=Anne
               </Link>
@@ -36,19 +50,36 @@ const DashboardURLParameters = () => {
             <dl>
               {id && (
                 <>
-                  <dt>Path parameter detected (id):</dt>
+                  <dt>
+                    {t(
+                      'dashboard.urlParameters.pathParameter',
+                      'Path parameter detected (id):',
+                    )}
+                  </dt>
                   <dd>{id}</dd>
                 </>
               )}
               {queryParam && (
                 <>
-                  <dt>Query parameter detected (q):</dt>
+                  <dt>
+                    {t(
+                      'dashboard.urlParameters.queryParameter',
+                      'Query parameter detected ({{param}}):',
+                      { param: 'q' },
+                    )}
+                  </dt>
                   <dd>{queryParam}</dd>
                 </>
               )}
               {nameParam && (
                 <>
-                  <dt>Query parameter detected (name):</dt>
+                  <dt>
+                    {t(
+                      'dashboard.urlParameters.queryParameter',
+                      'Query parameter detected ({{param}}):',
+                      { param: 'name' },
+                    )}
+                  </dt>
                   <dd>{nameParam}</dd>
                 </>
               )}

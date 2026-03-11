@@ -1,6 +1,6 @@
 {
   "version": "0.2",
-  "language": "en",
+  "language": "en,de",
   "dictionaries": ["carbon", "project"],
   "dictionaryDefinitions": [
     {
@@ -34,7 +34,8 @@
     "dist",
     "package.json",
     "*.snap",
-    "*.log"
+    "*.log",
+    "src/locales"
   ],
   "words": []
 }

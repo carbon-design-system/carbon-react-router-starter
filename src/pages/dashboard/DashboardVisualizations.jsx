@@ -6,6 +6,7 @@
  */
 
 import { Column, Grid, Tile } from '@carbon/react';
+import { useTranslation } from 'react-i18next';
 
 const DataVisualization = ({ title }) => {
   return (
@@ -18,10 +19,16 @@ const DataVisualization = ({ title }) => {
 };
 
 const DashboardVisualizations = () => {
+  const { t } = useTranslation();
+
   return (
     <Grid>
-      <DataVisualization title="Visualization" />
-      <DataVisualization title="Cool table" />
+      <DataVisualization
+        title={t('dashboard.visualizations.visualization', 'Visualization')}
+      />
+      <DataVisualization
+        title={t('dashboard.visualizations.coolTable', 'Cool table')}
+      />
     </Grid>
   );
 };

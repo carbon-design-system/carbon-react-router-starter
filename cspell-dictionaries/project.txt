@@ -4,3 +4,5 @@ plex
 Stephane
 fouc
 vite
+Lngs
+languagedetector

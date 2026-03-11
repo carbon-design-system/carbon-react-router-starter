@@ -29,7 +29,23 @@
     "logoAlt": "fed-at-ibm Logo"
   },
   "dashboard": {
-    "loading": "Dashboard wird geladen..."
+    "loading": "Dashboard wird geladen...",
+    "title": "Dashboard",
+    "numberTiles": {
+      "activeUsers": "Aktive Benutzer"
+    },
+    "urlParameters": {
+      "title": "URL-Parameter Beispiel",
+      "greeting": "Hallo {{name}}! 👋",
+      "description": "Dies zeigt, wie man sowohl Pfad-Parameter als auch Query-Parameter aus der URL abruft.",
+      "tryAccessing": "Versuchen Sie:",
+      "pathParameter": "Pfad-Parameter erkannt (id):",
+      "queryParameter": "Query-Parameter erkannt ({{param}}):"
+    },
+    "visualizations": {
+      "visualization": "Visualisierung",
+      "coolTable": "Coole Tabelle"
+    }
   },
   "notFound": {
     "loading": "Fehlerseite wird geladen...",
