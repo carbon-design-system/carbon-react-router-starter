@@ -32,8 +32,8 @@ export const PageLayout = ({ children, className, fallback }) => {
     <Suspense fallback={fallback}>
       <div className={classNames('cs--page-layout', className)}>
         <Nav />
-        <Content className="cs--content">
-          <div className="cs--page-layout__content">{children}</div>
+        <Content className="cs--content cs--page-layout__content">
+          {children}
         </Content>
       </div>
     </Suspense>
