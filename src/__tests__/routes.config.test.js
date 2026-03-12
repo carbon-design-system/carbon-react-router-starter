@@ -1,12 +1,17 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import { test, expect, describe } from 'vitest';
-import { routes, routesInHeader, routesInSideNav } from '../routes/config';
+import {
+  routes,
+  routesInHeader,
+  routesInSideNav,
+  isDirectChildPath,
+} from '../routes/config';
 import Dashboard from '../pages/dashboard/Dashboard';
 import NotFound from '../pages/not-found/NotFound';
 import Placeholder from '../pages/placeholder/Placeholder';
@@ -111,5 +116,194 @@ describe('routes configuration', () => {
         expect(typeof route.status).toBe('number');
       }
     });
+  });
+});
+
+describe('isDirectChildPath', () => {
+  test('returns true for direct child paths', () => {
+    expect(isDirectChildPath('/link-4', '/link-4/sub-link-1')).toBe(true);
+    expect(isDirectChildPath('/dashboard', '/dashboard/123')).toBe(true);
+    expect(isDirectChildPath('/api', '/api/users')).toBe(true);
+    expect(isDirectChildPath('/a', '/a/b')).toBe(true);
+  });
+
+  test('returns false for nested child paths (grandchildren)', () => {
+    expect(isDirectChildPath('/link-4', '/link-4/sub-link-1/nested')).toBe(
+      false,
+    );
+    expect(isDirectChildPath('/dashboard', '/dashboard/123/details')).toBe(
+      false,
+    );
+    expect(isDirectChildPath('/api', '/api/users/profile')).toBe(false);
+    expect(isDirectChildPath('/a', '/a/b/c')).toBe(false);
+  });
+
+  test('returns false when paths are identical', () => {
+    expect(isDirectChildPath('/dashboard', '/dashboard')).toBe(false);
+    expect(isDirectChildPath('/link-4', '/link-4')).toBe(false);
+    expect(isDirectChildPath('/', '/')).toBe(false);
+  });
+
+  test('returns false for non-matching paths', () => {
+    expect(isDirectChildPath('/link-4', '/link-5')).toBe(false);
+    expect(isDirectChildPath('/dashboard', '/profile')).toBe(false);
+    expect(isDirectChildPath('/api', '/app')).toBe(false);
+  });
+
+  test('returns false for paths that start similarly but are not children', () => {
+    expect(isDirectChildPath('/link', '/link-4')).toBe(false);
+    expect(isDirectChildPath('/dash', '/dashboard')).toBe(false);
+    expect(isDirectChildPath('/api', '/api-v2')).toBe(false);
+  });
+
+  test('handles edge cases with null, undefined, and empty strings', () => {
+    expect(isDirectChildPath(null, '/path')).toBe(false);
+    expect(isDirectChildPath('/path', null)).toBe(false);
+    expect(isDirectChildPath(undefined, '/path')).toBe(false);
+    expect(isDirectChildPath('/path', undefined)).toBe(false);
+    expect(isDirectChildPath('', '/path')).toBe(false);
+    expect(isDirectChildPath('/path', '')).toBe(false);
+    expect(isDirectChildPath('', '')).toBe(false);
+  });
+
+  test('handles paths with special characters', () => {
+    expect(isDirectChildPath('/user-profile', '/user-profile/settings')).toBe(
+      true,
+    );
+    expect(isDirectChildPath('/api_v2', '/api_v2/endpoint')).toBe(true);
+    expect(isDirectChildPath('/path.name', '/path.name/child')).toBe(true);
+  });
+
+  test('handles trailing slashes correctly', () => {
+    // Parent with trailing slash should not match (different path structure)
+    expect(isDirectChildPath('/link-4/', '/link-4/sub-link-1')).toBe(false);
+    // Child with trailing slash contains '/' in remainder, so not a direct child
+    expect(isDirectChildPath('/link-4', '/link-4/sub-link-1/')).toBe(false);
+    // Without trailing slashes works correctly
+    expect(isDirectChildPath('/link-4', '/link-4/sub-link-1')).toBe(true);
+  });
+
+  test('is case-sensitive', () => {
+    expect(isDirectChildPath('/Link-4', '/link-4/sub-link-1')).toBe(false);
+    expect(isDirectChildPath('/link-4', '/Link-4/sub-link-1')).toBe(false);
+  });
+
+  test('works with root path', () => {
+    // Root path '/' + '/' = '//', so '/dashboard' doesn't start with '//'
+    // This is expected behavior - root path needs special handling if needed
+    expect(isDirectChildPath('/', '/dashboard')).toBe(false);
+
+    // For actual use case, routes don't use '/' as parent in the config
+    // But if they did, this would be the correct behavior
+    expect(isDirectChildPath('/', '//dashboard')).toBe(true);
+    expect(isDirectChildPath('/', '//dashboard/123')).toBe(false);
+  });
+
+  test('handles URL parameters correctly', () => {
+    // Dynamic route parameters (common in React Router)
+    expect(isDirectChildPath('/dashboard', '/dashboard/:id')).toBe(true);
+    expect(isDirectChildPath('/users', '/users/:userId')).toBe(true);
+    expect(isDirectChildPath('/api', '/api/:version')).toBe(true);
+
+    // Multiple parameters
+    expect(isDirectChildPath('/users/:userId', '/users/:userId/posts')).toBe(
+      true,
+    );
+    expect(
+      isDirectChildPath('/users/:userId/posts', '/users/:userId/posts/:postId'),
+    ).toBe(true);
+
+    // Should not match nested parameters
+    expect(isDirectChildPath('/users', '/users/:userId/posts/:postId')).toBe(
+      false,
+    );
+  });
+
+  test('handles query strings and hash fragments', () => {
+    // Query strings should be treated as part of the path
+    expect(isDirectChildPath('/search', '/search/results?q=test')).toBe(true);
+    expect(isDirectChildPath('/api', '/api/data?format=json')).toBe(true);
+
+    // Hash fragments
+    expect(isDirectChildPath('/docs', '/docs/intro#section')).toBe(true);
+
+    // Combined
+    expect(isDirectChildPath('/page', '/page/view?id=1#top')).toBe(true);
+
+    // Should not match if there's a nested path before query/hash
+    expect(isDirectChildPath('/api', '/api/v1/data?format=json')).toBe(false);
+  });
+
+  test('handles special URL characters', () => {
+    // Encoded characters
+    expect(isDirectChildPath('/search', '/search/hello%20world')).toBe(true);
+    expect(isDirectChildPath('/files', '/files/document.pdf')).toBe(true);
+
+    // Special characters that are valid in URLs
+    expect(isDirectChildPath('/items', '/items/item-123')).toBe(true);
+    expect(isDirectChildPath('/tags', '/tags/tag_name')).toBe(true);
+    expect(isDirectChildPath('/docs', '/docs/v1.0.0')).toBe(true);
+    expect(isDirectChildPath('/api', '/api/~user')).toBe(true);
+
+    // Parentheses (sometimes used in routing)
+    expect(isDirectChildPath('/routes', '/routes/(auth)')).toBe(true);
+
+    // Plus sign
+    expect(isDirectChildPath('/search', '/search/C++')).toBe(true);
+  });
+
+  test('handles wildcard and catch-all patterns', () => {
+    // Asterisk (catch-all routes)
+    expect(isDirectChildPath('/files', '/files/*')).toBe(true);
+    expect(isDirectChildPath('/docs', '/docs/*')).toBe(true);
+
+    // Should not match nested wildcards
+    expect(isDirectChildPath('/files', '/files/subfolder/*')).toBe(false);
+  });
+
+  test('handles optional segments notation', () => {
+    // Optional segments (React Router syntax)
+    expect(isDirectChildPath('/users', '/users/:id?')).toBe(true);
+    expect(isDirectChildPath('/posts', '/posts/:slug?')).toBe(true);
+
+    // Splat parameters
+    expect(isDirectChildPath('/files', '/files/*filepath')).toBe(true);
+  });
+
+  test('handles real-world routing scenarios', () => {
+    // API versioning
+    expect(isDirectChildPath('/api', '/api/v1')).toBe(true);
+    expect(isDirectChildPath('/api', '/api/v1/users')).toBe(false);
+
+    // Locale routing
+    expect(isDirectChildPath('/en', '/en/dashboard')).toBe(true);
+    expect(isDirectChildPath('/en', '/en/dashboard/settings')).toBe(false);
+
+    // Admin routes
+    expect(isDirectChildPath('/admin', '/admin/users')).toBe(true);
+    expect(isDirectChildPath('/admin', '/admin/users/edit')).toBe(false);
+
+    // Resource routes (RESTful)
+    expect(isDirectChildPath('/posts', '/posts/new')).toBe(true);
+    expect(isDirectChildPath('/posts', '/posts/:id')).toBe(true);
+    expect(isDirectChildPath('/posts/:id', '/posts/:id/edit')).toBe(true);
+    expect(isDirectChildPath('/posts/:id', '/posts/:id/comments')).toBe(true);
+    expect(
+      isDirectChildPath('/posts/:id', '/posts/:id/comments/:commentId'),
+    ).toBe(false);
+  });
+
+  test('prevents ReDoS by avoiding regex', () => {
+    // These patterns would be problematic with regex but are safe with string methods
+    const maliciousPath = '/a'.repeat(100);
+    const maliciousSubPath = maliciousPath + '/b';
+
+    // Should complete quickly without hanging
+    const startTime = Date.now();
+    const result = isDirectChildPath(maliciousPath, maliciousSubPath);
+    const endTime = Date.now();
+
+    expect(result).toBe(true);
+    expect(endTime - startTime).toBeLessThan(10); // Should be nearly instant
   });
 });

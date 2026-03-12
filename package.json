@@ -1,7 +1,7 @@
 {
   "name": "carbon-react-starter",
   "private": true,
-  "version": "0.3.0",
+  "version": "0.3.1",
   "type": "module",
   "scripts": {
     "dev": "node src/server",
@@ -43,6 +43,7 @@
     "sirv": "^3.0.0"
   },
   "devDependencies": {
+    "@cspell/dict-de-de": "^4.1.2",
     "@double-great/stylelint-a11y": "^3.0.4",
     "@eslint/js": "^9.21.0",
     "@testing-library/dom": "^10.4.1",
