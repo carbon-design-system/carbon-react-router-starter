@@ -25,9 +25,10 @@ const Dashboard = () => {
       className="cs--dashboard"
       fallback={<p>{t('dashboard.loading', 'Loading dashboard page...')}</p>}
     >
-      <PageLayout.Header>
-        <PageHeader title={t('dashboard.title', 'Dashboard')} />
-      </PageLayout.Header>
+      <PageHeader
+        title={t('dashboard.title', 'Dashboard')}
+        className="cs--dashboard__header"
+      />
 
       <DashboardURLParameters />
 

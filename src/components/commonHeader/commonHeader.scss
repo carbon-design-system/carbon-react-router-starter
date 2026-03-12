@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,6 +9,11 @@
 @use '@carbon/react/scss/type' as *;
 @use '@carbon/react/scss/theme' as *;
 @use '@carbon/react/scss/breakpoint' as *;
+
+.cs--common-header {
+  padding-block-start: $spacing-05;
+  margin-block-end: $spacing-05;
+}
 
 .cs--common-header__content {
   // This CSS follow the principles of a condensed carbon grid with 2x2
