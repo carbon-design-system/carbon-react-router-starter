@@ -35,7 +35,15 @@ if (!isProduction) {
   const { findAvailablePort } = await import('./utils/port.js');
 
   // Find an available port for Vite's HMR WebSocket server
-  const hmrPort = await findAvailablePort(24678);
+  let hmrPort;
+  try {
+    hmrPort = await findAvailablePort(24678);
+  } catch (error) {
+    console.error('Failed to find available port for Vite HMR:', error);
+    throw new Error(
+      'Unable to start development server: Could not find available port for HMR',
+    );
+  }
 
   vite = await createServer({
     server: {

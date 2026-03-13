@@ -13,6 +13,7 @@ import detect from 'detect-port';
  *
  * @param {number} preferredPort - The preferred port to use
  * @returns {Promise<number>} The available port
+ * @throws {Error} If port detection fails
  */
 export async function findAvailablePort(preferredPort) {
   try {
@@ -27,7 +28,9 @@ export async function findAvailablePort(preferredPort) {
     return availablePort;
   } catch (error) {
     console.error('Error detecting available port:', error);
-    // Fallback to preferred port if detection fails
-    return preferredPort;
+    // Throw error instead of silently falling back to potentially unavailable port
+    throw new Error(
+      `Failed to find available port: ${error.message || 'Unknown error'}`,
+    );
   }
 }

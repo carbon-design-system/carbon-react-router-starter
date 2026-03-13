@@ -22,9 +22,17 @@ export const baseUrl = `http://localhost:${port}`;
  * If the preferred port is in use, it will find the next available port.
  *
  * @returns {Promise<{port: number, baseUrl: string}>} The available port and base URL
+ * @throws {Error} If no available port can be found
  */
 export async function getServerConfig() {
-  const actualPort = await findAvailablePort(preferredPort);
-  const actualBaseUrl = `http://localhost:${actualPort}`;
-  return { port: actualPort, baseUrl: actualBaseUrl };
+  try {
+    const actualPort = await findAvailablePort(preferredPort);
+    const actualBaseUrl = `http://localhost:${actualPort}`;
+    return { port: actualPort, baseUrl: actualBaseUrl };
+  } catch (error) {
+    console.error('Failed to get server configuration:', error);
+    throw new Error(
+      `Unable to start server: ${error.message}. Please check if ports are available.`,
+    );
+  }
 }
