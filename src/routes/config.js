@@ -46,6 +46,7 @@ export const routes = [
     path: '/dashboard',
     element: Dashboard,
     carbon: {
+      labelKey: 'routes.dashboard',
       label: 'Dashboard',
       inHeader: true,
     },
@@ -58,6 +59,7 @@ export const routes = [
     path: '/link-1',
     element: Placeholder,
     carbon: {
+      labelKey: 'routes.link1',
       label: 'Link 1',
       inHeader: true,
     },
@@ -66,6 +68,7 @@ export const routes = [
     path: '/link-2',
     element: Placeholder,
     carbon: {
+      labelKey: 'routes.link2',
       label: 'Link 2',
       inHeader: true,
     },
@@ -74,6 +77,7 @@ export const routes = [
     path: '/link-3',
     element: Placeholder,
     carbon: {
+      labelKey: 'routes.link3',
       label: 'Link 3',
       inHeader: true,
     },
@@ -81,6 +85,7 @@ export const routes = [
   {
     path: '/link-4',
     carbon: {
+      labelKey: 'routes.link4',
       label: 'Link 4',
       inHeader: true,
     },
@@ -89,6 +94,7 @@ export const routes = [
     path: '/link-4/sub-link-1',
     element: Placeholder,
     carbon: {
+      labelKey: 'routes.link4.subLink1',
       label: 'Sub-link 1',
     },
   },
@@ -96,6 +102,7 @@ export const routes = [
     path: '/link-4/sub-link-2',
     element: Placeholder,
     carbon: {
+      labelKey: 'routes.link4.subLink2',
       label: 'Sub-link 2',
     },
   },
@@ -103,6 +110,7 @@ export const routes = [
     path: '/link-4/sub-link-3',
     element: Placeholder,
     carbon: {
+      labelKey: 'routes.link4.subLink3',
       label: 'Sub-link 3',
     },
   },
@@ -110,6 +118,7 @@ export const routes = [
     carbon: {
       virtualPath: '/getting-started',
       inSideNav: true,
+      labelKey: 'routes.gettingStarted',
       label: 'Getting Started',
       icon: MagicWand,
       href: `https://github.com/carbon-design-system/carbon-react-router-starter?tab=readme-ov-file#get-started`,
@@ -118,6 +127,7 @@ export const routes = [
   {
     carbon: {
       virtualPath: '/getting-started/how',
+      labelKey: 'routes.gettingStarted.how',
       label: 'How does this work',
       href: `https://github.com/carbon-design-system/carbon-react-router-starter?tab=readme-ov-file#how-does-this-work`,
     },
@@ -125,6 +135,7 @@ export const routes = [
   {
     carbon: {
       virtualPath: '/getting-started/up-to-date',
+      labelKey: 'routes.gettingStarted.upToDate',
       label: 'Keeping this up to date',
       href: `https://github.com/carbon-design-system/carbon-react-router-starter?tab=readme-ov-file#keeping-this-up-to-date`,
     },
@@ -132,6 +143,7 @@ export const routes = [
   {
     carbon: {
       virtualPath: '/getting-started/report',
+      labelKey: 'routes.gettingStarted.report',
       label: 'Report problems',
       href: `https://github.com/carbon-design-system/carbon-react-router-starter?tab=readme-ov-file#report-problems`,
     },
@@ -140,6 +152,7 @@ export const routes = [
     carbon: {
       virtualPath: '/github',
       inSideNav: true,
+      labelKey: 'routes.github',
       label: 'GitHub',
       icon: LogoGithub,
       href: `https://github.com/carbon-design-system/carbon-react-router-starter`,
@@ -152,6 +165,38 @@ export const routes = [
     status: 404,
   },
 ];
+
+/**
+ * Checks if a subPath is a direct child of a parent path.
+ * A direct child means the subPath starts with the parent path followed by '/',
+ * and contains no additional '/' characters after that.
+ *
+ * @param {string} parentPath - The parent path to check against
+ * @param {string} subPath - The potential child path
+ * @returns {boolean} True if subPath is a direct child of parentPath
+ *
+ * @example
+ * isDirectChildPath('/link-4', '/link-4/sub-link-1') // true
+ * isDirectChildPath('/link-4', '/link-4/sub-link-1/nested') // false
+ * isDirectChildPath('/dashboard', '/dashboard/123') // true
+ * isDirectChildPath('/dashboard', '/dashboard') // false
+ */
+export const isDirectChildPath = (parentPath, subPath) => {
+  if (!subPath || !parentPath) {
+    return false;
+  }
+
+  // Check if subPath starts with parentPath followed by '/'
+  if (!subPath.startsWith(parentPath + '/')) {
+    return false;
+  }
+
+  // Get the remainder after the parent path and separator
+  const remainder = subPath.slice(parentPath.length + 1);
+
+  // A direct child should have content but no additional '/' characters
+  return remainder.length > 0 && !remainder.includes('/');
+};
 
 // The routes config is a flat structure defined for use with react-router.
 // Here we organize the routes into a hierarchy for use by the Carbon header and sidenav
@@ -168,9 +213,8 @@ const routesProcessed = routes.map((route) => {
     if (!subRoute.carbon) return false;
 
     const subPath = subRoute.path || subRoute.carbon.virtualPath;
-    const childPath = new RegExp(`^${path}/[^/]+$`); // match direct parent only
 
-    return !route.index && subPath && childPath.test(subPath);
+    return !route.index && isDirectChildPath(path, subPath);
   });
 
   if (subMenu && subMenu.length > 0) {
