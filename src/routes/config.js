@@ -4,11 +4,17 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+import { lazy } from 'react';
 import { MagicWand, LogoGithub } from '@carbon/icons-react';
-import Dashboard from '../pages/dashboard/Dashboard';
-import NotFound from '../pages/not-found/NotFound';
-import Placeholder from '../pages/placeholder/Placeholder';
-import Welcome from '../pages/welcome/Welcome';
+
+// This project splits the pages each in different JavaScript bundles.
+// You might also split part of the pages that incur significant
+// network load at your discretion, given they are not needed right
+// away when the page loads.
+const Dashboard = lazy(() => import('../pages/dashboard/Dashboard'));
+const NotFound = lazy(() => import('../pages/not-found/NotFound'));
+const Placeholder = lazy(() => import('../pages/placeholder/Placeholder'));
+const Welcome = lazy(() => import('../pages/welcome/Welcome'));
 
 // type carbonRouteType = {
 //   virtualPath: string; // related to path, used for arranging Carbon menu when no path exists
