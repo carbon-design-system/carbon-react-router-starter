@@ -5,16 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { Suspense } from 'react';
 import { Route, Routes } from 'react-router';
+import { Loading } from '@carbon/react';
 
 import { routes } from './config.js';
 
 export const Router = () => {
   return (
-    <Routes>
-      {routes.map(({ element: Element, ...rest }) => (
-        <Route key={rest.path} {...rest} element={Element && <Element />} />
-      ))}
-    </Routes>
+    <Suspense fallback={<Loading />}>
+      <Routes>
+        {routes.map(({ element: Element, ...rest }) => (
+          <Route key={rest.path} {...rest} element={Element && <Element />} />
+        ))}
+      </Routes>
+    </Suspense>
   );
 };
