@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,13 +9,20 @@ import fs from 'node:fs/promises';
 import express from 'express';
 import { Transform } from 'node:stream';
 import { getRoutes } from './routes/routes.js';
-import { port, base, baseUrl } from './config/server-config.js';
+import { base, getServerConfig } from './config/server-config.js';
 import i18nextMiddleware from 'i18next-http-middleware';
 import i18n from './i18n.server.js';
+import { setBaseUrl } from './service/postHandlers.js';
 
 // Constants
 const isProduction = process.env.NODE_ENV === 'production';
 const ABORT_DELAY = 10000;
+
+// Get available port
+const { port, baseUrl } = await getServerConfig();
+
+// Set the base URL for post handlers to use
+setBaseUrl(baseUrl);
 
 // Create http server
 const app = express();
@@ -25,8 +32,18 @@ const app = express();
 let vite;
 if (!isProduction) {
   const { createServer } = await import('vite');
+  const { findAvailablePort } = await import('./utils/port.js');
+
+  // Find an available port for Vite's HMR WebSocket server
+  const hmrPort = await findAvailablePort(24678);
+
   vite = await createServer({
-    server: { middlewareMode: true },
+    server: {
+      middlewareMode: true,
+      hmr: {
+        port: hmrPort,
+      },
+    },
     appType: 'custom',
     base,
   });
