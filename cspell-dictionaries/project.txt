@@ -1,6 +1,7 @@
 Descriptionless
 languagedetector
 Lngs
+nvmrc
 Pipeable
 Platzhalterseite
 plex

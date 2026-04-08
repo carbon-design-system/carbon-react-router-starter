@@ -17,6 +17,10 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: ${{ steps.nvm.outputs.NODE_VERSION }}
+      - name: Validate package-lock.json is in sync
+        run: |
+          npm install --package-lock-only --ignore-scripts
+          git diff --exit-code package-lock.json || (echo "package-lock.json is out of sync with package.json. Run 'npm install' locally and commit the changes." && exit 1)
       - run: npm ci
       - run: npm run build
       - run: npm run test

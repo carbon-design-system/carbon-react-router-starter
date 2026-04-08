@@ -81,6 +81,9 @@
     "vitest": "^4.0.0"
   },
   "lint-staged": {
+    "package.json": [
+      "echo '⚠️  package.json was modified. Please run: npm install' && exit 0"
+    ],
     "*.{js,ts,jsx,tsx,scss,css,html,yml,yaml}": [
       "node scripts/check-copyright.js --fix",
       "git add",
