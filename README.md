@@ -60,6 +60,10 @@ Create a production build with `npm run build`, but be aware that a server runti
    npm run preview:prod
    ```
 
+### Alternative deployment for prototyping
+
+While server-side rendering (SSR) is the recommended approach for full power and best practices, GitHub Pages deployment can be useful for prototyping scenarios where you need quick, free hosting without server infrastructure. For instructions on deploying this project to GitHub Pages, see [`README-using-gh-pages.md`](README-using-gh-pages.md). Note that this approach has limitations, including no SSR support and browser routing constraints.
+
 ### Before connecting to github.ibm.com
 
 If you are not familiar with and have never configured your device to work with git, npm, node, ssh etc. then you might want to find a friendly developer to help with your setup. You will at a minimum need:
