@@ -1,12 +1,4 @@
-/\*\*
-
-- Copyright IBM Corp. 2026
--
-- This source code is licensed under the Apache-2.0 license found in the
-- LICENSE file in the root directory of this source tree.
-  \*/
-
-# Adding GitHub Pages Deployment
+# Using GitHub Pages Deployment
 
 Quick guide to add GitHub Pages deployment to any Carbon React Router starter-based project.
 
@@ -33,17 +25,34 @@ Add these two scripts to your `package.json`:
 "build:gh-pages": "vite build --outDir dist-gh-pages --base=/my-org/my-project/ && touch dist-gh-pages/.nojekyll"
 ```
 
-### Step 2: Update Router Basename
+### Step 2: Switch to Hash Router
 
-In your client entry file (e.g., `src/entry-client.jsx`), add `basename` prop to `BrowserRouter`:
+In your client entry file (e.g., `src/entry-client.jsx`), replace `BrowserRouter` with `HashRouter`:
 
 ```jsx
+// Before
+import { BrowserRouter } from 'react-router';
+
 <BrowserRouter basename={import.meta.env.BASE_URL}>
   <Router />
-</BrowserRouter>
+</BrowserRouter>;
+
+// After
+import { HashRouter } from 'react-router';
+
+<HashRouter>
+  <Router />
+</HashRouter>;
 ```
 
-This makes the router use the correct base path for GitHub Pages while keeping `/` for local development.
+**Why HashRouter?**
+
+- Eliminates all routing limitations on GitHub Pages
+- Direct URLs, bookmarks, and page refreshes work perfectly
+- No `basename` prop needed - hash routing is always relative
+- Trade-off: URLs include `#` (e.g., `/#/about` instead of `/about`)
+
+**Note:** The `--base` flag in the build script is still required for asset paths (CSS, JS, images), not routing.
 
 ### Step 3: Fix Asset Paths
 
@@ -136,39 +145,9 @@ jobs:
 
 Then update GitHub Pages settings to use **GitHub Actions** as the source instead of the `gh-pages` branch.
 
-## Limitations & Workarounds
+## Limitations
 
-### Browser Routing Limitations
-
-GitHub Pages is **static file hosting only** - it cannot handle server-side routing. This means:
-
-- ✅ Navigation through the app works perfectly
-- ❌ Direct URL access to routes (bookmarks, shared links) will return 404
-- ❌ Browser refresh on any route except home page will fail
-
-**Why this happens:**
-
-- GitHub Pages serves actual files from the repository
-- Routes like `/about` or `/dashboard` don't correspond to physical files
-- There's no server to intercept requests and serve `index.html` for all routes
-
-**Workarounds:**
-
-1. **Hash-Based Routing** (Recommended for GitHub Pages):
-   - Use `HashRouter` instead of `BrowserRouter`
-   - URLs become `/#/route` instead of `/route`
-   - Works because everything after `#` is client-side only
-   - Trade-off: Less clean URLs
-
-2. **Custom 404.html Redirect**:
-   - Create a `404.html` that redirects to `index.html` with route information
-   - Trade-off: Causes visible redirect, affects browser history
-
-3. **Accept the Limitation**:
-   - Document that users must navigate from the home page
-   - Suitable for internal tools or demos
-
-### Other Limitations
+### General Limitations
 
 - ❌ No server-side rendering (SSR)
 - ❌ No API endpoints or backend features
@@ -196,9 +175,9 @@ GitHub Pages is **static file hosting only** - it cannot handle server-side rout
 
 **Solutions:**
 
-1. Ensure you rebuilt after updating `src/entry-client.jsx` with the `basename` prop
+1. Ensure you rebuilt after switching to `HashRouter`
 2. Check browser console for errors
-3. Verify `import.meta.env.BASE_URL` is set correctly (inspect in DevTools)
+3. Verify you removed the `basename` prop from the router
 4. Confirm all `<Link>` components use relative paths (no leading `/`)
 
 ### Deployment Command Fails
@@ -211,16 +190,6 @@ GitHub Pages is **static file hosting only** - it cannot handle server-side rout
 2. Verify the `gh-pages` package is installed: `npm install --save-dev gh-pages`
 3. Try manual deployment: `npx gh-pages -d dist-gh-pages --dotfiles`
 4. Check for Git authentication issues (may need to configure SSH keys or tokens)
-
-### Routes Return 404 on Direct Access
-
-**Symptoms:** Typing a URL directly or refreshing a page shows 404
-
-**This is expected behavior** - see "Browser Routing Limitations" above. Solutions:
-
-1. Switch to `HashRouter` for full compatibility
-2. Implement a custom 404.html redirect
-3. Document that users should navigate from the home page
 
 ## Technical Notes
 
@@ -242,17 +211,18 @@ npm run build:gh-pages     # Static build - outputs to dist-gh-pages/
 npm run deploy:gh-pages    # Build + Deploy to GitHub Pages
 ```
 
-The changes required for GitHub Pages (relative asset paths, router basename) are compatible with SSR builds.
+The changes required for GitHub Pages (relative asset paths, hash routing) are compatible with SSR builds for local development.
 
 ### Verification Checklist
 
 After deployment, test that:
 
 - ✅ Home page loads at your GitHub Pages URL
-- ✅ Navigation through the app's UI works (all links use correct base path)
+- ✅ Navigation through the app's UI works
 - ✅ Assets load correctly (CSS, JS, images)
 - ✅ Styles and Carbon components render properly
-- ⚠️ Direct URL access to routes will return 404 (expected - see limitations above)
+- ✅ Direct URL access to routes works (with hash routing)
+- ✅ Page refresh works on all routes
 
 ## Quick Reference
 
