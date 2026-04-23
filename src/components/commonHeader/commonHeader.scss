@@ -51,6 +51,7 @@
   margin-inline: auto;
   align-items: center;
   justify-content: center;
+  /* stylelint-disable-next-line carbon/theme-use -- radial gradient for decorative brand effect, no Carbon token equivalent */
   background: radial-gradient(
     closest-side,
     var(--cs-brand-alt) 40%,
