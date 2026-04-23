@@ -57,7 +57,7 @@
     "@vitest/coverage-v8": "^4.0.0",
     "baseline-browser-mapping": "^2.9.12",
     "cross-env": "^10.0.0",
-    "cspell": "^9.0.0",
+    "cspell": "^10.0.0",
     "detect-port": "^2.1.0",
     "eslint": "^9.23.0",
     "eslint-config-prettier": "^10.1.2",
