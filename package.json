@@ -46,7 +46,7 @@
   "devDependencies": {
     "@cspell/dict-de-de": "^4.1.2",
     "@double-great/stylelint-a11y": "^3.0.4",
-    "@eslint/js": "^9.21.0",
+    "@eslint/js": "^10.0.0",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
@@ -59,7 +59,7 @@
     "cross-env": "^10.0.0",
     "cspell": "^10.0.0",
     "detect-port": "^2.1.0",
-    "eslint": "^9.23.0",
+    "eslint": "^10.0.0",
     "eslint-config-prettier": "^10.1.2",
     "eslint-plugin-import-x": "^4.16.1",
     "eslint-plugin-jsx-a11y": "^6.10.2",
