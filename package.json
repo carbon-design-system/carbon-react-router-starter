@@ -92,6 +92,10 @@
   },
   "overrides": {
     "react": "$react",
-    "react-dom": "$react-dom"
+    "react-dom": "$react-dom",
+    "basic-ftp": "^6.0.1",
+    "get-uri": "^8.0.0",
+    "pac-proxy-agent": "^9.0.1",
+    "proxy-agent": "^8.0.1"
   }
 }
