@@ -23,6 +23,19 @@ export default defineConfig({
       namespaceResolution: 'basename',
     }),
   ],
+  server: {
+    // Automatically find an available port if the default is in use
+    strictPort: false,
+    hmr: {
+      // Let Vite automatically find an available port for WebSocket/HMR
+      // This prevents "Port is already in use" errors for the WebSocket server
+      clientPort: undefined,
+    },
+  },
+  preview: {
+    // Automatically find an available port if the default is in use
+    strictPort: false,
+  },
   test: {
     globals: true,
     environment: 'jsdom',

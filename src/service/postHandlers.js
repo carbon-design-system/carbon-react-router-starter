@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,13 +11,24 @@
  */
 
 /**
- * Get the base URL for the server
- * In production, this would be configured via environment variables
+ * Store the base URL for the server
+ * This is set when the server starts and the actual port is determined
  */
-import { baseUrl } from '../config/server-config.js';
+let serverBaseUrl = 'http://localhost:5173'; // Default fallback
 
+/**
+ * Set the base URL for the server
+ * @param {string} url - The base URL to use
+ */
+export const setBaseUrl = (url) => {
+  serverBaseUrl = url;
+};
+
+/**
+ * Get the base URL for the server
+ */
 const getBaseUrl = () => {
-  return baseUrl;
+  return serverBaseUrl;
 };
 
 export const getPost = async (req, res) => {
