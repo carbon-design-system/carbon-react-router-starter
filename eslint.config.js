@@ -23,6 +23,9 @@ import globals from 'globals';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 /* added eslint-config-prettier to turn off conflicting rules April 15th 2025 */
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
+/* added @typescript-eslint for TypeScript support */
+import tseslint from '@typescript-eslint/eslint-plugin';
+import tsparser from '@typescript-eslint/parser';
 
 export default [
   { ignores: ['dist', 'vite.config.js', 'node_modules/**'] },
@@ -44,7 +47,7 @@ export default [
       },
       'import-x/resolver': {
         node: {
-          extensions: ['.js', '.jsx'],
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
         },
       },
       'import-x/ignore': ['node_modules'],
@@ -52,6 +55,41 @@ export default [
         espree: ['.js', '.cjs', '.mjs', '.jsx'],
       },
       'import-x/internal-regex': '^(@carbon|react)',
+    },
+  },
+  /* TypeScript configuration */
+  {
+    files: ['**/*.{ts,tsx}'],
+    languageOptions: {
+      parser: tsparser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        ecmaFeatures: { jsx: true },
+        project: './tsconfig.json',
+      },
+      globals: { ...globals.browser, ...globals.node, ...globals.jest },
+    },
+    plugins: {
+      '@typescript-eslint': tseslint,
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
+      'import-x/resolver': {
+        node: {
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        },
+      },
+    },
+    rules: {
+      ...tseslint.configs.recommended.rules,
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { varsIgnorePattern: '^[A-Z_]', argsIgnorePattern: '^_' },
+      ],
+      '@typescript-eslint/no-explicit-any': 'warn',
     },
   },
   importPlugin.flatConfigs.recommended,
