@@ -39,6 +39,41 @@ NOTE: In addition to starting with a clean history `degit` avoids the accidental
 
 Create a production build with `npm run build`, but be aware that a server runtime is needed as this project uses server-side rendering.
 
+## TypeScript Support
+
+This project supports both JavaScript and TypeScript out of the box. You can freely mix `.js`/`.jsx` and `.ts`/`.tsx` files in your project.
+
+### Using TypeScript
+
+To create a TypeScript file, simply use the `.ts` or `.tsx` extension:
+
+### Configuration
+
+TypeScript is configured with strict mode enabled in `tsconfig.json`. This provides maximum type safety for new TypeScript files while allowing existing JavaScript files to work without modification.
+
+- **Development**: TypeScript files are compiled automatically by Vite during development with full HMR support
+- **Build**: TypeScript is compiled as part of the normal build process (`npm run build`)
+- **Linting**: ESLint is configured to lint both JavaScript and TypeScript files
+- **Testing**: Vitest supports TypeScript natively
+
+### Type Checking
+
+Vite compiles TypeScript for speed but doesn't perform type checking during development. To check types:
+
+```bash
+npx tsc --noEmit
+```
+
+You can add this as a pre-commit hook or CI step if desired.
+
+### Gradual Migration
+
+You don't need to convert existing JavaScript files to TypeScript. The project is configured to support both:
+
+- Keep using `.js`/`.jsx` for files that don't need types
+- Use `.ts`/`.tsx` for new files or when you want type safety
+- Mix both approaches in the same project without issues
+
 ### Running production
 
 1. Build the project
