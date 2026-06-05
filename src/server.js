@@ -89,7 +89,8 @@ app.use('*all', async (req, res) => {
     if (!isProduction) {
       // Always read fresh template in development
       template = await fs.readFile('./index.html', 'utf-8');
-      template = await vite.transformIndexHtml(url, template);
+      // Transform HTML for SSR - Vite 8 requires the full URL path
+      template = await vite.transformIndexHtml(url || '/', template);
       render = (await vite.ssrLoadModule('/src/entry-server.jsx')).render;
     } else {
       const templateHtml = isProduction
