@@ -2,7 +2,7 @@
   "name": "carbon-react-starter",
   "private": true,
   "version": "0.4.0",
-  "packageManager": "npm@11.16.0",
+  "packageManager": "npm@11.17.0",
   "type": "module",
   "scripts": {
     "dev": "node src/server",
@@ -23,7 +23,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@carbon-labs/react-theme-settings": "^0.24.0",
+    "@carbon-labs/react-theme-settings": "^0.30.0",
     "@carbon/ibm-products": "^2.74.0",
     "@carbon/react": "^1.73.0",
     "@ibm/plex": "^6.4.1",
