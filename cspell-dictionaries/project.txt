@@ -9,3 +9,4 @@ Stephane
 Testbarkeit
 fouc
 vite
+nojekyll

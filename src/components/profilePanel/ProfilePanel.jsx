@@ -19,8 +19,8 @@ import {
 import { useTranslation } from 'react-i18next';
 import {
   getThemeSettings,
-  setThemeSetting as updateThemeSetting,
-  setHeaderInverse as updateHeaderInverse,
+  setThemeSetting,
+  setHeaderInverse,
 } from '../../utils/theme';
 
 export const ProfilePanel = ({ className }) => {
@@ -29,24 +29,24 @@ export const ProfilePanel = ({ className }) => {
   // Get initial values from cookies (single call to avoid redundant parsing)
   const initialSettings = getThemeSettings();
 
-  const [themeSetting, setThemeSettingState] = useState(
+  const [themeSettingLocal, setThemeSettingLocal] = useState(
     initialSettings.themeSetting,
   );
 
-  const [themeMenuComplement, setThemeMenuComplementState] = useState(
+  const [themeMenuComplementLocal, setThemeMenuComplementLocal] = useState(
     initialSettings.headerInverse,
   );
 
   // Update theme setting
   const handleThemeSettingChange = (value) => {
-    setThemeSettingState(value);
-    updateThemeSetting(value);
+    setThemeSettingLocal(value);
+    setThemeSetting(value);
   };
 
   // Update header inverse
   const handleThemeMenuComplementChange = (value) => {
-    setThemeMenuComplementState(value);
-    updateHeaderInverse(value);
+    setThemeMenuComplementLocal(value);
+    setHeaderInverse(value);
   };
 
   const userProfile = {
@@ -75,7 +75,7 @@ export const ProfilePanel = ({ className }) => {
         <ThemeSettings>
           <ThemeSwitcher
             onChange={handleThemeSettingChange}
-            value={themeSetting}
+            value={themeSettingLocal}
           ></ThemeSwitcher>
           <ThemeMenuComplement
             id="theme-menu-complement"
@@ -83,7 +83,7 @@ export const ProfilePanel = ({ className }) => {
               'profile.settings.complementMenuTheme',
               'Complement menu theme',
             )}
-            checked={themeMenuComplement}
+            checked={themeMenuComplementLocal}
             onChange={handleThemeMenuComplementChange}
           />
         </ThemeSettings>
