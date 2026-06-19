@@ -5,7 +5,7 @@
   ],
   "plugins": [
     "@double-great/stylelint-a11y",
-    "stylelint-use-logical-spec",
+    "stylelint-use-logical",
     "stylelint-plugin-carbon-tokens"
   ],
   "reportNeedlessDisables": true,
@@ -21,7 +21,7 @@
         "ignoreAtRules": ["if", "else", "each", "include", "mixin"]
       }
     ],
-    "liberty/use-logical-spec": true,
+    "csstools/use-logical": "always",
     "selector-class-pattern": [
       "^([a-z]*--)*[a-z]([-]?[a-z0-9]+)*(__[a-z0-9]([-]?[a-z0-9]+)*)?(--[a-z0-9]([-]?[a-z0-9]+)*)?$",
       {

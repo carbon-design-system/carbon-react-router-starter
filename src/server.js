@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,11 +9,20 @@ import fs from 'node:fs/promises';
 import express from 'express';
 import { Transform } from 'node:stream';
 import { getRoutes } from './routes/routes.js';
-import { port, base, baseUrl } from './config/server-config.js';
+import { base, getServerConfig } from './config/server-config.js';
+import i18nextMiddleware from 'i18next-http-middleware';
+import i18n from './i18n.server.js';
+import { setBaseUrl } from './service/postHandlers.js';
 
 // Constants
 const isProduction = process.env.NODE_ENV === 'production';
 const ABORT_DELAY = 10000;
+
+// Get available port
+const { port, baseUrl } = await getServerConfig();
+
+// Set the base URL for post handlers to use
+setBaseUrl(baseUrl);
 
 // Create http server
 const app = express();
@@ -23,8 +32,26 @@ const app = express();
 let vite;
 if (!isProduction) {
   const { createServer } = await import('vite');
+  const { findAvailablePort } = await import('./utils/port.js');
+
+  // Find an available port for Vite's HMR WebSocket server
+  let hmrPort;
+  try {
+    hmrPort = await findAvailablePort(24678);
+  } catch (error) {
+    console.error('Failed to find available port for Vite HMR:', error);
+    throw new Error(
+      'Unable to start development server: Could not find available port for HMR',
+    );
+  }
+
   vite = await createServer({
-    server: { middlewareMode: true },
+    server: {
+      middlewareMode: true,
+      hmr: {
+        port: hmrPort,
+      },
+    },
     appType: 'custom',
     base,
   });
@@ -37,6 +64,14 @@ if (!isProduction) {
   app.use(compression({ level: 6, brotli: { enabled: true, zlib: {} } }));
   app.use(base, sirv('./dist/client', { extensions: [] }));
 }
+
+// Add i18next middleware for language detection
+app.use(
+  i18nextMiddleware.handle(i18n, {
+    ignoreRoutes: [], // Don't ignore any routes
+    removeLngFromUrl: false,
+  }),
+);
 
 // Register API routes
 getRoutes(app);
@@ -68,8 +103,9 @@ app.use('*all', async (req, res) => {
 
     let didError = false;
 
-    const { pipe, abort, statusCode, themeAttr } = render(
+    const { pipe, head, abort, statusCode, themeAttr } = render(
       url,
+      req.i18n,
       {
         onShellError(error) {
           // Improved error handling with debugging context
@@ -96,12 +132,13 @@ app.use('*all', async (req, res) => {
 
           const [htmlStart, htmlEnd] = template.split(`<!--app-html-->`);
 
-          // Inject theme attribute into the html tag
-          const htmlStartWithTheme = themeAttr
-            ? htmlStart.replace('<html', `<html${themeAttr}`)
-            : htmlStart;
+          // Inject head content (i18n state) and theme attribute into the html tag
+          let htmlStartProcessed = htmlStart.replace('<!--app-head-->', head);
+          htmlStartProcessed = themeAttr
+            ? htmlStartProcessed.replace('<html', `<html${themeAttr}`)
+            : htmlStartProcessed;
 
-          res.write(htmlStartWithTheme);
+          res.write(htmlStartProcessed);
 
           transformStream.on('finish', () => {
             res.end(htmlEnd);
@@ -143,6 +180,42 @@ app.use('*all', async (req, res) => {
 });
 
 // Start http server
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Server started at: ${baseUrl}`);
 });
+
+// Graceful shutdown handler
+function gracefulShutdown(signal) {
+  console.log(`\n${signal} received. Closing server gracefully...`);
+
+  server.close(() => {
+    console.log('HTTP server closed');
+
+    // Close Vite dev server if running
+    if (vite) {
+      vite.close().then(() => {
+        console.log('Vite dev server closed');
+        process.exit(0);
+      });
+    } else {
+      process.exit(0);
+    }
+  });
+
+  // Force close after 10 seconds
+  setTimeout(() => {
+    console.error(
+      'Could not close connections in time, forcefully shutting down',
+    );
+    process.exit(1);
+  }, 10000);
+}
+
+// Handle shutdown signals
+process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
+process.on('SIGINT', () => gracefulShutdown('SIGINT'));
+
+// Windows-specific signals
+if (process.platform === 'win32') {
+  process.on('SIGBREAK', () => gracefulShutdown('SIGBREAK'));
+}

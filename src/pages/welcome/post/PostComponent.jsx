@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2025, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import { getComments, getPost } from '../../../api/message.js';
 import { Heading, Grid, Layer, Section, Stack, Tile } from '@carbon/react';
 import { useEffect, useState } from 'react';

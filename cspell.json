@@ -12,6 +12,13 @@
       "path": "./cspell-dictionaries/project.txt"
     }
   ],
+  "import": ["@cspell/dict-de-de/cspell-ext.json"],
+  "overrides": [
+    {
+      "filename": "**/locales/*.json",
+      "language": "en,de"
+    }
+  ],
   "enabledLanguageIds": [
     "git-commit",
     "graphql",

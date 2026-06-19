@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,6 +8,10 @@
 @use '@carbon/react/scss/grid' as *;
 @use '@carbon/react/scss/spacing' as *;
 @use '@carbon/react/scss/type' as *;
+
+.cs--dashboard__header {
+  margin-block-end: $spacing-05;
+}
 
 .cs--dashboard__tile {
   margin-block: $spacing-05;
