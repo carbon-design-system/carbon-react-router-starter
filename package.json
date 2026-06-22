@@ -4,11 +4,16 @@
   "version": "0.4.0",
   "packageManager": "npm@11.17.0",
   "type": "module",
+  "sideEffects": [
+    "**/*.scss",
+    "**/*.css"
+  ],
   "scripts": {
     "dev": "node src/server",
     "build": "npm run build:client && npm run build:server",
     "build:client": "vite build --ssrManifest .vite/ssr-manifest.json  --outDir dist/client",
     "build:server": "vite build --ssr src/entry-server.jsx --outDir dist/server",
+    "optimize:fonts": "glyphhanger --subset=*.woff2 --formats=woff2",
     "lighthouse": "lhci collect",
     "lint": "npm run lint:es && npm run lint:style && npm run lint:format && npm run lint:spell",
     "lint-fix": "npm run lint:es -- --fix && npm run lint:style -- --fix && npm run lint:format",
@@ -41,7 +46,8 @@
     "react-i18next": "^16.2.4",
     "react-is": "^19.0.0",
     "react-router": "^7.5.2",
-    "sirv": "^3.0.0"
+    "sirv": "^3.0.0",
+    "express-static-gzip": "^2.1.8"
   },
   "devDependencies": {
     "@cspell/dict-de-de": "^4.1.2",
@@ -58,6 +64,7 @@
     "baseline-browser-mapping": "^2.9.12",
     "cross-env": "^10.0.0",
     "cspell": "^10.0.0",
+    "glyphhanger": "^5.0.0",
     "detect-port": "^2.1.0",
     "eslint": "^9.23.0",
     "eslint-config-prettier": "^10.1.2",
