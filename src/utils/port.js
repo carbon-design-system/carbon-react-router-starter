@@ -31,6 +31,7 @@ export async function findAvailablePort(preferredPort) {
     // Throw error instead of silently falling back to potentially unavailable port
     throw new Error(
       `Failed to find available port: ${error.message || 'Unknown error'}`,
+      { cause: error },
     );
   }
 }

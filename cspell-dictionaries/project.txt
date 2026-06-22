@@ -1,6 +1,7 @@
 Descriptionless
 languagedetector
 Lngs
+nojekyll
 nvmrc
 Pipeable
 Platzhalterseite
