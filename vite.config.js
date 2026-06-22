@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import react from '@vitejs/plugin-react-swc';
+import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import i18nextLoader from 'vite-plugin-i18next-loader';
 
@@ -35,6 +35,10 @@ export default defineConfig({
   preview: {
     // Automatically find an available port if the default is in use
     strictPort: false,
+  },
+  ssr: {
+    // Ensure proper handling of external dependencies in SSR
+    noExternal: [],
   },
   test: {
     globals: true,

@@ -1,12 +1,12 @@
 Descriptionless
+fouc
 languagedetector
 Lngs
+nojekyll
 nvmrc
 Pipeable
 Platzhalterseite
 plex
 Stephane
 Testbarkeit
-fouc
 vite
-nojekyll
