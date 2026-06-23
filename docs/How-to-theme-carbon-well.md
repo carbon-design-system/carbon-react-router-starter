@@ -8,13 +8,13 @@ global navigation requires careful consideration. Many applications need to
 support multiple themes (light, dark, and system preference) while allowing
 users to independently control the appearance of different UI regions.
 
-This article demonstrates a production-ready approach to Carbon theming that
+This guide demonstrates a production-ready approach to Carbon theming that
 uses CSS custom properties and data attributes to enable flexible theme
 switching. The solution includes a user-friendly theme selector component,
 respects system preferences via `prefers-color-scheme`, and persists user
 choices across sessions using cookies.
 
-> [!NOTE] The implementation described in this article is inspired by and based
+> [!NOTE] The implementation described in this guide is inspired by and based
 > on the
 > [Carbon React Router Starter](https://github.com/carbon-design-system/carbon-react-router-starter)
 > repository, which provides a complete, production-ready example of this
@@ -902,7 +902,7 @@ that respects user preferences while maintaining clean, performant code.
 
 For a complete, working implementation of this theming system, explore the
 [Carbon React Router Starter](https://github.com/carbon-design-system/carbon-react-router-starter)
-repository. It includes all the code from this article plus additional features
+repository. It includes all the code from this guide plus additional features
 like routing, internationalization, and more comprehensive examples. The starter
 serves as an excellent foundation for new Carbon React projects or as a
 reference for adding theming to existing applications.
