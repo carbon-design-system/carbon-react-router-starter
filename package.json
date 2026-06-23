@@ -6,9 +6,9 @@
   "type": "module",
   "scripts": {
     "dev": "node src/server",
-    "build": "npm run build:client && npm run build:server",
-    "build:client": "vite build --ssrManifest .vite/ssr-manifest.json  --outDir dist/client",
-    "build:server": "vite build --ssr src/entry-server.jsx --outDir dist/server",
+    "build": "cross-env NODE_ENV=production npm run build:client && npm run build:server",
+    "build:client": "cross-env NODE_ENV=production vite build --ssrManifest .vite/ssr-manifest.json  --outDir dist/client",
+    "build:server": "cross-env NODE_ENV=production vite build --ssr src/entry-server.jsx --outDir dist/server",
     "lighthouse": "lhci collect",
     "lint": "npm run lint:es && npm run lint:style && npm run lint:format && npm run lint:spell",
     "lint-fix": "npm run lint:es -- --fix && npm run lint:style -- --fix && npm run lint:format",
