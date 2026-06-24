@@ -1,4 +1,4 @@
-# How to theme Carbon well
+# Theming Carbon
 
 ## Technical Synopsis
 
