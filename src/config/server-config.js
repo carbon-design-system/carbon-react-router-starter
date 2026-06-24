@@ -33,6 +33,7 @@ export async function getServerConfig() {
     console.error('Failed to get server configuration:', error);
     throw new Error(
       `Unable to start server: ${error.message}. Please check if ports are available.`,
+      { cause: error },
     );
   }
 }

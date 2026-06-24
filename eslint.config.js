@@ -25,8 +25,12 @@ import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
 
 export default [
-  { ignores: ['dist', 'vite.config.js', 'node_modules/**'] },
   {
+    name: 'ignore-patterns',
+    ignores: ['dist', 'vite.config.js', 'node_modules/**'],
+  },
+  {
+    name: 'main-config',
     files: ['**/*.{js,mjs,cjs,jsx}'],
     ignores: ['dist', 'vite.config.js'],
     languageOptions: {
@@ -66,6 +70,7 @@ export default [
   /* added eslint-config-prettier to turn off conflicting rules April 15th 2025 */
   eslintConfigPrettier,
   {
+    name: 'custom-rules',
     rules: {
       ...pluginJs.configs.recommended.rules,
       /* import named is off because @carbon/react uses default exports in some components April 10th 2025 */
