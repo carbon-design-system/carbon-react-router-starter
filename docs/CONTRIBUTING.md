@@ -118,6 +118,20 @@ npm run preview:prod
    - `test:` for adding or updating tests
    - `chore:` for maintenance tasks
 
+### Versioning and releases
+
+This project uses automated versioning based on commit messages. See [versioning guide](./versioning.md) for comprehensive documentation.
+
+Your commit type determines the version bump:
+
+| Commit type        | Version bump          | Example                       |
+| ------------------ | --------------------- | ----------------------------- |
+| `feat:`            | Minor (0.4.0 → 0.5.0) | `feat: add user profile page` |
+| `fix:`             | Patch (0.4.0 → 0.4.1) | `fix: resolve navigation bug` |
+| `BREAKING CHANGE:` | Major (0.4.0 → 1.0.0) | See versioning guide          |
+
+Other commit types (`docs:`, `style:`, `test:`, `chore:`, `ci:`, `build:`) don't trigger releases.
+
 ### Manage dependencies
 
 - **Add or update dependencies:** Use `npm install <package-name>` when you need to add or update a package
