@@ -1,6 +1,6 @@
 # Theming Carbon
 
-## Technical Synopsis
+## Technical synopsis
 
 Carbon Design System provides powerful theming capabilities, but implementing a
 complete theming solution that covers both your main application content and
@@ -27,7 +27,7 @@ system that gives users full control over their visual experience while
 maintaining clean, maintainable code that leverages Carbon's built-in theming
 tokens.
 
-## Understanding Carbon's Theme Architecture
+## Understanding Carbon's theme architecture
 
 Carbon provides four primary built-in themes through SCSS mixins:
 
@@ -47,12 +47,12 @@ These themes are applied using the `@include theme()` mixin from Carbon's SCSS
 modules. The key to flexible theming is controlling when and where these mixins
 are applied based on user preferences.
 
-## Setting Up the Theme Configuration
+## Setting up the theme configuration
 
-### Theme Structure with SCSS Mixins
+### Theme structure with SCSS mixins
 
-First we need to build the foundation of our theming system uses SCSS mixins to
-encapsulate theme-specific styles. Here's how to structure your theme
+First we need to build the foundation of our theming system, here we use SCSS
+mixins to encapsulate theme-specific styles. Here's how to structure your theme
 configuration:
 
 ```scss
@@ -98,7 +98,7 @@ configuration:
 This approach separates Carbon's core theme tokens from your custom brand
 colors, making it easy to maintain and update both independently.
 
-### Data Attribute-Based Theme Switching
+### Data attribute-based theme switching
 
 Instead of using CSS classes for theme switching, we use HTML data attributes on
 the root element. This provides several advantages:
@@ -136,14 +136,14 @@ $system-selector: ':root:is(:not([data-theme-setting]), [data-theme-setting="sys
 }
 ```
 
-## Implementing Independent Header Theming
+## Implementing independent header theming
 
 A common pattern seen in IBM products is the global navigation using a
 different, often opposite, theme to the main content. The approach taken here is
 to introduce a second data attribute `data-header-inverse` to control this,
 automatically applying the contrasting theme.
 
-### Content-Scoped Theme Application
+### Content-scoped theme application
 
 To apply themes to specific regions, we use a helper mixin that targets a
 content wrapper:
@@ -173,7 +173,7 @@ content wrapper:
 This pattern allows the header (root level) and content area (`.cs--content`
 class) to have different themes simultaneously.
 
-### Layout Structure
+### Layout structure
 
 In order to make use of themes applied to `.cs--content` your layouts should
 include the content wrapper class:
@@ -199,17 +199,17 @@ The
 component from Carbon provides the proper spacing and structure, while our
 `cs--content` class enables theme scoping.
 
-## Building the Theme Management System
+## Building the theme management system
 
-### Cookie-Based Persistence
+### Cookie-based persistence
 
-Failing to persist a users theme preferences is not a good move. If you already
+Failing to persist a user's theme preferences is not a good move. If you already
 have a mechanism for persisting these settings then please use the following to
 check you are both supporting the required values and SSR. In this example we
 use cookies, permitted as supporting the product feature, to persist the theme
 because they work on both client and server:
 
-#### Cookie Utility Functions
+#### Cookie utility functions
 
 First, we need basic cookie parsing and setting utilities. These handle the
 low-level cookie operations with proper encoding and validation:
@@ -283,7 +283,7 @@ values and gracefully handles decoding errors. The `setCookie()` function
 automatically sets secure cookies in production and uses sensible defaults for
 path and expiration.
 
-#### Theme-Specific Cookie Functions
+#### Theme-specific cookie functions
 
 Now we can build theme-specific functions on top of these utilities:
 
@@ -332,7 +332,7 @@ export function setThemeInCookies(values) {
 }
 ```
 
-### Theme Utility Functions
+### Theme utility functions
 
 Create utility functions to manage theme state and apply changes:
 
@@ -372,9 +372,9 @@ export function setHeaderInverse(headerInverse) {
 These functions update both the cookie (for persistence) and the DOM attribute
 (for immediate visual feedback) without requiring a React re-render.
 
-## Creating the Theme Selector UI
+## Creating the theme selector UI
 
-### Using Carbon Labs Theme Settings
+### Using Carbon Labs ThemeSettings component
 
 Carbon Labs provides a ready-to-use theme settings component that integrates
 seamlessly with our theming system:
@@ -445,7 +445,7 @@ component provides radio buttons for System, Light, and Dark themes, while
 [`ThemeMenuComplement`](https://github.com/carbon-design-system/carbon-labs/tree/main/packages/react/src/components/ThemeSettings)
 is a toggle that controls the header inverse setting.
 
-### Integrating with Navigation
+### Integrating with navigation
 
 Place the theme selector in a convenient location, such as a user profile panel:
 
@@ -489,9 +489,9 @@ export const Nav = () => {
 };
 ```
 
-## System Theme Integration
+## System theme integration
 
-### Respecting User Preferences
+### Respecting user preferences
 
 The system theme option automatically respects the user's operating system
 preference using the `prefers-color-scheme` media query. This is handled
@@ -511,7 +511,7 @@ When a user selects "System" in the theme switcher, the application will:
 2. Switch to dark theme if the OS is set to dark mode
 3. Automatically update when the OS theme changes (no JavaScript required)
 
-### Initialization on Page Load
+### Initialization on page load
 
 To ensure themes are applied correctly on initial page load and during
 server-side rendering, we need to handle potential hydration mismatches. This
@@ -579,7 +579,7 @@ import { initializeTheme } from './utils/theme';
 initializeTheme();
 ```
 
-## Complete Implementation Example
+## Complete implementation example
 
 Here's how all the pieces fit together in a complete application:
 
@@ -813,11 +813,13 @@ export function initializeTheme() {
 ### 4. Profile Panel Component
 
 ```jsx
+import classNames from 'classnames';
 import { useState } from 'react';
+import { UserAvatar } from '@carbon/ibm-products';
 import {
   ThemeSettings,
-  ThemeSwitcher,
   ThemeMenuComplement,
+  ThemeSwitcher,
 } from '@carbon-labs/react-theme-settings';
 import {
   getThemeSettings,
@@ -825,7 +827,7 @@ import {
   setHeaderInverse,
 } from '../../utils/theme';
 
-export const ProfilePanel = ({ user }) => {
+export const ProfilePanel = ({ className }) => {
   // Get initial values from cookies (single call to avoid redundant parsing)
   const initialSettings = getThemeSettings();
 
@@ -833,35 +835,64 @@ export const ProfilePanel = ({ user }) => {
     initialSettings.themeSetting,
   );
 
-  const [headerInverseLocal, setHeaderInverseLocal] = useState(
+  const [themeMenuComplementLocal, setThemeMenuComplementLocal] = useState(
     initialSettings.headerInverse,
   );
 
+  // Update theme setting
+  const handleThemeSettingChange = (value) => {
+    setThemeSettingLocal(value);
+    setThemeSetting(value);
+  };
+
+  // Update header inverse
+  const handleThemeMenuComplementChange = (value) => {
+    setThemeMenuComplementLocal(value);
+    setHeaderInverse(value);
+  };
+
+  const userProfile = {
+    name: 'Anne Profile',
+    email: 'anne.profile@ibm.com',
+  };
+
   return (
-    <div className="cs--profile-panel">
-      <ThemeSettings>
-        <ThemeSwitcher
-          value={themeSettingLocal}
-          onChange={(value) => {
-            setThemeSettingLocal(value);
-            setThemeSetting(value);
-          }}
+    <div className={classNames(className, 'cs--profile-panel')}>
+      <div className="cs--profile-user-info">
+        <UserAvatar
+          name={userProfile.name}
+          renderIcon=""
+          size="lg"
+          tooltipAlignment="bottom"
         />
-        <ThemeMenuComplement
-          checked={headerInverseLocal}
-          labelText="Complement menu theme"
-          onChange={(value) => {
-            setHeaderInverseLocal(value);
-            setHeaderInverse(value);
-          }}
-        />
-      </ThemeSettings>
+        <div className="cds--profile-user-info__text-wrapper">
+          <div className="cds--profile-user-info__name">{userProfile.name}</div>
+          <div className="cds--profile-user-info__email">
+            {userProfile.email}
+          </div>
+        </div>
+      </div>
+
+      <div className="cs--profile-settings">
+        <ThemeSettings>
+          <ThemeSwitcher
+            onChange={handleThemeSettingChange}
+            value={themeSettingLocal}
+          />
+          <ThemeMenuComplement
+            id="theme-menu-complement"
+            labelText="Complement menu theme"
+            checked={themeMenuComplementLocal}
+            onChange={handleThemeMenuComplementChange}
+          />
+        </ThemeSettings>
+      </div>
     </div>
   );
 };
 ```
 
-## Key Benefits of This Approach
+## Key benefits of this approach
 
 This theming implementation provides several significant advantages:
 
