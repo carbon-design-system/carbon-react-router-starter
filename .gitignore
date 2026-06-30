@@ -30,5 +30,3 @@ dist-ssr
 # Tools for this template
 .lighthouseci/
 
-# Local npm configuration
-.npmrc

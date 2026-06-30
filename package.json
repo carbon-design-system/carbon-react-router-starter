@@ -92,8 +92,7 @@
       "node scripts/check-copyright.js --fix",
       "git add",
       "npm run lint"
-    ],
-    ".npmrc": "node -e \"console.error('Are you sure you want to commit .npmrc?'); process.exit(1);\""
+    ]
   },
   "overrides": {
     "react": "$react",
