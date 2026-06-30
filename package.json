@@ -60,6 +60,7 @@
     "@vitejs/plugin-react": "^6.0.0",
     "@vitest/coverage-v8": "^4.0.0",
     "baseline-browser-mapping": "^2.9.12",
+    "conventional-changelog-conventionalcommits": "^10.2.0",
     "cross-env": "^10.0.0",
     "cspell": "^10.0.0",
     "detect-port": "^2.1.0",
