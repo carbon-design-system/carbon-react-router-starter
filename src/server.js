@@ -9,6 +9,7 @@ import fs from 'node:fs/promises';
 import express from 'express';
 import { Transform } from 'node:stream';
 import { getRoutes } from './routes/routes.js';
+import { routes } from './routes/config.js';
 import { base, getServerConfig } from './config/server-config.js';
 import i18nextMiddleware from 'i18next-http-middleware';
 import i18n from './i18n.server.js';
@@ -19,17 +20,27 @@ const isProduction = process.env.NODE_ENV === 'production';
 const ABORT_DELAY = 10000;
 
 /**
- * In production, rewrite the Carbon stylesheet link from render-blocking to
- * non-blocking. Vite emits `<link rel="stylesheet" href="/assets/index-[hash].css">`
- * into index.html. We swap it to `<link rel="preload" as="style">` at startup,
- * then the onload handler in the injected script promotes it to a stylesheet
- * once downloaded — eliminating ~1,500 ms of render-blocking time.
+ * In production, read and pre-process the index.html template once at startup.
  *
- * body stays visibility:hidden (from the inline <style> in index.html) until
- * entry-client.jsx sets body.ready, which it defers until the stylesheet load
- * is confirmed, preventing any flash of unstyled content.
+ * Two transformations are applied:
+ *
+ * 1. NON-BLOCKING STYLESHEET
+ *    Vite emits `<link rel="stylesheet" href="/assets/index-[hash].css">` into
+ *    index.html. We rewrite it to `<link rel="preload" as="style">` at startup,
+ *    then the onload handler promotes it to a stylesheet once downloaded —
+ *    eliminating ~1,500 ms of render-blocking time.
+ *    body stays visibility:hidden until entry-client.jsx sets body.ready,
+ *    which it defers until the stylesheet is confirmed applied.
+ *
+ * 2. SSR MANIFEST
+ *    The Vite SSR manifest maps source module paths to their hashed built asset
+ *    filenames. It is serialized into window.__SSR_MANIFEST__ so the client-side
+ *    prefetchRoutes() utility can resolve asset URLs for non-active routes.
+ *    The same manifest is used server-side to inject modulepreload / preload
+ *    hints for the current page's chunks.
  */
 let productionTemplate = null;
+let ssrManifest = null;
 if (isProduction) {
   try {
     const raw = await fs.readFile('./dist/client/index.html', 'utf-8');
@@ -49,6 +60,18 @@ if (isProduction) {
   } catch {
     console.warn(
       'Could not read production template — falling back to blocking stylesheet.',
+    );
+  }
+
+  try {
+    const manifestRaw = await fs.readFile(
+      './dist/client/.vite/ssr-manifest.json',
+      'utf-8',
+    );
+    ssrManifest = JSON.parse(manifestRaw);
+  } catch {
+    console.warn(
+      'SSR manifest not found — preload hints and prefetch will be disabled.',
     );
   }
 }
@@ -130,8 +153,9 @@ app.use('*all', async (req, res) => {
       template = await vite.transformIndexHtml(transformUrl, template);
       render = (await vite.ssrLoadModule('/src/entry-server.jsx')).render;
     } else {
-      // productionTemplate is pre-processed at startup with the Carbon
-      // stylesheet rewritten to non-blocking preload (see startup block above).
+      // productionTemplate is pre-processed at startup:
+      //   - Carbon stylesheet rewritten to non-blocking preload
+      // Falls back to bare index.html if startup processing failed.
       template =
         productionTemplate ??
         (await fs.readFile('./dist/client/index.html', 'utf-8'));
@@ -175,6 +199,27 @@ app.use('*all', async (req, res) => {
             ? htmlStartProcessed.replace('<html', `<html${themeAttr}`)
             : htmlStartProcessed;
 
+          // Inject the SSR manifest for client-side route prefetching and
+          // server-side preload hints. Both use the same manifest object.
+          if (ssrManifest) {
+            // Serialize the manifest into window.__SSR_MANIFEST__ so the
+            // client-side prefetchRoutes() utility can resolve asset URLs for
+            // non-active routes without bundling the manifest into the JS.
+            const manifestScript = `<script>window.__SSR_MANIFEST__ = ${JSON.stringify(ssrManifest).replace(/</g, '\\u003c')}</script>`;
+
+            // Generate <link rel="modulepreload"> and <link rel="preload" as="style">
+            // for the current page's chunks. The server knows which route is being
+            // rendered before the browser receives any HTML — emitting these hints
+            // lets the browser fetch the page chunk in parallel with the stream
+            // rather than waiting for the parser to discover the <script> tag.
+            const preloadLinks = buildPreloadLinks(url, ssrManifest);
+
+            htmlStartProcessed = htmlStartProcessed.replace(
+              '</head>',
+              `${preloadLinks}${manifestScript}</head>`,
+            );
+          }
+
           res.write(htmlStartProcessed);
 
           transformStream.on('finish', () => {
@@ -215,6 +260,48 @@ app.use('*all', async (req, res) => {
       .end('Internal Server Error');
   }
 });
+
+/**
+ * Builds <link rel="modulepreload"> and <link rel="preload" as="style"> tags
+ * for the current page's assets using the Vite SSR manifest.
+ *
+ * The server knows which route is being rendered before the browser receives
+ * a single byte of HTML. Emitting these hints causes the browser to fetch the
+ * page-specific JS and CSS chunks in parallel with the HTML stream rather than
+ * waiting for the parser to discover the <script> tag later.
+ *
+ * @param {string} url - The current request URL path
+ * @param {Object} manifest - The parsed Vite SSR manifest
+ * @returns {string} HTML string of <link> tags to inject into <head>
+ */
+function buildPreloadLinks(url, manifest) {
+  // Find the route whose path matches the current URL
+  const matchedRoute = routes.find((route) => {
+    if (!route.path || !route.element) return false;
+    if (route.path === url || route.path === `/${url}`) return true;
+    // Match dynamic segments: /dashboard/:id matches /dashboard/123
+    const staticPart = route.path.split('/:')[0];
+    return staticPart !== route.path && url.startsWith(staticPart);
+  });
+
+  if (!matchedRoute?.chunkId) return '';
+
+  // chunkId matches the manifest key exactly (e.g. 'src/pages/welcome/Welcome.jsx')
+  const assets = manifest[matchedRoute.chunkId] ?? [];
+
+  return assets
+    .map((asset) => {
+      const href = asset.startsWith('/') ? asset : `/${asset}`;
+      if (asset.endsWith('.js')) {
+        return `<link rel="modulepreload" href="${href}">`;
+      }
+      if (asset.endsWith('.css')) {
+        return `<link rel="preload" as="style" href="${href}">`;
+      }
+      return '';
+    })
+    .join('\n  ');
+}
 
 // Start http server
 const server = app.listen(port, () => {

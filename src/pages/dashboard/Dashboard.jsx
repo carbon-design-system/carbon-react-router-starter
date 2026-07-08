@@ -5,6 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// Page-specific styles are imported here, not in index.scss, so Vite emits
+// them as a separate CSS chunk loaded only when this route is visited.
+import './dashboard.scss';
+
 import { useTranslation } from 'react-i18next';
 
 import { Footer } from '../../components/footer/Footer';
