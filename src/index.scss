@@ -1,10 +1,20 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+// ─── Carbon full entrypoints — only in this file ─────────────────────────────
+// '@carbon/react' and '@carbon/ibm-products' emit all Carbon component CSS.
+// Importing them anywhere else duplicates the entire stylesheet into that
+// file's output chunk — a silent ~1.8 MB regression per accidental import.
+// Carbon token/mixin sub-paths ARE safe to use in any SCSS file:
+//   @use '@carbon/react/scss/spacing'   → SCSS variables only, zero CSS output
+//   @use '@carbon/react/scss/theme'     → mixins only, zero CSS output
+//   @use '@carbon/react/scss/breakpoint'→ mixins only, zero CSS output
+// SCSS's @use module system deduplicates them automatically.
+// See also: the Stylelint rule in .stylelintrc.json that enforces this.
 @use '@carbon/ibm-products/css/index.min';
 @use '@carbon/react' with (
   $font-path: '@ibm/plex',
@@ -16,14 +26,12 @@
 @use '@carbon/react/scss/colors' as *;
 @use '@carbon-labs/react-theme-settings/scss/theme-settings';
 
-/* Importing the component styles here will load them
-   before the JavaScript, which will make the page 
-   not "flashing style" - everything will be at the right
-   place from the start. In most case, avoid loading styles
-   from the JavaScript. */
+// ─── Global component styles — shell only ────────────────────────────────────
+// Only styles that are present on every page belong here: layout, header,
+// footer. Page-specific styles belong in the page component file (e.g.
+// src/pages/welcome/welcome.scss), imported directly from the JSX. Vite then
+// emits them as a separate CSS chunk loaded only when that route is visited.
 @use 'layouts/page-layout';
-@use 'pages/welcome/welcome';
-@use 'pages/dashboard/dashboard';
 @use 'components/commonHeader/commonHeader';
 @use 'components/footer/footer';
 

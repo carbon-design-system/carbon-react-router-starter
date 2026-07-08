@@ -15,6 +15,8 @@ import { Router } from './routes';
 // App level imports
 import { initializeTheme } from './utils/theme';
 import i18n from './i18n.client.js';
+import { prefetchRoutes } from './utils/prefetchRoutes.js';
+import { routes } from './routes/config.js';
 
 /**
  * Initializes the theme on client load by reading the user's preference
@@ -62,3 +64,11 @@ hydrateRoot(
 
 // Remove visibility hidden after hydration to prevent FOUC
 document.body.classList.add('ready');
+
+/**
+ * After hydration, prefetch the JS and CSS chunks for every other route on
+ * idle. This ensures subsequent navigations are instant — the browser has
+ * already fetched the page chunks before the user requests them.
+ * Only runs in production (see prefetchRoutes.js for rationale).
+ */
+prefetchRoutes(routes, window.location.pathname);
