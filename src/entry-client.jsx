@@ -60,5 +60,46 @@ hydrateRoot(
   </StrictMode>,
 );
 
-// Remove visibility hidden after hydration to prevent FOUC
-document.body.classList.add('ready');
+/**
+ * Reveal the page after both hydration and the Carbon stylesheet are ready.
+ *
+ * In production the stylesheet is loaded non-blocking via <link rel="preload"
+ * onload>. We must not set body.ready until it has been applied — otherwise
+ * the page appears briefly unstyled. We check whether the stylesheet link has
+ * already been promoted (rel === 'stylesheet') and if not, wait for its load
+ * event before revealing.
+ *
+ * In development Vite injects CSS synchronously via JS modules so the
+ * preload pattern is not used and we can reveal immediately.
+ */
+function revealWhenReady() {
+  if (!import.meta.env.PROD) {
+    document.body.classList.add('ready');
+    return;
+  }
+
+  // Find the preloaded Carbon stylesheet link (identified by the index asset)
+  const cssLink = document.querySelector(
+    'link[rel="stylesheet"][href*="/assets/index-"], ' +
+      'link[rel="preload"][as="style"][href*="/assets/index-"]',
+  );
+
+  if (!cssLink || cssLink.rel === 'stylesheet') {
+    // Already applied or not found — reveal immediately
+    document.body.classList.add('ready');
+  } else {
+    // Wait for the preload to be promoted to a stylesheet
+    cssLink.addEventListener(
+      'load',
+      () => document.body.classList.add('ready'),
+      {
+        once: true,
+      },
+    );
+    // Safety fallback: reveal after 3 s regardless, avoiding a permanently
+    // invisible page if the CSS load event misfires
+    setTimeout(() => document.body.classList.add('ready'), 3000);
+  }
+}
+
+revealWhenReady();
