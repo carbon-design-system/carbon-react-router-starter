@@ -27,13 +27,15 @@ Because the page is loaded via `React.lazy()`, Vite automatically emits the styl
 
 All `@carbon/*`, `@ibm/*`, and `@carbon-labs/*` JavaScript is bundled into a single `vendor-carbon` chunk. This chunk is large, but it is cached in the browser after the first visit and never re-downloaded when you deploy new application code.
 
-This is configured in [`vite.config.js`](../vite.config.js) via `build.rollupOptions.output.manualChunks`.
+This is configured in [`vite.config.js`](../vite.config.js) via `build.rolldownOptions.output.codeSplitting`. Vite 8 replaced the deprecated `build.rollupOptions.output.manualChunks` function with this Rolldown-native API.
+
+A small `rolldown-runtime` chunk (~0.6 kB) is also emitted automatically by Rolldown whenever `codeSplitting.groups` is used. It contains module-loading bootstrap code and is loaded first on every page.
 
 ### 3. Prefetch on idle + server preload hints
 
 After the first page is interactive, the browser prefetches the JS and CSS chunks for every other route in the background at low priority. This is the same strategy Next.js uses — by the time the user clicks a link, the assets are already cached.
 
-Additionally, the SSR server injects `<link rel="modulepreload">` and `<link rel="preload" as="style">` tags for the *current* page's chunks into the HTML `<head>`, so the browser can fetch them in parallel with the HTML stream.
+Additionally, the SSR server injects `<link rel="modulepreload">` and `<link rel="preload" as="style">` tags for the _current_ page's chunks into the HTML `<head>`, so the browser can fetch them in parallel with the HTML stream.
 
 ---
 
@@ -41,13 +43,16 @@ Additionally, the SSR server injects `<link rel="modulepreload">` and `<link rel
 
 Carbon exposes two kinds of SCSS imports that behave very differently:
 
-| Import | Emits CSS? | Safe in component files? |
-|---|---|---|
-| `@use '@carbon/react'` | Yes — all ~80 components | ❌ `index.scss` only |
-| `@use '@carbon/ibm-products/css/index.min'` | Yes — all IBM Products | ❌ `index.scss` only |
-| `@use '@carbon/react/scss/spacing'` | No — SCSS variables only | ✅ Anywhere |
-| `@use '@carbon/react/scss/theme'` | No — mixins only | ✅ Anywhere |
-| `@use '@carbon/react/scss/breakpoint'` | No — mixins only | ✅ Anywhere |
+| Import                                                 | Emits CSS?                                | Safe in component files?     |
+| ------------------------------------------------------ | ----------------------------------------- | ---------------------------- |
+| `@use '@carbon/react'`                                 | Yes — all ~80 Carbon components           | ❌ `index.scss` only         |
+| `@use '@carbon/ibm-products/css/index-without-carbon'` | Yes — IBM Products components only        | ❌ `index.scss` only         |
+| `@use '@carbon/ibm-products/css/index-full-carbon'`    | Yes — IBM Products **and** Carbon (avoid) | ❌ Never — duplicates Carbon |
+| `@use '@carbon/react/scss/spacing'`                    | No — SCSS variables only                  | ✅ Anywhere                  |
+| `@use '@carbon/react/scss/theme'`                      | No — mixins only                          | ✅ Anywhere                  |
+| `@use '@carbon/react/scss/breakpoint'`                 | No — mixins only                          | ✅ Anywhere                  |
+
+Use `index-without-carbon` (not `index` or `index-full-carbon`) for IBM Products because this starter already imports `@carbon/react` directly. Using the full entrypoint would duplicate all Carbon base CSS into the output.
 
 Importing a full entrypoint outside `src/index.scss` silently duplicates ~1.8 MB of CSS into that file's output chunk. A Stylelint rule (`plugin/no-carbon-full-entrypoint`) enforces this and will fail `npm run lint` if violated.
 
@@ -56,6 +61,7 @@ Importing a full entrypoint outside `src/index.scss` silently duplicates ~1.8 MB
 ## Adding a new page
 
 1. Create your page component and its SCSS file:
+
    ```
    src/pages/my-page/
      MyPage.jsx
@@ -63,11 +69,13 @@ Importing a full entrypoint outside `src/index.scss` silently duplicates ~1.8 MB
    ```
 
 2. Import the stylesheet at the top of the component:
+
    ```jsx
    import './my-page.scss';
    ```
 
 3. Register the page with `React.lazy()` in [`src/routes/config.js`](../src/routes/config.js) and add a `chunkId` matching the source path:
+
    ```js
    const MyPage = lazy(() => import('../pages/my-page/MyPage'));
 
@@ -82,6 +90,7 @@ Importing a full entrypoint outside `src/index.scss` silently duplicates ~1.8 MB
    The `chunkId` is used by the server to emit preload hints and by the client to prefetch the page's assets. It must match the path Vite uses as the module ID — the relative path from the project root.
 
 4. Use Carbon token/mixin sub-paths freely in your SCSS:
+
    ```scss
    @use '@carbon/react/scss/spacing' as *;
    @use '@carbon/react/scss/breakpoint' as *;

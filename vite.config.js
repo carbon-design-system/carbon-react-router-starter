@@ -27,7 +27,11 @@ export default defineConfig({
      * 3× = 894 kB → rounded up to 1,000 kB.
      */
     chunkSizeWarningLimit: 1000,
-    rollupOptions: {
+    /**
+     * build.rolldownOptions replaces the deprecated build.rollupOptions in
+     * Vite 8 (Rolldown-based). The API is a superset of Rollup's options.
+     */
+    rolldownOptions: {
       output: {
         /**
          * Isolate all Carbon, IBM, and Carbon Labs packages into a single
@@ -35,17 +39,19 @@ export default defineConfig({
          * first visit — application-code deploys no longer bust the browser
          * cache for the entire library.
          *
+         * codeSplitting.groups replaces the deprecated manualChunks function
+         * in Vite 8 / Rolldown. The test regex matches the same packages.
+         *
          * CSS from Carbon stays in index.css (via src/index.scss). This only
          * affects JS chunking.
          */
-        manualChunks(id) {
-          if (
-            id.includes('node_modules/@carbon/') ||
-            id.includes('node_modules/@ibm/') ||
-            id.includes('node_modules/@carbon-labs/')
-          ) {
-            return 'vendor-carbon';
-          }
+        codeSplitting: {
+          groups: [
+            {
+              test: /node_modules\/@carbon\/|node_modules\/@ibm\/|node_modules\/@carbon-labs\//,
+              name: 'vendor-carbon',
+            },
+          ],
         },
       },
       /**
