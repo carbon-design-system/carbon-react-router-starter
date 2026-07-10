@@ -172,7 +172,12 @@ export const routes = [
   {
     path: '*',
     element: NotFound,
-    chunkId: 'src/pages/not-found/NotFound.jsx',
+    // chunkId is intentionally omitted here. The 404 page is a low-value
+    // prefetch target — users are unlikely to visit it intentionally, so
+    // pre-warming its chunk wastes bandwidth. Omitting chunkId suppresses
+    // both the server-side <link rel="preload"> hint and the client-side
+    // idle prefetch without affecting how the page loads when actually reached.
+    // Add chunkId: 'src/pages/not-found/NotFound.jsx' to re-enable preloading.
     status: 404,
   },
 ];
