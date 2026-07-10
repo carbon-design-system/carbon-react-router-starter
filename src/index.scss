@@ -15,7 +15,10 @@
 //   @use '@carbon/react/scss/breakpoint'→ mixins only, zero CSS output
 // SCSS's @use module system deduplicates them automatically.
 // See also: the Stylelint rule in .stylelintrc.json that enforces this.
-@use '@carbon/ibm-products/css/index.min';
+// Use 'index-without-carbon' (not 'index' or 'index-full-carbon') because this
+// file already loads @carbon/react below. Using the full entrypoint would
+// duplicate all Carbon base CSS into the output bundle.
+@use '@carbon/ibm-products/css/index-without-carbon';
 @use '@carbon/react' with (
   $font-path: '@ibm/plex',
   $font-display: 'block'
