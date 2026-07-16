@@ -43,5 +43,13 @@
     "*.snap",
     "*.log"
   ],
-  "words": []
+  "words": [
+    "colocating",
+    "navigations",
+    "onwarn",
+    "prefetchable",
+    "stylesheet",
+    "unminified",
+    "unnamespaced"
+  ]
 }

@@ -7,10 +7,10 @@
 import { lazy } from 'react';
 import { MagicWand, LogoGithub } from '@carbon/icons-react';
 
-// This project splits the pages each in different JavaScript bundles.
-// You might also split part of the pages that incur significant
-// network load at your discretion, given they are not needed right
-// away when the page loads.
+// This project splits each page into a separate JavaScript (and CSS) chunk.
+// The chunkId on each route matches the key used in the Vite SSR manifest
+// so the server can emit <link rel="modulepreload"> hints and the client can
+// prefetch non-active routes — both without guessing hashed filenames.
 const Dashboard = lazy(() => import('../pages/dashboard/Dashboard'));
 const NotFound = lazy(() => import('../pages/not-found/NotFound'));
 const Placeholder = lazy(() => import('../pages/placeholder/Placeholder'));
@@ -33,6 +33,7 @@ const Welcome = lazy(() => import('../pages/welcome/Welcome'));
 //   index?: boolean;
 //   element?: ({ usingOutlet }: { usingOutlet?: boolean }) => JSX.Element;
 //   status?: number;
+//   chunkId?: string; // source module path matching the Vite SSR manifest key
 //   carbon?: carbonRouteType;
 // };
 
@@ -41,10 +42,12 @@ export const routes = [
     index: true,
     path: '/',
     element: Welcome,
+    chunkId: 'src/pages/welcome/Welcome.jsx',
   },
   {
     path: '/dashboard',
     element: Dashboard,
+    chunkId: 'src/pages/dashboard/Dashboard.jsx',
     carbon: {
       labelKey: 'routes.dashboard',
       label: 'Dashboard',
@@ -54,10 +57,12 @@ export const routes = [
   {
     path: '/dashboard/:id',
     element: Dashboard,
+    chunkId: 'src/pages/dashboard/Dashboard.jsx',
   },
   {
     path: '/link-1',
     element: Placeholder,
+    chunkId: 'src/pages/placeholder/Placeholder.jsx',
     carbon: {
       labelKey: 'routes.link1',
       label: 'Link 1',
@@ -67,6 +72,7 @@ export const routes = [
   {
     path: '/link-2',
     element: Placeholder,
+    chunkId: 'src/pages/placeholder/Placeholder.jsx',
     carbon: {
       labelKey: 'routes.link2',
       label: 'Link 2',
@@ -76,6 +82,7 @@ export const routes = [
   {
     path: '/link-3',
     element: Placeholder,
+    chunkId: 'src/pages/placeholder/Placeholder.jsx',
     carbon: {
       labelKey: 'routes.link3',
       label: 'Link 3',
@@ -93,6 +100,7 @@ export const routes = [
   {
     path: '/link-4/sub-link-1',
     element: Placeholder,
+    chunkId: 'src/pages/placeholder/Placeholder.jsx',
     carbon: {
       labelKey: 'routes.link4.subLink1',
       label: 'Sub-link 1',
@@ -101,6 +109,7 @@ export const routes = [
   {
     path: '/link-4/sub-link-2',
     element: Placeholder,
+    chunkId: 'src/pages/placeholder/Placeholder.jsx',
     carbon: {
       labelKey: 'routes.link4.subLink2',
       label: 'Sub-link 2',
@@ -109,6 +118,7 @@ export const routes = [
   {
     path: '/link-4/sub-link-3',
     element: Placeholder,
+    chunkId: 'src/pages/placeholder/Placeholder.jsx',
     carbon: {
       labelKey: 'routes.link4.subLink3',
       label: 'Sub-link 3',
@@ -162,6 +172,12 @@ export const routes = [
   {
     path: '*',
     element: NotFound,
+    // chunkId is intentionally omitted here. The 404 page is a low-value
+    // prefetch target — users are unlikely to visit it intentionally, so
+    // pre-warming its chunk wastes bandwidth. Omitting chunkId suppresses
+    // both the server-side <link rel="preload"> hint and the client-side
+    // idle prefetch without affecting how the page loads when actually reached.
+    // Add chunkId: 'src/pages/not-found/NotFound.jsx' to re-enable preloading.
     status: 404,
   },
 ];
