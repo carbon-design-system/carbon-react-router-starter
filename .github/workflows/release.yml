@@ -33,7 +33,7 @@ jobs:
         id: nvm
 
       - name: Use Node.js ${{ steps.nvm.outputs.NODE_VERSION }}
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ steps.nvm.outputs.NODE_VERSION }}
 
