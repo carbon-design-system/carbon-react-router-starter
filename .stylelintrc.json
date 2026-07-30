@@ -1,13 +1,6 @@
 {
-  "extends": [
-    "stylelint-config-standard-scss",
-    "stylelint-plugin-carbon-tokens/config/recommended"
-  ],
-  "plugins": [
-    "@double-great/stylelint-a11y",
-    "stylelint-use-logical",
-    "stylelint-plugin-carbon-tokens"
-  ],
+  "extends": ["stylelint-config-standard-scss", "stylelint-plugin-carbon-tokens/config/recommended"],
+  "plugins": ["@double-great/stylelint-a11y", "stylelint-use-logical", "stylelint-plugin-carbon-tokens"],
   "reportNeedlessDisables": true,
   "reportInvalidScopeDisables": true,
   "reportDescriptionlessDisables": true,

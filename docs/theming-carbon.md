@@ -186,9 +186,7 @@ export const PageLayout = ({ children }) => {
   return (
     <div className="cs--page-layout">
       <Nav />
-      <Content className="cs--content cs--page-layout__content">
-        {children}
-      </Content>
+      <Content className="cs--content cs--page-layout__content">{children}</Content>
     </div>
   );
 };
@@ -303,9 +301,7 @@ export function getThemeFromCookies(cookieString) {
 
   // Validate theme setting value
   const validThemeSettings = ['system', 'light', 'dark'];
-  const validatedThemeSetting = validThemeSettings.includes(themeSetting)
-    ? themeSetting
-    : 'system';
+  const validatedThemeSetting = validThemeSettings.includes(themeSetting) ? themeSetting : 'system';
 
   return {
     themeSetting: validatedThemeSetting,
@@ -361,10 +357,7 @@ export function setHeaderInverse(headerInverse) {
 
   // Update HTML attribute immediately (no re-render needed)
   if (typeof document !== 'undefined') {
-    document.documentElement.setAttribute(
-      'data-header-inverse',
-      String(headerInverse),
-    );
+    document.documentElement.setAttribute('data-header-inverse', String(headerInverse));
   }
 }
 ```
@@ -381,28 +374,16 @@ seamlessly with our theming system:
 
 ```jsx
 import { useState } from 'react';
-import {
-  ThemeSettings,
-  ThemeMenuComplement,
-  ThemeSwitcher,
-} from '@carbon-labs/react-theme-settings';
-import {
-  getThemeSettings,
-  setThemeSetting,
-  setHeaderInverse,
-} from '../../utils/theme';
+import { ThemeSettings, ThemeMenuComplement, ThemeSwitcher } from '@carbon-labs/react-theme-settings';
+import { getThemeSettings, setThemeSetting, setHeaderInverse } from '../../utils/theme';
 
 export const ProfilePanel = ({ user }) => {
   // Get initial values from cookies (single call to avoid redundant parsing)
   const initialSettings = getThemeSettings();
 
-  const [themeSettingLocal, setThemeSettingLocal] = useState(
-    initialSettings.themeSetting,
-  );
+  const [themeSettingLocal, setThemeSettingLocal] = useState(initialSettings.themeSetting);
 
-  const [themeMenuComplementLocal, setThemeMenuComplementLocal] = useState(
-    initialSettings.headerInverse,
-  );
+  const [themeMenuComplementLocal, setThemeMenuComplementLocal] = useState(initialSettings.headerInverse);
 
   // Update theme setting
   const handleThemeSettingChange = (value) => {
@@ -422,10 +403,7 @@ export const ProfilePanel = ({ user }) => {
 
       <div className="cs--profile-settings">
         <ThemeSettings>
-          <ThemeSwitcher
-            onChange={handleThemeSettingChange}
-            value={themeSettingLocal}
-          />
+          <ThemeSwitcher onChange={handleThemeSettingChange} value={themeSettingLocal} />
           <ThemeMenuComplement
             id="theme-menu-complement"
             labelText="Complement menu theme"
@@ -451,12 +429,7 @@ Place the theme selector in a convenient location, such as a user profile panel:
 
 ```jsx
 import { useState } from 'react';
-import {
-  Header,
-  HeaderPanel,
-  HeaderGlobalAction,
-  HeaderGlobalBar,
-} from '@carbon/react';
+import { Header, HeaderPanel, HeaderGlobalAction, HeaderGlobalBar } from '@carbon/react';
 import { UserAvatar } from '@carbon/icons-react';
 import { ProfilePanel } from '../profilePanel/ProfilePanel';
 
@@ -473,17 +446,12 @@ export const Nav = () => {
       {/* Other header content */}
 
       <HeaderGlobalBar>
-        <HeaderGlobalAction
-          aria-label="User profile"
-          onClick={() => setIsProfileOpen(!isProfileOpen)}
-        >
+        <HeaderGlobalAction aria-label="User profile" onClick={() => setIsProfileOpen(!isProfileOpen)}>
           <UserAvatar size={20} />
         </HeaderGlobalAction>
       </HeaderGlobalBar>
 
-      <HeaderPanel expanded={isProfileOpen}>
-        {isProfileOpen && <ProfilePanel user={currentUser} />}
-      </HeaderPanel>
+      <HeaderPanel expanded={isProfileOpen}>{isProfileOpen && <ProfilePanel user={currentUser} />}</HeaderPanel>
     </Header>
   );
 };
@@ -530,11 +498,8 @@ export function initializeTheme() {
   const { themeSetting, headerInverse } = getThemeSettings();
 
   // Get current attributes set by SSR
-  const currentThemeSetting =
-    document.documentElement.getAttribute('data-theme-setting');
-  const currentHeaderInverse = document.documentElement.getAttribute(
-    'data-header-inverse',
-  );
+  const currentThemeSetting = document.documentElement.getAttribute('data-theme-setting');
+  const currentHeaderInverse = document.documentElement.getAttribute('data-header-inverse');
 
   // Only update if attributes are missing OR if cookies have changed since SSR
   // This prevents hydration mismatch while allowing cookie updates to take effect
@@ -543,22 +508,15 @@ export function initializeTheme() {
   } else if (currentThemeSetting !== themeSetting) {
     // Cookie changed between SSR and hydration - log warning but don't update
     // to avoid hydration mismatch. The next navigation will use the new value.
-    console.warn(
-      'Theme cookie changed between SSR and hydration. ' +
-        'Change will take effect on next navigation.',
-    );
+    console.warn('Theme cookie changed between SSR and hydration. ' + 'Change will take effect on next navigation.');
   }
 
   if (!currentHeaderInverse) {
-    document.documentElement.setAttribute(
-      'data-header-inverse',
-      String(headerInverse),
-    );
+    document.documentElement.setAttribute('data-header-inverse', String(headerInverse));
   } else if (currentHeaderInverse !== String(headerInverse)) {
     // Cookie changed between SSR and hydration - log warning but don't update
     console.warn(
-      'Header inverse cookie changed between SSR and hydration. ' +
-        'Change will take effect on next navigation.',
+      'Header inverse cookie changed between SSR and hydration. ' + 'Change will take effect on next navigation.',
     );
   }
 }
@@ -715,9 +673,7 @@ export function getThemeFromCookies(cookieString) {
   const headerInverse = cookies['header-inverse'] === 'true';
 
   const validThemeSettings = ['system', 'light', 'dark'];
-  const validatedThemeSetting = validThemeSettings.includes(themeSetting)
-    ? themeSetting
-    : 'system';
+  const validatedThemeSetting = validThemeSettings.includes(themeSetting) ? themeSetting : 'system';
 
   return {
     themeSetting: validatedThemeSetting,
@@ -763,10 +719,7 @@ export function setThemeSetting(themeSetting) {
 export function setHeaderInverse(headerInverse) {
   setThemeInCookies({ headerInverse });
   if (typeof document !== 'undefined') {
-    document.documentElement.setAttribute(
-      'data-header-inverse',
-      String(headerInverse),
-    );
+    document.documentElement.setAttribute('data-header-inverse', String(headerInverse));
   }
 }
 
@@ -776,11 +729,8 @@ export function initializeTheme() {
   const { themeSetting, headerInverse } = getThemeSettings();
 
   // Get current attributes set by SSR
-  const currentThemeSetting =
-    document.documentElement.getAttribute('data-theme-setting');
-  const currentHeaderInverse = document.documentElement.getAttribute(
-    'data-header-inverse',
-  );
+  const currentThemeSetting = document.documentElement.getAttribute('data-theme-setting');
+  const currentHeaderInverse = document.documentElement.getAttribute('data-header-inverse');
 
   // Only update if attributes are missing OR if cookies have changed since SSR
   // This prevents hydration mismatch while allowing cookie updates to take effect
@@ -789,22 +739,15 @@ export function initializeTheme() {
   } else if (currentThemeSetting !== themeSetting) {
     // Cookie changed between SSR and hydration - log warning but don't update
     // to avoid hydration mismatch. The next navigation will use the new value.
-    console.warn(
-      'Theme cookie changed between SSR and hydration. ' +
-        'Change will take effect on next navigation.',
-    );
+    console.warn('Theme cookie changed between SSR and hydration. ' + 'Change will take effect on next navigation.');
   }
 
   if (!currentHeaderInverse) {
-    document.documentElement.setAttribute(
-      'data-header-inverse',
-      String(headerInverse),
-    );
+    document.documentElement.setAttribute('data-header-inverse', String(headerInverse));
   } else if (currentHeaderInverse !== String(headerInverse)) {
     // Cookie changed between SSR and hydration - log warning but don't update
     console.warn(
-      'Header inverse cookie changed between SSR and hydration. ' +
-        'Change will take effect on next navigation.',
+      'Header inverse cookie changed between SSR and hydration. ' + 'Change will take effect on next navigation.',
     );
   }
 }
@@ -816,28 +759,16 @@ export function initializeTheme() {
 import classNames from 'classnames';
 import { useState } from 'react';
 import { UserAvatar } from '@carbon/ibm-products';
-import {
-  ThemeSettings,
-  ThemeMenuComplement,
-  ThemeSwitcher,
-} from '@carbon-labs/react-theme-settings';
-import {
-  getThemeSettings,
-  setThemeSetting,
-  setHeaderInverse,
-} from '../../utils/theme';
+import { ThemeSettings, ThemeMenuComplement, ThemeSwitcher } from '@carbon-labs/react-theme-settings';
+import { getThemeSettings, setThemeSetting, setHeaderInverse } from '../../utils/theme';
 
 export const ProfilePanel = ({ className }) => {
   // Get initial values from cookies (single call to avoid redundant parsing)
   const initialSettings = getThemeSettings();
 
-  const [themeSettingLocal, setThemeSettingLocal] = useState(
-    initialSettings.themeSetting,
-  );
+  const [themeSettingLocal, setThemeSettingLocal] = useState(initialSettings.themeSetting);
 
-  const [themeMenuComplementLocal, setThemeMenuComplementLocal] = useState(
-    initialSettings.headerInverse,
-  );
+  const [themeMenuComplementLocal, setThemeMenuComplementLocal] = useState(initialSettings.headerInverse);
 
   // Update theme setting
   const handleThemeSettingChange = (value) => {
@@ -859,26 +790,16 @@ export const ProfilePanel = ({ className }) => {
   return (
     <div className={classNames(className, 'cs--profile-panel')}>
       <div className="cs--profile-user-info">
-        <UserAvatar
-          name={userProfile.name}
-          renderIcon=""
-          size="lg"
-          tooltipAlignment="bottom"
-        />
+        <UserAvatar name={userProfile.name} renderIcon="" size="lg" tooltipAlignment="bottom" />
         <div className="cds--profile-user-info__text-wrapper">
           <div className="cds--profile-user-info__name">{userProfile.name}</div>
-          <div className="cds--profile-user-info__email">
-            {userProfile.email}
-          </div>
+          <div className="cds--profile-user-info__email">{userProfile.email}</div>
         </div>
       </div>
 
       <div className="cs--profile-settings">
         <ThemeSettings>
-          <ThemeSwitcher
-            onChange={handleThemeSettingChange}
-            value={themeSettingLocal}
-          />
+          <ThemeSwitcher onChange={handleThemeSettingChange} value={themeSettingLocal} />
           <ThemeMenuComplement
             id="theme-menu-complement"
             labelText="Complement menu theme"
