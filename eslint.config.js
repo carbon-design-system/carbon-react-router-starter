@@ -34,7 +34,7 @@ export default [
     ignores: ['dist', 'vite.config.js'],
     languageOptions: {
       /* added (globals.node) - for server side elements */
-      globals: { ...globals.browser, ...globals.node, ...globals.jest },
+      globals: { ...globals.browser, ...globals.node },
       ecmaVersion: 'latest', // Support all modern ECMAScript features
       parserOptions: {
         ecmaFeatures: { jsx: true },
@@ -68,7 +68,7 @@ export default [
         ecmaFeatures: { jsx: true },
         project: './tsconfig.json',
       },
-      globals: { ...globals.browser, ...globals.node, ...globals.jest },
+      globals: { ...globals.browser, ...globals.node },
     },
     plugins: {
       '@typescript-eslint': tseslint,
