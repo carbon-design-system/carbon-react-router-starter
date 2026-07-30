@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -50,6 +50,13 @@ export function setHeaderInverse(headerInverse) {
  * Initialize theme on page load (sync HTML attributes with cookies)
  * Call this once when the app starts
  * Only updates attributes if they're not already set by SSR
+ *
+ * > [!WARNING] **Hydration Mismatch Prevention**
+ * > The `initializeTheme` function deliberately avoids updating attributes if
+ * > they differ from cookie values. This prevents React hydration errors when
+ * > cookies change between SSR and client-side hydration. The warning messages
+ * > help developers identify when this occurs, and the changes will take effect
+ * > on the next page navigation.
  */
 export function initializeTheme() {
   if (typeof document === 'undefined') return;
