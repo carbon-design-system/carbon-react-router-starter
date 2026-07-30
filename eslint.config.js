@@ -108,6 +108,9 @@ export default [
       ...pluginJs.configs.recommended.rules,
       /* import named is off because @carbon/react uses default exports in some components April 10th 2025 */
       'import-x/named': 'off',
+      /* import-x/unambiguous - ensures every file is unambiguously an ES module (has import/export).
+         Works alongside "moduleDetection": "force" in tsconfig.json as a belt-and-braces approach. */
+      'import-x/unambiguous': 'error',
       /* no-unused-vars - ignore pattern for React component usage */
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
       'react-refresh/only-export-components': [
