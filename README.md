@@ -56,7 +56,7 @@ TypeScript is configured with strict mode enabled in `tsconfig.json`. This provi
 - **Linting**: ESLint is configured to lint both JavaScript and TypeScript files
 - **Testing**: Vitest supports TypeScript natively
 
-### Type Checking
+### Type checking
 
 Vite compiles TypeScript for speed but doesn't perform type checking during development. To check types:
 
