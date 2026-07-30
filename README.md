@@ -60,11 +60,13 @@ TypeScript is configured with strict mode enabled in `tsconfig.json`. This provi
 
 Vite compiles TypeScript for speed but doesn't perform type checking during development. To check types:
 
+This is done using the script "lint:types" which is executed during the "lint" script. This means it is also performed during "lint-staged"
+
+You can check manually using:
+
 ```bash
 npx tsc --noEmit
 ```
-
-You can add this as a pre-commit hook or CI step if desired.
 
 ### Gradual migration
 
