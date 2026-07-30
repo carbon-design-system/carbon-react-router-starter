@@ -66,7 +66,7 @@ npx tsc --noEmit
 
 You can add this as a pre-commit hook or CI step if desired.
 
-### Gradual Migration
+### Gradual migration
 
 You don't need to convert existing JavaScript files to TypeScript. The project is configured to support both:
 
