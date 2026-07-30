@@ -39,7 +39,7 @@ NOTE: In addition to starting with a clean history `degit` avoids the accidental
 
 Create a production build with `npm run build`, but be aware that a server runtime is needed as this project uses server-side rendering.
 
-## TypeScript Support
+## TypeScript support
 
 This project supports both JavaScript and TypeScript out of the box. You can freely mix `.js`/`.jsx` and `.ts`/`.tsx` files in your project.
 
