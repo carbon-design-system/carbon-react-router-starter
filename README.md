@@ -57,7 +57,7 @@ export const Footer = (): JSX.Element => {
 
 ### Configuration
 
-TypeScript is configured with strict mode enabled in `tsconfig.json`. This provides maximum type safety for new TypeScript files while allowing existing JavaScript files to work without modification.
+TypeScript is configured with strict mode and additional strictness options enabled in `tsconfig.json`. This is intentional — the goal is a fully TypeScript codebase, and setting a high bar from the start avoids retrofitting type errors later. Existing JavaScript files continue to work without modification during the transition.
 
 - **Development**: TypeScript files are compiled automatically by Vite during development with full HMR support
 - **Build**: TypeScript is compiled as part of the normal build process (`npm run build`)
@@ -78,11 +78,11 @@ npm run lint:types
 
 ### Gradual migration
 
-You don't need to convert existing JavaScript files to TypeScript. The project is configured to support both:
+The project is moving toward a fully TypeScript codebase. JavaScript files are supported during the transition, but new files should be written in TypeScript:
 
-- Keep using `.js`/`.jsx` for files that don't need types
-- Use `.ts`/`.tsx` for new files or when you want type safety
-- Mix both approaches in the same project without issues
+- Convert existing `.js`/`.jsx` files to `.ts`/`.tsx` as you work on them
+- Write all new files in TypeScript
+- Both can coexist in the same project without issues during the transition
 
 ### Running production
 
