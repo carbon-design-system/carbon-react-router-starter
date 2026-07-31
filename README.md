@@ -73,7 +73,7 @@ This is done using the script "lint:types" which is executed during the "lint" s
 You can check manually using:
 
 ```bash
-npx tsc --noEmit
+npm run lint:types
 ```
 
 ### Gradual migration
