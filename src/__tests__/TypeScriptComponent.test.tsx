@@ -31,7 +31,7 @@ const TestComponent: FC<TestComponentProps> = ({ title, count }) => {
 };
 
 describe('TypeScript React Component Integration', () => {
-  it('should compile, enforce prop types at compile time and render TSX components', () => {
+  it('should render a TSX component with typed props', () => {
     render(<TestComponent title="Test Title" count={100} />);
 
     expect(screen.getByText('Test Title')).toBeInTheDocument();
