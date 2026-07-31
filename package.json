@@ -32,6 +32,7 @@
     "classnames": "^2.5.1",
     "compression": "^1.7.5",
     "express": "^5.0.1",
+    "express-rate-limit": "^8.6.1",
     "i18next": "^26.0.0",
     "i18next-browser-languagedetector": "^8.2.0",
     "i18next-fs-backend": "^2.6.0",
