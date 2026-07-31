@@ -45,7 +45,15 @@ This project supports both JavaScript and TypeScript out of the box. You can fre
 
 ### Using TypeScript
 
-To create a TypeScript file, simply use the `.ts` or `.tsx` extension:
+To create a TypeScript file, simply use the `.ts` or `.tsx` extension. For example, `src/components/footer/Footer.tsx` is a converted component in this project:
+
+```tsx
+import type { JSX } from 'react';
+
+export const Footer = (): JSX.Element => {
+  return <footer>...</footer>;
+};
+```
 
 ### Configuration
 
