@@ -5,7 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { test, expect, vi, beforeEach } from 'vitest';
+import {
+  test,
+  expect,
+  vi,
+  beforeAll,
+  beforeEach,
+  afterEach,
+  afterAll,
+} from 'vitest';
 import { screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';

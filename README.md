@@ -39,6 +39,51 @@ NOTE: In addition to starting with a clean history `degit` avoids the accidental
 
 Create a production build with `npm run build`, but be aware that a server runtime is needed as this project uses server-side rendering.
 
+## TypeScript support
+
+This project supports both JavaScript and TypeScript out of the box. You can freely mix `.js`/`.jsx` and `.ts`/`.tsx` files in your project.
+
+### Using TypeScript
+
+To create a TypeScript file, simply use the `.ts` or `.tsx` extension. For example, `src/components/footer/Footer.tsx` is a converted component in this project:
+
+```tsx
+import type { JSX } from 'react';
+
+export const Footer = (): JSX.Element => {
+  return <footer>...</footer>;
+};
+```
+
+### Configuration
+
+TypeScript is configured with strict mode and additional strictness options enabled in `tsconfig.json`. This is intentional — the goal is a fully TypeScript codebase, and setting a high bar from the start avoids retrofitting type errors later. Existing JavaScript files continue to work without modification during the transition.
+
+- **Development**: TypeScript files are compiled automatically by Vite during development with full HMR support
+- **Build**: TypeScript is compiled as part of the normal build process (`npm run build`)
+- **Linting**: ESLint is configured to lint both JavaScript and TypeScript files
+- **Testing**: Vitest supports TypeScript natively
+
+### Type checking
+
+Vite compiles TypeScript for speed but doesn't perform type checking during development. To check types:
+
+This is done using the script "lint:types" which is executed during the "lint" script. This means it is also performed during "lint-staged"
+
+You can check manually using:
+
+```bash
+npm run lint:types
+```
+
+### Gradual migration
+
+The project is moving toward a fully TypeScript codebase. JavaScript files are supported during the transition, but new files should be written in TypeScript:
+
+- Convert existing `.js`/`.jsx` files to `.ts`/`.tsx` as you work on them
+- Write all new files in TypeScript
+- Both can coexist in the same project without issues during the transition
+
 ### Running production
 
 1. Build the project
