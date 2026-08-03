@@ -23,6 +23,9 @@ import globals from 'globals';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 /* added eslint-config-prettier to turn off conflicting rules April 15th 2025 */
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
+/* added @typescript-eslint for TypeScript support */
+import tseslint from '@typescript-eslint/eslint-plugin';
+import tsparser from '@typescript-eslint/parser';
 
 export default [
   { ignores: ['dist', 'vite.config.js', 'node_modules/**'] },
@@ -31,7 +34,7 @@ export default [
     ignores: ['dist', 'vite.config.js'],
     languageOptions: {
       /* added (globals.node) - for server side elements */
-      globals: { ...globals.browser, ...globals.node, ...globals.jest },
+      globals: { ...globals.browser, ...globals.node },
       ecmaVersion: 'latest', // Support all modern ECMAScript features
       parserOptions: {
         ecmaFeatures: { jsx: true },
@@ -44,7 +47,7 @@ export default [
       },
       'import-x/resolver': {
         node: {
-          extensions: ['.js', '.jsx'],
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
         },
       },
       'import-x/ignore': ['node_modules'],
@@ -52,6 +55,41 @@ export default [
         espree: ['.js', '.cjs', '.mjs', '.jsx'],
       },
       'import-x/internal-regex': '^(@carbon|react)',
+    },
+  },
+  /* TypeScript configuration */
+  {
+    files: ['**/*.{ts,tsx}'],
+    languageOptions: {
+      parser: tsparser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        ecmaFeatures: { jsx: true },
+        project: './tsconfig.json',
+      },
+      globals: { ...globals.browser, ...globals.node },
+    },
+    plugins: {
+      '@typescript-eslint': tseslint,
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
+      'import-x/resolver': {
+        node: {
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        },
+      },
+    },
+    rules: {
+      ...tseslint.configs.recommended.rules,
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { varsIgnorePattern: '^[A-Z_]', argsIgnorePattern: '^_' },
+      ],
+      '@typescript-eslint/no-explicit-any': 'warn',
     },
   },
   importPlugin.flatConfigs.recommended,
@@ -70,6 +108,9 @@ export default [
       ...pluginJs.configs.recommended.rules,
       /* import named is off because @carbon/react uses default exports in some components April 10th 2025 */
       'import-x/named': 'off',
+      /* import-x/unambiguous - ensures every file is unambiguously an ES module (has import/export).
+         Works alongside "moduleDetection": "force" in tsconfig.json as a belt-and-braces approach. */
+      'import-x/unambiguous': 'error',
       /* no-unused-vars - ignore pattern for React component usage */
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
       'react-refresh/only-export-components': [
