@@ -6,6 +6,10 @@ This project is intended as a guiding template to get you and your team started 
 
 It is intended to be helping, not dictating. If you don't know exactly what to use, feel free to take this as a starting point. You can of course swap anything in this stack with your preferred tool if you want to.
 
+## Branch: `next`
+
+This branch tracks work toward **v2** — a fully TypeScript implementation of the starter project. Development continues in parallel on the `main` branch, and criteria for retiring the JavaScript files have not yet been established. New files in this branch should be written in TypeScript; existing `.js`/`.jsx` files are converted incrementally as work touches them.
+
 ## Get started
 
 1. Instantiate this template locally without the git history, specifying the name of the folder for the repository.
