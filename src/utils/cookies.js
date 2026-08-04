@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -78,9 +78,7 @@ export function setCookie(name, value, options = {}) {
   // Validate cookie value before encoding
   const encodedValue = encodeURIComponent(value);
   if (!isValidCookieValue(encodedValue)) {
-    console.warn(
-      `Invalid cookie value for "${name}": contains invalid characters`,
-    );
+    console.warn(`Invalid cookie value for "${name}": contains invalid characters`);
     return;
   }
 
@@ -118,9 +116,7 @@ export function getThemeFromCookies(cookieString) {
 
   // Validate theme setting value
   const validThemeSettings = ['system', 'light', 'dark'];
-  const validatedThemeSetting = validThemeSettings.includes(themeSetting)
-    ? themeSetting
-    : 'system';
+  const validatedThemeSetting = validThemeSettings.includes(themeSetting) ? themeSetting : 'system';
 
   return {
     themeSetting: validatedThemeSetting,

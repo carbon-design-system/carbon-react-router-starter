@@ -15,32 +15,17 @@ const NotFound = () => {
   const location = useLocation();
 
   return (
-    <PageLayout
-      className="cs--not-found"
-      fallback={<p>{t('notFound.loading', 'Loading not found page...')}</p>}
-    >
+    <PageLayout className="cs--not-found" fallback={<p>{t('notFound.loading', 'Loading not found page...')}</p>}>
       <CommonHeader
         title={t('notFound.title', 'Page not found')}
         paragraphs={[
+          <>{t('notFound.description', 'This is not the page you were looking for.')}</>,
           <>
-            {t(
-              'notFound.description',
-              'This is not the page you were looking for.',
-            )}
+            {t('notFound.routeNotRecognized', "The route '{{pathname}}' is not recognized.", {
+              pathname: location.pathname,
+            })}
           </>,
-          <>
-            {t(
-              'notFound.routeNotRecognized',
-              "The route '{{pathname}}' is not recognized.",
-              { pathname: location.pathname },
-            )}
-          </>,
-          <>
-            {t(
-              'notFound.maintainer',
-              'Maintained by fed-at-ibm, a chapter of the OIC.',
-            )}
-          </>,
+          <>{t('notFound.maintainer', 'Maintained by fed-at-ibm, a chapter of the OIC.')}</>,
         ]}
       />
     </PageLayout>

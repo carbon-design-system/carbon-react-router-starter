@@ -30,17 +30,9 @@ export const NavHeaderItems = ({ routesInHeader, currentPath }) => {
         !carbon.inSubMenu && carbon?.label ? (
           carbon.subMenu ? (
             <HeaderMenu
-              aria-label={
-                carbon.labelKey
-                  ? t(carbon.labelKey, carbon.label)
-                  : carbon.label
-              }
+              aria-label={carbon.labelKey ? t(carbon.labelKey, carbon.label) : carbon.label}
               key={path}
-              menuLinkName={
-                carbon.labelKey
-                  ? t(carbon.labelKey, carbon.label)
-                  : carbon.label
-              }
+              menuLinkName={carbon.labelKey ? t(carbon.labelKey, carbon.label) : carbon.label}
             >
               {carbon.subMenu.map((subRoute) => (
                 <HeaderMenuItem
@@ -56,15 +48,8 @@ export const NavHeaderItems = ({ routesInHeader, currentPath }) => {
               ))}
             </HeaderMenu>
           ) : (
-            <HeaderMenuItem
-              as={RouterLink}
-              key={path}
-              to={path}
-              isActive={isPathActive(path, currentPath)}
-            >
-              {carbon.labelKey
-                ? t(carbon.labelKey, carbon.label)
-                : carbon.label}
+            <HeaderMenuItem as={RouterLink} key={path} to={path} isActive={isPathActive(path, currentPath)}>
+              {carbon.labelKey ? t(carbon.labelKey, carbon.label) : carbon.label}
             </HeaderMenuItem>
           )
         ) : null,

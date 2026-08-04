@@ -25,9 +25,7 @@ const DashboardURLParameters = () => {
       <Column sm={4} md={8} lg={16}>
         <Tile className="cs--dashboard__tile">
           <Stack gap={5}>
-            <strong>
-              {t('dashboard.urlParameters.title', 'URL parameters example')}
-            </strong>
+            <strong>{t('dashboard.urlParameters.title', 'URL parameters example')}</strong>
             {nameParam && (
               <h2 style={{ margin: 0 }}>
                 {t('dashboard.urlParameters.greeting', 'Hello {{name}}! 👋', {
@@ -42,41 +40,24 @@ const DashboardURLParameters = () => {
               )}{' '}
               <br />
               {t('dashboard.urlParameters.tryAccessing', 'Try accessing:')}{' '}
-              <Link href="/dashboard/1234?q=xyz&name=Anne">
-                /dashboard/1234?q=xyz&name=Anne
-              </Link>
+              <Link href="/dashboard/1234?q=xyz&name=Anne">/dashboard/1234?q=xyz&name=Anne</Link>
             </p>
             <dl>
               {id && (
                 <>
-                  <dt>
-                    {t(
-                      'dashboard.urlParameters.pathParameter',
-                      'Path parameter detected (id):',
-                    )}
-                  </dt>
+                  <dt>{t('dashboard.urlParameters.pathParameter', 'Path parameter detected (id):')}</dt>
                   <dd>{id}</dd>
                 </>
               )}
               {queryParam && (
                 <>
-                  <dt>
-                    {t(
-                      'dashboard.urlParameters.queryParameterQ',
-                      'Query parameter detected (q):',
-                    )}
-                  </dt>
+                  <dt>{t('dashboard.urlParameters.queryParameterQ', 'Query parameter detected (q):')}</dt>
                   <dd>{queryParam}</dd>
                 </>
               )}
               {nameParam && (
                 <>
-                  <dt>
-                    {t(
-                      'dashboard.urlParameters.queryParameterName',
-                      'Query parameter detected (name):',
-                    )}
-                  </dt>
+                  <dt>{t('dashboard.urlParameters.queryParameterName', 'Query parameter detected (name):')}</dt>
                   <dd>{nameParam}</dd>
                 </>
               )}

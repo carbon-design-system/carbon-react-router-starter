@@ -40,9 +40,7 @@ if (!isProduction) {
     hmrPort = await findAvailablePort(24678);
   } catch (error) {
     console.error('Failed to find available port for Vite HMR:', error);
-    throw new Error(
-      'Unable to start development server: Could not find available port for HMR',
-    );
+    throw new Error('Unable to start development server: Could not find available port for HMR');
   }
 
   vite = await createServer({
@@ -95,9 +93,7 @@ app.use('*all', async (req, res) => {
       template = await vite.transformIndexHtml(transformUrl, template);
       render = (await vite.ssrLoadModule('/src/entry-server.jsx')).render;
     } else {
-      const templateHtml = isProduction
-        ? await fs.readFile('./dist/client/index.html', 'utf-8')
-        : '';
+      const templateHtml = isProduction ? await fs.readFile('./dist/client/index.html', 'utf-8') : '';
       template = templateHtml;
       render = (await import('../dist/server/entry-server.js')).render;
     }
@@ -173,10 +169,7 @@ app.use('*all', async (req, res) => {
       stack: e.stack,
       timestamp: new Date().toISOString(),
     });
-    res
-      .status(500)
-      .set('Content-Type', 'text/plain')
-      .end('Internal Server Error');
+    res.status(500).set('Content-Type', 'text/plain').end('Internal Server Error');
   }
 });
 
@@ -205,9 +198,7 @@ function gracefulShutdown(signal) {
 
   // Force close after 10 seconds
   setTimeout(() => {
-    console.error(
-      'Could not close connections in time, forcefully shutting down',
-    );
+    console.error('Could not close connections in time, forcefully shutting down');
     process.exit(1);
   }, 10000);
 }

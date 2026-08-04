@@ -15,9 +15,7 @@
 
 .cs--dashboard__tile {
   margin-block: $spacing-05;
-  block-size: calc(
-    100% - $spacing-07
-  ); // Sets common height for the row, a min-height should be added as well.
+  block-size: calc(100% - $spacing-07); // Sets common height for the row, a min-height should be added as well.
 }
 
 /* While the carbon documentation states that most containers should be
