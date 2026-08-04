@@ -7,6 +7,7 @@
 
 import fs from 'node:fs/promises';
 import express from 'express';
+import { rateLimit } from 'express-rate-limit';
 import { Transform } from 'node:stream';
 import { getRoutes } from './routes/routes.js';
 import { base, getServerConfig } from './config/server-config.js';
@@ -74,8 +75,16 @@ app.use(
 // Register API routes
 getRoutes(app);
 
+// Rate limit the SSR HTML handler — it performs file system reads on every request
+const htmlLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  limit: 500,
+  standardHeaders: 'draft-8',
+  legacyHeaders: false,
+});
+
 // Serve HTML
-app.use('*all', async (req, res) => {
+app.use('*all', htmlLimiter, async (req, res) => {
   try {
     const url = req.originalUrl.replace(base, '');
 
