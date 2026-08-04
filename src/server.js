@@ -9,6 +9,7 @@ import fs from 'node:fs/promises';
 import express from 'express';
 import { Transform } from 'node:stream';
 import { getRoutes } from './routes/routes.js';
+import { routes } from './routes/config.js';
 import { base, getServerConfig } from './config/server-config.js';
 import i18nextMiddleware from 'i18next-http-middleware';
 import i18n from './i18n.server.js';
@@ -17,6 +18,34 @@ import { setBaseUrl } from './service/postHandlers.js';
 // Constants
 const isProduction = process.env.NODE_ENV === 'production';
 const ABORT_DELAY = 10000;
+
+/**
+ * Load the Vite SSR manifest once at startup in production.
+ *
+ * The manifest maps source module paths to their hashed built asset filenames:
+ *   { "src/pages/welcome/Welcome.jsx": ["assets/Welcome-[hash].js", ...] }
+ *
+ * It serves two purposes:
+ *   1. Injected into window.__SSR_MANIFEST__ for the client-side prefetch
+ *      utility (prefetchRoutes.js) to resolve asset URLs for non-active routes.
+ *   2. Used server-side to inject <link rel="modulepreload"> and
+ *      <link rel="preload" as="style"> for the current page's chunks so the
+ *      browser can fetch them in parallel with the HTML stream.
+ */
+let ssrManifest = null;
+if (isProduction) {
+  try {
+    const manifestRaw = await fs.readFile(
+      './dist/client/.vite/ssr-manifest.json',
+      'utf-8',
+    );
+    ssrManifest = JSON.parse(manifestRaw);
+  } catch {
+    console.warn(
+      'SSR manifest not found — preload hints and prefetch will be disabled.',
+    );
+  }
+}
 
 // Get available port
 const { port, baseUrl } = await getServerConfig();
@@ -95,10 +124,7 @@ app.use('*all', async (req, res) => {
       template = await vite.transformIndexHtml(transformUrl, template);
       render = (await vite.ssrLoadModule('/src/entry-server.jsx')).render;
     } else {
-      const templateHtml = isProduction
-        ? await fs.readFile('./dist/client/index.html', 'utf-8')
-        : '';
-      template = templateHtml;
+      template = await fs.readFile('./dist/client/index.html', 'utf-8');
       render = (await import('../dist/server/entry-server.js')).render;
     }
 
@@ -138,6 +164,27 @@ app.use('*all', async (req, res) => {
           htmlStartProcessed = themeAttr
             ? htmlStartProcessed.replace('<html', `<html${themeAttr}`)
             : htmlStartProcessed;
+
+          // Inject the SSR manifest for client-side route prefetching and
+          // server-side preload hints. Both use the same manifest object.
+          if (ssrManifest) {
+            // Serialize the manifest into window.__SSR_MANIFEST__ so the
+            // client-side prefetchRoutes() utility can resolve asset URLs for
+            // non-active routes without bundling the manifest into the JS.
+            const manifestScript = `<script>window.__SSR_MANIFEST__ = ${JSON.stringify(ssrManifest).replace(/</g, '\\u003c')}</script>`;
+
+            // Generate <link rel="modulepreload"> and <link rel="preload" as="style">
+            // for the current page's chunks. The server knows which route is being
+            // rendered before the browser receives any HTML — emitting these hints
+            // lets the browser fetch the page chunk in parallel with the stream
+            // rather than waiting for the parser to discover the <script> tag.
+            const preloadLinks = buildPreloadLinks(url, ssrManifest);
+
+            htmlStartProcessed = htmlStartProcessed.replace(
+              '</head>',
+              `${preloadLinks}${manifestScript}</head>`,
+            );
+          }
 
           res.write(htmlStartProcessed);
 
@@ -179,6 +226,48 @@ app.use('*all', async (req, res) => {
       .end('Internal Server Error');
   }
 });
+
+/**
+ * Builds <link rel="modulepreload"> and <link rel="preload" as="style"> tags
+ * for the current page's assets using the Vite SSR manifest.
+ *
+ * The server knows which route is being rendered before the browser receives
+ * a single byte of HTML. Emitting these hints causes the browser to fetch the
+ * page-specific JS and CSS chunks in parallel with the HTML stream rather than
+ * waiting for the parser to discover the <script> tag later.
+ *
+ * @param {string} url - The current request URL path
+ * @param {Object} manifest - The parsed Vite SSR manifest
+ * @returns {string} HTML string of <link> tags to inject into <head>
+ */
+function buildPreloadLinks(url, manifest) {
+  // Find the route whose path matches the current URL
+  const matchedRoute = routes.find((route) => {
+    if (!route.path || !route.element) return false;
+    if (route.path === url || route.path === `/${url}`) return true;
+    // Match dynamic segments: /dashboard/:id matches /dashboard/123
+    const staticPart = route.path.split('/:')[0];
+    return staticPart !== route.path && url.startsWith(staticPart);
+  });
+
+  if (!matchedRoute?.chunkId) return '';
+
+  // chunkId matches the manifest key exactly (e.g. 'src/pages/welcome/Welcome.jsx')
+  const assets = manifest[matchedRoute.chunkId] ?? [];
+
+  return assets
+    .map((asset) => {
+      const href = asset.startsWith('/') ? asset : `/${asset}`;
+      if (asset.endsWith('.js')) {
+        return `<link rel="modulepreload" href="${href}">`;
+      }
+      if (asset.endsWith('.css')) {
+        return `<link rel="preload" as="style" href="${href}">`;
+      }
+      return '';
+    })
+    .join('\n  ');
+}
 
 // Start http server
 const server = app.listen(port, () => {
