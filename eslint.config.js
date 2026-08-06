@@ -23,9 +23,8 @@ import globals from 'globals';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 /* added eslint-config-prettier to turn off conflicting rules April 15th 2025 */
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
-/* added @typescript-eslint for TypeScript support */
-import tseslint from '@typescript-eslint/eslint-plugin';
-import tsparser from '@typescript-eslint/parser';
+/* replaced split @typescript-eslint/eslint-plugin + @typescript-eslint/parser with unified typescript-eslint */
+import tseslint from 'typescript-eslint';
 
 export default [
   { ignores: ['dist', 'vite.config.js', 'node_modules/**'] },
@@ -57,21 +56,28 @@ export default [
       'import-x/internal-regex': '^(@carbon|react)',
     },
   },
-  /* TypeScript configuration */
+  /* disable type-checked rules for JS files — required because recommendedTypeChecked
+     is applied globally below and JS files cannot be type-checked by the TS parser */
+  {
+    files: ['**/*.{js,mjs,cjs,jsx}'],
+    ...tseslint.configs.disableTypeChecked,
+  },
+  /* TypeScript configuration — uses projectService for typed linting */
   {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
-      parser: tsparser,
+      parser: tseslint.parser,
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
         ecmaFeatures: { jsx: true },
-        project: './tsconfig.json',
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
       },
       globals: { ...globals.browser, ...globals.node },
     },
     plugins: {
-      '@typescript-eslint': tseslint,
+      '@typescript-eslint': tseslint.plugin,
     },
     settings: {
       react: {
@@ -84,7 +90,10 @@ export default [
       },
     },
     rules: {
-      ...tseslint.configs.recommended.rules,
+      ...tseslint.configs.recommendedTypeChecked.reduce(
+        (acc, cfg) => ({ ...acc, ...(cfg.rules ?? {}) }),
+        {},
+      ),
       '@typescript-eslint/no-unused-vars': [
         'error',
         { varsIgnorePattern: '^[A-Z_]', argsIgnorePattern: '^_' },
