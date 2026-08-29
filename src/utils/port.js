@@ -20,17 +20,13 @@ export async function findAvailablePort(preferredPort) {
     const availablePort = await detect(preferredPort);
 
     if (availablePort !== preferredPort) {
-      console.warn(
-        `⚠️  Port ${preferredPort} is in use, using port ${availablePort} instead`,
-      );
+      console.warn(`⚠️  Port ${preferredPort} is in use, using port ${availablePort} instead`);
     }
 
     return availablePort;
   } catch (error) {
     console.error('Error detecting available port:', error);
     // Throw error instead of silently falling back to potentially unavailable port
-    throw new Error(
-      `Failed to find available port: ${error.message || 'Unknown error'}`,
-    );
+    throw new Error(`Failed to find available port: ${error.message || 'Unknown error'}`);
   }
 }

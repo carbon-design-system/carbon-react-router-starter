@@ -67,9 +67,7 @@ export const getComments = async (req, res) => {
 
   try {
     // Call our mock "external" API endpoint
-    const response = await fetch(
-      `${getBaseUrl()}/api/external/comments?postId=${postId}`,
-    );
+    const response = await fetch(`${getBaseUrl()}/api/external/comments?postId=${postId}`);
 
     if (!response.ok) {
       const error = await response.json();

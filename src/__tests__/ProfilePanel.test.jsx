@@ -12,12 +12,7 @@ import userEvent from '@testing-library/user-event';
 import { renderWithoutProviders } from '../test/test-utils';
 import { ProfilePanel } from '../components/profilePanel/ProfilePanel';
 import { server } from '../test/server';
-import {
-  setupBeforeAll,
-  setupBeforeEach,
-  setupAfterEach,
-  setupAfterAll,
-} from '../test/setup';
+import { setupBeforeAll, setupBeforeEach, setupAfterEach, setupAfterAll } from '../test/setup';
 import * as themeUtils from '../utils/theme';
 import * as cookieUtils from '../utils/cookies';
 
@@ -37,12 +32,8 @@ beforeEach(() => {
   mockSetHeaderInverse.mockReset();
 
   // Mock the theme utility functions
-  vi.spyOn(themeUtils, 'setThemeSetting').mockImplementation(
-    mockSetThemeSetting,
-  );
-  vi.spyOn(themeUtils, 'setHeaderInverse').mockImplementation(
-    mockSetHeaderInverse,
-  );
+  vi.spyOn(themeUtils, 'setThemeSetting').mockImplementation(mockSetThemeSetting);
+  vi.spyOn(themeUtils, 'setHeaderInverse').mockImplementation(mockSetHeaderInverse);
 
   // Mock cookie utilities to return default values
   // Note: headerInverse is 'false' (string) which converts to false (boolean)
@@ -133,10 +124,7 @@ test('toggles menu complement when checkbox is clicked', async () => {
     }
 
     // Check if the checkbox is contained within the label
-    return (
-      complementLabel.contains(checkbox) ||
-      complementLabel.parentElement?.contains(checkbox)
-    );
+    return complementLabel.contains(checkbox) || complementLabel.parentElement?.contains(checkbox);
   });
 
   // If we found the checkbox, click it
