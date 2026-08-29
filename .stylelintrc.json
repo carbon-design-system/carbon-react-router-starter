@@ -6,12 +6,14 @@
   "plugins": [
     "@double-great/stylelint-a11y",
     "stylelint-use-logical",
-    "stylelint-plugin-carbon-tokens"
+    "stylelint-plugin-carbon-tokens",
+    "./stylelint-plugins/no-carbon-full-entrypoint.cjs"
   ],
   "reportNeedlessDisables": true,
   "reportInvalidScopeDisables": true,
   "reportDescriptionlessDisables": true,
   "rules": {
+    "plugin/no-carbon-full-entrypoint": true,
     "a11y/media-prefers-reduced-motion": true,
     "a11y/no-outline-none": true,
     "a11y/selector-pseudo-class-focus": true,
