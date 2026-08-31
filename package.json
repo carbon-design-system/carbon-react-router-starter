@@ -2,7 +2,7 @@
   "name": "carbon-react-starter",
   "private": true,
   "version": "1.0.0",
-  "packageManager": "npm@11.19.0",
+  "packageManager": "npm@11.19.1",
   "type": "module",
   "scripts": {
     "dev": "node src/server",
@@ -47,11 +47,11 @@
     "@cspell/dict-de-de": "^4.1.2",
     "@double-great/stylelint-a11y": "^3.0.4",
     "@eslint/js": "^9.21.0",
-    "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/changelog": "^7.0.0",
+    "@semantic-release/git": "^11.0.0",
     "@semantic-release/github": "^12.0.8",
     "@testing-library/dom": "^10.4.1",
-    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/jest-dom": "^7.0.0",
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^14.6.1",
     "@types/react": "^19.0.10",
@@ -73,7 +73,7 @@
     "eslint-plugin-react-refresh": "^0.5.0",
     "globals": "^17.0.0",
     "husky": "^9.1.7",
-    "jsdom": "^29.0.0",
+    "jsdom": "^30.0.0",
     "lint-staged": "^17.0.0",
     "msw": "^2.7.3",
     "prettier": "^3.5.3",
@@ -101,6 +101,8 @@
     "basic-ftp": "^6.0.1",
     "get-uri": "^8.0.0",
     "pac-proxy-agent": "^9.0.1",
-    "proxy-agent": "^8.0.1"
+    "proxy-agent": "^8.0.1",
+    "tmp": "^0.2.6",
+    "uuid": "^14.0.0"
   }
 }
