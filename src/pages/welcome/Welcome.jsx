@@ -5,6 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// Page-specific styles are imported here, not in index.scss, so Vite emits
+// them as a separate CSS chunk loaded only when this route is visited.
+import './welcome.scss';
+
 import { Footer } from '../../components/footer/Footer';
 import { WelcomeHeader } from './WelcomeHeader.jsx';
 import { PageLayout } from '../../layouts/page-layout.jsx';
