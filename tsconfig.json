@@ -36,13 +36,6 @@
     /* Additional Options */
     "types": ["vite/client", "@testing-library/jest-dom"]
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.js",
-    "src/**/*.jsx",
-    "vite.config.js",
-    "eslint.config.js"
-  ],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.js", "src/**/*.jsx", "vite.config.js", "eslint.config.js"],
   "exclude": ["node_modules", "dist", "build"]
 }
