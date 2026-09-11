@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2026
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,11 +15,7 @@ interface Props {
   action?: ReactNode;
 }
 
-export const CommonHeader = ({
-  title,
-  paragraphs,
-  action,
-}: Props): JSX.Element => {
+export const CommonHeader = ({ title, paragraphs, action }: Props): JSX.Element => {
   const { t } = useTranslation();
   return (
     <Grid as="header" className="cs--common-header">
