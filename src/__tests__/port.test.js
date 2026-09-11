@@ -64,13 +64,8 @@ describe('findAvailablePort', () => {
     const error = new Error('Port detection failed');
     detect.mockRejectedValue(error);
 
-    await expect(findAvailablePort(preferredPort)).rejects.toThrow(
-      'Failed to find available port',
-    );
-    expect(console.error).toHaveBeenCalledWith(
-      'Error detecting available port:',
-      error,
-    );
+    await expect(findAvailablePort(preferredPort)).rejects.toThrow('Failed to find available port');
+    expect(console.error).toHaveBeenCalledWith('Error detecting available port:', error);
   });
 
   test('handles network errors gracefully', async () => {
@@ -78,13 +73,8 @@ describe('findAvailablePort', () => {
     const networkError = new Error('ECONNREFUSED');
     detect.mockRejectedValue(networkError);
 
-    await expect(findAvailablePort(preferredPort)).rejects.toThrow(
-      'Failed to find available port',
-    );
-    expect(console.error).toHaveBeenCalledWith(
-      'Error detecting available port:',
-      networkError,
-    );
+    await expect(findAvailablePort(preferredPort)).rejects.toThrow('Failed to find available port');
+    expect(console.error).toHaveBeenCalledWith('Error detecting available port:', networkError);
   });
 
   test('handles invalid port numbers', async () => {
@@ -92,9 +82,7 @@ describe('findAvailablePort', () => {
     const error = new Error('Invalid port number');
     detect.mockRejectedValue(error);
 
-    await expect(findAvailablePort(invalidPort)).rejects.toThrow(
-      'Failed to find available port',
-    );
+    await expect(findAvailablePort(invalidPort)).rejects.toThrow('Failed to find available port');
   });
 
   test('works with high port numbers', async () => {
@@ -132,13 +120,8 @@ describe('findAvailablePort', () => {
     const timeoutError = new Error('Timeout');
     detect.mockRejectedValue(timeoutError);
 
-    await expect(findAvailablePort(preferredPort)).rejects.toThrow(
-      'Failed to find available port',
-    );
-    expect(console.error).toHaveBeenCalledWith(
-      'Error detecting available port:',
-      timeoutError,
-    );
+    await expect(findAvailablePort(preferredPort)).rejects.toThrow('Failed to find available port');
+    expect(console.error).toHaveBeenCalledWith('Error detecting available port:', timeoutError);
   });
 
   test('handles permission errors', async () => {
@@ -146,13 +129,8 @@ describe('findAvailablePort', () => {
     const permissionError = new Error('EACCES: permission denied');
     detect.mockRejectedValue(permissionError);
 
-    await expect(findAvailablePort(preferredPort)).rejects.toThrow(
-      'Failed to find available port',
-    );
-    expect(console.error).toHaveBeenCalledWith(
-      'Error detecting available port:',
-      permissionError,
-    );
+    await expect(findAvailablePort(preferredPort)).rejects.toThrow('Failed to find available port');
+    expect(console.error).toHaveBeenCalledWith('Error detecting available port:', permissionError);
   });
 
   test('logs warning only when port changes', async () => {
@@ -173,12 +151,8 @@ describe('findAvailablePort', () => {
   test('handles undefined or null port gracefully', async () => {
     detect.mockRejectedValue(new Error('Invalid port'));
 
-    await expect(findAvailablePort(undefined)).rejects.toThrow(
-      'Failed to find available port',
-    );
-    await expect(findAvailablePort(null)).rejects.toThrow(
-      'Failed to find available port',
-    );
+    await expect(findAvailablePort(undefined)).rejects.toThrow('Failed to find available port');
+    await expect(findAvailablePort(null)).rejects.toThrow('Failed to find available port');
   });
 
   test('handles string port numbers', async () => {
@@ -195,9 +169,7 @@ describe('findAvailablePort', () => {
     const ports = [5173, 5174, 5175];
     detect.mockImplementation((port) => Promise.resolve(port));
 
-    const results = await Promise.all(
-      ports.map((port) => findAvailablePort(port)),
-    );
+    const results = await Promise.all(ports.map((port) => findAvailablePort(port)));
 
     expect(results).toEqual(ports);
     expect(detect).toHaveBeenCalledTimes(3);

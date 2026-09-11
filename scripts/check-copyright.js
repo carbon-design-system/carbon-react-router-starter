@@ -6,17 +6,7 @@ import { execSync } from 'child_process';
 const CURRENT_YEAR = new Date().getFullYear();
 
 // File extensions that should have copyright headers
-const EXTENSIONS_REQUIRING_COPYRIGHT = [
-  '.js',
-  '.jsx',
-  '.ts',
-  '.tsx',
-  '.scss',
-  '.css',
-  '.html',
-  '.yml',
-  '.yaml',
-];
+const EXTENSIONS_REQUIRING_COPYRIGHT = ['.js', '.jsx', '.ts', '.tsx', '.scss', '.css', '.html', '.yml', '.yaml'];
 
 // Comment styles for different file types
 const COMMENT_STYLES = {
@@ -111,10 +101,7 @@ function getFileModificationYear(filePath) {
 
   try {
     // Get the year from the most recent commit
-    const result = execSync(
-      `git log -1 --format=%ad --date=format:%Y -- "${filePath}"`,
-      { encoding: 'utf-8' },
-    ).trim();
+    const result = execSync(`git log -1 --format=%ad --date=format:%Y -- "${filePath}"`, { encoding: 'utf-8' }).trim();
 
     if (result) {
       return parseInt(result, 10);
@@ -156,10 +143,8 @@ function getExpectedCopyright(filePath) {
   }
 
   const copyrightText = `Copyright IBM Corp. ${yearRange}`;
-  const licenseText =
-    'This source code is licensed under the Apache-2.0 license found in the';
-  const licenseText2 =
-    'LICENSE file in the root directory of this source tree.';
+  const licenseText = 'This source code is licensed under the Apache-2.0 license found in the';
+  const licenseText2 = 'LICENSE file in the root directory of this source tree.';
 
   if (commentStyle.style === 'block') {
     return `/**

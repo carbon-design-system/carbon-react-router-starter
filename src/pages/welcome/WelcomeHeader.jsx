@@ -16,10 +16,7 @@ export const WelcomeHeader = () => {
 
   return (
     <CommonHeader
-      title={t(
-        'welcomeHeader.title',
-        'Welcome to the Carbon React Router starter',
-      )}
+      title={t('welcomeHeader.title', 'Welcome to the Carbon React Router starter')}
       paragraphs={[
         <>
           {t(
@@ -27,18 +24,10 @@ export const WelcomeHeader = () => {
             'This is a boilerplate and a living guide for creating React applications with the Carbon Design System. Change it as you see needed.',
           )}
         </>,
-        <>
-          {t(
-            'welcomeHeader.maintainer',
-            'Maintained by fed-at-ibm, a chapter of the OIC.',
-          )}
-        </>,
+        <>{t('welcomeHeader.maintainer', 'Maintained by fed-at-ibm, a chapter of the OIC.')}</>,
       ]}
       action={
-        <Button
-          renderIcon={ArrowRight}
-          href="https://github.com/carbon-design-system/carbon-react-router-starter"
-        >
+        <Button renderIcon={ArrowRight} href="https://github.com/carbon-design-system/carbon-react-router-starter">
           {t('welcomeHeader.button.useTemplate', 'Use this template')}
         </Button>
       }

@@ -31,8 +31,6 @@ export async function getServerConfig() {
     return { port: actualPort, baseUrl: actualBaseUrl };
   } catch (error) {
     console.error('Failed to get server configuration:', error);
-    throw new Error(
-      `Unable to start server: ${error.message}. Please check if ports are available.`,
-    );
+    throw new Error(`Unable to start server: ${error.message}. Please check if ports are available.`);
   }
 }

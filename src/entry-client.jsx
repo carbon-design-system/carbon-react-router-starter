@@ -37,8 +37,7 @@ initializeTheme();
  * cause a brief flash of English (the fallback language) before the
  * correct translations appear.
  */
-const { initialI18nStore, initialLanguage } =
-  window.__INITIAL_I18N_STATE__ || {};
+const { initialI18nStore, initialLanguage } = window.__INITIAL_I18N_STATE__ || {};
 
 if (initialI18nStore && initialLanguage) {
   Object.keys(initialI18nStore).forEach((lng) => {

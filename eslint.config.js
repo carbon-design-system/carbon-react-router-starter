@@ -72,10 +72,7 @@ export default [
       'import-x/named': 'off',
       /* no-unused-vars - ignore pattern for React component usage */
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       /* no-irregular-whitespace
         - ignore to allow prettier of the text layout. April 10th 2025.
 

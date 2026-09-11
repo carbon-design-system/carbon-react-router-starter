@@ -36,6 +36,8 @@
     "mdx"
   ],
   "ignorePaths": [
+    ".github",
+    "node_modules",
     "coverage",
     "cspell-dictionaries",
     "dist",

@@ -6,12 +6,7 @@
  */
 
 import { test, expect, describe } from 'vitest';
-import {
-  routes,
-  routesInHeader,
-  routesInSideNav,
-  isDirectChildPath,
-} from '../routes/config';
+import { routes, routesInHeader, routesInSideNav, isDirectChildPath } from '../routes/config';
 
 describe('routes configuration', () => {
   test('routes array contains expected structure', () => {
@@ -56,8 +51,7 @@ describe('routes configuration', () => {
 
     // Check that all routes with inHeader flag are included
     const headerRoutesCount = routes.filter(
-      (route) =>
-        route.carbon && route.carbon.inHeader && !route.carbon.inSubMenu,
+      (route) => route.carbon && route.carbon.inHeader && !route.carbon.inSubMenu,
     ).length;
     expect(routesInHeader.length).toBe(headerRoutesCount);
   });
@@ -74,16 +68,14 @@ describe('routes configuration', () => {
 
     // Check that all routes with inSideNav flag are included
     const sideNavRoutesCount = routes.filter(
-      (route) =>
-        route.carbon && route.carbon.inSideNav && !route.carbon.inSubMenu,
+      (route) => route.carbon && route.carbon.inSideNav && !route.carbon.inSubMenu,
     ).length;
     expect(routesInSideNav.length).toBe(sideNavRoutesCount);
   });
 
   test('routes with subMenu have their children marked as inSubMenu', () => {
     const routesWithSubMenu = routes.filter(
-      (route) =>
-        route.carbon && route.carbon.subMenu && route.carbon.subMenu.length > 0,
+      (route) => route.carbon && route.carbon.subMenu && route.carbon.subMenu.length > 0,
     );
 
     routesWithSubMenu.forEach((route) => {
@@ -97,9 +89,7 @@ describe('routes configuration', () => {
   test('routes support all required properties for React Router', () => {
     routes.forEach((route) => {
       // Every route should have either a path or a carbon.virtualPath
-      expect(
-        route.path || (route.carbon && route.carbon.virtualPath),
-      ).toBeDefined();
+      expect(route.path || (route.carbon && route.carbon.virtualPath)).toBeDefined();
 
       // Routes with path should have an element or be a parent route
       if (route.path && !route.carbon?.subMenu) {
@@ -204,12 +194,8 @@ describe('isDirectChildPath', () => {
   });
 
   test('returns false for nested child paths (grandchildren)', () => {
-    expect(isDirectChildPath('/link-4', '/link-4/sub-link-1/nested')).toBe(
-      false,
-    );
-    expect(isDirectChildPath('/dashboard', '/dashboard/123/details')).toBe(
-      false,
-    );
+    expect(isDirectChildPath('/link-4', '/link-4/sub-link-1/nested')).toBe(false);
+    expect(isDirectChildPath('/dashboard', '/dashboard/123/details')).toBe(false);
     expect(isDirectChildPath('/api', '/api/users/profile')).toBe(false);
     expect(isDirectChildPath('/a', '/a/b/c')).toBe(false);
   });
@@ -243,9 +229,7 @@ describe('isDirectChildPath', () => {
   });
 
   test('handles paths with special characters', () => {
-    expect(isDirectChildPath('/user-profile', '/user-profile/settings')).toBe(
-      true,
-    );
+    expect(isDirectChildPath('/user-profile', '/user-profile/settings')).toBe(true);
     expect(isDirectChildPath('/api_v2', '/api_v2/endpoint')).toBe(true);
     expect(isDirectChildPath('/path.name', '/path.name/child')).toBe(true);
   });
@@ -282,17 +266,11 @@ describe('isDirectChildPath', () => {
     expect(isDirectChildPath('/api', '/api/:version')).toBe(true);
 
     // Multiple parameters
-    expect(isDirectChildPath('/users/:userId', '/users/:userId/posts')).toBe(
-      true,
-    );
-    expect(
-      isDirectChildPath('/users/:userId/posts', '/users/:userId/posts/:postId'),
-    ).toBe(true);
+    expect(isDirectChildPath('/users/:userId', '/users/:userId/posts')).toBe(true);
+    expect(isDirectChildPath('/users/:userId/posts', '/users/:userId/posts/:postId')).toBe(true);
 
     // Should not match nested parameters
-    expect(isDirectChildPath('/users', '/users/:userId/posts/:postId')).toBe(
-      false,
-    );
+    expect(isDirectChildPath('/users', '/users/:userId/posts/:postId')).toBe(false);
   });
 
   test('handles query strings and hash fragments', () => {
@@ -364,9 +342,7 @@ describe('isDirectChildPath', () => {
     expect(isDirectChildPath('/posts', '/posts/:id')).toBe(true);
     expect(isDirectChildPath('/posts/:id', '/posts/:id/edit')).toBe(true);
     expect(isDirectChildPath('/posts/:id', '/posts/:id/comments')).toBe(true);
-    expect(
-      isDirectChildPath('/posts/:id', '/posts/:id/comments/:commentId'),
-    ).toBe(false);
+    expect(isDirectChildPath('/posts/:id', '/posts/:id/comments/:commentId')).toBe(false);
   });
 
   test('prevents ReDoS by avoiding regex', () => {

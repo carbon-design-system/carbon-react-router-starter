@@ -43,10 +43,7 @@ export const WelcomeFetchingSection = () => {
               )}
             </ListItem>
             <ListItem>
-              <strong>
-                {t('welcome.fetching.serviceLayer', 'Service layer')}
-              </strong>{' '}
-              -{' '}
+              <strong>{t('welcome.fetching.serviceLayer', 'Service layer')}</strong> -{' '}
               {t(
                 'welcome.fetching.serviceLayerDesc',
                 'Server-side handlers in service/postHandlers.js proxy requests to external APIs.',

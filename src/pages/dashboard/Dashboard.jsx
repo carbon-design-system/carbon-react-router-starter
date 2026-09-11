@@ -21,14 +21,8 @@ const Dashboard = () => {
   const { t } = useTranslation();
 
   return (
-    <PageLayout
-      className="cs--dashboard"
-      fallback={<p>{t('dashboard.loading', 'Loading dashboard page...')}</p>}
-    >
-      <PageHeader
-        title={t('dashboard.title', 'Dashboard')}
-        className="cs--dashboard__header"
-      />
+    <PageLayout className="cs--dashboard" fallback={<p>{t('dashboard.loading', 'Loading dashboard page...')}</p>}>
+      <PageHeader title={t('dashboard.title', 'Dashboard')} className="cs--dashboard__header" />
 
       <DashboardURLParameters />
 

@@ -6,13 +6,7 @@
  */
 
 import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest';
-import {
-  parseCookies,
-  getCookie,
-  setCookie,
-  getThemeFromCookies,
-  setThemeInCookies,
-} from '../utils/cookies';
+import { parseCookies, getCookie, setCookie, getThemeFromCookies, setThemeInCookies } from '../utils/cookies';
 
 describe('cookie utilities', () => {
   describe('parseCookies', () => {
@@ -347,9 +341,7 @@ describe('cookie utilities', () => {
 
       setThemeInCookies({ themeSetting: 'invalid' });
 
-      expect(consoleWarnSpy).toHaveBeenCalledWith(
-        expect.stringContaining('Invalid theme setting'),
-      );
+      expect(consoleWarnSpy).toHaveBeenCalledWith(expect.stringContaining('Invalid theme setting'));
       expect(mockDocument.cookie).not.toContain('theme-setting=invalid');
 
       consoleWarnSpy.mockRestore();

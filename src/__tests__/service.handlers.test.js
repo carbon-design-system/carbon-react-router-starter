@@ -7,10 +7,7 @@
 
 import { describe, test, expect, vi, beforeEach } from 'vitest';
 import { getPost, getComments } from '../service/postHandlers';
-import {
-  getExternalPost,
-  getExternalComments,
-} from '../service/externalHandlers';
+import { getExternalPost, getExternalComments } from '../service/externalHandlers';
 
 describe('postHandlers', () => {
   describe('getPost', () => {
