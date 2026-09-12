@@ -63,7 +63,7 @@
     "@typescript-eslint/eslint-plugin": "^8.59.4",
     "@typescript-eslint/parser": "^8.59.4",
     "@vitejs/plugin-react": "^6.0.0",
-    "@vitest/coverage-v8": "^4.0.0",
+    "@vitest/coverage-v8": "^5.0.0",
     "baseline-browser-mapping": "^2.9.12",
     "conventional-changelog-conventionalcommits": "^10.2.0",
     "cross-env": "^10.0.0",
@@ -93,7 +93,7 @@
     "unlighthouse": "^0.18.0",
     "vite": "^8.0.0",
     "vite-plugin-i18next-loader": "^4.0.0",
-    "vitest": "^4.0.0"
+    "vitest": "^5.0.0"
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx,scss,css,html,yml,yaml}": [
