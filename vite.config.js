@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025, 2026
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -47,6 +47,19 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],
+      include: ['src/**'],
+      exclude: [
+        'src/test/**',
+        'src/__tests__/**',
+        'src/**/*.scss',
+        'src/locales/**',
+      ],
+      thresholds: {
+        statements: 60,
+        branches: 70,
+        functions: 60,
+        lines: 60,
+      },
     },
   },
 });
