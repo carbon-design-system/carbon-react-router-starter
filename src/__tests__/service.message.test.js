@@ -28,9 +28,7 @@ describe('service/message getMessage', () => {
 
     await getMessage(mockReq, mockRes);
 
-    expect(global.fetch).toHaveBeenCalledWith(
-      'https://jsonplaceholder.typicode.com/posts/1',
-    );
+    expect(global.fetch).toHaveBeenCalledWith('https://jsonplaceholder.typicode.com/posts/1');
     expect(mockRes.json).toHaveBeenCalledWith({ message: 'a sample title' });
     expect(mockRes.status).not.toHaveBeenCalled();
   });
