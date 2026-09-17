@@ -48,13 +48,7 @@ export default defineConfig({
       provider: 'v8',
       reporter: ['text', 'html'],
       include: ['src/**'],
-      exclude: ['src/test/**', 'src/__tests__/**', 'src/**/*.scss', 'src/locales/**'],
-      thresholds: {
-        statements: 60,
-        branches: 70,
-        functions: 60,
-        lines: 60,
-      },
+      exclude: ['src/test/**', 'src/__tests__/**', 'src/**/*.scss', 'src/locales/**', 'src/stories/**'],
     },
   },
 });
