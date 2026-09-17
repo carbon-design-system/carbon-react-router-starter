@@ -28,15 +28,14 @@ describe('theme utilities', () => {
     };
 
     // Replace global document with mock
-    global.document = mockDocument;
+    vi.stubGlobal('document', mockDocument);
 
     // Reset all mocks
     vi.clearAllMocks();
   });
 
   afterEach(() => {
-    // Clean up
-    delete global.document;
+    vi.unstubAllGlobals();
   });
 
   describe('getThemeSettings', () => {
@@ -84,7 +83,7 @@ describe('theme utilities', () => {
     });
 
     test('does not update HTML when document is undefined', () => {
-      delete global.document;
+      vi.stubGlobal('document', undefined);
 
       themeUtils.setThemeSetting('dark');
 
@@ -115,7 +114,7 @@ describe('theme utilities', () => {
     });
 
     test('does not update HTML when document is undefined', () => {
-      delete global.document;
+      vi.stubGlobal('document', undefined);
 
       themeUtils.setHeaderInverse(true);
 
@@ -135,7 +134,7 @@ describe('theme utilities', () => {
     });
 
     test('does nothing when document is undefined', () => {
-      delete global.document;
+      vi.stubGlobal('document', undefined);
 
       themeUtils.initializeTheme();
 
@@ -215,5 +214,3 @@ describe('theme utilities', () => {
     });
   });
 });
-
-// Made with Bob
