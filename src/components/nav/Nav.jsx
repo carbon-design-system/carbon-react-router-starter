@@ -20,13 +20,7 @@ import {
   SkipToContent,
 } from '@carbon/react';
 
-import {
-  LogoGithub,
-  MagicWand,
-  Search,
-  Switcher as SwitcherIcon,
-  UserAvatar,
-} from '@carbon/icons-react';
+import { LogoGithub, MagicWand, Search, Switcher as SwitcherIcon, UserAvatar } from '@carbon/icons-react';
 import { Link as RouterLink, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { ProfilePanel } from '../profilePanel/ProfilePanel';
@@ -56,11 +50,7 @@ export const Nav = () => {
       <Header aria-label="fed-at-ibm">
         <SkipToContent />
         <HeaderMenuButton
-          aria-label={
-            isSideNavExpanded
-              ? t('nav.menu.close', 'Close menu')
-              : t('nav.menu.open', 'Open menu')
-          }
+          aria-label={isSideNavExpanded ? t('nav.menu.close', 'Close menu') : t('nav.menu.open', 'Open menu')}
           onClick={toggleNav}
           isCollapsible={true}
           isActive={isSideNavExpanded}
@@ -71,10 +61,7 @@ export const Nav = () => {
         </HeaderName>
         {routesInHeader.length > 0 && (
           <HeaderNavigation aria-label="fed-at-ibm">
-            <NavHeaderItems
-              routesInHeader={routesInHeader}
-              currentPath={location.pathname}
-            />
+            <NavHeaderItems routesInHeader={routesInHeader} currentPath={location.pathname} />
           </HeaderNavigation>
         )}
         <HeaderGlobalBar>
@@ -88,10 +75,7 @@ export const Nav = () => {
           >
             <UserAvatar size={20} />
           </HeaderGlobalAction>
-          <HeaderGlobalAction
-            aria-label={t('nav.actions.appSwitcher', 'App switcher')}
-            tooltipAlignment="end"
-          >
+          <HeaderGlobalAction aria-label={t('nav.actions.appSwitcher', 'App switcher')} tooltipAlignment="end">
             <SwitcherIcon size={20} />
           </HeaderGlobalAction>
         </HeaderGlobalBar>
@@ -108,17 +92,11 @@ export const Nav = () => {
         <SideNavItems>
           {routesInHeader.length > 0 && (
             <HeaderSideNavItems hasDivider>
-              <NavHeaderItems
-                routesInHeader={routesInHeader}
-                currentPath={location.pathname}
-              />
+              <NavHeaderItems routesInHeader={routesInHeader} currentPath={location.pathname} />
             </HeaderSideNavItems>
           )}
 
-          <NavSideItems
-            routesInSideNav={routesInSideNav}
-            currentPath={location.pathname}
-          />
+          <NavSideItems routesInSideNav={routesInSideNav} currentPath={location.pathname} />
         </SideNavItems>
       </SideNav>
     </>

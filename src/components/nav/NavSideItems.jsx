@@ -27,19 +27,11 @@ export const NavSideItems = ({ routesInSideNav, currentPath }) => {
       {routesInSideNav.map(({ path, carbon }) =>
         !carbon.inSubMenu && carbon?.label ? (
           carbon.subMenu ? (
-            <SideNavMenu
-              key={path ?? carbon.label}
-              renderIcon={carbon.icon}
-              title={t(carbon.labelKey, carbon.label)}
-            >
+            <SideNavMenu key={path ?? carbon.label} renderIcon={carbon.icon} title={t(carbon.labelKey, carbon.label)}>
               {carbon.subMenu.map((subRoute) => (
                 <SideNavMenuItem
                   key={subRoute.path ?? subRoute.carbon.label}
-                  {...destinationProps(
-                    subRoute.path,
-                    subRoute.carbon,
-                    currentPath,
-                  )}
+                  {...destinationProps(subRoute.path, subRoute.carbon, currentPath)}
                 >
                   {t(subRoute.carbon.labelKey, subRoute.carbon.label)}
                 </SideNavMenuItem>

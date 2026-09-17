@@ -10,3 +10,4 @@ plex
 Stephane
 Testbarkeit
 vite
+unlighthouse
