@@ -77,6 +77,8 @@ export function setCookie(name, value, options = {}) {
 
   // Validate cookie value before encoding
   const encodedValue = encodeURIComponent(value);
+  // c8 ignore next 4 — encodeURIComponent always escapes the chars isValidCookieValue rejects;
+  // this guard is a defensive fallback that cannot be reached via normal inputs
   if (!isValidCookieValue(encodedValue)) {
     console.warn(`Invalid cookie value for "${name}": contains invalid characters`);
     return;

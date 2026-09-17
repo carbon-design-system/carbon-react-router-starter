@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { describe, test, expect, vi, beforeEach } from 'vitest';
-import { getPost, getComments } from '../service/postHandlers';
+import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest';
+import { getPost, getComments, setBaseUrl } from '../service/postHandlers';
 import { getExternalPost, getExternalComments } from '../service/externalHandlers';
 
 describe('postHandlers', () => {
@@ -166,6 +166,29 @@ describe('postHandlers', () => {
       expect(mockRes.json).toHaveBeenCalledWith(mockComments);
       expect(mockRes.status).not.toHaveBeenCalled();
     });
+  });
+});
+
+describe('setBaseUrl', () => {
+  afterEach(() => {
+    setBaseUrl('http://localhost:5173');
+  });
+
+  test('updates the base URL used by subsequent fetch calls', async () => {
+    setBaseUrl('http://localhost:9999');
+
+    const mockPost = { id: 1, title: 'Test' };
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => mockPost,
+    });
+
+    const mockReq = { params: { id: '1' } };
+    const mockRes = { status: vi.fn().mockReturnThis(), json: vi.fn() };
+
+    await getPost(mockReq, mockRes);
+
+    expect(global.fetch).toHaveBeenCalledWith('http://localhost:9999/api/external/post/1');
   });
 });
 

@@ -224,7 +224,8 @@ const routesProcessed = routes.map((route) => {
     // mark child as in sub menu
     subMenu.forEach((menu) => {
       const subPath = menu.path || menu.carbon.virtualPath;
-      // Carbon should never be blank
+      // Carbon should never be blank (filtered above, but kept as a safety fallback)
+      // c8 ignore next
       menu.carbon = menu.carbon || { label: subPath };
       menu.carbon.inSubMenu = true;
     });
