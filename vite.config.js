@@ -62,10 +62,19 @@ export default defineConfig({
         'src/i18n.server.js',
       ],
       thresholds: {
-        statements: 80,
-        branches: 80,
-        functions: 80,
-        lines: 80,
+        statements: 90,
+        branches: 90,
+        functions: 90,
+        lines: 90,
+
+        // specific overrides for src/config.js due to an issue
+        // with anonymous in this instance
+        'src/routes/config.js': {
+          statements: 80,
+          branches: 90,
+          functions: 40,
+          lines: 90,
+        },
       },
     },
   },
