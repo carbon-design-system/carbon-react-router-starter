@@ -45,5 +45,5 @@
     "*.snap",
     "*.log"
   ],
-  "words": []
+  "words": ["unstub"]
 }
