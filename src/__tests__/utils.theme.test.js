@@ -28,7 +28,7 @@ describe('theme utilities', () => {
     };
 
     // Replace global document with mock
-    global.document = mockDocument;
+    vi.stubGlobal('document', mockDocument);
 
     // Reset all mocks
     vi.clearAllMocks();

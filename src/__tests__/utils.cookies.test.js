@@ -109,7 +109,7 @@ describe('cookie utilities', () => {
       mockDocument = {
         cookie: 'name=value; theme=dark',
       };
-      global.document = mockDocument;
+      vi.stubGlobal('document', mockDocument);
     });
 
     afterEach(() => {
