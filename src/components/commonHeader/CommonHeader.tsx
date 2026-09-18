@@ -5,10 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { AspectRatio, Column, Grid, Heading } from '@carbon/react';
+import type { JSX, ReactNode } from 'react';
+import { Column, Grid, Heading } from '@carbon/react';
 import { useTranslation } from 'react-i18next';
 
-export const CommonHeader = ({ title, paragraphs, action }) => {
+interface Props {
+  title: string;
+  paragraphs: string[];
+  action?: ReactNode;
+}
+
+export const CommonHeader = ({ title, paragraphs, action }: Props): JSX.Element => {
   const { t } = useTranslation();
   return (
     <Grid as="header" className="cs--common-header">
