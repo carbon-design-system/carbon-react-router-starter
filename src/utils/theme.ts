@@ -1,25 +1,23 @@
 /**
- * Copyright IBM Corp. 2025, 2026
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { getThemeFromCookies, setThemeInCookies } from './cookies.js';
+import { getThemeFromCookies, setThemeInCookies, type ThemeCookieValues } from './cookies.js';
 
 /**
  * Get current theme settings from cookies
- * @returns {Object} Object with themeSetting and headerInverse values
  */
-export function getThemeSettings() {
+export function getThemeSettings(): ThemeCookieValues {
   return getThemeFromCookies();
 }
 
 /**
  * Update theme setting and apply to HTML
- * @param {string} themeSetting - Theme setting (system, light, dark)
  */
-export function setThemeSetting(themeSetting) {
+export function setThemeSetting(themeSetting: string): void {
   // Update cookie
   setThemeInCookies({ themeSetting });
 
@@ -31,9 +29,8 @@ export function setThemeSetting(themeSetting) {
 
 /**
  * Update header inverse setting and apply to HTML
- * @param {boolean} headerInverse - Header inverse setting
  */
-export function setHeaderInverse(headerInverse) {
+export function setHeaderInverse(headerInverse: boolean): void {
   // Update cookie
   setThemeInCookies({ headerInverse });
 
@@ -55,7 +52,7 @@ export function setHeaderInverse(headerInverse) {
  * > help developers identify when this occurs, and the changes will take effect
  * > on the next page navigation.
  */
-export function initializeTheme() {
+export function initializeTheme(): void {
   if (typeof document === 'undefined') return;
 
   const { themeSetting, headerInverse } = getThemeSettings();

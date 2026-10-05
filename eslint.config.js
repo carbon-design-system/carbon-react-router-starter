@@ -46,9 +46,8 @@ export default [
         version: 'detect',
       },
       'import-x/resolver': {
-        node: {
-          extensions: ['.js', '.jsx', '.ts', '.tsx'],
-        },
+        typescript: true,
+        node: true,
       },
       'import-x/ignore': ['node_modules'],
       'import-x/parsers': {
@@ -78,9 +77,8 @@ export default [
         version: 'detect',
       },
       'import-x/resolver': {
-        node: {
-          extensions: ['.js', '.jsx', '.ts', '.tsx'],
-        },
+        typescript: true,
+        node: true,
       },
     },
     rules: {
@@ -90,6 +88,7 @@ export default [
     },
   },
   importPlugin.flatConfigs.recommended,
+  importPlugin.flatConfigs.typescript,
   /* added (eslint-plugin-react) - popular recommended config March 24th 2025 */
   pluginReact.configs.flat['jsx-runtime'],
   pluginReactHooks.configs.flat.recommended,

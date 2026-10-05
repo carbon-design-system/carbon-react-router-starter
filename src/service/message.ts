@@ -1,22 +1,24 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import type { Request, Response } from 'express';
+
 /**
  * This file contains the functions that do async network requests
  */
 
-export const getMessage = async (req, res) => {
+export const getMessage = async (_req: Request, res: Response): Promise<void> => {
   try {
     const response = await fetch(
       // TODO: replace with actual endpoint URL
       'https://jsonplaceholder.typicode.com/posts/1',
     );
     // The sample endpoint returns a blogpost
-    const blogpost = await response.json();
+    const blogpost = (await response.json()) as { title: string };
 
     // Return the blogpost's title
     res.json({ message: blogpost.title });

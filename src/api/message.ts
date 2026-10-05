@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,20 +9,20 @@
  * This file contains client-side API functions that call our express.js backend routes
  */
 
-export const getPost = async (postId) => {
+export const getPost = async (postId: string | number): Promise<unknown> => {
   try {
     const response = await fetch(`/api/post/${postId}`);
     return await response.json();
   } catch (error) {
-    throw new Error('Failed to load post: ', error);
+    throw new Error('Failed to load post: ', { cause: error });
   }
 };
 
-export const getComments = async (postId) => {
+export const getComments = async (postId: string | number): Promise<unknown> => {
   try {
     const response = await fetch(`/api/comments?postId=${postId}`);
     return await response.json();
   } catch (error) {
-    throw new Error('Failed to load comments: ', error);
+    throw new Error('Failed to load comments: ', { cause: error });
   }
 };
