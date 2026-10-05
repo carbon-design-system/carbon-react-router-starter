@@ -9,7 +9,9 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useState } from 'react';
 
-import './profile-panel.scss';
+// The styles are imported into index.scss by default.
+// Do the same unless you have a good reason not to.
+// import './profile-panel.scss';
 import { UserAvatar } from '@carbon/ibm-products';
 import { ThemeSettings, ThemeMenuComplement, ThemeSwitcher } from '@carbon-labs/react-theme-settings';
 import { useTranslation } from 'react-i18next';

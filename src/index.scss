@@ -26,6 +26,7 @@
 @use 'pages/dashboard/dashboard';
 @use 'components/commonHeader/commonHeader';
 @use 'components/footer/footer';
+@use 'components/profilePanel/profile-panel';
 
 @mixin light-brand {
   --light: 'true';
