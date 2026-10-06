@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { findAvailablePort } from '../utils/port.js';
+import { findAvailablePort } from '../utils/port.ts';
 
 // Server configuration constants
 // Extracted to avoid importing the full server during tests

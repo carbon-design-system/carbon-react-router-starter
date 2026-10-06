@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { getThemeFromCookies, setThemeInCookies, type ThemeCookieValues } from './cookies.js';
+import { getThemeFromCookies, setThemeInCookies, type ThemeCookieValues } from './cookies.ts';
 
 /**
  * Get current theme settings from cookies
