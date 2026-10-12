@@ -49,13 +49,19 @@ This project supports both JavaScript and TypeScript out of the box. You can fre
 
 ### Using TypeScript
 
-To create a TypeScript file, simply use the `.ts` or `.tsx` extension. For example, `src/components/footer/Footer.tsx` is a converted component in this project:
+To create a TypeScript file, simply use the `.ts` or `.tsx` extension. Components should use direct prop typing on parameters and leverage TypeScript's automatic return type inference rather than `React.FC` or explicit `JSX.Element` annotations. For example, `src/components/commonHeader/CommonHeader.tsx`:
 
 ```tsx
-import type { JSX } from 'react';
+import type { ReactNode } from 'react';
 
-export const Footer = (): JSX.Element => {
-  return <footer>...</footer>;
+interface CommonHeaderProps {
+  title: string;
+  paragraphs: string[];
+  action?: ReactNode;
+}
+
+export const CommonHeader = ({ title, paragraphs, action }: CommonHeaderProps) => {
+  return <header>...</header>;
 };
 ```
 

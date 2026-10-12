@@ -8,7 +8,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { FC } from 'react';
 
 /**
  * TypeScript React Component Integration Tests
@@ -21,7 +20,7 @@ interface TestComponentProps {
   count: number;
 }
 
-const TestComponent: FC<TestComponentProps> = ({ title, count }) => {
+const TestComponent = ({ title, count }: TestComponentProps) => {
   return (
     <div>
       <h1>{title}</h1>
