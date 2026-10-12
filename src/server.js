@@ -9,7 +9,7 @@ import fs from 'node:fs/promises';
 import express from 'express';
 import { Transform } from 'node:stream';
 import { getRoutes } from './routes/routes.js';
-import { base, getServerConfig } from './config/server-config.js';
+import { base, getServerConfig } from './config/server-config.ts';
 import i18nextMiddleware from 'i18next-http-middleware';
 import i18n from './i18n.server.js';
 import { setBaseUrl } from './service/postHandlers.js';
@@ -32,7 +32,7 @@ const app = express();
 let vite;
 if (!isProduction) {
   const { createServer } = await import('vite');
-  const { findAvailablePort } = await import('./utils/port.js');
+  const { findAvailablePort } = await import('./utils/port.ts');
 
   // Find an available port for Vite's HMR WebSocket server
   let hmrPort;

@@ -14,7 +14,7 @@ import { I18nextProvider } from 'react-i18next';
 // App level imports
 import { Router } from './routes/index.jsx';
 import { getStatusCodeForPath } from './routes/utils.js';
-import { getThemeFromCookies } from './utils/cookies.js';
+import { getThemeFromCookies } from './utils/cookies.ts';
 
 /**
  * @param {string} url
