@@ -19,6 +19,7 @@ import {
   SideNavItems,
   SkipToContent,
 } from '@carbon/react';
+import classNames from 'classnames';
 
 import { LogoGithub, MagicWand, Search, Switcher as SwitcherIcon, UserAvatar } from '@carbon/icons-react';
 import { Link as RouterLink, useLocation } from 'react-router';
@@ -85,6 +86,7 @@ export const Nav = () => {
         </HeaderPanel>
       </Header>
       <SideNav
+        className={classNames('cs--side-nav', { 'cs--side-nav--expanded': isSideNavExpanded })}
         aria-label={t('nav.sideNav.ariaLabel', 'Side navigation')}
         expanded={isSideNavExpanded}
         isPersistent={false}
