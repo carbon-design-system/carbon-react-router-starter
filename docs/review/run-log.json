@@ -1,0 +1,327 @@
+[
+  {
+    "step": "perf-static",
+    "script": "/Users/leechase/Source/bob/skills/review-performance/scripts/perf-static-scan.js",
+    "args": [
+      "--root",
+      ".",
+      "--include",
+      "src/**",
+      "--exclude",
+      "**/node_modules/**,**/dist/**,**/coverage/**,**/*.min.*,**/vendor/**,src/stories/**"
+    ],
+    "status": "ok",
+    "durationMs": 57,
+    "covers": ["performance"],
+    "toolVersions": {
+      "node": "v24.20.0"
+    },
+    "findingCount": 1
+  },
+  {
+    "step": "bundle",
+    "script": "/Users/leechase/Source/bob/skills/review-performance/scripts/bundle-analyze.js",
+    "args": ["--dir", "dist/client", "--root", "."],
+    "status": "ok",
+    "durationMs": 83,
+    "covers": ["performance"],
+    "toolVersions": {
+      "node": "v24.20.0"
+    },
+    "findingCount": 2
+  },
+  {
+    "step": "lighthouse-perf",
+    "script": "/Users/leechase/Source/bob/skills/review-performance/scripts/lighthouse-to-findings.js",
+    "args": [
+      "/Users/leechase/Source/uxe/carbon-react-router-starter/docs/review/evidence/lighthouse/dashboard-desktop-run1.json",
+      "/Users/leechase/Source/uxe/carbon-react-router-starter/docs/review/evidence/lighthouse/dashboard-mobile-run1.json",
+      "/Users/leechase/Source/uxe/carbon-react-router-starter/docs/review/evidence/lighthouse/home-desktop-run1.json",
+      "/Users/leechase/Source/uxe/carbon-react-router-starter/docs/review/evidence/lighthouse/home-mobile-run1.json"
+    ],
+    "status": "ok",
+    "durationMs": 56,
+    "covers": ["performance"],
+    "toolVersions": {
+      "node": "v24.20.0"
+    },
+    "findingCount": 1
+  },
+  {
+    "step": "a11y-static",
+    "script": "/Users/leechase/Source/bob/skills/review-accessibility/scripts/a11y-static-scan.js",
+    "args": [
+      "--root",
+      ".",
+      "--include",
+      "src/**",
+      "--exclude",
+      "**/node_modules/**,**/dist/**,**/coverage/**,**/*.min.*,**/vendor/**,src/stories/**"
+    ],
+    "status": "ok",
+    "durationMs": 58,
+    "covers": ["accessibility"],
+    "toolVersions": {
+      "node": "v24.20.0"
+    },
+    "findingCount": 0
+  },
+  {
+    "step": "a11y-lighthouse",
+    "script": "/Users/leechase/Source/bob/skills/review-accessibility/scripts/lighthouse-a11y-to-findings.js",
+    "args": [
+      "/Users/leechase/Source/uxe/carbon-react-router-starter/docs/review/evidence/lighthouse/dashboard-desktop-run1.json",
+      "/Users/leechase/Source/uxe/carbon-react-router-starter/docs/review/evidence/lighthouse/dashboard-mobile-run1.json",
+      "/Users/leechase/Source/uxe/carbon-react-router-starter/docs/review/evidence/lighthouse/home-desktop-run1.json",
+      "/Users/leechase/Source/uxe/carbon-react-router-starter/docs/review/evidence/lighthouse/home-mobile-run1.json"
+    ],
+    "status": "ok",
+    "durationMs": 56,
+    "covers": ["accessibility"],
+    "toolVersions": {
+      "node": "v24.20.0"
+    },
+    "findingCount": 6
+  },
+  {
+    "step": "a11y-hygiene",
+    "script": "/Users/leechase/Source/bob/skills/review-accessibility/scripts/a11y-hygiene-probe.js",
+    "args": ["--root", ".", "--run"],
+    "status": "ok",
+    "durationMs": 425,
+    "covers": ["accessibility"],
+    "toolVersions": {
+      "node": "v24.20.0"
+    },
+    "findingCount": 0
+  },
+  {
+    "step": "a11y-manual",
+    "script": "/Users/leechase/Source/bob/skills/review-accessibility/scripts/manual-evidence-checklist.js",
+    "args": ["/Users/leechase/Source/uxe/carbon-react-router-starter/docs/review/evidence/a11y-manual.json"],
+    "status": "ok",
+    "durationMs": 52,
+    "covers": ["accessibility"],
+    "toolVersions": {
+      "node": "v24.20.0"
+    },
+    "findingCount": 1
+  },
+  {
+    "step": "responsive-static",
+    "script": "/Users/leechase/Source/bob/skills/review-responsive-ux/scripts/responsive-static-scan.js",
+    "args": [
+      "--root",
+      ".",
+      "--include",
+      "src/**",
+      "--exclude",
+      "**/node_modules/**,**/dist/**,**/coverage/**,**/*.min.*,**/vendor/**,src/stories/**"
+    ],
+    "status": "ok",
+    "durationMs": 68,
+    "covers": ["responsive"],
+    "toolVersions": {
+      "node": "v24.20.0"
+    },
+    "findingCount": 6
+  },
+  {
+    "step": "ux-static",
+    "script": "/Users/leechase/Source/bob/skills/review-responsive-ux/scripts/ux-static-scan.js",
+    "args": [
+      "--root",
+      ".",
+      "--include",
+      "src/**",
+      "--exclude",
+      "**/node_modules/**,**/dist/**,**/coverage/**,**/*.min.*,**/vendor/**,src/stories/**"
+    ],
+    "status": "ok",
+    "durationMs": 62,
+    "covers": ["ux"],
+    "toolVersions": {
+      "node": "v24.20.0"
+    },
+    "findingCount": 5
+  },
+  {
+    "step": "dom-structure",
+    "script": "/Users/leechase/Source/bob/skills/review-responsive-ux/scripts/dom-structure-scan.js",
+    "args": [
+      "--root",
+      ".",
+      "--include",
+      "src/**",
+      "--exclude",
+      "**/node_modules/**,**/dist/**,**/coverage/**,**/*.min.*,**/vendor/**,src/stories/**"
+    ],
+    "status": "ok",
+    "durationMs": 57,
+    "covers": ["responsive", "ux"],
+    "toolVersions": {
+      "node": "v24.20.0"
+    },
+    "findingCount": 1
+  },
+  {
+    "step": "code-static",
+    "script": "/Users/leechase/Source/bob/skills/review-code-quality/scripts/code-static-scan.js",
+    "args": [
+      "--root",
+      ".",
+      "--include",
+      "src/**",
+      "--exclude",
+      "**/node_modules/**,**/dist/**,**/coverage/**,**/*.min.*,**/vendor/**,src/stories/**"
+    ],
+    "status": "ok",
+    "durationMs": 57,
+    "covers": ["code-quality"],
+    "toolVersions": {
+      "node": "v24.20.0"
+    },
+    "findingCount": 3
+  },
+  {
+    "step": "css-eval",
+    "script": "/Users/leechase/Source/bob/skills/review-code-quality/scripts/css-eval-wrapper.js",
+    "args": [
+      "--root",
+      ".",
+      "--include",
+      "src/**",
+      "--exclude",
+      "**/node_modules/**,**/dist/**,**/coverage/**,**/*.min.*,**/vendor/**,src/stories/**"
+    ],
+    "status": "ok",
+    "durationMs": 127,
+    "covers": ["code-quality"],
+    "toolVersions": {
+      "node": "v24.20.0"
+    },
+    "findingCount": 2
+  },
+  {
+    "step": "tooling",
+    "script": "/Users/leechase/Source/bob/skills/review-code-quality/scripts/tooling-discovery.js",
+    "args": ["--root", "."],
+    "status": "ok",
+    "durationMs": 45,
+    "covers": ["code-quality", "testing"],
+    "toolVersions": {
+      "node": "v24.20.0"
+    },
+    "findingCount": 0
+  },
+  {
+    "step": "hygiene",
+    "script": "/Users/leechase/Source/bob/skills/review-code-quality/scripts/hygiene-run.js",
+    "args": ["--root", ".", "--run", "--canary", "--ci-green", "yes"],
+    "status": "failed",
+    "reason": "stdout was not valid JSON (exit 1)",
+    "durationMs": 46,
+    "covers": [],
+    "toolVersions": {
+      "node": "v24.20.0"
+    },
+    "findingCount": 0
+  },
+  {
+    "step": "secrets",
+    "script": "/Users/leechase/Source/bob/skills/review-security-deps/scripts/secrets-scan.js",
+    "args": [
+      "--root",
+      ".",
+      "--include",
+      "src/**",
+      "--exclude",
+      "**/node_modules/**,**/dist/**,**/coverage/**,**/*.min.*,**/vendor/**,src/stories/**"
+    ],
+    "status": "ok",
+    "durationMs": 74,
+    "covers": ["security"],
+    "toolVersions": {
+      "node": "v24.20.0"
+    },
+    "findingCount": 0
+  },
+  {
+    "step": "docker",
+    "script": "/Users/leechase/Source/bob/skills/review-security-deps/scripts/docker-scan.js",
+    "args": [
+      "--root",
+      ".",
+      "--include",
+      "src/**",
+      "--exclude",
+      "**/node_modules/**,**/dist/**,**/coverage/**,**/*.min.*,**/vendor/**,src/stories/**"
+    ],
+    "status": "ok",
+    "durationMs": 59,
+    "covers": ["security"],
+    "toolVersions": {
+      "node": "v24.20.0"
+    },
+    "findingCount": 0
+  },
+  {
+    "step": "carbon-split",
+    "script": "/Users/leechase/Source/bob/skills/review-security-deps/scripts/carbon-version-split.js",
+    "args": [
+      "--root",
+      ".",
+      "--include",
+      "src/**",
+      "--exclude",
+      "**/node_modules/**,**/dist/**,**/coverage/**,**/*.min.*,**/vendor/**,src/stories/**",
+      "--pkg",
+      "package.json"
+    ],
+    "status": "ok",
+    "durationMs": 64,
+    "covers": ["code-quality", "security"],
+    "toolVersions": {
+      "node": "v24.20.0"
+    },
+    "findingCount": 0
+  },
+  {
+    "step": "deps",
+    "script": "/Users/leechase/Source/bob/skills/review-security-deps/scripts/deps-analyze.js",
+    "args": [
+      "--root",
+      ".",
+      "--pkg",
+      "package.json",
+      "--audit",
+      "/Users/leechase/Source/uxe/carbon-react-router-starter/docs/review/evidence/npm-audit.json",
+      "--outdated",
+      "/Users/leechase/Source/uxe/carbon-react-router-starter/docs/review/evidence/npm-outdated.json"
+    ],
+    "status": "ok",
+    "durationMs": 85,
+    "covers": ["security"],
+    "toolVersions": {
+      "node": "v24.20.0"
+    },
+    "findingCount": 173
+  },
+  {
+    "step": "headers",
+    "script": "/Users/leechase/Source/bob/skills/review-security-deps/scripts/headers-check.js",
+    "args": [
+      "--lh-file",
+      "/Users/leechase/Source/uxe/carbon-react-router-starter/docs/review/evidence/lighthouse/dashboard-desktop-run1.json",
+      "--headers-file",
+      "/Users/leechase/Source/uxe/carbon-react-router-starter/docs/review/evidence/headers.txt"
+    ],
+    "status": "ok",
+    "durationMs": 57,
+    "covers": ["security"],
+    "toolVersions": {
+      "node": "v24.20.0"
+    },
+    "findingCount": 11
+  }
+]

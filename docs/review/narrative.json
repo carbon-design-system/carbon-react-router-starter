@@ -1,0 +1,120 @@
+{
+  "purpose": "carbon-react-starter is a reference implementation of good front-end development practice built on Carbon Design System, React 19, React Router v8, Vite 8 and Express. It is used as a starting template for new IBM front-end projects.",
+  "healthSummary": "The product scores 66.1 / 100 (Fair, provisional) on its first automated review. Responsive and UX dimensions are Strong; performance and testing are Good. The overall score is held back by two Weak dimensions: code quality (31) and security (35). Code quality is weak primarily because the hygiene ladder shows tooling that is configured but not yet at the Effective level — ESLint, Stylelint and the type checker run clean but canary probes could not confirm that violations are caught before merge. Security is weak because the local Express server ships without the HTTP security headers required by OWASP A05. Both are readily fixable. The score is provisional because Lighthouse performance metrics were not collected (the DevTools MCP `lighthouse_audit` tool does not return performance category scores; a CLI Lighthouse run is needed for full performance scoring).",
+  "headlineMetrics": [
+    { "label": "Overall score", "value": "66.1 / 100 (Fair, provisional)" },
+    { "label": "Accessibility (Lighthouse automated)", "value": "97–98 / 100 on home and dashboard" },
+    { "label": "Responsive", "value": "96.7 / 100 (Strong)" },
+    { "label": "Node version", "value": "24.21.0" },
+    { "label": "Critical CVEs in production deps", "value": "0" },
+    { "label": "Security header findings", "value": "3 Medium (CSP absent, no frame-ancestors, no X-Content-Type-Options)" }
+  ],
+  "dimensions": {
+    "performance": {
+      "headline": "Good (81) — provisional; Lighthouse performance metrics not collected via DevTools MCP; CSS payload is 2 MiB (exceeds 750 KiB threshold).",
+      "action": "Run CLI Lighthouse to complete performance scoring; consider CSS code-splitting or lazy-loading to reduce initial CSS payload."
+    },
+    "accessibility": {
+      "headline": "Fair (60.6) — Lighthouse scores 97–98; two automated skip-link findings and one manual focus-management Low finding; many Lighthouse manual checks not yet assessed.",
+      "action": "Fix skip link focus management (move focus to #main-content on activation); fix heading order on the Welcome page; run axe in tests to automate ongoing coverage."
+    },
+    "responsive": {
+      "headline": "Strong (96.7) — excellent layout at 320 px and on mobile; minor Grid configuration improvements identified.",
+      "action": "Add responsive props (sm, md, lg) to the one Carbon Column missing them; add withRowGap to Grid containers."
+    },
+    "ux": {
+      "headline": "Strong (93.7) — consistent Carbon patterns used throughout; five hard-coded i18n strings found; one passthrough wrapper pattern identified.",
+      "action": "Route the five hard-coded strings through i18next; review the passthrough wrapper pattern in the Dashboard."
+    },
+    "code-quality": {
+      "headline": "Weak (31) — tooling is correctly installed and configured but the hygiene ladder sits at level 1 (configured, not yet Effective); ESLint and Stylelint lack canary probes; no standalone tsc --noEmit; 18 console.log calls; 3 files using deprecated React APIs; two SCSS files with hardcoded colours.",
+      "action": "Add tsc --noEmit to CI; add canary test fixtures so ESLint and Stylelint are proved to catch violations; replace console.log with proper logging; migrate deprecated React APIs; fix hardcoded SCSS colours to Carbon tokens."
+    },
+    "testing": {
+      "headline": "Good (80) — Vitest, React Testing Library and MSW are present and tests pass; no coverage thresholds set; no jest-axe or axe integration.",
+      "action": "Set coverage thresholds in vitest.config; add jest-axe or @axe-core/react to at least one component test."
+    },
+    "security": {
+      "headline": "Weak (35) — all advisories are in devDependencies (no production CVEs); local server missing CSP, frame-ancestors, X-Content-Type-Options, Referrer-Policy and Permissions-Policy headers; X-Powered-By exposes Express version.",
+      "action": "Add HTTP security headers to the Express server (helmet or manual res.setHeader); remove X-Powered-By."
+    }
+  },
+  "keyFindings": [
+    {
+      "area": "Code quality — tooling hygiene",
+      "finding": "ESLint, Stylelint and the TypeScript checker are installed and run clean, but there is no standalone tsc --noEmit in CI and no canary probes confirming that violations are actually caught. The hygiene ladder rates this as level 1 (configured) rather than level 3 (effective), which is the primary driver of the Weak code quality score.",
+      "exposure": "Regressions in type safety and lint rules could reach the main branch undetected.",
+      "priority": "High — foundational for a template repo that sets the bar for new projects"
+    },
+    {
+      "area": "Security — HTTP headers",
+      "finding": "The Express server does not send Content-Security-Policy, X-Content-Type-Options, frame-ancestors (or X-Frame-Options), Referrer-Policy or Permissions-Policy. X-Powered-By reveals Express is in use.",
+      "exposure": "Projects forked from this template will inherit the missing headers. For a local dev/demo server the direct risk is low; for any deployment the risk is Medium.",
+      "priority": "Medium — easy to fix; one helmet.js call or five res.setHeader calls in server.js"
+    },
+    {
+      "area": "Performance — CSS payload",
+      "finding": "The initial CSS bundle is 2001 KiB (2 MiB), against a threshold of 750 KiB. This is largely caused by the full @carbon/react stylesheet being imported. Lighthouse performance category scores were not captured in this run.",
+      "exposure": "Slow first-paint on lower-end devices or constrained networks.",
+      "priority": "Medium — a Vite CSS code-split or per-component import strategy could reduce this significantly"
+    },
+    {
+      "area": "Accessibility — skip link",
+      "finding": "The skip-to-content link updates the URL hash on activation but does not move keyboard focus to the main content region. This is a WCAG 2.4.1 (A) violation. Lighthouse also reports that the skip link element is not keyboard-focusable.",
+      "exposure": "Keyboard-only users cannot skip repetitive navigation, which is a core accessibility failure.",
+      "priority": "Low effort, High standards impact — one component-fix of size S"
+    }
+  ],
+  "roadmapIntro": "Three phases ordered by impact-to-effort ratio. Phase 1 completes in a single sprint and raises the score by roughly 15 points. Phases 2 and 3 address the CSS payload, test coverage and remaining dependency hygiene.",
+  "phases": [
+    {
+      "name": "Phase 1 — Security headers and tooling foundations (1 sprint)",
+      "intro": "All items are S or M effort with no architectural risk. Bob can draft and verify most of these.",
+      "items": [
+        "Add helmet (or equivalent) to Express server to set CSP, X-Content-Type-Options, frame-ancestors, Referrer-Policy, Permissions-Policy; disable X-Powered-By.",
+        "Add tsc --noEmit to CI (builds on the TypeScript branch next; pave the way).",
+        "Add canary test fixtures for ESLint and Stylelint (one file that deliberately breaks a rule; CI checks that lint fails).",
+        "Fix skip-link focus management: move focus to #main-content on activation.",
+        "Fix heading order on the Welcome page.",
+        "Replace 18 console.log/warn/error calls with a logger or remove them."
+      ]
+    },
+    {
+      "name": "Phase 2 — Code quality and test coverage (1–2 sprints)",
+      "intro": "Addresses the remaining hygiene gaps and establishes the test safety net needed before larger changes.",
+      "items": [
+        "Migrate 3 files using deprecated React APIs (findDOMNode, componentWillMount, legacy lifecycle methods).",
+        "Fix 2 SCSS files with hardcoded hex/RGB colours — replace with Carbon design tokens.",
+        "Set coverage thresholds in vitest.config (suggest 70 % line as an initial baseline).",
+        "Add jest-axe or @axe-core/react to at least one component test.",
+        "Route 5 hard-coded i18n strings through i18next."
+      ]
+    },
+    {
+      "name": "Phase 3 — Performance and dependency hygiene (ongoing)",
+      "intro": "Longer-horizon work that benefits from the TypeScript branch progressing.",
+      "items": [
+        "Investigate CSS code-splitting to reduce the 2 MiB initial CSS payload (per-component @carbon/react imports or lazy-loaded route CSS).",
+        "Run CLI Lighthouse (desktop + mobile, 3 runs per page) to complete performance scoring.",
+        "Address the 3 major-version outdated direct devDependencies (ESLint 9→10, MSW 2→3 already on a Renovate schedule).",
+        "Resolve or suppress devDependency advisories via Renovate; confirm none affect the production bundle."
+      ]
+    }
+  ],
+  "staffing": [
+    { "role": "Front-end developer", "count": 2, "note": "Experienced; IBM Bob in use" }
+  ],
+  "timeline": "Calendar estimates are omitted because PR review capacity was not provided. Phase 1 is 1 sprint of parallelisable S/M items. Phase 2 is 1–2 sprints. Phase 3 is ongoing maintenance.",
+  "outcomes": [
+    "Phase 1 completion raises the projected overall score to approximately 78–82 (Fair→Healthy), primarily by lifting security (35→75+) and code quality (31→60+).",
+    "Phase 2 completion targets an overall score above 80 (Healthy) with a Strong testing safety net.",
+    "Completing all three phases positions this template to score 85+ and serve as a credible reference for production-grade Carbon front-end work."
+  ],
+  "riskIfDeferred": "If security headers are not added before this template is used as a base for a deployed product, the inheriting project will launch with known OWASP A05 gaps. The code quality hygiene gap means regressions can reach main silently. Neither risk is blocking for a demo/reference repo, but both are blocking before recommending this as a production-ready template.",
+  "gates": [
+    "Security headers passing a standard header scan before recommending as production template.",
+    "Canary probes green in CI (ESLint and Stylelint proved effective) before claiming level 3 hygiene.",
+    "Coverage thresholds set and enforced before declaring test safety net adequate."
+  ],
+  "traceExceptions": []
+}

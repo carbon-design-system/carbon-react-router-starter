@@ -1,0 +1,73 @@
+{
+  "findings": [
+    {
+      "id": "SCAN-CONSOLE",
+      "check": "CODE-CONSOLE-LOG",
+      "dimension": "code-quality",
+      "severity": "Medium",
+      "title": "18 console.log/error/warn calls in source",
+      "location": "",
+      "evidence": {
+        "method": "script",
+        "refs": ["code-static-scan.js"]
+      },
+      "effort": "S",
+      "workType": "mechanical",
+      "fixableBy": "script",
+      "howToFix": "Remove debug console calls from source files."
+    },
+    {
+      "id": "SCAN-REACT-DEP",
+      "check": "CODE-REACT-DEPRECATED",
+      "dimension": "code-quality",
+      "severity": "Medium",
+      "title": "3 file(s) with deprecated React APIs (findDOMNode, componentWill*, legacy context, string refs)",
+      "location": "",
+      "evidence": {
+        "method": "script",
+        "refs": ["code-static-scan.js"]
+      },
+      "effort": "M",
+      "workType": "component-refactor",
+      "fixableBy": "manual",
+      "howToFix": "Migrate to current React patterns. Use useEffect/useRef instead of findDOMNode; use createContext instead of legacy context."
+    },
+    {
+      "id": "SCAN-PROPTYPES",
+      "check": "CODE-PROPTYPES-MUTATION",
+      "dimension": "code-quality",
+      "severity": "Low",
+      "title": "1 PropTypes mutation(s) (ComponentName.propTypes = ...)",
+      "location": "",
+      "evidence": {
+        "method": "script",
+        "refs": ["code-static-scan.js"]
+      },
+      "effort": "S",
+      "workType": "mechanical",
+      "fixableBy": "manual",
+      "howToFix": "Remove propTypes mutations on external components. Use TypeScript types for prop validation."
+    }
+  ],
+  "metrics": {
+    "totalFiles": 63,
+    "jsFiles": 56,
+    "scssFiles": 7,
+    "eslintDisableCount": 1,
+    "tsIgnoreCount": 0,
+    "consoleLogCount": 18,
+    "todoCount": 4,
+    "importantCount": 0,
+    "hardcodedHexCount": 0,
+    "bemParentCount": 0,
+    "scssImportCount": 0,
+    "deprecatedReactCount": 3,
+    "classComponentCount": 0,
+    "functionComponentCount": 26,
+    "routerLegacyCount": 0,
+    "propTypesMutationCount": 1,
+    "largeFiles": [],
+    "copyrightMissingJs": 0,
+    "copyrightMissingScss": 0
+  }
+}

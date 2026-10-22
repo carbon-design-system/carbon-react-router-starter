@@ -1,0 +1,47 @@
+{
+  "covers": ["accessibility"],
+  "findings": [],
+  "hygiene": [
+    {
+      "id": "A11Y-H01-JSX-A11Y",
+      "dimension": "accessibility",
+      "title": "eslint-plugin-jsx-a11y configured but canary did not catch a known violation — possibly misconfigured",
+      "severity": "High",
+      "level": "broken",
+      "evidence": {
+        "method": "script",
+        "refs": [
+          "package.json",
+          "canary run result: Invalid option '--eslintrc' - perhaps you meant '--ext'?\nYou're using eslint.config.js, some command line flags are no longer available. Please see https://eslint.org/docs/latest/use/command-line-interface for details.\n"
+        ]
+      },
+      "toImprove": "Verify the plugin is active in the rules. Check that jsx-a11y/click-events-have-key-events is enabled."
+    },
+    {
+      "id": "A11Y-H03-AXE-TEST",
+      "dimension": "accessibility",
+      "title": "No automated a11y test runner (jest-axe, @axe-core/playwright, @axe-core/react, cypress-axe) found",
+      "severity": "Medium",
+      "level": 0,
+      "evidence": {
+        "method": "script",
+        "refs": ["package.json"]
+      },
+      "toImprove": "Add jest-axe and call axe(container) in at least one smoke test per route."
+    },
+    {
+      "id": "A11Y-H02-STYLELINT-A11Y",
+      "dimension": "accessibility",
+      "title": "stylelint-a11y plugin absent",
+      "severity": "Medium",
+      "level": 0,
+      "evidence": {
+        "method": "script",
+        "refs": ["package.json"]
+      },
+      "toImprove": "Install stylelint-a11y and enable a11y/no-outline-none, a11y/media-prefers-reduced-motion."
+    }
+  ],
+  "notAssessed": [],
+  "metrics": {}
+}

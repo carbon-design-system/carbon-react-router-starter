@@ -1,0 +1,38 @@
+{
+  "covers": ["performance"],
+  "findings": [
+    {
+      "id": "PERF-STATIC-IMG-SIZE-1",
+      "check": "PERF-10",
+      "dimension": "performance",
+      "severity": "Medium",
+      "title": "1 <img> element(s) lack explicit width and height attributes (triggers layout shifts)",
+      "location": "src/components/commonHeader/CommonHeader.jsx:24",
+      "evidence": {
+        "method": "script",
+        "refs": ["static:src/components/commonHeader/CommonHeader.jsx:24"]
+      },
+      "effort": "S",
+      "workType": "dom-structure",
+      "fixableBy": "manual",
+      "howToFix": "Provide explicit width and height attributes or CSS aspect-ratio on all <img> elements."
+    }
+  ],
+  "hygiene": [],
+  "notAssessed": [],
+  "metrics": {
+    "scannedFileCount": 66,
+    "styleLoaderCount": 0,
+    "miniCssCount": 0,
+    "loadableCount": 0,
+    "lazyCount": 0,
+    "dynamicImportCount": 5,
+    "eagerRegisterCount": 0,
+    "momentImportCount": 0,
+    "lodashRootImportCount": 0,
+    "unsizedImgCount": 1,
+    "missingLazyImgCount": 1,
+    "fontWithoutDisplayCount": 0,
+    "uncleanedListenerCount": 0
+  }
+}

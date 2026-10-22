@@ -1,0 +1,22 @@
+{
+  "tool": "docker-scan.js",
+  "root": "/Users/leechase/Source/uxe/carbon-react-router-starter",
+  "today": "2026-10-22",
+  "eolTable": {
+    "asOf": "2026-10-19",
+    "ageDays": 3,
+    "stale": false
+  },
+  "warnings": [],
+  "filesScanned": 66,
+  "dockerfiles": [],
+  "manifests": [],
+  "nodeVersions": {
+    "engines": null,
+    "nvmrc": null,
+    "docker": [],
+    "ci": [],
+    "distinct": []
+  },
+  "findings": []
+}
