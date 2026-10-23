@@ -1,0 +1,1912 @@
+{
+  "rubricVersion": "1.0.0",
+  "product": "carbon-react-starter",
+  "date": "2026-10-22",
+  "scope": {
+    "include": [
+      "src/**"
+    ],
+    "exclude": [
+      "**/node_modules/**",
+      "**/dist/**",
+      "**/coverage/**",
+      "**/*.min.*",
+      "**/vendor/**",
+      "src/stories/**"
+    ],
+    "pages": [
+      {
+        "label": "Home / Welcome",
+        "path": "/"
+      },
+      {
+        "label": "Dashboard",
+        "path": "/dashboard"
+      }
+    ],
+    "dimensions": [
+      "performance",
+      "accessibility",
+      "responsive",
+      "ux",
+      "code-quality",
+      "testing",
+      "security"
+    ],
+    "modules": {
+      "saasReadiness": false,
+      "pageLoadMatrix": false,
+      "issueLinks": false
+    }
+  },
+  "dimensions": {
+    "performance": {
+      "label": "Performance",
+      "weight": 24,
+      "score": 81,
+      "band": "Good",
+      "bandMeaning": "No Critical, few High; known and bounded.",
+      "confidence": "Medium",
+      "provisional": true,
+      "hasCritical": false,
+      "totalDeduction": 19,
+      "topLosers": [
+        {
+          "kind": "finding",
+          "check": "BUN-02",
+          "title": "Initial CSS payload is 2001 KiB (exceeds 750 KiB threshold)",
+          "severity": "High",
+          "count": 1,
+          "points": 10,
+          "effort": "M",
+          "ids": [
+            "BUN-CSS-PAYLOAD-1"
+          ],
+          "toImprove": "Purge duplicate design system stylesheets and remove unused global component CSS."
+        },
+        {
+          "kind": "finding",
+          "check": "PERF-10",
+          "title": "1 <img> element(s) lack explicit width and height attributes (triggers layout shifts)",
+          "severity": "Medium",
+          "count": 1,
+          "points": 4,
+          "effort": "S",
+          "ids": [
+            "PERF-STATIC-IMG-SIZE-1"
+          ],
+          "toImprove": "Provide explicit width and height attributes or CSS aspect-ratio on all <img> elements."
+        },
+        {
+          "kind": "finding",
+          "check": "PERF-15",
+          "title": "Informational audit 'has-hsts' has score 1 but reports: No HSTS header found",
+          "severity": "Medium",
+          "count": 1,
+          "points": 4,
+          "effort": "S",
+          "ids": [
+            "PERF-INFO-HSTS-1"
+          ],
+          "toImprove": "Inspect audit details and send Strict-Transport-Security header on HTTPS responses."
+        },
+        {
+          "kind": "finding",
+          "check": "BUN-09",
+          "title": "No source maps generated for build output (hinders performance tracing and error analysis)",
+          "severity": "Low",
+          "count": 1,
+          "points": 1,
+          "effort": "S",
+          "ids": [
+            "BUN-SOURCEMAPS-2"
+          ],
+          "toImprove": "Configure devtool: \"hidden-source-map\" in production webpack builds."
+        }
+      ],
+      "pointsAvailable": [
+        {
+          "kind": "finding",
+          "check": "PERF-10",
+          "title": "1 <img> element(s) lack explicit width and height attributes (triggers layout shifts)",
+          "severity": "Medium",
+          "count": 1,
+          "points": 4,
+          "effort": "S",
+          "ids": [
+            "PERF-STATIC-IMG-SIZE-1"
+          ],
+          "toImprove": "Provide explicit width and height attributes or CSS aspect-ratio on all <img> elements.",
+          "perEffort": 4
+        },
+        {
+          "kind": "finding",
+          "check": "PERF-15",
+          "title": "Informational audit 'has-hsts' has score 1 but reports: No HSTS header found",
+          "severity": "Medium",
+          "count": 1,
+          "points": 4,
+          "effort": "S",
+          "ids": [
+            "PERF-INFO-HSTS-1"
+          ],
+          "toImprove": "Inspect audit details and send Strict-Transport-Security header on HTTPS responses.",
+          "perEffort": 4
+        },
+        {
+          "kind": "finding",
+          "check": "BUN-02",
+          "title": "Initial CSS payload is 2001 KiB (exceeds 750 KiB threshold)",
+          "severity": "High",
+          "count": 1,
+          "points": 10,
+          "effort": "M",
+          "ids": [
+            "BUN-CSS-PAYLOAD-1"
+          ],
+          "toImprove": "Purge duplicate design system stylesheets and remove unused global component CSS.",
+          "perEffort": 3.3
+        },
+        {
+          "kind": "finding",
+          "check": "BUN-09",
+          "title": "No source maps generated for build output (hinders performance tracing and error analysis)",
+          "severity": "Low",
+          "count": 1,
+          "points": 1,
+          "effort": "S",
+          "ids": [
+            "BUN-SOURCEMAPS-2"
+          ],
+          "toImprove": "Configure devtool: \"hidden-source-map\" in production webpack builds.",
+          "perEffort": 1
+        }
+      ],
+      "nextTarget": {
+        "targetGain": 10,
+        "reachable": 18,
+        "to": 99,
+        "actions": [
+          {
+            "check": "PERF-10",
+            "title": "1 <img> element(s) lack explicit width and height attributes (triggers layout shifts)",
+            "effort": "S",
+            "points": 4
+          },
+          {
+            "check": "PERF-15",
+            "title": "Informational audit 'has-hsts' has score 1 but reports: No HSTS header found",
+            "effort": "S",
+            "points": 4
+          },
+          {
+            "check": "BUN-02",
+            "title": "Initial CSS payload is 2001 KiB (exceeds 750 KiB threshold)",
+            "effort": "M",
+            "points": 10
+          }
+        ]
+      },
+      "notAssessed": [
+        {
+          "dimension": "performance",
+          "check": "CWV-02",
+          "evidenceNeeded": "Live user interaction trace (Chrome DevTools Performance panel trace or RUM telemetry)"
+        },
+        {
+          "dimension": "performance",
+          "check": "CWV-08",
+          "evidenceNeeded": "Chrome User Experience Report (CrUX) or Real User Monitoring (RUM) field data"
+        }
+      ]
+    },
+    "accessibility": {
+      "label": "Accessibility",
+      "weight": 16,
+      "score": 60.6,
+      "band": "Fair",
+      "bandMeaning": "At least one High with user or business impact, or several Mediums that interact.",
+      "confidence": "Low",
+      "provisional": true,
+      "hasCritical": false,
+      "totalDeduction": 39.4,
+      "topLosers": [
+        {
+          "kind": "hygiene",
+          "check": "A11Y-H01-JSX-A11Y",
+          "title": "eslint-plugin-jsx-a11y configured but canary did not catch a known violation — possibly misconfigured",
+          "severity": "High",
+          "count": 1,
+          "points": 20,
+          "effort": "M",
+          "ids": [
+            "A11Y-H01-JSX-A11Y"
+          ],
+          "level": "broken",
+          "levelName": "Configured but broken or misleading",
+          "cappedByEvidence": false,
+          "toImprove": "Verify the plugin is active in the rules. Check that jsx-a11y/click-events-have-key-events is enabled."
+        },
+        {
+          "kind": "finding",
+          "check": "A11Y-08",
+          "title": "Skip links are not focusable. (1 instance) on http://localhost:5173/dashboard",
+          "severity": "Medium",
+          "count": 2,
+          "points": 6.4,
+          "effort": "S",
+          "ids": [
+            "LH-R01-001",
+            "LH-R03-004"
+          ],
+          "toImprove": "Including a skip link can help users skip to the main content to save time. [Learn more about skip links](https://dequeuniversity.com/rules/axe/4.12/skip-link)."
+        },
+        {
+          "kind": "finding",
+          "check": "A11Y-07",
+          "title": "Heading elements are not in a sequentially-descending order (1 instance) on http://localhost:5173/",
+          "severity": "Medium",
+          "count": 1,
+          "points": 4,
+          "effort": "S",
+          "ids": [
+            "LH-R03-003"
+          ],
+          "toImprove": "Properly ordered headings that do not skip levels convey the semantic structure of the page, making it easier to navigate and understand when using assistive technologies. [Learn more about heading order](https://dequeuniversity.com/rules/axe/4.12/heading-order)."
+        },
+        {
+          "kind": "hygiene",
+          "check": "A11Y-H03-AXE-TEST",
+          "title": "No automated a11y test runner (jest-axe, @axe-core/playwright, @axe-core/react, cypress-axe) found",
+          "severity": "Medium",
+          "count": 1,
+          "points": 4,
+          "effort": "M",
+          "ids": [
+            "A11Y-H03-AXE-TEST"
+          ],
+          "level": 0,
+          "levelName": "Absent",
+          "cappedByEvidence": false,
+          "toImprove": "Add jest-axe and call axe(container) in at least one smoke test per route."
+        },
+        {
+          "kind": "hygiene",
+          "check": "A11Y-H02-STYLELINT-A11Y",
+          "title": "stylelint-a11y plugin absent",
+          "severity": "Medium",
+          "count": 1,
+          "points": 4,
+          "effort": "M",
+          "ids": [
+            "A11Y-H02-STYLELINT-A11Y"
+          ],
+          "level": 0,
+          "levelName": "Absent",
+          "cappedByEvidence": false,
+          "toImprove": "Install stylelint-a11y and enable a11y/no-outline-none, a11y/media-prefers-reduced-motion."
+        }
+      ],
+      "pointsAvailable": [
+        {
+          "kind": "hygiene",
+          "check": "A11Y-H01-JSX-A11Y",
+          "title": "eslint-plugin-jsx-a11y configured but canary did not catch a known violation — possibly misconfigured",
+          "severity": "High",
+          "count": 1,
+          "points": 20,
+          "effort": "M",
+          "ids": [
+            "A11Y-H01-JSX-A11Y"
+          ],
+          "level": "broken",
+          "levelName": "Configured but broken or misleading",
+          "cappedByEvidence": false,
+          "toImprove": "Verify the plugin is active in the rules. Check that jsx-a11y/click-events-have-key-events is enabled.",
+          "perEffort": 6.7
+        },
+        {
+          "kind": "finding",
+          "check": "A11Y-08",
+          "title": "Skip links are not focusable. (1 instance) on http://localhost:5173/dashboard",
+          "severity": "Medium",
+          "count": 2,
+          "points": 6.4,
+          "effort": "S",
+          "ids": [
+            "LH-R01-001",
+            "LH-R03-004"
+          ],
+          "toImprove": "Including a skip link can help users skip to the main content to save time. [Learn more about skip links](https://dequeuniversity.com/rules/axe/4.12/skip-link).",
+          "perEffort": 6.4
+        },
+        {
+          "kind": "finding",
+          "check": "A11Y-07",
+          "title": "Heading elements are not in a sequentially-descending order (1 instance) on http://localhost:5173/",
+          "severity": "Medium",
+          "count": 1,
+          "points": 4,
+          "effort": "S",
+          "ids": [
+            "LH-R03-003"
+          ],
+          "toImprove": "Properly ordered headings that do not skip levels convey the semantic structure of the page, making it easier to navigate and understand when using assistive technologies. [Learn more about heading order](https://dequeuniversity.com/rules/axe/4.12/heading-order).",
+          "perEffort": 4
+        },
+        {
+          "kind": "hygiene",
+          "check": "A11Y-H03-AXE-TEST",
+          "title": "No automated a11y test runner (jest-axe, @axe-core/playwright, @axe-core/react, cypress-axe) found",
+          "severity": "Medium",
+          "count": 1,
+          "points": 4,
+          "effort": "M",
+          "ids": [
+            "A11Y-H03-AXE-TEST"
+          ],
+          "level": 0,
+          "levelName": "Absent",
+          "cappedByEvidence": false,
+          "toImprove": "Add jest-axe and call axe(container) in at least one smoke test per route.",
+          "perEffort": 1.3
+        },
+        {
+          "kind": "hygiene",
+          "check": "A11Y-H02-STYLELINT-A11Y",
+          "title": "stylelint-a11y plugin absent",
+          "severity": "Medium",
+          "count": 1,
+          "points": 4,
+          "effort": "M",
+          "ids": [
+            "A11Y-H02-STYLELINT-A11Y"
+          ],
+          "level": 0,
+          "levelName": "Absent",
+          "cappedByEvidence": false,
+          "toImprove": "Install stylelint-a11y and enable a11y/no-outline-none, a11y/media-prefers-reduced-motion.",
+          "perEffort": 1.3
+        },
+        {
+          "kind": "finding",
+          "check": "A11Y-10",
+          "title": "Focus management in modals and panels — Skip-to-content link updates the URL on activation but does not move focus to the main content region and does not dismiss or hide the button. The main journey (tab through page, interactive elements) is otherwise good.",
+          "severity": "Low",
+          "count": 1,
+          "points": 1,
+          "effort": "S",
+          "ids": [
+            "MAN-001"
+          ],
+          "toImprove": "After the skip link is activated, programmatically move focus to the #main-content target element (e.g. mainRef.current.focus()). Ensure the target has tabIndex=-1 so it is focusable programmatically.",
+          "perEffort": 1
+        }
+      ],
+      "nextTarget": {
+        "targetGain": 10,
+        "reachable": 20,
+        "to": 80.6,
+        "actions": [
+          {
+            "check": "A11Y-H01-JSX-A11Y",
+            "title": "eslint-plugin-jsx-a11y configured but canary did not catch a known violation — possibly misconfigured",
+            "effort": "M",
+            "points": 20
+          }
+        ]
+      },
+      "notAssessed": [
+        {
+          "dimension": "accessibility",
+          "check": "A11Y-09",
+          "evidenceNeeded": "Manual focus-visible check in browser to confirm outline:0 has no visible replacement style."
+        },
+        {
+          "dimension": "accessibility",
+          "check": "A11Y-15",
+          "evidenceNeeded": "Contrast ratio measurement in each Carbon theme (white, g10, g90, g100) using axe or DevTools."
+        },
+        {
+          "dimension": "accessibility",
+          "check": "A11Y-17",
+          "evidenceNeeded": "320px viewport screenshot or scrollWidth check confirming no horizontal scrollbar."
+        },
+        {
+          "dimension": "accessibility",
+          "check": "A11Y-18",
+          "evidenceNeeded": "Text-spacing bookmarklet (1.4.12) applied; screenshot confirming no content loss."
+        },
+        {
+          "dimension": "accessibility",
+          "check": "A11Y-21",
+          "evidenceNeeded": "Screen reader pass: in-page status messages announced via live region."
+        },
+        {
+          "dimension": "accessibility",
+          "check": "A11Y-LH-focusable-controls",
+          "evidenceNeeded": "Manual verification of \"Interactive controls are keyboard focusable\" on http://localhost:5173/dashboard. Lighthouse audit: focusable-controls."
+        },
+        {
+          "dimension": "accessibility",
+          "check": "A11Y-LH-interactive-element-affordance",
+          "evidenceNeeded": "Manual verification of \"Interactive elements indicate their purpose and state\" on http://localhost:5173/dashboard. Lighthouse audit: interactive-element-affordance."
+        },
+        {
+          "dimension": "accessibility",
+          "check": "A11Y-LH-logical-tab-order",
+          "evidenceNeeded": "Manual verification of \"The page has a logical tab order\" on http://localhost:5173/dashboard. Lighthouse audit: logical-tab-order."
+        },
+        {
+          "dimension": "accessibility",
+          "check": "A11Y-LH-visual-order-follows-dom",
+          "evidenceNeeded": "Manual verification of \"Visual order on the page follows DOM order\" on http://localhost:5173/dashboard. Lighthouse audit: visual-order-follows-dom."
+        },
+        {
+          "dimension": "accessibility",
+          "check": "A11Y-LH-focus-traps",
+          "evidenceNeeded": "Manual verification of \"User focus is not accidentally trapped in a region\" on http://localhost:5173/dashboard. Lighthouse audit: focus-traps."
+        },
+        {
+          "dimension": "accessibility",
+          "check": "A11Y-LH-managed-focus",
+          "evidenceNeeded": "Manual verification of \"The user's focus is directed to new content added to the page\" on http://localhost:5173/dashboard. Lighthouse audit: managed-focus."
+        },
+        {
+          "dimension": "accessibility",
+          "check": "A11Y-LH-use-landmarks",
+          "evidenceNeeded": "Manual verification of \"HTML5 landmark elements are used to improve navigation\" on http://localhost:5173/dashboard. Lighthouse audit: use-landmarks."
+        },
+        {
+          "dimension": "accessibility",
+          "check": "A11Y-LH-offscreen-content-hidden",
+          "evidenceNeeded": "Manual verification of \"Offscreen content is hidden from assistive technology\" on http://localhost:5173/dashboard. Lighthouse audit: offscreen-content-hidden."
+        },
+        {
+          "dimension": "accessibility",
+          "check": "A11Y-LH-custom-controls-labels",
+          "evidenceNeeded": "Manual verification of \"Custom controls have associated labels\" on http://localhost:5173/dashboard. Lighthouse audit: custom-controls-labels."
+        },
+        {
+          "dimension": "accessibility",
+          "check": "A11Y-LH-custom-controls-roles",
+          "evidenceNeeded": "Manual verification of \"Custom controls have ARIA roles\" on http://localhost:5173/dashboard. Lighthouse audit: custom-controls-roles."
+        },
+        {
+          "dimension": "accessibility",
+          "check": "A11Y-LH-focusable-controls-home",
+          "evidenceNeeded": "Manual verification of \"Interactive controls are keyboard focusable\" on http://localhost:5173/. Lighthouse audit: focusable-controls."
+        },
+        {
+          "dimension": "accessibility",
+          "check": "A11Y-LH-interactive-element-affordance-home",
+          "evidenceNeeded": "Manual verification of \"Interactive elements indicate their purpose and state\" on http://localhost:5173/. Lighthouse audit: interactive-element-affordance."
+        },
+        {
+          "dimension": "accessibility",
+          "check": "A11Y-LH-logical-tab-order-home",
+          "evidenceNeeded": "Manual verification of \"The page has a logical tab order\" on http://localhost:5173/. Lighthouse audit: logical-tab-order."
+        },
+        {
+          "dimension": "accessibility",
+          "check": "A11Y-LH-visual-order-follows-dom-home",
+          "evidenceNeeded": "Manual verification of \"Visual order on the page follows DOM order\" on http://localhost:5173/. Lighthouse audit: visual-order-follows-dom."
+        },
+        {
+          "dimension": "accessibility",
+          "check": "A11Y-LH-focus-traps-home",
+          "evidenceNeeded": "Manual verification of \"User focus is not accidentally trapped in a region\" on http://localhost:5173/. Lighthouse audit: focus-traps."
+        },
+        {
+          "dimension": "accessibility",
+          "check": "A11Y-LH-managed-focus-home",
+          "evidenceNeeded": "Manual verification of \"The user's focus is directed to new content added to the page\" on http://localhost:5173/. Lighthouse audit: managed-focus."
+        },
+        {
+          "dimension": "accessibility",
+          "check": "A11Y-LH-use-landmarks-home",
+          "evidenceNeeded": "Manual verification of \"HTML5 landmark elements are used to improve navigation\" on http://localhost:5173/. Lighthouse audit: use-landmarks."
+        },
+        {
+          "dimension": "accessibility",
+          "check": "A11Y-LH-offscreen-content-hidden-home",
+          "evidenceNeeded": "Manual verification of \"Offscreen content is hidden from assistive technology\" on http://localhost:5173/. Lighthouse audit: offscreen-content-hidden."
+        },
+        {
+          "dimension": "accessibility",
+          "check": "A11Y-LH-custom-controls-labels-home",
+          "evidenceNeeded": "Manual verification of \"Custom controls have associated labels\" on http://localhost:5173/. Lighthouse audit: custom-controls-labels."
+        },
+        {
+          "dimension": "accessibility",
+          "check": "A11Y-LH-custom-controls-roles-home",
+          "evidenceNeeded": "Manual verification of \"Custom controls have ARIA roles\" on http://localhost:5173/. Lighthouse audit: custom-controls-roles."
+        }
+      ]
+    },
+    "responsive": {
+      "label": "Responsive design",
+      "weight": 10,
+      "score": 96.7,
+      "band": "Strong",
+      "bandMeaning": "No Critical or High issues; meets the stated standard.",
+      "confidence": "Medium",
+      "provisional": true,
+      "hasCritical": false,
+      "totalDeduction": 3.3,
+      "topLosers": [
+        {
+          "kind": "finding",
+          "check": "RESP-05",
+          "title": "Grid container lacks withRowGap or vertical row-gap configuration",
+          "severity": "Low",
+          "count": 5,
+          "points": 2.3,
+          "effort": "S",
+          "ids": [
+            "RESP-1",
+            "RESP-2",
+            "RESP-3",
+            "RESP-4",
+            "RESP-5"
+          ],
+          "toImprove": "Add withRowGap prop to <Grid> or specify row-gap in SCSS."
+        },
+        {
+          "kind": "finding",
+          "check": "RESP-03",
+          "title": "Carbon Column missing responsive props: sm, md, lg",
+          "severity": "Low",
+          "count": 1,
+          "points": 1,
+          "effort": "S",
+          "ids": [
+            "RESP-6"
+          ],
+          "toImprove": "Specify explicit sm, md, and lg span props on every Carbon Column."
+        }
+      ],
+      "pointsAvailable": [
+        {
+          "kind": "finding",
+          "check": "RESP-05",
+          "title": "Grid container lacks withRowGap or vertical row-gap configuration",
+          "severity": "Low",
+          "count": 5,
+          "points": 2.3,
+          "effort": "S",
+          "ids": [
+            "RESP-1",
+            "RESP-2",
+            "RESP-3",
+            "RESP-4",
+            "RESP-5"
+          ],
+          "toImprove": "Add withRowGap prop to <Grid> or specify row-gap in SCSS.",
+          "perEffort": 2.3
+        },
+        {
+          "kind": "finding",
+          "check": "RESP-03",
+          "title": "Carbon Column missing responsive props: sm, md, lg",
+          "severity": "Low",
+          "count": 1,
+          "points": 1,
+          "effort": "S",
+          "ids": [
+            "RESP-6"
+          ],
+          "toImprove": "Specify explicit sm, md, and lg span props on every Carbon Column.",
+          "perEffort": 1
+        }
+      ],
+      "nextTarget": {
+        "targetGain": 10,
+        "reachable": 3.3,
+        "to": 100,
+        "actions": [
+          {
+            "check": "RESP-05",
+            "title": "Grid container lacks withRowGap or vertical row-gap configuration",
+            "effort": "S",
+            "points": 2.3
+          },
+          {
+            "check": "RESP-03",
+            "title": "Carbon Column missing responsive props: sm, md, lg",
+            "effort": "S",
+            "points": 1
+          }
+        ]
+      },
+      "notAssessed": [
+        {
+          "dimension": "responsive",
+          "check": "RESP-06",
+          "evidenceNeeded": "Live browser viewport sweep across 320, 480, 768, 1056, 1312, 1584 px using Chrome DevTools MCP"
+        },
+        {
+          "dimension": "responsive",
+          "check": "RESP-07",
+          "evidenceNeeded": "Live browser reflow test at 400% zoom (1280x1024 / 320 CSS px) for WCAG 1.4.10 compliance"
+        },
+        {
+          "dimension": "responsive",
+          "check": "RESP-08",
+          "evidenceNeeded": "Live browser text zoom test at 200% (WCAG 1.4.4)"
+        }
+      ]
+    },
+    "ux": {
+      "label": "UX",
+      "weight": 10,
+      "score": 93.7,
+      "band": "Strong",
+      "bandMeaning": "No Critical or High issues; meets the stated standard.",
+      "confidence": "Medium",
+      "provisional": true,
+      "hasCritical": false,
+      "totalDeduction": 6.3,
+      "topLosers": [
+        {
+          "kind": "finding",
+          "check": "UX-10",
+          "title": "Identified 2 distinct passthrough wrapper pattern(s) in JSX trees (pilot recommended)",
+          "severity": "Medium",
+          "count": 1,
+          "points": 4,
+          "effort": "M",
+          "ids": [
+            "UX-DOM-1"
+          ],
+          "toImprove": "Consolidate nested single-child div wrappers into unified layout containers."
+        },
+        {
+          "kind": "finding",
+          "check": "UX-01",
+          "title": "Hard-coded user-visible string in JSX: \"Page Content\"",
+          "severity": "Low",
+          "count": 5,
+          "points": 2.3,
+          "effort": "S",
+          "ids": [
+            "UX-1",
+            "UX-2",
+            "UX-3",
+            "UX-4",
+            "UX-5"
+          ],
+          "toImprove": "Extract string to NLS resource file and wrap with translation function (e.g. locale.s)."
+        }
+      ],
+      "pointsAvailable": [
+        {
+          "kind": "finding",
+          "check": "UX-01",
+          "title": "Hard-coded user-visible string in JSX: \"Page Content\"",
+          "severity": "Low",
+          "count": 5,
+          "points": 2.3,
+          "effort": "S",
+          "ids": [
+            "UX-1",
+            "UX-2",
+            "UX-3",
+            "UX-4",
+            "UX-5"
+          ],
+          "toImprove": "Extract string to NLS resource file and wrap with translation function (e.g. locale.s).",
+          "perEffort": 2.3
+        },
+        {
+          "kind": "finding",
+          "check": "UX-10",
+          "title": "Identified 2 distinct passthrough wrapper pattern(s) in JSX trees (pilot recommended)",
+          "severity": "Medium",
+          "count": 1,
+          "points": 4,
+          "effort": "M",
+          "ids": [
+            "UX-DOM-1"
+          ],
+          "toImprove": "Consolidate nested single-child div wrappers into unified layout containers.",
+          "perEffort": 1.3
+        }
+      ],
+      "nextTarget": {
+        "targetGain": 10,
+        "reachable": 6.3,
+        "to": 100,
+        "actions": [
+          {
+            "check": "UX-01",
+            "title": "Hard-coded user-visible string in JSX: \"Page Content\"",
+            "effort": "S",
+            "points": 2.3
+          },
+          {
+            "check": "UX-10",
+            "title": "Identified 2 distinct passthrough wrapper pattern(s) in JSX trees (pilot recommended)",
+            "effort": "M",
+            "points": 4
+          }
+        ]
+      },
+      "notAssessed": [
+        {
+          "dimension": "ux",
+          "check": "UX-07",
+          "evidenceNeeded": "Visual audit of page header patterns across active routes to verify header consistency"
+        },
+        {
+          "dimension": "ux",
+          "check": "UX-08",
+          "evidenceNeeded": "Live test of empty, loading, and error states under simulated network/API failure"
+        },
+        {
+          "dimension": "ux",
+          "check": "UX-DOM-LIVE-DEPTH",
+          "evidenceNeeded": "Live DOM tree inspection snippet run via chrome-devtools evaluate_script to verify rendered browser depth"
+        }
+      ]
+    },
+    "code-quality": {
+      "label": "Code quality",
+      "weight": 14,
+      "score": 31,
+      "band": "Weak",
+      "bandMeaning": "At least one Critical or several High with no mitigation.",
+      "confidence": "High",
+      "provisional": false,
+      "hasCritical": false,
+      "totalDeduction": 69,
+      "topLosers": [
+        {
+          "kind": "hygiene",
+          "check": "CODE-ESLINT",
+          "title": "ESLint configured, runs clean, jsx-a11y enabled, --max-warnings 0",
+          "severity": "High",
+          "count": 1,
+          "points": 10,
+          "effort": "M",
+          "ids": [
+            "CODE-ESLINT"
+          ],
+          "level": 1,
+          "levelName": "Configured (no credit for presence)",
+          "cappedByEvidence": false,
+          "toImprove": "Install ESLint with jsx-a11y; add --max-warnings 0; run in pre-commit and CI."
+        },
+        {
+          "kind": "hygiene",
+          "check": "CODE-STYLELINT",
+          "title": "Stylelint with carbon-tokens, a11y, logical plugins configured and clean",
+          "severity": "High",
+          "count": 1,
+          "points": 10,
+          "effort": "M",
+          "ids": [
+            "CODE-STYLELINT"
+          ],
+          "level": 1,
+          "levelName": "Configured (no credit for presence)",
+          "cappedByEvidence": false,
+          "toImprove": "Add stylelint-plugin-carbon-tokens, @double-great/stylelint-a11y, stylelint-use-logical; run in pre-commit and CI."
+        },
+        {
+          "kind": "hygiene",
+          "check": "CODE-CSS-STYLELINT-POLICY",
+          "title": "Stylelint policy effective for CSS (carbon-tokens plugin catches violations)",
+          "severity": "High",
+          "count": 1,
+          "points": 10,
+          "effort": "M",
+          "ids": [
+            "CODE-CSS-STYLELINT-POLICY"
+          ],
+          "level": 1,
+          "levelName": "Configured (no credit for presence)",
+          "cappedByEvidence": false,
+          "toImprove": "Install stylelint-plugin-carbon-tokens and enable reportDescriptionlessDisables."
+        },
+        {
+          "kind": "hygiene",
+          "check": "CODE-TYPECHECK",
+          "title": "TypeScript type check (tsc --noEmit) runs clean",
+          "severity": "High",
+          "count": 1,
+          "points": 10,
+          "effort": "M",
+          "ids": [
+            "CODE-TYPECHECK"
+          ],
+          "level": 0,
+          "levelName": "Absent",
+          "cappedByEvidence": false,
+          "toImprove": "Add a typecheck script (tsc --noEmit); run in CI."
+        },
+        {
+          "kind": "hygiene",
+          "check": "CODE-NODE-PIN",
+          "title": "Node version pinned and consistent across .nvmrc, engines, Dockerfile",
+          "severity": "High",
+          "count": 1,
+          "points": 10,
+          "effort": "M",
+          "ids": [
+            "CODE-NODE-PIN"
+          ],
+          "level": 1,
+          "levelName": "Configured (no credit for presence)",
+          "cappedByEvidence": false,
+          "toImprove": "Add .nvmrc; set engines.node; pin Dockerfile FROM to the same major."
+        }
+      ],
+      "pointsAvailable": [
+        {
+          "kind": "finding",
+          "check": "CODE-CONSOLE-LOG",
+          "title": "18 console.log/error/warn calls in source",
+          "severity": "Medium",
+          "count": 1,
+          "points": 4,
+          "effort": "S",
+          "ids": [
+            "SCAN-CONSOLE"
+          ],
+          "toImprove": "Remove debug console calls from source files.",
+          "perEffort": 4
+        },
+        {
+          "kind": "finding",
+          "check": "CODE-CSS-RGBCOLORS",
+          "title": "Hardcoded RGB colors",
+          "severity": "Medium",
+          "count": 1,
+          "points": 4,
+          "effort": "S",
+          "ids": [
+            "css-eval:src/components/commonHeader/commonHeader.scss:rgbColors"
+          ],
+          "toImprove": "Replace with Carbon design tokens. See rubric.md §CSS checks.",
+          "perEffort": 4
+        },
+        {
+          "kind": "finding",
+          "check": "CODE-CSS-HEXCOLORS",
+          "title": "Hardcoded hex colors",
+          "severity": "Medium",
+          "count": 1,
+          "points": 4,
+          "effort": "S",
+          "ids": [
+            "css-eval:src/layouts/page-layout.scss:hexColors"
+          ],
+          "toImprove": "Replace with Carbon design tokens. See rubric.md §CSS checks.",
+          "perEffort": 4
+        },
+        {
+          "kind": "hygiene",
+          "check": "CODE-ESLINT",
+          "title": "ESLint configured, runs clean, jsx-a11y enabled, --max-warnings 0",
+          "severity": "High",
+          "count": 1,
+          "points": 10,
+          "effort": "M",
+          "ids": [
+            "CODE-ESLINT"
+          ],
+          "level": 1,
+          "levelName": "Configured (no credit for presence)",
+          "cappedByEvidence": false,
+          "toImprove": "Install ESLint with jsx-a11y; add --max-warnings 0; run in pre-commit and CI.",
+          "perEffort": 3.3
+        },
+        {
+          "kind": "hygiene",
+          "check": "CODE-STYLELINT",
+          "title": "Stylelint with carbon-tokens, a11y, logical plugins configured and clean",
+          "severity": "High",
+          "count": 1,
+          "points": 10,
+          "effort": "M",
+          "ids": [
+            "CODE-STYLELINT"
+          ],
+          "level": 1,
+          "levelName": "Configured (no credit for presence)",
+          "cappedByEvidence": false,
+          "toImprove": "Add stylelint-plugin-carbon-tokens, @double-great/stylelint-a11y, stylelint-use-logical; run in pre-commit and CI.",
+          "perEffort": 3.3
+        },
+        {
+          "kind": "hygiene",
+          "check": "CODE-CSS-STYLELINT-POLICY",
+          "title": "Stylelint policy effective for CSS (carbon-tokens plugin catches violations)",
+          "severity": "High",
+          "count": 1,
+          "points": 10,
+          "effort": "M",
+          "ids": [
+            "CODE-CSS-STYLELINT-POLICY"
+          ],
+          "level": 1,
+          "levelName": "Configured (no credit for presence)",
+          "cappedByEvidence": false,
+          "toImprove": "Install stylelint-plugin-carbon-tokens and enable reportDescriptionlessDisables.",
+          "perEffort": 3.3
+        },
+        {
+          "kind": "hygiene",
+          "check": "CODE-TYPECHECK",
+          "title": "TypeScript type check (tsc --noEmit) runs clean",
+          "severity": "High",
+          "count": 1,
+          "points": 10,
+          "effort": "M",
+          "ids": [
+            "CODE-TYPECHECK"
+          ],
+          "level": 0,
+          "levelName": "Absent",
+          "cappedByEvidence": false,
+          "toImprove": "Add a typecheck script (tsc --noEmit); run in CI.",
+          "perEffort": 3.3
+        },
+        {
+          "kind": "hygiene",
+          "check": "CODE-NODE-PIN",
+          "title": "Node version pinned and consistent across .nvmrc, engines, Dockerfile",
+          "severity": "High",
+          "count": 1,
+          "points": 10,
+          "effort": "M",
+          "ids": [
+            "CODE-NODE-PIN"
+          ],
+          "level": 1,
+          "levelName": "Configured (no credit for presence)",
+          "cappedByEvidence": false,
+          "toImprove": "Add .nvmrc; set engines.node; pin Dockerfile FROM to the same major.",
+          "perEffort": 3.3
+        },
+        {
+          "kind": "finding",
+          "check": "CODE-REACT-DEPRECATED",
+          "title": "3 file(s) with deprecated React APIs (findDOMNode, componentWill*, legacy context, string refs)",
+          "severity": "Medium",
+          "count": 1,
+          "points": 4,
+          "effort": "M",
+          "ids": [
+            "SCAN-REACT-DEP"
+          ],
+          "toImprove": "Migrate to current React patterns. Use useEffect/useRef instead of findDOMNode; use createContext instead of legacy context.",
+          "perEffort": 1.3
+        },
+        {
+          "kind": "finding",
+          "check": "CODE-PROPTYPES-MUTATION",
+          "title": "1 PropTypes mutation(s) (ComponentName.propTypes = ...)",
+          "severity": "Low",
+          "count": 1,
+          "points": 1,
+          "effort": "S",
+          "ids": [
+            "SCAN-PROPTYPES"
+          ],
+          "toImprove": "Remove propTypes mutations on external components. Use TypeScript types for prop validation.",
+          "perEffort": 1
+        },
+        {
+          "kind": "hygiene",
+          "check": "CODE-PRETTIER",
+          "title": "Prettier formatter configured and enforced",
+          "severity": "Low",
+          "count": 1,
+          "points": 1,
+          "effort": "M",
+          "ids": [
+            "CODE-PRETTIER"
+          ],
+          "level": 1,
+          "levelName": "Configured (no credit for presence)",
+          "cappedByEvidence": false,
+          "toImprove": "Configure Prettier; run prettier --check in CI; add to lint-staged.",
+          "perEffort": 0.3
+        },
+        {
+          "kind": "hygiene",
+          "check": "CODE-SPELLCHECK",
+          "title": "Spell check configured and runs in CI",
+          "severity": "Low",
+          "count": 1,
+          "points": 1,
+          "effort": "M",
+          "ids": [
+            "CODE-SPELLCHECK"
+          ],
+          "level": 0,
+          "levelName": "Absent",
+          "cappedByEvidence": false,
+          "toImprove": "Install cspell; add a spell script; run in CI.",
+          "perEffort": 0.3
+        }
+      ],
+      "nextTarget": {
+        "targetGain": 10,
+        "reachable": 12,
+        "to": 43,
+        "actions": [
+          {
+            "check": "CODE-CONSOLE-LOG",
+            "title": "18 console.log/error/warn calls in source",
+            "effort": "S",
+            "points": 4
+          },
+          {
+            "check": "CODE-CSS-RGBCOLORS",
+            "title": "Hardcoded RGB colors",
+            "effort": "S",
+            "points": 4
+          },
+          {
+            "check": "CODE-CSS-HEXCOLORS",
+            "title": "Hardcoded hex colors",
+            "effort": "S",
+            "points": 4
+          }
+        ]
+      },
+      "notAssessed": []
+    },
+    "testing": {
+      "label": "Testing",
+      "weight": 10,
+      "score": 80,
+      "band": "Good",
+      "bandMeaning": "No Critical, few High; known and bounded.",
+      "confidence": "High",
+      "provisional": false,
+      "hasCritical": false,
+      "totalDeduction": 20,
+      "topLosers": [
+        {
+          "kind": "hygiene",
+          "check": "TEST-RUNNER",
+          "title": "Unit/component test suite runs and passes; framework matches React version",
+          "severity": "High",
+          "count": 1,
+          "points": 10,
+          "effort": "M",
+          "ids": [
+            "TEST-RUNNER"
+          ],
+          "level": 0,
+          "levelName": "Absent",
+          "cappedByEvidence": false,
+          "toImprove": "Configure a test runner; run in CI."
+        },
+        {
+          "kind": "hygiene",
+          "check": "TEST-COVERAGE-THRESH",
+          "title": "Coverage thresholds set above zero and enforced",
+          "severity": "High",
+          "count": 1,
+          "points": 10,
+          "effort": "M",
+          "ids": [
+            "TEST-COVERAGE-THRESH"
+          ],
+          "level": 0,
+          "levelName": "Absent",
+          "cappedByEvidence": false,
+          "toImprove": "Configure coverageThreshold in jest.config.js with non-zero values."
+        }
+      ],
+      "pointsAvailable": [
+        {
+          "kind": "hygiene",
+          "check": "TEST-RUNNER",
+          "title": "Unit/component test suite runs and passes; framework matches React version",
+          "severity": "High",
+          "count": 1,
+          "points": 10,
+          "effort": "M",
+          "ids": [
+            "TEST-RUNNER"
+          ],
+          "level": 0,
+          "levelName": "Absent",
+          "cappedByEvidence": false,
+          "toImprove": "Configure a test runner; run in CI.",
+          "perEffort": 3.3
+        },
+        {
+          "kind": "hygiene",
+          "check": "TEST-COVERAGE-THRESH",
+          "title": "Coverage thresholds set above zero and enforced",
+          "severity": "High",
+          "count": 1,
+          "points": 10,
+          "effort": "M",
+          "ids": [
+            "TEST-COVERAGE-THRESH"
+          ],
+          "level": 0,
+          "levelName": "Absent",
+          "cappedByEvidence": false,
+          "toImprove": "Configure coverageThreshold in jest.config.js with non-zero values.",
+          "perEffort": 3.3
+        }
+      ],
+      "nextTarget": {
+        "targetGain": 10,
+        "reachable": 10,
+        "to": 90,
+        "actions": [
+          {
+            "check": "TEST-RUNNER",
+            "title": "Unit/component test suite runs and passes; framework matches React version",
+            "effort": "M",
+            "points": 10
+          }
+        ]
+      },
+      "notAssessed": []
+    },
+    "security": {
+      "label": "Security",
+      "weight": 16,
+      "score": 35,
+      "band": "Weak",
+      "bandMeaning": "At least one Critical or several High with no mitigation.",
+      "confidence": "Medium",
+      "provisional": true,
+      "hasCritical": false,
+      "totalDeduction": 65,
+      "topLosers": [
+        {
+          "kind": "finding",
+          "check": "DEP-03",
+          "title": "handlebars: critical advisory (dev-only), Handlebars: JavaScript Injection via Unsafe Inline Embedding of Precompiled Templates; Handlebars: JavaScript Injection via AST Type Confusion in compile (bypass of CVE-2026-33937)",
+          "severity": "High",
+          "count": 2,
+          "points": 16,
+          "effort": "S",
+          "ids": [
+            "DEP-AN-22",
+            "DEP-AN-38"
+          ],
+          "toImprove": "Run npm audit fix or update to the patched version; run the tests."
+        },
+        {
+          "kind": "finding",
+          "check": "DEP-03",
+          "title": "@double-great/stylelint-a11y: high advisory (dev-only), via stylelint",
+          "severity": "Medium",
+          "count": 41,
+          "points": 10,
+          "effort": "S",
+          "ids": [
+            "DEP-AN-1",
+            "DEP-AN-2",
+            "DEP-AN-3",
+            "DEP-AN-4",
+            "DEP-AN-5",
+            "DEP-AN-6",
+            "DEP-AN-7",
+            "DEP-AN-8",
+            "DEP-AN-9",
+            "DEP-AN-10",
+            "DEP-AN-11",
+            "DEP-AN-12",
+            "DEP-AN-14",
+            "DEP-AN-15",
+            "DEP-AN-16",
+            "DEP-AN-18",
+            "DEP-AN-19",
+            "DEP-AN-20",
+            "DEP-AN-21",
+            "DEP-AN-23",
+            "DEP-AN-26",
+            "DEP-AN-27",
+            "DEP-AN-28",
+            "DEP-AN-29",
+            "DEP-AN-30",
+            "DEP-AN-31",
+            "DEP-AN-33",
+            "DEP-AN-34",
+            "DEP-AN-35",
+            "DEP-AN-36",
+            "DEP-AN-37",
+            "DEP-AN-40",
+            "DEP-AN-41",
+            "DEP-AN-42",
+            "DEP-AN-43",
+            "DEP-AN-44",
+            "DEP-AN-45",
+            "DEP-AN-46",
+            "DEP-AN-47",
+            "DEP-AN-48",
+            "DEP-AN-49"
+          ],
+          "toImprove": "No fix is published; override, replace the package, or record an accepted risk with an expiry."
+        },
+        {
+          "kind": "finding",
+          "check": "DEP-13",
+          "title": "ansi-styles is installed in 4 major versions (3, 4, 5, 6)",
+          "severity": "Medium",
+          "count": 24,
+          "points": 10,
+          "effort": "M",
+          "ids": [
+            "DEP-AN-54",
+            "DEP-AN-55",
+            "DEP-AN-56",
+            "DEP-AN-57",
+            "DEP-AN-58",
+            "DEP-AN-59",
+            "DEP-AN-60",
+            "DEP-AN-61",
+            "DEP-AN-62",
+            "DEP-AN-63",
+            "DEP-AN-64",
+            "DEP-AN-65",
+            "DEP-AN-66",
+            "DEP-AN-67",
+            "DEP-AN-68",
+            "DEP-AN-69",
+            "DEP-AN-70",
+            "DEP-AN-71",
+            "DEP-AN-72",
+            "DEP-AN-73",
+            "DEP-AN-74",
+            "DEP-AN-75",
+            "DEP-AN-76",
+            "DEP-AN-77"
+          ],
+          "toImprove": "Align on one major; use overrides only as a stop-gap."
+        },
+        {
+          "kind": "finding",
+          "check": "DEP-19",
+          "title": "27 package(s) have patch or minor updates pending",
+          "severity": "Medium",
+          "count": 1,
+          "points": 4,
+          "effort": "S",
+          "ids": [
+            "DEP-AN-53"
+          ],
+          "toImprove": "Batch the updates (Renovate group) and run the tests."
+        },
+        {
+          "kind": "finding",
+          "check": "SEC-06",
+          "title": "No Content-Security-Policy header",
+          "severity": "Medium",
+          "count": 1,
+          "points": 4,
+          "effort": "M",
+          "ids": [
+            "SEC-HDR-1"
+          ],
+          "toImprove": "Add an enforcing CSP; roll out as report-only first."
+        }
+      ],
+      "pointsAvailable": [
+        {
+          "kind": "finding",
+          "check": "DEP-03",
+          "title": "handlebars: critical advisory (dev-only), Handlebars: JavaScript Injection via Unsafe Inline Embedding of Precompiled Templates; Handlebars: JavaScript Injection via AST Type Confusion in compile (bypass of CVE-2026-33937)",
+          "severity": "High",
+          "count": 2,
+          "points": 16,
+          "effort": "S",
+          "ids": [
+            "DEP-AN-22",
+            "DEP-AN-38"
+          ],
+          "toImprove": "Run npm audit fix or update to the patched version; run the tests.",
+          "perEffort": 16
+        },
+        {
+          "kind": "finding",
+          "check": "DEP-03",
+          "title": "@double-great/stylelint-a11y: high advisory (dev-only), via stylelint",
+          "severity": "Medium",
+          "count": 41,
+          "points": 10,
+          "effort": "S",
+          "ids": [
+            "DEP-AN-1",
+            "DEP-AN-2",
+            "DEP-AN-3",
+            "DEP-AN-4",
+            "DEP-AN-5",
+            "DEP-AN-6",
+            "DEP-AN-7",
+            "DEP-AN-8",
+            "DEP-AN-9",
+            "DEP-AN-10",
+            "DEP-AN-11",
+            "DEP-AN-12",
+            "DEP-AN-14",
+            "DEP-AN-15",
+            "DEP-AN-16",
+            "DEP-AN-18",
+            "DEP-AN-19",
+            "DEP-AN-20",
+            "DEP-AN-21",
+            "DEP-AN-23",
+            "DEP-AN-26",
+            "DEP-AN-27",
+            "DEP-AN-28",
+            "DEP-AN-29",
+            "DEP-AN-30",
+            "DEP-AN-31",
+            "DEP-AN-33",
+            "DEP-AN-34",
+            "DEP-AN-35",
+            "DEP-AN-36",
+            "DEP-AN-37",
+            "DEP-AN-40",
+            "DEP-AN-41",
+            "DEP-AN-42",
+            "DEP-AN-43",
+            "DEP-AN-44",
+            "DEP-AN-45",
+            "DEP-AN-46",
+            "DEP-AN-47",
+            "DEP-AN-48",
+            "DEP-AN-49"
+          ],
+          "toImprove": "No fix is published; override, replace the package, or record an accepted risk with an expiry.",
+          "perEffort": 10
+        },
+        {
+          "kind": "finding",
+          "check": "DEP-19",
+          "title": "27 package(s) have patch or minor updates pending",
+          "severity": "Medium",
+          "count": 1,
+          "points": 4,
+          "effort": "S",
+          "ids": [
+            "DEP-AN-53"
+          ],
+          "toImprove": "Batch the updates (Renovate group) and run the tests.",
+          "perEffort": 4
+        },
+        {
+          "kind": "finding",
+          "check": "SEC-09",
+          "title": "No frame control: no frame-ancestors in an enforcing CSP and no X-Frame-Options",
+          "severity": "Medium",
+          "count": 1,
+          "points": 4,
+          "effort": "S",
+          "ids": [
+            "SEC-HDR-2"
+          ],
+          "toImprove": "Add frame-ancestors to the CSP, or X-Frame-Options.",
+          "perEffort": 4
+        },
+        {
+          "kind": "finding",
+          "check": "SEC-11",
+          "title": "X-Content-Type-Options: nosniff is not set",
+          "severity": "Medium",
+          "count": 1,
+          "points": 4,
+          "effort": "S",
+          "ids": [
+            "SEC-HDR-3"
+          ],
+          "toImprove": "Send X-Content-Type-Options: nosniff.",
+          "perEffort": 4
+        },
+        {
+          "kind": "finding",
+          "check": "DEP-13",
+          "title": "ansi-styles is installed in 4 major versions (3, 4, 5, 6)",
+          "severity": "Medium",
+          "count": 24,
+          "points": 10,
+          "effort": "M",
+          "ids": [
+            "DEP-AN-54",
+            "DEP-AN-55",
+            "DEP-AN-56",
+            "DEP-AN-57",
+            "DEP-AN-58",
+            "DEP-AN-59",
+            "DEP-AN-60",
+            "DEP-AN-61",
+            "DEP-AN-62",
+            "DEP-AN-63",
+            "DEP-AN-64",
+            "DEP-AN-65",
+            "DEP-AN-66",
+            "DEP-AN-67",
+            "DEP-AN-68",
+            "DEP-AN-69",
+            "DEP-AN-70",
+            "DEP-AN-71",
+            "DEP-AN-72",
+            "DEP-AN-73",
+            "DEP-AN-74",
+            "DEP-AN-75",
+            "DEP-AN-76",
+            "DEP-AN-77"
+          ],
+          "toImprove": "Align on one major; use overrides only as a stop-gap.",
+          "perEffort": 3.3
+        },
+        {
+          "kind": "finding",
+          "check": "DEP-03",
+          "title": "argparse: moderate advisory (dev-only), via sprintf-js",
+          "severity": "Low",
+          "count": 5,
+          "points": 2.3,
+          "effort": "S",
+          "ids": [
+            "DEP-AN-13",
+            "DEP-AN-24",
+            "DEP-AN-25",
+            "DEP-AN-32",
+            "DEP-AN-39"
+          ],
+          "toImprove": "Upgrade unlighthouse to 0.4.2 (breaking); run the tests.",
+          "perEffort": 2.3
+        },
+        {
+          "kind": "finding",
+          "check": "DEP-10",
+          "title": "@ibm/plex is declared but not imported (heuristic, verify before removing)",
+          "severity": "Low",
+          "count": 2,
+          "points": 1.6,
+          "effort": "S",
+          "ids": [
+            "DEP-AN-170",
+            "DEP-AN-171"
+          ],
+          "toImprove": "Remove the package.",
+          "perEffort": 1.6
+        },
+        {
+          "kind": "finding",
+          "check": "SEC-06",
+          "title": "No Content-Security-Policy header",
+          "severity": "Medium",
+          "count": 1,
+          "points": 4,
+          "effort": "M",
+          "ids": [
+            "SEC-HDR-1"
+          ],
+          "toImprove": "Add an enforcing CSP; roll out as report-only first.",
+          "perEffort": 1.3
+        },
+        {
+          "kind": "finding",
+          "check": "SEC-12",
+          "title": "No Referrer-Policy header",
+          "severity": "Low",
+          "count": 1,
+          "points": 1,
+          "effort": "S",
+          "ids": [
+            "SEC-HDR-4"
+          ],
+          "toImprove": "Send Referrer-Policy: strict-origin-when-cross-origin or stricter.",
+          "perEffort": 1
+        },
+        {
+          "kind": "finding",
+          "check": "SEC-13",
+          "title": "No Permissions-Policy header",
+          "severity": "Low",
+          "count": 1,
+          "points": 1,
+          "effort": "S",
+          "ids": [
+            "SEC-HDR-5"
+          ],
+          "toImprove": "Send a Permissions-Policy that disables unused browser features.",
+          "perEffort": 1
+        },
+        {
+          "kind": "finding",
+          "check": "SEC-17",
+          "title": "Response reveals server or framework version",
+          "severity": "Low",
+          "count": 1,
+          "points": 1,
+          "effort": "S",
+          "ids": [
+            "SEC-HDR-7"
+          ],
+          "toImprove": "Strip build meta tags and version banners from production output.",
+          "perEffort": 1
+        },
+        {
+          "kind": "finding",
+          "check": "DEP-13",
+          "title": "@babel/runtime is installed in 2 major versions (7, 8)",
+          "severity": "Low",
+          "count": 92,
+          "points": 2.5,
+          "effort": "M",
+          "ids": [
+            "DEP-AN-78",
+            "DEP-AN-79",
+            "DEP-AN-80",
+            "DEP-AN-81",
+            "DEP-AN-82",
+            "DEP-AN-83",
+            "DEP-AN-84",
+            "DEP-AN-85",
+            "DEP-AN-86",
+            "DEP-AN-87",
+            "DEP-AN-88",
+            "DEP-AN-89",
+            "DEP-AN-90",
+            "DEP-AN-91",
+            "DEP-AN-92",
+            "DEP-AN-93",
+            "DEP-AN-94",
+            "DEP-AN-95",
+            "DEP-AN-96",
+            "DEP-AN-97",
+            "DEP-AN-98",
+            "DEP-AN-99",
+            "DEP-AN-100",
+            "DEP-AN-101",
+            "DEP-AN-102",
+            "DEP-AN-103",
+            "DEP-AN-104",
+            "DEP-AN-105",
+            "DEP-AN-106",
+            "DEP-AN-107",
+            "DEP-AN-108",
+            "DEP-AN-109",
+            "DEP-AN-110",
+            "DEP-AN-111",
+            "DEP-AN-112",
+            "DEP-AN-113",
+            "DEP-AN-114",
+            "DEP-AN-115",
+            "DEP-AN-116",
+            "DEP-AN-117",
+            "DEP-AN-118",
+            "DEP-AN-119",
+            "DEP-AN-120",
+            "DEP-AN-121",
+            "DEP-AN-122",
+            "DEP-AN-123",
+            "DEP-AN-124",
+            "DEP-AN-125",
+            "DEP-AN-126",
+            "DEP-AN-127",
+            "DEP-AN-128",
+            "DEP-AN-129",
+            "DEP-AN-130",
+            "DEP-AN-131",
+            "DEP-AN-132",
+            "DEP-AN-133",
+            "DEP-AN-134",
+            "DEP-AN-135",
+            "DEP-AN-136",
+            "DEP-AN-137",
+            "DEP-AN-138",
+            "DEP-AN-139",
+            "DEP-AN-140",
+            "DEP-AN-141",
+            "DEP-AN-142",
+            "DEP-AN-143",
+            "DEP-AN-144",
+            "DEP-AN-145",
+            "DEP-AN-146",
+            "DEP-AN-147",
+            "DEP-AN-148",
+            "DEP-AN-149",
+            "DEP-AN-150",
+            "DEP-AN-151",
+            "DEP-AN-152",
+            "DEP-AN-153",
+            "DEP-AN-154",
+            "DEP-AN-155",
+            "DEP-AN-156",
+            "DEP-AN-157",
+            "DEP-AN-158",
+            "DEP-AN-159",
+            "DEP-AN-160",
+            "DEP-AN-161",
+            "DEP-AN-162",
+            "DEP-AN-163",
+            "DEP-AN-164",
+            "DEP-AN-165",
+            "DEP-AN-166",
+            "DEP-AN-167",
+            "DEP-AN-168",
+            "DEP-AN-169"
+          ],
+          "toImprove": "Align on one major; use overrides only as a stop-gap.",
+          "perEffort": 0.8
+        },
+        {
+          "kind": "finding",
+          "check": "DEP-09",
+          "title": "@eslint/js 9.39.5 is 1 major version(s) behind 10.0.1 (no documented migration), dev-only",
+          "severity": "Low",
+          "count": 3,
+          "points": 2,
+          "effort": "M",
+          "ids": [
+            "DEP-AN-50",
+            "DEP-AN-51",
+            "DEP-AN-52"
+          ],
+          "toImprove": "Read the changelog for each major, upgrade behind a baseline test net, and verify behaviour by hand.",
+          "perEffort": 0.7
+        },
+        {
+          "kind": "finding",
+          "check": "DEP-15",
+          "title": "@cspell/dict-de-de is licensed LGPL-3.0 (copyleft)",
+          "severity": "Low",
+          "count": 2,
+          "points": 1.6,
+          "effort": "M",
+          "ids": [
+            "DEP-AN-172",
+            "DEP-AN-173"
+          ],
+          "toImprove": "Ask legal to confirm, or replace the package.",
+          "perEffort": 0.5
+        }
+      ],
+      "nextTarget": {
+        "targetGain": 10,
+        "reachable": 16,
+        "to": 51,
+        "actions": [
+          {
+            "check": "DEP-03",
+            "title": "handlebars: critical advisory (dev-only), Handlebars: JavaScript Injection via Unsafe Inline Embedding of Precompiled Templates; Handlebars: JavaScript Injection via AST Type Confusion in compile (bypass of CVE-2026-33937)",
+            "effort": "S",
+            "points": 16
+          }
+        ]
+      },
+      "notAssessed": [
+        {
+          "dimension": "security",
+          "check": "SEC-04",
+          "evidenceNeeded": "The page URL (pass --page-url or use --url)"
+        }
+      ]
+    }
+  },
+  "overall": {
+    "score": 66.1,
+    "rating": "Fair",
+    "capped": false,
+    "capReason": null,
+    "provisional": true,
+    "dimensionsAssessed": 7
+  },
+  "findingKeys": [
+    "performance:PERF-10:src/components/commonHeader/CommonHeader.jsx:24",
+    "performance:BUN-02:build/",
+    "performance:BUN-09:build/",
+    "performance:PERF-15:http://localhost:5173/dashboard",
+    "accessibility:A11Y-08:http://localhost:5173/dashboard#skip-link",
+    "accessibility:A11Y-07:http://localhost:5173/#heading-order",
+    "accessibility:A11Y-08:http://localhost:5173/#skip-link",
+    "accessibility:A11Y-10:",
+    "responsive:RESP-05:src/components/commonHeader/CommonHeader.jsx:14",
+    "responsive:RESP-05:src/components/footer/Footer.jsx:15",
+    "responsive:RESP-05:src/pages/dashboard/DashboardNumberTiles.jsx:30",
+    "responsive:RESP-05:src/pages/dashboard/DashboardURLParameters.jsx:24",
+    "responsive:RESP-05:src/pages/dashboard/DashboardVisualizations.jsx:22",
+    "responsive:RESP-03:src/pages/welcome/WelcomeFetchingSection.jsx:61",
+    "ux:UX-01:src/layouts/page-layout.jsx:25",
+    "ux:UX-01:src/pages/welcome/Welcome.jsx:22",
+    "ux:UX-01:src/pages/welcome/post/PostComponent.jsx:52",
+    "ux:UX-01:src/pages/welcome/post/PostComponent.jsx:63",
+    "ux:UX-01:src/server.js:117",
+    "ux:UX-10:src/components/profilePanel/ProfilePanel.jsx:50",
+    "code-quality:CODE-CONSOLE-LOG:",
+    "code-quality:CODE-REACT-DEPRECATED:",
+    "code-quality:CODE-PROPTYPES-MUTATION:",
+    "code-quality:CODE-CSS-RGBCOLORS:src/components/commonHeader/commonHeader.scss",
+    "code-quality:CODE-CSS-HEXCOLORS:src/layouts/page-layout.scss",
+    "security:DEP-03:@double-great/stylelint-a11y",
+    "security:DEP-03:@lhci/utils",
+    "security:DEP-03:@puppeteer/browsers",
+    "security:DEP-03:@semantic-release/changelog",
+    "security:DEP-03:@semantic-release/commit-analyzer",
+    "security:DEP-03:@semantic-release/git",
+    "security:DEP-03:@semantic-release/github",
+    "security:DEP-03:@semantic-release/npm",
+    "security:DEP-03:@semantic-release/release-notes-generator",
+    "security:DEP-03:@unlighthouse/cli",
+    "security:DEP-03:@unlighthouse/core",
+    "security:DEP-03:@unlighthouse/server",
+    "security:DEP-03:argparse",
+    "security:DEP-03:basic-ftp",
+    "security:DEP-03:brace-expansion",
+    "security:DEP-03:braces",
+    "security:DEP-03:esbuild",
+    "security:DEP-03:extract-zip",
+    "security:DEP-03:fast-glob",
+    "security:DEP-03:get-uri",
+    "security:DEP-03:globby",
+    "security:DEP-03:handlebars",
+    "security:DEP-03:http-cache-semantics",
+    "security:DEP-03:ip-address",
+    "security:DEP-03:js-yaml",
+    "security:DEP-03:launch-editor",
+    "security:DEP-03:lighthouse",
+    "security:DEP-03:listhen",
+    "security:DEP-03:micromatch",
+    "security:DEP-03:node-forge",
+    "security:DEP-03:pac-proxy-agent",
+    "security:DEP-03:postcss-selector-parser",
+    "security:DEP-03:proxy-agent",
+    "security:DEP-03:puppeteer",
+    "security:DEP-03:puppeteer-cluster",
+    "security:DEP-03:puppeteer-core",
+    "security:DEP-03:semantic-release",
+    "security:DEP-03:shell-quote",
+    "security:DEP-03:sprintf-js",
+    "security:DEP-03:stylelint",
+    "security:DEP-03:stylelint-config-recommended",
+    "security:DEP-03:stylelint-config-recommended-scss",
+    "security:DEP-03:stylelint-config-standard",
+    "security:DEP-03:stylelint-config-standard-scss",
+    "security:DEP-03:stylelint-plugin-carbon-tokens",
+    "security:DEP-03:stylelint-scss",
+    "security:DEP-03:stylelint-use-logical",
+    "security:DEP-03:undici",
+    "security:DEP-03:unlighthouse",
+    "security:DEP-09:@eslint/js",
+    "security:DEP-09:eslint",
+    "security:DEP-09:msw",
+    "security:DEP-19:package.json",
+    "security:DEP-13:ansi-styles",
+    "security:DEP-13:chalk",
+    "security:DEP-13:get-stream",
+    "security:DEP-13:lru-cache",
+    "security:DEP-13:react-is",
+    "security:DEP-13:supports-color",
+    "security:DEP-13:type-fest",
+    "security:DEP-13:cliui",
+    "security:DEP-13:dot-prop",
+    "security:DEP-13:emoji-regex",
+    "security:DEP-13:escape-string-regexp",
+    "security:DEP-13:execa",
+    "security:DEP-13:has-flag",
+    "security:DEP-13:marked",
+    "security:DEP-13:p-limit",
+    "security:DEP-13:parse-json",
+    "security:DEP-13:parse5",
+    "security:DEP-13:semver",
+    "security:DEP-13:string-width",
+    "security:DEP-13:undici",
+    "security:DEP-13:which",
+    "security:DEP-13:yallist",
+    "security:DEP-13:yargs",
+    "security:DEP-13:yargs-parser",
+    "security:DEP-13:@babel/runtime",
+    "security:DEP-13:@octokit/openapi-types",
+    "security:DEP-13:@octokit/types",
+    "security:DEP-13:@puppeteer/browsers",
+    "security:DEP-13:@sentry/core",
+    "security:DEP-13:@sentry/node",
+    "security:DEP-13:@sindresorhus/is",
+    "security:DEP-13:@vueuse/core",
+    "security:DEP-13:@vueuse/metadata",
+    "security:DEP-13:@vueuse/shared",
+    "security:DEP-13:agent-base",
+    "security:DEP-13:ajv",
+    "security:DEP-13:ansi-regex",
+    "security:DEP-13:argparse",
+    "security:DEP-13:balanced-match",
+    "security:DEP-13:brace-expansion",
+    "security:DEP-13:chromium-bidi",
+    "security:DEP-13:color-convert",
+    "security:DEP-13:configstore",
+    "security:DEP-13:content-type",
+    "security:DEP-13:cookie",
+    "security:DEP-13:cookie-es",
+    "security:DEP-13:crypto-random-string",
+    "security:DEP-13:debug",
+    "security:DEP-13:entities",
+    "security:DEP-13:env-paths",
+    "security:DEP-13:eslint-visitor-keys",
+    "security:DEP-13:estree-walker",
+    "security:DEP-13:figures",
+    "security:DEP-13:file-entry-cache",
+    "security:DEP-13:find-up",
+    "security:DEP-13:flat-cache",
+    "security:DEP-13:glob-parent",
+    "security:DEP-13:globals",
+    "security:DEP-13:hookified",
+    "security:DEP-13:hosted-git-info",
+    "security:DEP-13:http-proxy-agent",
+    "security:DEP-13:https-proxy-agent",
+    "security:DEP-13:human-signals",
+    "security:DEP-13:ignore",
+    "security:DEP-13:import-fresh",
+    "security:DEP-13:indent-string",
+    "security:DEP-13:ini",
+    "security:DEP-13:is-stream",
+    "security:DEP-13:isarray",
+    "security:DEP-13:isexe",
+    "security:DEP-13:js-tokens",
+    "security:DEP-13:js-yaml",
+    "security:DEP-13:json-parse-even-better-errors",
+    "security:DEP-13:json-schema-traverse",
+    "security:DEP-13:keyv",
+    "security:DEP-13:lighthouse",
+    "security:DEP-13:locate-path",
+    "security:DEP-13:magic-string",
+    "security:DEP-13:meow",
+    "security:DEP-13:mimic-response",
+    "security:DEP-13:minimatch",
+    "security:DEP-13:minipass",
+    "security:DEP-13:negotiator",
+    "security:DEP-13:normalize-package-data",
+    "security:DEP-13:normalize-url",
+    "security:DEP-13:npm-run-path",
+    "security:DEP-13:p-locate",
+    "security:DEP-13:path-exists",
+    "security:DEP-13:path-key",
+    "security:DEP-13:picomatch",
+    "security:DEP-13:pkg-types",
+    "security:DEP-13:puppeteer-core",
+    "security:DEP-13:read-package-up",
+    "security:DEP-13:read-pkg",
+    "security:DEP-13:resolve-from",
+    "security:DEP-13:signal-exit",
+    "security:DEP-13:socks-proxy-agent",
+    "security:DEP-13:spdx-expression-parse",
+    "security:DEP-13:strip-ansi",
+    "security:DEP-13:strip-final-newline",
+    "security:DEP-13:strip-json-comments",
+    "security:DEP-13:supports-hyperlinks",
+    "security:DEP-13:tldts-core",
+    "security:DEP-13:tldts-icann",
+    "security:DEP-13:tr46",
+    "security:DEP-13:unctx",
+    "security:DEP-13:unique-string",
+    "security:DEP-13:unplugin",
+    "security:DEP-13:webidl-conversions",
+    "security:DEP-13:whatwg-url",
+    "security:DEP-13:wrap-ansi",
+    "security:DEP-13:write-file-atomic",
+    "security:DEP-13:ws",
+    "security:DEP-13:xdg-basedir",
+    "security:DEP-13:yocto-queue",
+    "security:DEP-13:zod",
+    "security:DEP-10:@ibm/plex",
+    "security:DEP-10:react-is",
+    "security:DEP-15:@cspell/dict-de-de",
+    "security:DEP-15:node-forge",
+    "security:SEC-06:content-security-policy",
+    "security:SEC-09:frame-control",
+    "security:SEC-11:x-content-type-options",
+    "security:SEC-12:referrer-policy",
+    "security:SEC-13:permissions-policy",
+    "security:SEC-14:cross-origin-isolation",
+    "security:SEC-17:version-banner",
+    "security:SEC-10:localhost"
+  ]
+}

@@ -1,0 +1,41 @@
+[
+  {
+    "check": "A11Y-09",
+    "status": "pass",
+    "notes": "Focus indicator visible throughout keyboard run."
+  },
+  {
+    "check": "A11Y-10",
+    "status": "fail",
+    "severityIfFail": "Low",
+    "notes": "Skip-to-content link updates the URL on activation but does not move focus to the main content region and does not dismiss or hide the button. The main journey (tab through page, interactive elements) is otherwise good.",
+    "effort": "S",
+    "workType": "component-fix",
+    "howToFix": "After the skip link is activated, programmatically move focus to the #main-content target element (e.g. mainRef.current.focus()). Ensure the target has tabIndex=-1 so it is focusable programmatically."
+  },
+  {
+    "check": "A11Y-12-SR",
+    "status": "pass",
+    "notes": "Screen reader announces content correctly. Carbon icon buttons read text twice (aria-label + tooltip) — this is correct Carbon design system usage, not a defect."
+  },
+  {
+    "check": "A11Y-17",
+    "status": "pass",
+    "notes": "Responsive behaviour excellent at 320px. Mobile layout handles narrow widths better than 400% zoom on a wide desktop monitor."
+  },
+  {
+    "check": "A11Y-18",
+    "status": "pass",
+    "notes": "No text spacing issues observed."
+  },
+  {
+    "check": "A11Y-19",
+    "status": "pass",
+    "notes": "No motion issues. prefers-reduced-motion respected."
+  },
+  {
+    "check": "A11Y-FORCED-COLOURS",
+    "status": "pass",
+    "notes": "High contrast mode appears OK. No colour-only information loss observed."
+  }
+]

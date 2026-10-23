@@ -1,0 +1,77 @@
+{
+  "product": "carbon-react-starter",
+  "repo": {
+    "root": ".",
+    "include": ["src/**"],
+    "exclude": ["**/node_modules/**", "**/dist/**", "**/coverage/**", "**/*.min.*", "**/vendor/**", "src/stories/**"]
+  },
+  "live": {
+    "baseUrl": "http://localhost:5173",
+    "auth": "none",
+    "pages": [
+      {
+        "label": "Home / Welcome",
+        "path": "/"
+      },
+      {
+        "label": "Dashboard",
+        "path": "/dashboard"
+      }
+    ],
+    "note": "Built and served locally via npm run build && npm run preview:prod (PORT=5173). No sign-in required."
+  },
+  "deploy": {
+    "runtime": "Node 24.21.0",
+    "container": "none",
+    "ciProvider": "GitHub Actions",
+    "productionUrl": "",
+    "buildDir": "dist/client",
+    "ciGreen": "yes"
+  },
+  "dimensions": ["performance", "accessibility", "responsive", "ux", "code-quality", "testing", "security"],
+  "modules": {
+    "saasReadiness": false,
+    "pageLoadMatrix": false,
+    "issueLinks": false
+  },
+  "team": {
+    "size": 2,
+    "reviewCapacityPrsPerWeek": null,
+    "constraints": "Maintenance mode; TypeScript branch `next` is future development. This review is a framework evaluation, not an active sprint.",
+    "skillSplit": "2 experienced front-end developers",
+    "bobInUse": true
+  },
+  "safetyNet": null,
+  "evidence": {
+    "screenshotsDir": "docs/review/evidence",
+    "manualA11y": "ask"
+  },
+  "issueTracker": {
+    "baseUrl": ""
+  },
+  "purpose": "Example of good front-end development practice; template for new work.",
+  "dependencyScanning": "Mend Renovate (standard IBM practice); npm audit not in CI.",
+  "knownExceptions": "none",
+  "executiveSummaryAudience": "Author of the review framework (self-evaluation).",
+  "reviewContext": "First run. Test of the review framework itself.",
+  "scope": {
+    "include": ["src/**"],
+    "exclude": ["**/node_modules/**", "**/dist/**", "**/coverage/**", "**/*.min.*", "**/vendor/**", "src/stories/**"],
+    "pages": [
+      {
+        "label": "Home / Welcome",
+        "path": "/"
+      },
+      {
+        "label": "Dashboard",
+        "path": "/dashboard"
+      }
+    ],
+    "dimensions": ["performance", "accessibility", "responsive", "ux", "code-quality", "testing", "security"],
+    "modules": {
+      "saasReadiness": false,
+      "pageLoadMatrix": false,
+      "issueLinks": false
+    }
+  }
+}

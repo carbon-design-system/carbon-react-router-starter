@@ -1,0 +1,121 @@
+{
+  "findings": [
+    {
+      "id": "BUN-CSS-PAYLOAD-1",
+      "check": "BUN-02",
+      "dimension": "performance",
+      "severity": "High",
+      "title": "Initial CSS payload is 2001 KiB (exceeds 750 KiB threshold)",
+      "location": "build/",
+      "evidence": {
+        "method": "script",
+        "refs": ["bundle:totalCssBytesRaw:2049018"]
+      },
+      "effort": "M",
+      "workType": "mechanical",
+      "fixableBy": "manual",
+      "howToFix": "Purge duplicate design system stylesheets and remove unused global component CSS."
+    },
+    {
+      "id": "BUN-SOURCEMAPS-2",
+      "check": "BUN-09",
+      "dimension": "performance",
+      "severity": "Low",
+      "title": "No source maps generated for build output (hinders performance tracing and error analysis)",
+      "location": "build/",
+      "evidence": {
+        "method": "script",
+        "refs": ["bundle:sourceMapCount:0"]
+      },
+      "effort": "S",
+      "workType": "config-infra",
+      "fixableBy": "manual",
+      "howToFix": "Configure devtool: \"hidden-source-map\" in production webpack builds."
+    }
+  ],
+  "hygiene": [],
+  "notAssessed": [],
+  "metrics": {
+    "totalJsBytesRaw": 634706,
+    "totalJsBytesGzip": 197136,
+    "initialJsBytesRaw": 634706,
+    "initialJsBytesGzip": 197136,
+    "asyncJsBytesRaw": 0,
+    "asyncJsBytesGzip": 0,
+    "totalCssBytesRaw": 2049018,
+    "totalCssBytesGzip": 190037,
+    "jsAssetCount": 11,
+    "cssAssetCount": 1,
+    "sourceMapCount": 0,
+    "hasStyleLoader": false,
+    "nonHashedCount": 0,
+    "largestChunks": [
+      {
+        "name": "index-fK_qo-FJ.css",
+        "rawSize": 2049018,
+        "gzipSize": 190037,
+        "ext": ".css"
+      },
+      {
+        "name": "index-D7Hg8Na2.js",
+        "rawSize": 262443,
+        "gzipSize": 81546,
+        "ext": ".js"
+      },
+      {
+        "name": "page-layout-BbybUiBw.js",
+        "rawSize": 158596,
+        "gzipSize": 48051,
+        "ext": ".js"
+      },
+      {
+        "name": "Dashboard-CrDVHBZ5.js",
+        "rawSize": 114745,
+        "gzipSize": 32859,
+        "ext": ".js"
+      },
+      {
+        "name": "theme-DlMBQT2g.js",
+        "rawSize": 68558,
+        "gzipSize": 23597,
+        "ext": ".js"
+      },
+      {
+        "name": "Footer-DrNGbrjG.js",
+        "rawSize": 16062,
+        "gzipSize": 4903,
+        "ext": ".js"
+      },
+      {
+        "name": "Welcome-CuKoXhNe.js",
+        "rawSize": 7053,
+        "gzipSize": 2534,
+        "ext": ".js"
+      },
+      {
+        "name": "de-MJQGwTMO.js",
+        "rawSize": 3587,
+        "gzipSize": 1734,
+        "ext": ".js"
+      },
+      {
+        "name": "CommonHeader-DDRdlkJ5.js",
+        "rawSize": 1365,
+        "gzipSize": 637,
+        "ext": ".js"
+      },
+      {
+        "name": "Placeholder-BOe8Zg1P.js",
+        "rawSize": 944,
+        "gzipSize": 481,
+        "ext": ".js"
+      }
+    ],
+    "duplicateModules": [],
+    "viteRouteSplitting": {
+      "detected": true,
+      "routeChunkCount": 3,
+      "chunkNames": ["Dashboard-CrDVHBZ5.js", "NotFound-xxAQlqDG.js", "Welcome-CuKoXhNe.js"]
+    }
+  }
+}

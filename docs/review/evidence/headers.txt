@@ -1,0 +1,9 @@
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Language: en
+Content-Type: text/html; charset=utf-8
+Vary: Accept-Encoding
+Date: Thu, 22 Oct 2026 09:00:20 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+

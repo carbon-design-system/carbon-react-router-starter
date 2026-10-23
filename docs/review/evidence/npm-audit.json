@@ -1,0 +1,1044 @@
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "@double-great/stylelint-a11y": {
+      "name": "@double-great/stylelint-a11y",
+      "severity": "high",
+      "isDirect": true,
+      "via": ["stylelint"],
+      "effects": [],
+      "range": "*",
+      "nodes": ["node_modules/@double-great/stylelint-a11y"],
+      "fixAvailable": false
+    },
+    "@lhci/utils": {
+      "name": "@lhci/utils",
+      "severity": "high",
+      "isDirect": false,
+      "via": ["js-yaml", "lighthouse"],
+      "effects": ["@unlighthouse/cli"],
+      "range": ">=0.3.6",
+      "nodes": ["node_modules/@lhci/utils"],
+      "fixAvailable": {
+        "name": "unlighthouse",
+        "version": "0.4.2",
+        "isSemVerMajor": true
+      }
+    },
+    "@puppeteer/browsers": {
+      "name": "@puppeteer/browsers",
+      "severity": "high",
+      "isDirect": false,
+      "via": ["extract-zip", "proxy-agent"],
+      "effects": ["@unlighthouse/core", "puppeteer", "puppeteer-core"],
+      "range": "*",
+      "nodes": [
+        "node_modules/@puppeteer/browsers",
+        "node_modules/@unlighthouse/core/node_modules/@puppeteer/browsers",
+        "node_modules/puppeteer/node_modules/@puppeteer/browsers"
+      ],
+      "fixAvailable": {
+        "name": "unlighthouse",
+        "version": "0.4.2",
+        "isSemVerMajor": true
+      }
+    },
+    "@semantic-release/changelog": {
+      "name": "@semantic-release/changelog",
+      "severity": "high",
+      "isDirect": true,
+      "via": ["semantic-release"],
+      "effects": [],
+      "range": ">=6.0.0",
+      "nodes": ["node_modules/@semantic-release/changelog"],
+      "fixAvailable": {
+        "name": "@semantic-release/changelog",
+        "version": "5.0.1",
+        "isSemVerMajor": true
+      }
+    },
+    "@semantic-release/commit-analyzer": {
+      "name": "@semantic-release/commit-analyzer",
+      "severity": "high",
+      "isDirect": false,
+      "via": ["micromatch", "semantic-release"],
+      "effects": ["semantic-release"],
+      "range": ">=7.0.0-beta.1",
+      "nodes": ["node_modules/@semantic-release/commit-analyzer"],
+      "fixAvailable": {
+        "name": "@semantic-release/changelog",
+        "version": "5.0.1",
+        "isSemVerMajor": true
+      }
+    },
+    "@semantic-release/git": {
+      "name": "@semantic-release/git",
+      "severity": "high",
+      "isDirect": true,
+      "via": ["micromatch", "semantic-release"],
+      "effects": [],
+      "range": "*",
+      "nodes": ["node_modules/@semantic-release/git"],
+      "fixAvailable": false
+    },
+    "@semantic-release/github": {
+      "name": "@semantic-release/github",
+      "severity": "high",
+      "isDirect": true,
+      "via": ["semantic-release"],
+      "effects": ["semantic-release"],
+      "range": "5.3.0-beta.1 - 5.3.0-beta.8 || 5.4.0-beta.1 || 5.5.0-beta.1 || >=5.6.0-beta.1",
+      "nodes": ["node_modules/@semantic-release/github"],
+      "fixAvailable": {
+        "name": "@semantic-release/changelog",
+        "version": "5.0.1",
+        "isSemVerMajor": true
+      }
+    },
+    "@semantic-release/npm": {
+      "name": "@semantic-release/npm",
+      "severity": "high",
+      "isDirect": false,
+      "via": ["semantic-release"],
+      "effects": ["semantic-release"],
+      "range": ">=6.0.0-beta.1",
+      "nodes": ["node_modules/@semantic-release/npm"],
+      "fixAvailable": {
+        "name": "@semantic-release/changelog",
+        "version": "5.0.1",
+        "isSemVerMajor": true
+      }
+    },
+    "@semantic-release/release-notes-generator": {
+      "name": "@semantic-release/release-notes-generator",
+      "severity": "high",
+      "isDirect": false,
+      "via": ["semantic-release"],
+      "effects": ["semantic-release"],
+      "range": ">=10.0.0-beta.1",
+      "nodes": ["node_modules/@semantic-release/release-notes-generator"],
+      "fixAvailable": {
+        "name": "@semantic-release/changelog",
+        "version": "5.0.1",
+        "isSemVerMajor": true
+      }
+    },
+    "@unlighthouse/cli": {
+      "name": "@unlighthouse/cli",
+      "severity": "high",
+      "isDirect": false,
+      "via": ["@lhci/utils", "@unlighthouse/core", "@unlighthouse/server"],
+      "effects": ["unlighthouse"],
+      "range": "0.3.8 - 0.3.15 || >=0.4.3",
+      "nodes": ["node_modules/@unlighthouse/cli"],
+      "fixAvailable": {
+        "name": "unlighthouse",
+        "version": "0.4.2",
+        "isSemVerMajor": true
+      }
+    },
+    "@unlighthouse/core": {
+      "name": "@unlighthouse/core",
+      "severity": "high",
+      "isDirect": false,
+      "via": ["@puppeteer/browsers", "lighthouse", "puppeteer-cluster", "puppeteer-core"],
+      "effects": ["@unlighthouse/cli", "@unlighthouse/server", "unlighthouse"],
+      "range": "0.8.7 - 0.19.1",
+      "nodes": ["node_modules/@unlighthouse/core"],
+      "fixAvailable": {
+        "name": "unlighthouse",
+        "version": "0.4.2",
+        "isSemVerMajor": true
+      }
+    },
+    "@unlighthouse/server": {
+      "name": "@unlighthouse/server",
+      "severity": "high",
+      "isDirect": false,
+      "via": ["@unlighthouse/core", "listhen"],
+      "effects": ["@unlighthouse/cli"],
+      "range": "0.3.8 - 0.3.15 || >=0.4.3",
+      "nodes": ["node_modules/@unlighthouse/server"],
+      "fixAvailable": {
+        "name": "unlighthouse",
+        "version": "0.4.2",
+        "isSemVerMajor": true
+      }
+    },
+    "argparse": {
+      "name": "argparse",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": ["sprintf-js"],
+      "effects": ["js-yaml"],
+      "range": "1.0.0 - 1.0.10",
+      "nodes": ["node_modules/argparse"],
+      "fixAvailable": {
+        "name": "unlighthouse",
+        "version": "0.4.2",
+        "isSemVerMajor": true
+      }
+    },
+    "basic-ftp": {
+      "name": "basic-ftp",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1240853,
+          "name": "basic-ftp",
+          "dependency": "basic-ftp",
+          "title": "basic-ftp: Quadratic-time CPU denial of service in Client.list() Unix directory-listing parser (RE_LINE backtracking)",
+          "url": "https://github.com/advisories/GHSA-c475-qrg2-pj4r",
+          "severity": "high",
+          "cwe": ["CWE-1333"],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<=6.2.0"
+        }
+      ],
+      "effects": ["get-uri"],
+      "range": "<=6.2.0",
+      "nodes": ["node_modules/basic-ftp"],
+      "fixAvailable": {
+        "name": "unlighthouse",
+        "version": "0.4.2",
+        "isSemVerMajor": true
+      }
+    },
+    "brace-expansion": {
+      "name": "brace-expansion",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1240103,
+          "name": "brace-expansion",
+          "dependency": "brace-expansion",
+          "title": "brace-expansion: Quadratic-time expansion of the `{a},b}` rewrite causes CPU denial of service",
+          "url": "https://github.com/advisories/GHSA-q2hr-2g5m-vwhr",
+          "severity": "moderate",
+          "cwe": ["CWE-400", "CWE-407"],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": ">=4.0.0 <5.0.12"
+        },
+        {
+          "source": 1240107,
+          "name": "brace-expansion",
+          "dependency": "brace-expansion",
+          "title": "brace-expansion: DoS via uncontrolled recursion on nested brace groups causing stack exhaustion",
+          "url": "https://github.com/advisories/GHSA-qhr7-859c-m2p7",
+          "severity": "high",
+          "cwe": ["CWE-400", "CWE-674"],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=4.0.0 <5.0.11"
+        },
+        {
+          "source": 1240111,
+          "name": "brace-expansion",
+          "dependency": "brace-expansion",
+          "title": "brace-expansion: DoS via uncontrolled recursion in parseCommaParts causing stack exhaustion",
+          "url": "https://github.com/advisories/GHSA-6j4f-fj2g-mc7p",
+          "severity": "high",
+          "cwe": ["CWE-400", "CWE-674"],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=4.0.0 <5.0.10"
+        }
+      ],
+      "effects": [],
+      "range": "4.0.0 - 5.0.11",
+      "nodes": ["node_modules/npm/node_modules/brace-expansion"],
+      "fixAvailable": true
+    },
+    "braces": {
+      "name": "braces",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1240992,
+          "name": "braces",
+          "dependency": "braces",
+          "title": "braces vulnerable to stack-exhaustion denial of service through deeply nested patterns",
+          "url": "https://github.com/advisories/GHSA-vfj7-8cjw-p6xm",
+          "severity": "high",
+          "cwe": ["CWE-674"],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<=3.0.3"
+        }
+      ],
+      "effects": ["micromatch"],
+      "range": "*",
+      "nodes": ["node_modules/braces"],
+      "fixAvailable": {
+        "name": "@semantic-release/changelog",
+        "version": "5.0.1",
+        "isSemVerMajor": true
+      }
+    },
+    "esbuild": {
+      "name": "esbuild",
+      "severity": "low",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1120680,
+          "name": "esbuild",
+          "dependency": "esbuild",
+          "title": "esbuild allows arbitrary file read when running the development server on Windows",
+          "url": "https://github.com/advisories/GHSA-g7r4-m6w7-qqqr",
+          "severity": "low",
+          "cwe": ["CWE-22"],
+          "cvss": {
+            "score": 2.5,
+            "vectorString": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:N/I:L/A:N"
+          },
+          "range": ">=0.27.3 <0.28.1"
+        }
+      ],
+      "effects": [],
+      "range": "0.27.3 - 0.28.0",
+      "nodes": ["node_modules/esbuild"],
+      "fixAvailable": true
+    },
+    "extract-zip": {
+      "name": "extract-zip",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1139346,
+          "name": "extract-zip",
+          "dependency": "extract-zip",
+          "title": "extract-zip unvalidated symlink path traversal",
+          "url": "https://github.com/advisories/GHSA-jmr9-qjv8-65gv",
+          "severity": "high",
+          "cwe": ["CWE-22"],
+          "cvss": {
+            "score": 8.1,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:N"
+          },
+          "range": "<=2.0.1"
+        },
+        {
+          "source": 1193685,
+          "name": "extract-zip",
+          "dependency": "extract-zip",
+          "title": "extract-zip allows arbitrary file writes through symlink archive entries",
+          "url": "https://github.com/advisories/GHSA-7pqw-9j4j-h8q3",
+          "severity": "high",
+          "cwe": ["CWE-22"],
+          "cvss": {
+            "score": 8.1,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:H/A:H"
+          },
+          "range": "<=2.0.1"
+        }
+      ],
+      "effects": ["@puppeteer/browsers"],
+      "range": "*",
+      "nodes": ["node_modules/extract-zip"],
+      "fixAvailable": {
+        "name": "unlighthouse",
+        "version": "0.4.2",
+        "isSemVerMajor": true
+      }
+    },
+    "fast-glob": {
+      "name": "fast-glob",
+      "severity": "high",
+      "isDirect": false,
+      "via": ["micromatch"],
+      "effects": ["globby", "stylelint"],
+      "range": "*",
+      "nodes": ["node_modules/fast-glob"],
+      "fixAvailable": false
+    },
+    "get-uri": {
+      "name": "get-uri",
+      "severity": "high",
+      "isDirect": false,
+      "via": ["basic-ftp"],
+      "effects": ["pac-proxy-agent"],
+      "range": ">=5.0.0",
+      "nodes": ["node_modules/get-uri"],
+      "fixAvailable": {
+        "name": "unlighthouse",
+        "version": "0.4.2",
+        "isSemVerMajor": true
+      }
+    },
+    "globby": {
+      "name": "globby",
+      "severity": "high",
+      "isDirect": false,
+      "via": ["fast-glob", "micromatch"],
+      "effects": ["stylelint"],
+      "range": ">=8.0.0",
+      "nodes": ["node_modules/globby"],
+      "fixAvailable": false
+    },
+    "handlebars": {
+      "name": "handlebars",
+      "severity": "critical",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1241676,
+          "name": "handlebars",
+          "dependency": "handlebars",
+          "title": "Handlebars: JavaScript Injection via Unsafe Inline Embedding of Precompiled Templates",
+          "url": "https://github.com/advisories/GHSA-xw65-4hp5-5hc7",
+          "severity": "moderate",
+          "cwe": ["CWE-116"],
+          "cvss": {
+            "score": 4.7,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:C/C:L/I:L/A:N"
+          },
+          "range": ">=4.0.0 <=4.7.9"
+        },
+        {
+          "source": 1241677,
+          "name": "handlebars",
+          "dependency": "handlebars",
+          "title": "Handlebars: JavaScript Injection via AST Type Confusion in compile (bypass of CVE-2026-33937)",
+          "url": "https://github.com/advisories/GHSA-8r5x-fm3f-whwj",
+          "severity": "critical",
+          "cwe": ["CWE-94", "CWE-843"],
+          "cvss": {
+            "score": 9.8,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H"
+          },
+          "range": ">=4.0.0 <=4.7.9"
+        },
+        {
+          "source": 1242173,
+          "name": "handlebars",
+          "dependency": "handlebars",
+          "title": "Handlebars: JavaScript Injection via Own Property Check Bypass",
+          "url": "https://github.com/advisories/GHSA-p8wg-vrv2-v86f",
+          "severity": "critical",
+          "cwe": ["CWE-184", "CWE-1289"],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": ">=3.0.0 <=4.7.9"
+        }
+      ],
+      "effects": [],
+      "range": "3.0.0 - 4.7.9",
+      "nodes": ["node_modules/handlebars"],
+      "fixAvailable": true
+    },
+    "http-cache-semantics": {
+      "name": "http-cache-semantics",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1240991,
+          "name": "http-cache-semantics",
+          "dependency": "http-cache-semantics",
+          "title": "http-cache-semantics max-stale handling can disclose cross-user cached responses",
+          "url": "https://github.com/advisories/GHSA-ch52-4w7c-c8xp",
+          "severity": "high",
+          "cwe": ["CWE-524"],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N"
+          },
+          "range": "<=4.2.0"
+        }
+      ],
+      "effects": [],
+      "range": "<=4.2.0",
+      "nodes": ["node_modules/npm/node_modules/http-cache-semantics"],
+      "fixAvailable": true
+    },
+    "ip-address": {
+      "name": "ip-address",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1239948,
+          "name": "ip-address",
+          "dependency": "ip-address",
+          "title": "ip-address: Address6.isLinkLocal() recognizes fe80::/64 rather than fe80::/10, allowing SSRF and trust-boundary bypass to on-link hosts",
+          "url": "https://github.com/advisories/GHSA-rpw4-54j3-4h4q",
+          "severity": "moderate",
+          "cwe": ["CWE-697", "CWE-918"],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<=10.5.0"
+        },
+        {
+          "source": 1239949,
+          "name": "ip-address",
+          "dependency": "ip-address",
+          "title": "ip-address: no classifier recognizes the NAT64 local-use range 64:ff9b:1::/48, allowing SSRF and trust-boundary bypass",
+          "url": "https://github.com/advisories/GHSA-2vr4-cq9g-pvrc",
+          "severity": "moderate",
+          "cwe": ["CWE-918"],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": ">=10.2.0 <=10.5.0"
+        },
+        {
+          "source": 1240097,
+          "name": "ip-address",
+          "dependency": "ip-address",
+          "title": "ip-address: isInSubnet() and isHostInSubnet() compare addresses of different families as if they shared an address space, allowing an allowlist check to admit an address outside its range",
+          "url": "https://github.com/advisories/GHSA-j6r3-76f7-8jcv",
+          "severity": "moderate",
+          "cwe": ["CWE-697", "CWE-843"],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<=10.7.0"
+        },
+        {
+          "source": 1240098,
+          "name": "ip-address",
+          "dependency": "ip-address",
+          "title": "ip-address: Address6 builds a parse diagnostic proportional to the input with no length bound, allowing a single long string to stall or crash the process",
+          "url": "https://github.com/advisories/GHSA-h3mg-xc3c-68pw",
+          "severity": "moderate",
+          "cwe": ["CWE-400", "CWE-770"],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<=10.7.0"
+        }
+      ],
+      "effects": [],
+      "range": "<=10.7.0",
+      "nodes": ["node_modules/npm/node_modules/ip-address"],
+      "fixAvailable": true
+    },
+    "js-yaml": {
+      "name": "js-yaml",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": ["argparse"],
+      "effects": ["@lhci/utils"],
+      "range": "3.2.7 - 3.15.2",
+      "nodes": ["node_modules/js-yaml"],
+      "fixAvailable": {
+        "name": "unlighthouse",
+        "version": "0.4.2",
+        "isSemVerMajor": true
+      }
+    },
+    "launch-editor": {
+      "name": "launch-editor",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1242627,
+          "name": "launch-editor",
+          "dependency": "launch-editor",
+          "title": "launch-editor: escapeCmdArgs() omits % escaping on Windows",
+          "url": "https://github.com/advisories/GHSA-698v-4r3x-3vcv",
+          "severity": "moderate",
+          "cwe": ["CWE-78"],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<=2.14.1"
+        },
+        {
+          "source": 1242656,
+          "name": "launch-editor",
+          "dependency": "launch-editor",
+          "title": "launch-editor: Editor CLI flag misinterpretation causing arbitrary command execution for some editors",
+          "url": "https://github.com/advisories/GHSA-r825-w8mm-5pxw",
+          "severity": "moderate",
+          "cwe": ["CWE-88"],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<=2.14.1"
+        },
+        {
+          "source": 1242663,
+          "name": "launch-editor",
+          "dependency": "launch-editor",
+          "title": "launch-editor: `fs.existsSync()` existence check can be bypassed on Windows",
+          "url": "https://github.com/advisories/GHSA-587h-7wmj-h5pm",
+          "severity": "high",
+          "cwe": ["CWE-77"],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<=2.14.1"
+        }
+      ],
+      "effects": [],
+      "range": "<=2.14.1",
+      "nodes": ["node_modules/launch-editor"],
+      "fixAvailable": true
+    },
+    "lighthouse": {
+      "name": "lighthouse",
+      "severity": "high",
+      "isDirect": false,
+      "via": ["puppeteer-core", "puppeteer-core"],
+      "effects": ["@lhci/utils", "@unlighthouse/core"],
+      "range": "10.1.1-dev.20230414 - 10.1.1-dev.20230503 || >=10.2.0-dev.20230504",
+      "nodes": ["node_modules/@unlighthouse/core/node_modules/lighthouse", "node_modules/lighthouse"],
+      "fixAvailable": {
+        "name": "unlighthouse",
+        "version": "0.4.2",
+        "isSemVerMajor": true
+      }
+    },
+    "listhen": {
+      "name": "listhen",
+      "severity": "high",
+      "isDirect": false,
+      "via": ["node-forge"],
+      "effects": ["@unlighthouse/server"],
+      "range": ">=0.3.0",
+      "nodes": ["node_modules/listhen"],
+      "fixAvailable": {
+        "name": "unlighthouse",
+        "version": "0.4.2",
+        "isSemVerMajor": true
+      }
+    },
+    "micromatch": {
+      "name": "micromatch",
+      "severity": "high",
+      "isDirect": false,
+      "via": ["braces"],
+      "effects": [
+        "@semantic-release/commit-analyzer",
+        "@semantic-release/git",
+        "fast-glob",
+        "globby",
+        "semantic-release",
+        "stylelint"
+      ],
+      "range": ">=0.2.0",
+      "nodes": ["node_modules/micromatch"],
+      "fixAvailable": {
+        "name": "@semantic-release/changelog",
+        "version": "5.0.1",
+        "isSemVerMajor": true
+      }
+    },
+    "node-forge": {
+      "name": "node-forge",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1240912,
+          "name": "node-forge",
+          "dependency": "node-forge",
+          "title": "node-forge RSA PKCS#1 v1.5 signature verification accepts extra nested DigestAlgorithm elements",
+          "url": "https://github.com/advisories/GHSA-86w9-cpqp-85rv",
+          "severity": "high",
+          "cwe": ["CWE-347"],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N"
+          },
+          "range": "<=1.4.0"
+        }
+      ],
+      "effects": ["listhen"],
+      "range": "*",
+      "nodes": ["node_modules/node-forge"],
+      "fixAvailable": {
+        "name": "unlighthouse",
+        "version": "0.4.2",
+        "isSemVerMajor": true
+      }
+    },
+    "pac-proxy-agent": {
+      "name": "pac-proxy-agent",
+      "severity": "high",
+      "isDirect": false,
+      "via": ["get-uri"],
+      "effects": ["proxy-agent"],
+      "range": ">=6.0.0",
+      "nodes": ["node_modules/pac-proxy-agent"],
+      "fixAvailable": {
+        "name": "unlighthouse",
+        "version": "0.4.2",
+        "isSemVerMajor": true
+      }
+    },
+    "postcss-selector-parser": {
+      "name": "postcss-selector-parser",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1241232,
+          "name": "postcss-selector-parser",
+          "dependency": "postcss-selector-parser",
+          "title": "PostCSS: Quadratic complexity in flat selector parsing allows CPU exhaustion",
+          "url": "https://github.com/advisories/GHSA-rj75-hqrm-r3gf",
+          "severity": "moderate",
+          "cwe": ["CWE-400", "CWE-407"],
+          "cvss": {
+            "score": 5.9,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<7.1.6"
+        }
+      ],
+      "effects": [],
+      "range": "<7.1.6",
+      "nodes": ["node_modules/npm/node_modules/postcss-selector-parser"],
+      "fixAvailable": true
+    },
+    "proxy-agent": {
+      "name": "proxy-agent",
+      "severity": "high",
+      "isDirect": false,
+      "via": ["pac-proxy-agent"],
+      "effects": ["@puppeteer/browsers"],
+      "range": ">=6.0.0",
+      "nodes": ["node_modules/proxy-agent"],
+      "fixAvailable": {
+        "name": "unlighthouse",
+        "version": "0.4.2",
+        "isSemVerMajor": true
+      }
+    },
+    "puppeteer": {
+      "name": "puppeteer",
+      "severity": "high",
+      "isDirect": false,
+      "via": ["@puppeteer/browsers", "puppeteer-core"],
+      "effects": ["puppeteer-cluster"],
+      "range": ">=20.4.0",
+      "nodes": ["node_modules/puppeteer"],
+      "fixAvailable": {
+        "name": "unlighthouse",
+        "version": "0.4.2",
+        "isSemVerMajor": true
+      }
+    },
+    "puppeteer-cluster": {
+      "name": "puppeteer-cluster",
+      "severity": "high",
+      "isDirect": false,
+      "via": ["puppeteer"],
+      "effects": ["@unlighthouse/core"],
+      "range": ">=0.24.0",
+      "nodes": ["node_modules/puppeteer-cluster"],
+      "fixAvailable": {
+        "name": "unlighthouse",
+        "version": "0.4.2",
+        "isSemVerMajor": true
+      }
+    },
+    "puppeteer-core": {
+      "name": "puppeteer-core",
+      "severity": "high",
+      "isDirect": false,
+      "via": ["@puppeteer/browsers", "@puppeteer/browsers"],
+      "effects": ["@unlighthouse/core", "lighthouse", "puppeteer"],
+      "range": ">=19.8.4",
+      "nodes": [
+        "node_modules/@unlighthouse/core/node_modules/puppeteer-core",
+        "node_modules/puppeteer-core",
+        "node_modules/puppeteer/node_modules/puppeteer-core"
+      ],
+      "fixAvailable": {
+        "name": "unlighthouse",
+        "version": "0.4.2",
+        "isSemVerMajor": true
+      }
+    },
+    "semantic-release": {
+      "name": "semantic-release",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        "@semantic-release/commit-analyzer",
+        "@semantic-release/github",
+        "@semantic-release/npm",
+        "@semantic-release/release-notes-generator",
+        "micromatch"
+      ],
+      "effects": [
+        "@semantic-release/changelog",
+        "@semantic-release/commit-analyzer",
+        "@semantic-release/git",
+        "@semantic-release/github",
+        "@semantic-release/npm",
+        "@semantic-release/release-notes-generator"
+      ],
+      "range": ">=16.0.0-beta.1",
+      "nodes": ["node_modules/semantic-release"],
+      "fixAvailable": {
+        "name": "@semantic-release/changelog",
+        "version": "5.0.1",
+        "isSemVerMajor": true
+      }
+    },
+    "shell-quote": {
+      "name": "shell-quote",
+      "severity": "critical",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1241332,
+          "name": "shell-quote",
+          "dependency": "shell-quote",
+          "title": "shell-quote: `quote()` command injection via a line terminator in a token after a `{ comment }` token",
+          "url": "https://github.com/advisories/GHSA-pqg4-j6r4-53mv",
+          "severity": "critical",
+          "cwe": ["CWE-78"],
+          "cvss": {
+            "score": 8.1,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H"
+          },
+          "range": ">=1.8.4 <1.11.0"
+        }
+      ],
+      "effects": [],
+      "range": "1.8.4 - 1.10.0",
+      "nodes": ["node_modules/shell-quote"],
+      "fixAvailable": true
+    },
+    "sprintf-js": {
+      "name": "sprintf-js",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1241202,
+          "name": "sprintf-js",
+          "dependency": "sprintf-js",
+          "title": "sprintf-js vulnerable to denial of service through unbounded precision specifiers",
+          "url": "https://github.com/advisories/GHSA-hp3w-g68c-fv3c",
+          "severity": "moderate",
+          "cwe": ["CWE-1284"],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": "<=1.1.3"
+        }
+      ],
+      "effects": ["argparse"],
+      "range": "*",
+      "nodes": ["node_modules/sprintf-js"],
+      "fixAvailable": {
+        "name": "unlighthouse",
+        "version": "0.4.2",
+        "isSemVerMajor": true
+      }
+    },
+    "stylelint": {
+      "name": "stylelint",
+      "severity": "high",
+      "isDirect": true,
+      "via": ["fast-glob", "globby", "micromatch"],
+      "effects": [
+        "@double-great/stylelint-a11y",
+        "stylelint-config-recommended",
+        "stylelint-config-recommended-scss",
+        "stylelint-config-standard",
+        "stylelint-config-standard-scss",
+        "stylelint-plugin-carbon-tokens",
+        "stylelint-scss",
+        "stylelint-use-logical"
+      ],
+      "range": ">=7.7.1",
+      "nodes": ["node_modules/stylelint"],
+      "fixAvailable": false
+    },
+    "stylelint-config-recommended": {
+      "name": "stylelint-config-recommended",
+      "severity": "high",
+      "isDirect": false,
+      "via": ["stylelint"],
+      "effects": ["stylelint-config-recommended-scss", "stylelint-config-standard"],
+      "range": "*",
+      "nodes": ["node_modules/stylelint-config-recommended"],
+      "fixAvailable": false
+    },
+    "stylelint-config-recommended-scss": {
+      "name": "stylelint-config-recommended-scss",
+      "severity": "high",
+      "isDirect": false,
+      "via": ["stylelint", "stylelint-config-recommended", "stylelint-scss"],
+      "effects": ["stylelint-config-standard-scss"],
+      "range": "*",
+      "nodes": ["node_modules/stylelint-config-recommended-scss"],
+      "fixAvailable": false
+    },
+    "stylelint-config-standard": {
+      "name": "stylelint-config-standard",
+      "severity": "high",
+      "isDirect": false,
+      "via": ["stylelint", "stylelint-config-recommended"],
+      "effects": ["stylelint-config-standard-scss"],
+      "range": ">=16.0.0",
+      "nodes": ["node_modules/stylelint-config-standard"],
+      "fixAvailable": false
+    },
+    "stylelint-config-standard-scss": {
+      "name": "stylelint-config-standard-scss",
+      "severity": "high",
+      "isDirect": true,
+      "via": ["stylelint", "stylelint-config-recommended-scss", "stylelint-config-standard"],
+      "effects": [],
+      "range": "*",
+      "nodes": ["node_modules/stylelint-config-standard-scss"],
+      "fixAvailable": false
+    },
+    "stylelint-plugin-carbon-tokens": {
+      "name": "stylelint-plugin-carbon-tokens",
+      "severity": "high",
+      "isDirect": true,
+      "via": ["stylelint"],
+      "effects": [],
+      "range": ">=3.0.0-rc.0",
+      "nodes": ["node_modules/stylelint-plugin-carbon-tokens"],
+      "fixAvailable": {
+        "name": "stylelint-plugin-carbon-tokens",
+        "version": "2.8.0",
+        "isSemVerMajor": true
+      }
+    },
+    "stylelint-scss": {
+      "name": "stylelint-scss",
+      "severity": "high",
+      "isDirect": false,
+      "via": ["stylelint"],
+      "effects": ["stylelint-config-recommended-scss"],
+      "range": ">=2.0.0",
+      "nodes": ["node_modules/stylelint-scss"],
+      "fixAvailable": false
+    },
+    "stylelint-use-logical": {
+      "name": "stylelint-use-logical",
+      "severity": "high",
+      "isDirect": true,
+      "via": ["stylelint"],
+      "effects": [],
+      "range": "*",
+      "nodes": ["node_modules/stylelint-use-logical"],
+      "fixAvailable": false
+    },
+    "undici": {
+      "name": "undici",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1239934,
+          "name": "undici",
+          "dependency": "undici",
+          "title": "undici vulnerable to Denial of Service via unhandled error in WebSocket permessage-deflate decompression",
+          "url": "https://github.com/advisories/GHSA-3wwx-pv8p-q78v",
+          "severity": "moderate",
+          "cwe": ["CWE-248"],
+          "cvss": {
+            "score": 5.9,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=6.25.0 <6.28.1"
+        },
+        {
+          "source": 1240039,
+          "name": "undici",
+          "dependency": "undici",
+          "title": "undici vulnerable to downstream response splitting via retry interceptor",
+          "url": "https://github.com/advisories/GHSA-r53p-7pc4-xj5r",
+          "severity": "low",
+          "cwe": ["CWE-444"],
+          "cvss": {
+            "score": 3.7,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:L/A:N"
+          },
+          "range": "<6.28.1"
+        },
+        {
+          "source": 1240042,
+          "name": "undici",
+          "dependency": "undici",
+          "title": "undici vulnerable to Denial of Service via unrequested WebSocket subprotocol",
+          "url": "https://github.com/advisories/GHSA-rfgv-xxqx-mfg5",
+          "severity": "high",
+          "cwe": ["CWE-248", "CWE-252"],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=6.7.0 <6.28.1"
+        }
+      ],
+      "effects": [],
+      "range": "<=6.28.0",
+      "nodes": ["node_modules/npm/node_modules/undici"],
+      "fixAvailable": true
+    },
+    "unlighthouse": {
+      "name": "unlighthouse",
+      "severity": "high",
+      "isDirect": true,
+      "via": ["@unlighthouse/cli", "@unlighthouse/core"],
+      "effects": [],
+      "range": "0.3.13 - 0.3.15 || 0.4.3 - 0.19.1",
+      "nodes": ["node_modules/unlighthouse"],
+      "fixAvailable": {
+        "name": "unlighthouse",
+        "version": "0.4.2",
+        "isSemVerMajor": true
+      }
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 1,
+      "moderate": 5,
+      "high": 41,
+      "critical": 2,
+      "total": 49
+    },
+    "dependencies": {
+      "prod": 179,
+      "dev": 1629,
+      "optional": 170,
+      "peer": 38,
+      "peerOptional": 0,
+      "total": 1843
+    }
+  }
+}

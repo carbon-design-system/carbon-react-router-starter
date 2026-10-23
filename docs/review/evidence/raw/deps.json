@@ -1,0 +1,5608 @@
+{
+  "tool": "deps-analyze.js",
+  "today": "2026-10-22",
+  "migrationsAsOf": "2026-10-19",
+  "audit": {
+    "total": 49,
+    "critical": 2,
+    "high": 41,
+    "moderate": 5,
+    "low": 1,
+    "devOnly": 49,
+    "byPackage": [
+      {
+        "name": "@double-great/stylelint-a11y",
+        "severity": "high",
+        "devOnly": true,
+        "direct": true,
+        "fixAvailable": false,
+        "fixIsMajor": false
+      },
+      {
+        "name": "@lhci/utils",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "@puppeteer/browsers",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "@semantic-release/changelog",
+        "severity": "high",
+        "devOnly": true,
+        "direct": true,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "@semantic-release/commit-analyzer",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "@semantic-release/git",
+        "severity": "high",
+        "devOnly": true,
+        "direct": true,
+        "fixAvailable": false,
+        "fixIsMajor": false
+      },
+      {
+        "name": "@semantic-release/github",
+        "severity": "high",
+        "devOnly": true,
+        "direct": true,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "@semantic-release/npm",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "@semantic-release/release-notes-generator",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "@unlighthouse/cli",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "@unlighthouse/core",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "@unlighthouse/server",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "argparse",
+        "severity": "moderate",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "basic-ftp",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "brace-expansion",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": false
+      },
+      {
+        "name": "braces",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "esbuild",
+        "severity": "low",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": false
+      },
+      {
+        "name": "extract-zip",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "fast-glob",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": false,
+        "fixIsMajor": false
+      },
+      {
+        "name": "get-uri",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "globby",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": false,
+        "fixIsMajor": false
+      },
+      {
+        "name": "handlebars",
+        "severity": "critical",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": false
+      },
+      {
+        "name": "http-cache-semantics",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": false
+      },
+      {
+        "name": "ip-address",
+        "severity": "moderate",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": false
+      },
+      {
+        "name": "js-yaml",
+        "severity": "moderate",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "launch-editor",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": false
+      },
+      {
+        "name": "lighthouse",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "listhen",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "micromatch",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "node-forge",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "pac-proxy-agent",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "postcss-selector-parser",
+        "severity": "moderate",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": false
+      },
+      {
+        "name": "proxy-agent",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "puppeteer",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "puppeteer-cluster",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "puppeteer-core",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "semantic-release",
+        "severity": "high",
+        "devOnly": true,
+        "direct": true,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "shell-quote",
+        "severity": "critical",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": false
+      },
+      {
+        "name": "sprintf-js",
+        "severity": "moderate",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "stylelint",
+        "severity": "high",
+        "devOnly": true,
+        "direct": true,
+        "fixAvailable": false,
+        "fixIsMajor": false
+      },
+      {
+        "name": "stylelint-config-recommended",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": false,
+        "fixIsMajor": false
+      },
+      {
+        "name": "stylelint-config-recommended-scss",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": false,
+        "fixIsMajor": false
+      },
+      {
+        "name": "stylelint-config-standard",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": false,
+        "fixIsMajor": false
+      },
+      {
+        "name": "stylelint-config-standard-scss",
+        "severity": "high",
+        "devOnly": true,
+        "direct": true,
+        "fixAvailable": false,
+        "fixIsMajor": false
+      },
+      {
+        "name": "stylelint-plugin-carbon-tokens",
+        "severity": "high",
+        "devOnly": true,
+        "direct": true,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "stylelint-scss",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": false,
+        "fixIsMajor": false
+      },
+      {
+        "name": "stylelint-use-logical",
+        "severity": "high",
+        "devOnly": true,
+        "direct": true,
+        "fixAvailable": false,
+        "fixIsMajor": false
+      },
+      {
+        "name": "undici",
+        "severity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": false
+      },
+      {
+        "name": "unlighthouse",
+        "severity": "high",
+        "devOnly": true,
+        "direct": true,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    ]
+  },
+  "outdated": [
+    {
+      "name": "@carbon/ibm-products",
+      "current": "2.99.0",
+      "latest": "2.101.0",
+      "currentMajor": 2,
+      "latestMajor": 2,
+      "majorsBehind": 0,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-minor",
+      "replacedBy": null,
+      "behavioural": false,
+      "type": "dependencies"
+    },
+    {
+      "name": "@carbon/react",
+      "current": "1.117.0",
+      "latest": "1.119.0",
+      "currentMajor": 1,
+      "latestMajor": 1,
+      "majorsBehind": 0,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-minor",
+      "replacedBy": null,
+      "behavioural": false,
+      "type": "dependencies"
+    },
+    {
+      "name": "@cspell/dict-de-de",
+      "current": "4.1.2",
+      "latest": "4.1.3",
+      "currentMajor": 4,
+      "latestMajor": 4,
+      "majorsBehind": 0,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-minor",
+      "replacedBy": null,
+      "behavioural": false,
+      "type": "devDependencies"
+    },
+    {
+      "name": "@double-great/stylelint-a11y",
+      "current": "3.5.4",
+      "latest": "3.8.1",
+      "currentMajor": 3,
+      "latestMajor": 3,
+      "majorsBehind": 0,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-minor",
+      "replacedBy": null,
+      "behavioural": false,
+      "type": "devDependencies"
+    },
+    {
+      "name": "@eslint/js",
+      "current": "9.39.5",
+      "latest": "10.0.1",
+      "currentMajor": 9,
+      "latestMajor": 10,
+      "majorsBehind": 1,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-major",
+      "replacedBy": null,
+      "behavioural": false,
+      "type": "devDependencies"
+    },
+    {
+      "name": "@testing-library/user-event",
+      "current": "14.6.7",
+      "latest": "14.6.8",
+      "currentMajor": 14,
+      "latestMajor": 14,
+      "majorsBehind": 0,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-minor",
+      "replacedBy": null,
+      "behavioural": false,
+      "type": "devDependencies"
+    },
+    {
+      "name": "@vitejs/plugin-react",
+      "current": "6.1.1",
+      "latest": "6.1.2",
+      "currentMajor": 6,
+      "latestMajor": 6,
+      "majorsBehind": 0,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-minor",
+      "replacedBy": null,
+      "behavioural": false,
+      "type": "devDependencies"
+    },
+    {
+      "name": "@vitest/coverage-v8",
+      "current": "5.0.2",
+      "latest": "5.0.5",
+      "currentMajor": 5,
+      "latestMajor": 5,
+      "majorsBehind": 0,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-minor",
+      "replacedBy": null,
+      "behavioural": false,
+      "type": "devDependencies"
+    },
+    {
+      "name": "baseline-browser-mapping",
+      "current": "2.11.26",
+      "latest": "2.11.30",
+      "currentMajor": 2,
+      "latestMajor": 2,
+      "majorsBehind": 0,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-minor",
+      "replacedBy": null,
+      "behavioural": false,
+      "type": "devDependencies"
+    },
+    {
+      "name": "conventional-changelog-conventionalcommits",
+      "current": "10.4.0",
+      "latest": "10.4.1",
+      "currentMajor": 10,
+      "latestMajor": 10,
+      "majorsBehind": 0,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-minor",
+      "replacedBy": null,
+      "behavioural": false,
+      "type": "devDependencies"
+    },
+    {
+      "name": "cspell",
+      "current": "10.3.5",
+      "latest": "10.4.0",
+      "currentMajor": 10,
+      "latestMajor": 10,
+      "majorsBehind": 0,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-minor",
+      "replacedBy": null,
+      "behavioural": false,
+      "type": "devDependencies"
+    },
+    {
+      "name": "eslint",
+      "current": "9.39.5",
+      "latest": "10.13.0",
+      "currentMajor": 9,
+      "latestMajor": 10,
+      "majorsBehind": 1,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-major",
+      "replacedBy": null,
+      "behavioural": false,
+      "type": "devDependencies"
+    },
+    {
+      "name": "eslint-plugin-prettier",
+      "current": "5.5.6",
+      "latest": "5.5.7",
+      "currentMajor": 5,
+      "latestMajor": 5,
+      "majorsBehind": 0,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-minor",
+      "replacedBy": null,
+      "behavioural": false,
+      "type": "devDependencies"
+    },
+    {
+      "name": "express",
+      "current": "5.2.1",
+      "latest": "5.3.0",
+      "currentMajor": 5,
+      "latestMajor": 5,
+      "majorsBehind": 0,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-minor",
+      "replacedBy": null,
+      "behavioural": false,
+      "type": "dependencies"
+    },
+    {
+      "name": "globals",
+      "current": "17.12.0",
+      "latest": "17.13.0",
+      "currentMajor": 17,
+      "latestMajor": 17,
+      "majorsBehind": 0,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-minor",
+      "replacedBy": null,
+      "behavioural": false,
+      "type": "devDependencies"
+    },
+    {
+      "name": "i18next",
+      "current": "26.4.2",
+      "latest": "26.5.4",
+      "currentMajor": 26,
+      "latestMajor": 26,
+      "majorsBehind": 0,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-minor",
+      "replacedBy": null,
+      "behavioural": false,
+      "type": "dependencies"
+    },
+    {
+      "name": "i18next-fs-backend",
+      "current": "2.6.8",
+      "latest": "2.6.9",
+      "currentMajor": 2,
+      "latestMajor": 2,
+      "majorsBehind": 0,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-minor",
+      "replacedBy": null,
+      "behavioural": false,
+      "type": "dependencies"
+    },
+    {
+      "name": "jsdom",
+      "current": "30.1.1",
+      "latest": "30.1.3",
+      "currentMajor": 30,
+      "latestMajor": 30,
+      "majorsBehind": 0,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-minor",
+      "replacedBy": null,
+      "behavioural": false,
+      "type": "devDependencies"
+    },
+    {
+      "name": "msw",
+      "current": "2.15.0",
+      "latest": "3.0.3",
+      "currentMajor": 2,
+      "latestMajor": 3,
+      "majorsBehind": 1,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-major",
+      "replacedBy": null,
+      "behavioural": false,
+      "type": "devDependencies"
+    },
+    {
+      "name": "prettier",
+      "current": "3.9.9",
+      "latest": "3.9.10",
+      "currentMajor": 3,
+      "latestMajor": 3,
+      "majorsBehind": 0,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-minor",
+      "replacedBy": null,
+      "behavioural": false,
+      "type": "devDependencies"
+    },
+    {
+      "name": "react",
+      "current": "19.3.0",
+      "latest": "19.3.1",
+      "currentMajor": 19,
+      "latestMajor": 19,
+      "majorsBehind": 0,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-minor",
+      "replacedBy": null,
+      "behavioural": true,
+      "type": "dependencies"
+    },
+    {
+      "name": "react-dom",
+      "current": "19.3.0",
+      "latest": "19.3.1",
+      "currentMajor": 19,
+      "latestMajor": 19,
+      "majorsBehind": 0,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-minor",
+      "replacedBy": null,
+      "behavioural": true,
+      "type": "dependencies"
+    },
+    {
+      "name": "react-i18next",
+      "current": "17.0.15",
+      "latest": "17.1.0",
+      "currentMajor": 17,
+      "latestMajor": 17,
+      "majorsBehind": 0,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-minor",
+      "replacedBy": null,
+      "behavioural": false,
+      "type": "dependencies"
+    },
+    {
+      "name": "react-is",
+      "current": "19.3.0",
+      "latest": "19.3.1",
+      "currentMajor": 19,
+      "latestMajor": 19,
+      "majorsBehind": 0,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-minor",
+      "replacedBy": null,
+      "behavioural": false,
+      "type": "dependencies"
+    },
+    {
+      "name": "react-router",
+      "current": "8.4.0",
+      "latest": "8.5.0",
+      "currentMajor": 8,
+      "latestMajor": 8,
+      "majorsBehind": 0,
+      "migrationDocumented": true,
+      "codemod": false,
+      "workType": "dependency-minor",
+      "replacedBy": null,
+      "behavioural": false,
+      "type": "dependencies"
+    },
+    {
+      "name": "sass-embedded",
+      "current": "1.105.0",
+      "latest": "1.106.1",
+      "currentMajor": 1,
+      "latestMajor": 1,
+      "majorsBehind": 0,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-minor",
+      "replacedBy": null,
+      "behavioural": false,
+      "type": "devDependencies"
+    },
+    {
+      "name": "stylelint",
+      "current": "17.15.0",
+      "latest": "17.16.0",
+      "currentMajor": 17,
+      "latestMajor": 17,
+      "majorsBehind": 0,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-minor",
+      "replacedBy": null,
+      "behavioural": false,
+      "type": "devDependencies"
+    },
+    {
+      "name": "unlighthouse",
+      "current": "0.18.0",
+      "latest": "0.19.1",
+      "currentMajor": 0,
+      "latestMajor": 0,
+      "majorsBehind": 0,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-minor",
+      "replacedBy": null,
+      "behavioural": false,
+      "type": "devDependencies"
+    },
+    {
+      "name": "vite",
+      "current": "8.3.1",
+      "latest": "8.3.5",
+      "currentMajor": 8,
+      "latestMajor": 8,
+      "majorsBehind": 0,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-minor",
+      "replacedBy": null,
+      "behavioural": false,
+      "type": "devDependencies"
+    },
+    {
+      "name": "vitest",
+      "current": "5.0.2",
+      "latest": "5.0.5",
+      "currentMajor": 5,
+      "latestMajor": 5,
+      "majorsBehind": 0,
+      "migrationDocumented": false,
+      "codemod": false,
+      "workType": "dependency-minor",
+      "replacedBy": null,
+      "behavioural": false,
+      "type": "devDependencies"
+    }
+  ],
+  "duplicates": [
+    {
+      "name": "ansi-styles",
+      "majors": [3, 4, 5, 6],
+      "copies": 9
+    },
+    {
+      "name": "chalk",
+      "majors": [2, 4, 5, 6],
+      "copies": 6
+    },
+    {
+      "name": "get-stream",
+      "majors": [5, 6, 8, 9],
+      "copies": 7
+    },
+    {
+      "name": "lru-cache",
+      "majors": [5, 7, 10, 11],
+      "copies": 11
+    },
+    {
+      "name": "react-is",
+      "majors": [16, 17, 18, 19],
+      "copies": 4
+    },
+    {
+      "name": "supports-color",
+      "majors": [5, 7, 8, 10],
+      "copies": 5
+    },
+    {
+      "name": "type-fest",
+      "majors": [1, 2, 4, 5],
+      "copies": 7
+    },
+    {
+      "name": "cliui",
+      "majors": [7, 8, 9],
+      "copies": 5
+    },
+    {
+      "name": "dot-prop",
+      "majors": [5, 9, 10],
+      "copies": 3
+    },
+    {
+      "name": "emoji-regex",
+      "majors": [8, 9, 10],
+      "copies": 9
+    },
+    {
+      "name": "escape-string-regexp",
+      "majors": [1, 4, 5],
+      "copies": 6
+    },
+    {
+      "name": "execa",
+      "majors": [8, 9, 10],
+      "copies": 5
+    },
+    {
+      "name": "has-flag",
+      "majors": [3, 4, 5],
+      "copies": 3
+    },
+    {
+      "name": "marked",
+      "majors": [15, 17, 18],
+      "copies": 3
+    },
+    {
+      "name": "p-limit",
+      "majors": [1, 3, 6],
+      "copies": 3
+    },
+    {
+      "name": "parse-json",
+      "majors": [4, 5, 8],
+      "copies": 4
+    },
+    {
+      "name": "parse5",
+      "majors": [5, 6, 8],
+      "copies": 3
+    },
+    {
+      "name": "semver",
+      "majors": [5, 6, 7],
+      "copies": 8
+    },
+    {
+      "name": "string-width",
+      "majors": [4, 7, 8],
+      "copies": 9
+    },
+    {
+      "name": "undici",
+      "majors": [6, 7, 8],
+      "copies": 5
+    },
+    {
+      "name": "which",
+      "majors": [1, 2, 6],
+      "copies": 3
+    },
+    {
+      "name": "yallist",
+      "majors": [3, 4, 5],
+      "copies": 3
+    },
+    {
+      "name": "yargs",
+      "majors": [16, 17, 18],
+      "copies": 5
+    },
+    {
+      "name": "yargs-parser",
+      "majors": [20, 21, 22],
+      "copies": 5
+    },
+    {
+      "name": "@babel/runtime",
+      "majors": [7, 8],
+      "copies": 2
+    },
+    {
+      "name": "@octokit/openapi-types",
+      "majors": [27, 28],
+      "copies": 2
+    },
+    {
+      "name": "@octokit/types",
+      "majors": [16, 17],
+      "copies": 2
+    },
+    {
+      "name": "@puppeteer/browsers",
+      "majors": [2, 3],
+      "copies": 3
+    },
+    {
+      "name": "@sentry/core",
+      "majors": [7, 10],
+      "copies": 5
+    },
+    {
+      "name": "@sentry/node",
+      "majors": [7, 10],
+      "copies": 2
+    },
+    {
+      "name": "@sindresorhus/is",
+      "majors": [4, 5],
+      "copies": 2
+    },
+    {
+      "name": "@vueuse/core",
+      "majors": [10, 14],
+      "copies": 2
+    },
+    {
+      "name": "@vueuse/metadata",
+      "majors": [10, 14],
+      "copies": 2
+    },
+    {
+      "name": "@vueuse/shared",
+      "majors": [10, 14],
+      "copies": 2
+    },
+    {
+      "name": "agent-base",
+      "majors": [7, 9],
+      "copies": 2
+    },
+    {
+      "name": "ajv",
+      "majors": [6, 8],
+      "copies": 2
+    },
+    {
+      "name": "ansi-regex",
+      "majors": [5, 6],
+      "copies": 9
+    },
+    {
+      "name": "argparse",
+      "majors": [1, 2],
+      "copies": 4
+    },
+    {
+      "name": "balanced-match",
+      "majors": [1, 4],
+      "copies": 4
+    },
+    {
+      "name": "brace-expansion",
+      "majors": [1, 5],
+      "copies": 4
+    },
+    {
+      "name": "chromium-bidi",
+      "majors": [14, 17],
+      "copies": 3
+    },
+    {
+      "name": "color-convert",
+      "majors": [1, 2],
+      "copies": 2
+    },
+    {
+      "name": "configstore",
+      "majors": [5, 7],
+      "copies": 2
+    },
+    {
+      "name": "content-type",
+      "majors": [1, 2],
+      "copies": 2
+    },
+    {
+      "name": "cookie",
+      "majors": [0, 2],
+      "copies": 2
+    },
+    {
+      "name": "cookie-es",
+      "majors": [1, 3],
+      "copies": 2
+    },
+    {
+      "name": "crypto-random-string",
+      "majors": [2, 4],
+      "copies": 2
+    },
+    {
+      "name": "debug",
+      "majors": [2, 4],
+      "copies": 3
+    },
+    {
+      "name": "entities",
+      "majors": [7, 8],
+      "copies": 2
+    },
+    {
+      "name": "env-paths",
+      "majors": [2, 4],
+      "copies": 3
+    },
+    {
+      "name": "eslint-visitor-keys",
+      "majors": [3, 4],
+      "copies": 2
+    },
+    {
+      "name": "estree-walker",
+      "majors": [2, 3],
+      "copies": 3
+    },
+    {
+      "name": "figures",
+      "majors": [2, 6],
+      "copies": 4
+    },
+    {
+      "name": "file-entry-cache",
+      "majors": [8, 11],
+      "copies": 2
+    },
+    {
+      "name": "find-up",
+      "majors": [2, 5],
+      "copies": 2
+    },
+    {
+      "name": "flat-cache",
+      "majors": [4, 6],
+      "copies": 2
+    },
+    {
+      "name": "glob-parent",
+      "majors": [5, 6],
+      "copies": 2
+    },
+    {
+      "name": "globals",
+      "majors": [14, 17],
+      "copies": 2
+    },
+    {
+      "name": "hookified",
+      "majors": [1, 2],
+      "copies": 2
+    },
+    {
+      "name": "hosted-git-info",
+      "majors": [7, 9],
+      "copies": 3
+    },
+    {
+      "name": "http-proxy-agent",
+      "majors": [7, 9],
+      "copies": 2
+    },
+    {
+      "name": "https-proxy-agent",
+      "majors": [7, 9],
+      "copies": 2
+    },
+    {
+      "name": "human-signals",
+      "majors": [5, 8],
+      "copies": 3
+    },
+    {
+      "name": "ignore",
+      "majors": [5, 7],
+      "copies": 4
+    },
+    {
+      "name": "import-fresh",
+      "majors": [3, 4],
+      "copies": 3
+    },
+    {
+      "name": "indent-string",
+      "majors": [4, 5],
+      "copies": 2
+    },
+    {
+      "name": "ini",
+      "majors": [1, 6],
+      "copies": 5
+    },
+    {
+      "name": "is-stream",
+      "majors": [3, 4],
+      "copies": 4
+    },
+    {
+      "name": "isarray",
+      "majors": [1, 2],
+      "copies": 2
+    },
+    {
+      "name": "isexe",
+      "majors": [2, 4],
+      "copies": 2
+    },
+    {
+      "name": "js-tokens",
+      "majors": [4, 10],
+      "copies": 3
+    },
+    {
+      "name": "js-yaml",
+      "majors": [3, 4],
+      "copies": 4
+    },
+    {
+      "name": "json-parse-even-better-errors",
+      "majors": [2, 5],
+      "copies": 2
+    },
+    {
+      "name": "json-schema-traverse",
+      "majors": [0, 1],
+      "copies": 2
+    },
+    {
+      "name": "keyv",
+      "majors": [4, 5],
+      "copies": 4
+    },
+    {
+      "name": "lighthouse",
+      "majors": [12, 13],
+      "copies": 2
+    },
+    {
+      "name": "locate-path",
+      "majors": [2, 6],
+      "copies": 2
+    },
+    {
+      "name": "magic-string",
+      "majors": [0, 1],
+      "copies": 7
+    },
+    {
+      "name": "meow",
+      "majors": [13, 14],
+      "copies": 2
+    },
+    {
+      "name": "mimic-response",
+      "majors": [3, 4],
+      "copies": 2
+    },
+    {
+      "name": "minimatch",
+      "majors": [3, 10],
+      "copies": 4
+    },
+    {
+      "name": "minipass",
+      "majors": [3, 7],
+      "copies": 3
+    },
+    {
+      "name": "negotiator",
+      "majors": [0, 1],
+      "copies": 3
+    },
+    {
+      "name": "normalize-package-data",
+      "majors": [6, 8],
+      "copies": 2
+    },
+    {
+      "name": "normalize-url",
+      "majors": [8, 9],
+      "copies": 2
+    },
+    {
+      "name": "npm-run-path",
+      "majors": [5, 6],
+      "copies": 3
+    },
+    {
+      "name": "p-locate",
+      "majors": [2, 5],
+      "copies": 2
+    },
+    {
+      "name": "path-exists",
+      "majors": [3, 4],
+      "copies": 2
+    },
+    {
+      "name": "path-key",
+      "majors": [3, 4],
+      "copies": 5
+    },
+    {
+      "name": "picomatch",
+      "majors": [2, 4],
+      "copies": 4
+    },
+    {
+      "name": "pkg-types",
+      "majors": [1, 2],
+      "copies": 2
+    },
+    {
+      "name": "puppeteer-core",
+      "majors": [24, 25],
+      "copies": 3
+    },
+    {
+      "name": "read-package-up",
+      "majors": [11, 12],
+      "copies": 2
+    },
+    {
+      "name": "read-pkg",
+      "majors": [9, 10],
+      "copies": 2
+    },
+    {
+      "name": "resolve-from",
+      "majors": [4, 5],
+      "copies": 3
+    },
+    {
+      "name": "signal-exit",
+      "majors": [3, 4],
+      "copies": 9
+    },
+    {
+      "name": "socks-proxy-agent",
+      "majors": [8, 10],
+      "copies": 2
+    },
+    {
+      "name": "spdx-expression-parse",
+      "majors": [3, 4],
+      "copies": 2
+    },
+    {
+      "name": "strip-ansi",
+      "majors": [6, 7],
+      "copies": 8
+    },
+    {
+      "name": "strip-final-newline",
+      "majors": [3, 4],
+      "copies": 3
+    },
+    {
+      "name": "strip-json-comments",
+      "majors": [2, 3],
+      "copies": 2
+    },
+    {
+      "name": "supports-hyperlinks",
+      "majors": [3, 4],
+      "copies": 2
+    },
+    {
+      "name": "tldts-core",
+      "majors": [6, 7],
+      "copies": 3
+    },
+    {
+      "name": "tldts-icann",
+      "majors": [6, 7],
+      "copies": 2
+    },
+    {
+      "name": "tr46",
+      "majors": [0, 7],
+      "copies": 2
+    },
+    {
+      "name": "unctx",
+      "majors": [2, 3],
+      "copies": 2
+    },
+    {
+      "name": "unique-string",
+      "majors": [2, 3],
+      "copies": 2
+    },
+    {
+      "name": "unplugin",
+      "majors": [2, 3],
+      "copies": 4
+    },
+    {
+      "name": "webidl-conversions",
+      "majors": [3, 8],
+      "copies": 2
+    },
+    {
+      "name": "whatwg-url",
+      "majors": [5, 17],
+      "copies": 2
+    },
+    {
+      "name": "wrap-ansi",
+      "majors": [7, 9],
+      "copies": 5
+    },
+    {
+      "name": "write-file-atomic",
+      "majors": [3, 7],
+      "copies": 3
+    },
+    {
+      "name": "ws",
+      "majors": [7, 8],
+      "copies": 5
+    },
+    {
+      "name": "xdg-basedir",
+      "majors": [4, 5],
+      "copies": 2
+    },
+    {
+      "name": "yocto-queue",
+      "majors": [0, 1],
+      "copies": 2
+    },
+    {
+      "name": "zod",
+      "majors": [3, 4],
+      "copies": 4
+    }
+  ],
+  "licenses": {
+    "counts": [
+      {
+        "license": "MIT",
+        "count": 1431
+      },
+      {
+        "license": "ISC",
+        "count": 139
+      },
+      {
+        "license": "Apache-2.0",
+        "count": 132
+      },
+      {
+        "license": "BSD-2-Clause",
+        "count": 26
+      },
+      {
+        "license": "MPL-2.0",
+        "count": 25
+      },
+      {
+        "license": "BlueOak-1.0.0",
+        "count": 23
+      },
+      {
+        "license": "BSD-3-Clause",
+        "count": 21
+      },
+      {
+        "license": "OFL-1.1",
+        "count": 9
+      },
+      {
+        "license": "(MIT OR CC0-1.0)",
+        "count": 7
+      },
+      {
+        "license": "CC0-1.0",
+        "count": 5
+      },
+      {
+        "license": "MIT-0",
+        "count": 4
+      },
+      {
+        "license": "Python-2.0",
+        "count": 3
+      },
+      {
+        "license": "0BSD",
+        "count": 2
+      },
+      {
+        "license": "CC-BY-3.0",
+        "count": 2
+      },
+      {
+        "license": "(Apache-2.0 AND BSD-3-Clause)",
+        "count": 1
+      },
+      {
+        "license": "LGPL-3.0",
+        "count": 1
+      },
+      {
+        "license": "CC BY-SA 4.0",
+        "count": 1
+      },
+      {
+        "license": "CC-BY-4.0",
+        "count": 1
+      },
+      {
+        "license": "(BSD-3-Clause OR GPL-2.0)",
+        "count": 1
+      },
+      {
+        "license": "Artistic-2.0",
+        "count": 1
+      },
+      {
+        "license": "(BSD-2-Clause OR MIT OR Apache-2.0)",
+        "count": 1
+      },
+      {
+        "license": "WTFPL OR ISC",
+        "count": 1
+      },
+      {
+        "license": "WTFPL",
+        "count": 1
+      },
+      {
+        "license": "(WTFPL OR MIT)",
+        "count": 1
+      }
+    ],
+    "review": [
+      {
+        "name": "@cspell/dict-de-de",
+        "license": "LGPL-3.0",
+        "dev": true,
+        "kind": "copyleft"
+      },
+      {
+        "name": "node-forge",
+        "license": "(BSD-3-Clause OR GPL-2.0)",
+        "dev": true,
+        "kind": "dual (check the permissive option)"
+      }
+    ]
+  },
+  "unused": ["@ibm/plex", "react-is"],
+  "sizing": {
+    "dependencyMinor": 22,
+    "dependencyMajor": 32,
+    "majorsBehindTotal": 3,
+    "migrationDocumentedYes": 0,
+    "migrationDocumentedNo": 3,
+    "outdatedMinorPatch": 27,
+    "deprecated": 0,
+    "unused": 2,
+    "packages": [
+      {
+        "name": "@eslint/js",
+        "current": "9.39.5",
+        "latest": "10.0.1",
+        "majorsBehind": 1,
+        "workType": "dependency-major",
+        "migrationDocumented": false,
+        "codemod": false
+      },
+      {
+        "name": "eslint",
+        "current": "9.39.5",
+        "latest": "10.13.0",
+        "majorsBehind": 1,
+        "workType": "dependency-major",
+        "migrationDocumented": false,
+        "codemod": false
+      },
+      {
+        "name": "msw",
+        "current": "2.15.0",
+        "latest": "3.0.3",
+        "majorsBehind": 1,
+        "workType": "dependency-major",
+        "migrationDocumented": false,
+        "codemod": false
+      }
+    ],
+    "byWorkType": [
+      {
+        "workType": "dependency-minor",
+        "count": 22,
+        "majorsBehind": 0,
+        "migrationDocumentedYes": 22,
+        "migrationDocumentedNo": 0
+      },
+      {
+        "workType": "dependency-major",
+        "count": 32,
+        "majorsBehind": 3,
+        "migrationDocumentedYes": 29,
+        "migrationDocumentedNo": 3
+      }
+    ]
+  },
+  "findings": [
+    {
+      "id": "DEP-AN-1",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "@double-great/stylelint-a11y: high advisory (dev-only), via stylelint",
+      "location": "@double-great/stylelint-a11y",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm audit: @double-great/stylelint-a11y high (*) via stylelint"]
+      },
+      "effort": "S",
+      "workType": "dependency-minor",
+      "fixableBy": "manual",
+      "howToFix": "No fix is published; override, replace the package, or record an accepted risk with an expiry.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "@double-great/stylelint-a11y",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": true,
+        "fixAvailable": false,
+        "fixIsMajor": false
+      }
+    },
+    {
+      "id": "DEP-AN-2",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "@lhci/utils: high advisory (dev-only), via js-yaml, lighthouse",
+      "location": "@lhci/utils",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm audit: @lhci/utils high (>=0.3.6) via js-yaml, lighthouse"]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade unlighthouse to 0.4.2 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "@lhci/utils",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-3",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "@puppeteer/browsers: high advisory (dev-only), via extract-zip, proxy-agent",
+      "location": "@puppeteer/browsers",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm audit: @puppeteer/browsers high (*) via extract-zip, proxy-agent"]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade unlighthouse to 0.4.2 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "@puppeteer/browsers",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-4",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "@semantic-release/changelog: high advisory (dev-only), via semantic-release",
+      "location": "@semantic-release/changelog",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm audit: @semantic-release/changelog high (>=6.0.0) via semantic-release"]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade @semantic-release/changelog to 5.0.1 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "@semantic-release/changelog",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": true,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-5",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "@semantic-release/commit-analyzer: high advisory (dev-only), via micromatch, semantic-release",
+      "location": "@semantic-release/commit-analyzer",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm audit: @semantic-release/commit-analyzer high (>=7.0.0-beta.1) via micromatch, semantic-release"]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade @semantic-release/changelog to 5.0.1 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "@semantic-release/commit-analyzer",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-6",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "@semantic-release/git: high advisory (dev-only), via micromatch, semantic-release",
+      "location": "@semantic-release/git",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm audit: @semantic-release/git high (*) via micromatch, semantic-release"]
+      },
+      "effort": "S",
+      "workType": "dependency-minor",
+      "fixableBy": "manual",
+      "howToFix": "No fix is published; override, replace the package, or record an accepted risk with an expiry.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "@semantic-release/git",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": true,
+        "fixAvailable": false,
+        "fixIsMajor": false
+      }
+    },
+    {
+      "id": "DEP-AN-7",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "@semantic-release/github: high advisory (dev-only), via semantic-release",
+      "location": "@semantic-release/github",
+      "evidence": {
+        "method": "tool",
+        "refs": [
+          "npm audit: @semantic-release/github high (5.3.0-beta.1 - 5.3.0-beta.8 || 5.4.0-beta.1 || 5.5.0-beta.1 || >=5.6.0-beta.1) via semantic-release"
+        ]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade @semantic-release/changelog to 5.0.1 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "@semantic-release/github",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": true,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-8",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "@semantic-release/npm: high advisory (dev-only), via semantic-release",
+      "location": "@semantic-release/npm",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm audit: @semantic-release/npm high (>=6.0.0-beta.1) via semantic-release"]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade @semantic-release/changelog to 5.0.1 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "@semantic-release/npm",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-9",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "@semantic-release/release-notes-generator: high advisory (dev-only), via semantic-release",
+      "location": "@semantic-release/release-notes-generator",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm audit: @semantic-release/release-notes-generator high (>=10.0.0-beta.1) via semantic-release"]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade @semantic-release/changelog to 5.0.1 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "@semantic-release/release-notes-generator",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-10",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "@unlighthouse/cli: high advisory (dev-only), via @lhci/utils, @unlighthouse/core, @unlighthouse/server",
+      "location": "@unlighthouse/cli",
+      "evidence": {
+        "method": "tool",
+        "refs": [
+          "npm audit: @unlighthouse/cli high (0.3.8 - 0.3.15 || >=0.4.3) via @lhci/utils, @unlighthouse/core, @unlighthouse/server"
+        ]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade unlighthouse to 0.4.2 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "@unlighthouse/cli",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-11",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "@unlighthouse/core: high advisory (dev-only), via @puppeteer/browsers, lighthouse, puppeteer-cluster",
+      "location": "@unlighthouse/core",
+      "evidence": {
+        "method": "tool",
+        "refs": [
+          "npm audit: @unlighthouse/core high (0.8.7 - 0.19.1) via @puppeteer/browsers, lighthouse, puppeteer-cluster"
+        ]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade unlighthouse to 0.4.2 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "@unlighthouse/core",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-12",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "@unlighthouse/server: high advisory (dev-only), via @unlighthouse/core, listhen",
+      "location": "@unlighthouse/server",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm audit: @unlighthouse/server high (0.3.8 - 0.3.15 || >=0.4.3) via @unlighthouse/core, listhen"]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade unlighthouse to 0.4.2 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "@unlighthouse/server",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-13",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "argparse: moderate advisory (dev-only), via sprintf-js",
+      "location": "argparse",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm audit: argparse moderate (1.0.0 - 1.0.10) via sprintf-js"]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade unlighthouse to 0.4.2 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "argparse",
+        "npmSeverity": "moderate",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-14",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "basic-ftp: high advisory (dev-only), basic-ftp: Quadratic-time CPU denial of service in Client.list() Unix directory-listing parser (RE_LINE backtracking)",
+      "location": "basic-ftp",
+      "evidence": {
+        "method": "tool",
+        "refs": [
+          "npm audit: basic-ftp high (<=6.2.0) basic-ftp: Quadratic-time CPU denial of service in Client.list() Unix directory-listing parser (RE_LINE backtracking)",
+          "https://github.com/advisories/GHSA-c475-qrg2-pj4r"
+        ]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade unlighthouse to 0.4.2 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "basic-ftp",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-15",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "brace-expansion: high advisory (dev-only), brace-expansion: Quadratic-time expansion of the `{a},b}` rewrite causes CPU denial of service; brace-expansion: DoS via uncontrolled recursion on nested brace groups causing stack exhaustion",
+      "location": "brace-expansion",
+      "evidence": {
+        "method": "tool",
+        "refs": [
+          "npm audit: brace-expansion high (4.0.0 - 5.0.11) brace-expansion: Quadratic-time expansion of the `{a},b}` rewrite causes CPU denial of service; brace-expansion: DoS via uncontrolled recursion on nested brace groups causing stack exhaustion",
+          "https://github.com/advisories/GHSA-q2hr-2g5m-vwhr"
+        ]
+      },
+      "effort": "S",
+      "workType": "dependency-minor",
+      "fixableBy": "manual",
+      "howToFix": "Run npm audit fix or update to the patched version; run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "brace-expansion",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": false
+      }
+    },
+    {
+      "id": "DEP-AN-16",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "braces: high advisory (dev-only), braces vulnerable to stack-exhaustion denial of service through deeply nested patterns",
+      "location": "braces",
+      "evidence": {
+        "method": "tool",
+        "refs": [
+          "npm audit: braces high (*) braces vulnerable to stack-exhaustion denial of service through deeply nested patterns",
+          "https://github.com/advisories/GHSA-vfj7-8cjw-p6xm"
+        ]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade @semantic-release/changelog to 5.0.1 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "braces",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-17",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Info",
+      "title": "esbuild: low advisory (dev-only), esbuild allows arbitrary file read when running the development server on Windows",
+      "location": "esbuild",
+      "evidence": {
+        "method": "tool",
+        "refs": [
+          "npm audit: esbuild low (0.27.3 - 0.28.0) esbuild allows arbitrary file read when running the development server on Windows",
+          "https://github.com/advisories/GHSA-g7r4-m6w7-qqqr"
+        ]
+      },
+      "effort": "S",
+      "workType": "dependency-minor",
+      "fixableBy": "manual",
+      "howToFix": "Run npm audit fix or update to the patched version; run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "esbuild",
+        "npmSeverity": "low",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": false
+      }
+    },
+    {
+      "id": "DEP-AN-18",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "extract-zip: high advisory (dev-only), extract-zip unvalidated symlink path traversal; extract-zip allows arbitrary file writes through symlink archive entries",
+      "location": "extract-zip",
+      "evidence": {
+        "method": "tool",
+        "refs": [
+          "npm audit: extract-zip high (*) extract-zip unvalidated symlink path traversal; extract-zip allows arbitrary file writes through symlink archive entries",
+          "https://github.com/advisories/GHSA-jmr9-qjv8-65gv"
+        ]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade unlighthouse to 0.4.2 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "extract-zip",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-19",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "fast-glob: high advisory (dev-only), via micromatch",
+      "location": "fast-glob",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm audit: fast-glob high (*) via micromatch"]
+      },
+      "effort": "S",
+      "workType": "dependency-minor",
+      "fixableBy": "manual",
+      "howToFix": "No fix is published; override, replace the package, or record an accepted risk with an expiry.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "fast-glob",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": false,
+        "fixIsMajor": false
+      }
+    },
+    {
+      "id": "DEP-AN-20",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "get-uri: high advisory (dev-only), via basic-ftp",
+      "location": "get-uri",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm audit: get-uri high (>=5.0.0) via basic-ftp"]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade unlighthouse to 0.4.2 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "get-uri",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-21",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "globby: high advisory (dev-only), via fast-glob, micromatch",
+      "location": "globby",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm audit: globby high (>=8.0.0) via fast-glob, micromatch"]
+      },
+      "effort": "S",
+      "workType": "dependency-minor",
+      "fixableBy": "manual",
+      "howToFix": "No fix is published; override, replace the package, or record an accepted risk with an expiry.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "globby",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": false,
+        "fixIsMajor": false
+      }
+    },
+    {
+      "id": "DEP-AN-22",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "High",
+      "title": "handlebars: critical advisory (dev-only), Handlebars: JavaScript Injection via Unsafe Inline Embedding of Precompiled Templates; Handlebars: JavaScript Injection via AST Type Confusion in compile (bypass of CVE-2026-33937)",
+      "location": "handlebars",
+      "evidence": {
+        "method": "tool",
+        "refs": [
+          "npm audit: handlebars critical (3.0.0 - 4.7.9) Handlebars: JavaScript Injection via Unsafe Inline Embedding of Precompiled Templates; Handlebars: JavaScript Injection via AST Type Confusion in compile (bypass of CVE-2026-33937)",
+          "https://github.com/advisories/GHSA-xw65-4hp5-5hc7"
+        ]
+      },
+      "effort": "S",
+      "workType": "dependency-minor",
+      "fixableBy": "manual",
+      "howToFix": "Run npm audit fix or update to the patched version; run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "handlebars",
+        "npmSeverity": "critical",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": false
+      }
+    },
+    {
+      "id": "DEP-AN-23",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "http-cache-semantics: high advisory (dev-only), http-cache-semantics max-stale handling can disclose cross-user cached responses",
+      "location": "http-cache-semantics",
+      "evidence": {
+        "method": "tool",
+        "refs": [
+          "npm audit: http-cache-semantics high (<=4.2.0) http-cache-semantics max-stale handling can disclose cross-user cached responses",
+          "https://github.com/advisories/GHSA-ch52-4w7c-c8xp"
+        ]
+      },
+      "effort": "S",
+      "workType": "dependency-minor",
+      "fixableBy": "manual",
+      "howToFix": "Run npm audit fix or update to the patched version; run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "http-cache-semantics",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": false
+      }
+    },
+    {
+      "id": "DEP-AN-24",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "ip-address: moderate advisory (dev-only), ip-address: Address6.isLinkLocal() recognizes fe80::/64 rather than fe80::/10, allowing SSRF and trust-boundary bypass to on-link hosts; ip-address: no classifier recognizes the NAT64 local-use range 64:ff9b:1::/48, allowing SSRF and trust-boundary bypass",
+      "location": "ip-address",
+      "evidence": {
+        "method": "tool",
+        "refs": [
+          "npm audit: ip-address moderate (<=10.7.0) ip-address: Address6.isLinkLocal() recognizes fe80::/64 rather than fe80::/10, allowing SSRF and trust-boundary bypass to on-link hosts; ip-address: no classifier recognizes the NAT64 local-use range 64:ff9b:1::/48, allowing SSRF and trust-boundary bypass",
+          "https://github.com/advisories/GHSA-rpw4-54j3-4h4q"
+        ]
+      },
+      "effort": "S",
+      "workType": "dependency-minor",
+      "fixableBy": "manual",
+      "howToFix": "Run npm audit fix or update to the patched version; run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "ip-address",
+        "npmSeverity": "moderate",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": false
+      }
+    },
+    {
+      "id": "DEP-AN-25",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "js-yaml: moderate advisory (dev-only), via argparse",
+      "location": "js-yaml",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm audit: js-yaml moderate (3.2.7 - 3.15.2) via argparse"]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade unlighthouse to 0.4.2 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "js-yaml",
+        "npmSeverity": "moderate",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-26",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "launch-editor: high advisory (dev-only), launch-editor: escapeCmdArgs() omits % escaping on Windows; launch-editor: Editor CLI flag misinterpretation causing arbitrary command execution for some editors",
+      "location": "launch-editor",
+      "evidence": {
+        "method": "tool",
+        "refs": [
+          "npm audit: launch-editor high (<=2.14.1) launch-editor: escapeCmdArgs() omits % escaping on Windows; launch-editor: Editor CLI flag misinterpretation causing arbitrary command execution for some editors",
+          "https://github.com/advisories/GHSA-698v-4r3x-3vcv"
+        ]
+      },
+      "effort": "S",
+      "workType": "dependency-minor",
+      "fixableBy": "manual",
+      "howToFix": "Run npm audit fix or update to the patched version; run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "launch-editor",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": false
+      }
+    },
+    {
+      "id": "DEP-AN-27",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "lighthouse: high advisory (dev-only), via puppeteer-core, puppeteer-core",
+      "location": "lighthouse",
+      "evidence": {
+        "method": "tool",
+        "refs": [
+          "npm audit: lighthouse high (10.1.1-dev.20230414 - 10.1.1-dev.20230503 || >=10.2.0-dev.20230504) via puppeteer-core, puppeteer-core"
+        ]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade unlighthouse to 0.4.2 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "lighthouse",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-28",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "listhen: high advisory (dev-only), via node-forge",
+      "location": "listhen",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm audit: listhen high (>=0.3.0) via node-forge"]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade unlighthouse to 0.4.2 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "listhen",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-29",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "micromatch: high advisory (dev-only), via braces",
+      "location": "micromatch",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm audit: micromatch high (>=0.2.0) via braces"]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade @semantic-release/changelog to 5.0.1 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "micromatch",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-30",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "node-forge: high advisory (dev-only), node-forge RSA PKCS#1 v1.5 signature verification accepts extra nested DigestAlgorithm elements",
+      "location": "node-forge",
+      "evidence": {
+        "method": "tool",
+        "refs": [
+          "npm audit: node-forge high (*) node-forge RSA PKCS#1 v1.5 signature verification accepts extra nested DigestAlgorithm elements",
+          "https://github.com/advisories/GHSA-86w9-cpqp-85rv"
+        ]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade unlighthouse to 0.4.2 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "node-forge",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-31",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "pac-proxy-agent: high advisory (dev-only), via get-uri",
+      "location": "pac-proxy-agent",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm audit: pac-proxy-agent high (>=6.0.0) via get-uri"]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade unlighthouse to 0.4.2 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "pac-proxy-agent",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-32",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "postcss-selector-parser: moderate advisory (dev-only), PostCSS: Quadratic complexity in flat selector parsing allows CPU exhaustion",
+      "location": "postcss-selector-parser",
+      "evidence": {
+        "method": "tool",
+        "refs": [
+          "npm audit: postcss-selector-parser moderate (<7.1.6) PostCSS: Quadratic complexity in flat selector parsing allows CPU exhaustion",
+          "https://github.com/advisories/GHSA-rj75-hqrm-r3gf"
+        ]
+      },
+      "effort": "S",
+      "workType": "dependency-minor",
+      "fixableBy": "manual",
+      "howToFix": "Run npm audit fix or update to the patched version; run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "postcss-selector-parser",
+        "npmSeverity": "moderate",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": false
+      }
+    },
+    {
+      "id": "DEP-AN-33",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "proxy-agent: high advisory (dev-only), via pac-proxy-agent",
+      "location": "proxy-agent",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm audit: proxy-agent high (>=6.0.0) via pac-proxy-agent"]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade unlighthouse to 0.4.2 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "proxy-agent",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-34",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "puppeteer: high advisory (dev-only), via @puppeteer/browsers, puppeteer-core",
+      "location": "puppeteer",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm audit: puppeteer high (>=20.4.0) via @puppeteer/browsers, puppeteer-core"]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade unlighthouse to 0.4.2 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "puppeteer",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-35",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "puppeteer-cluster: high advisory (dev-only), via puppeteer",
+      "location": "puppeteer-cluster",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm audit: puppeteer-cluster high (>=0.24.0) via puppeteer"]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade unlighthouse to 0.4.2 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "puppeteer-cluster",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-36",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "puppeteer-core: high advisory (dev-only), via @puppeteer/browsers, @puppeteer/browsers",
+      "location": "puppeteer-core",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm audit: puppeteer-core high (>=19.8.4) via @puppeteer/browsers, @puppeteer/browsers"]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade unlighthouse to 0.4.2 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "puppeteer-core",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-37",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "semantic-release: high advisory (dev-only), via @semantic-release/commit-analyzer, @semantic-release/github, @semantic-release/npm",
+      "location": "semantic-release",
+      "evidence": {
+        "method": "tool",
+        "refs": [
+          "npm audit: semantic-release high (>=16.0.0-beta.1) via @semantic-release/commit-analyzer, @semantic-release/github, @semantic-release/npm"
+        ]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade @semantic-release/changelog to 5.0.1 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "semantic-release",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": true,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-38",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "High",
+      "title": "shell-quote: critical advisory (dev-only), shell-quote: `quote()` command injection via a line terminator in a token after a `{ comment }` token",
+      "location": "shell-quote",
+      "evidence": {
+        "method": "tool",
+        "refs": [
+          "npm audit: shell-quote critical (1.8.4 - 1.10.0) shell-quote: `quote()` command injection via a line terminator in a token after a `{ comment }` token",
+          "https://github.com/advisories/GHSA-pqg4-j6r4-53mv"
+        ]
+      },
+      "effort": "S",
+      "workType": "dependency-minor",
+      "fixableBy": "manual",
+      "howToFix": "Run npm audit fix or update to the patched version; run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "shell-quote",
+        "npmSeverity": "critical",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": false
+      }
+    },
+    {
+      "id": "DEP-AN-39",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "sprintf-js: moderate advisory (dev-only), sprintf-js vulnerable to denial of service through unbounded precision specifiers",
+      "location": "sprintf-js",
+      "evidence": {
+        "method": "tool",
+        "refs": [
+          "npm audit: sprintf-js moderate (*) sprintf-js vulnerable to denial of service through unbounded precision specifiers",
+          "https://github.com/advisories/GHSA-hp3w-g68c-fv3c"
+        ]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade unlighthouse to 0.4.2 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "sprintf-js",
+        "npmSeverity": "moderate",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-40",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "stylelint: high advisory (dev-only), via fast-glob, globby, micromatch",
+      "location": "stylelint",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm audit: stylelint high (>=7.7.1) via fast-glob, globby, micromatch"]
+      },
+      "effort": "S",
+      "workType": "dependency-minor",
+      "fixableBy": "manual",
+      "howToFix": "No fix is published; override, replace the package, or record an accepted risk with an expiry.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "stylelint",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": true,
+        "fixAvailable": false,
+        "fixIsMajor": false
+      }
+    },
+    {
+      "id": "DEP-AN-41",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "stylelint-config-recommended: high advisory (dev-only), via stylelint",
+      "location": "stylelint-config-recommended",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm audit: stylelint-config-recommended high (*) via stylelint"]
+      },
+      "effort": "S",
+      "workType": "dependency-minor",
+      "fixableBy": "manual",
+      "howToFix": "No fix is published; override, replace the package, or record an accepted risk with an expiry.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "stylelint-config-recommended",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": false,
+        "fixIsMajor": false
+      }
+    },
+    {
+      "id": "DEP-AN-42",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "stylelint-config-recommended-scss: high advisory (dev-only), via stylelint, stylelint-config-recommended, stylelint-scss",
+      "location": "stylelint-config-recommended-scss",
+      "evidence": {
+        "method": "tool",
+        "refs": [
+          "npm audit: stylelint-config-recommended-scss high (*) via stylelint, stylelint-config-recommended, stylelint-scss"
+        ]
+      },
+      "effort": "S",
+      "workType": "dependency-minor",
+      "fixableBy": "manual",
+      "howToFix": "No fix is published; override, replace the package, or record an accepted risk with an expiry.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "stylelint-config-recommended-scss",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": false,
+        "fixIsMajor": false
+      }
+    },
+    {
+      "id": "DEP-AN-43",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "stylelint-config-standard: high advisory (dev-only), via stylelint, stylelint-config-recommended",
+      "location": "stylelint-config-standard",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm audit: stylelint-config-standard high (>=16.0.0) via stylelint, stylelint-config-recommended"]
+      },
+      "effort": "S",
+      "workType": "dependency-minor",
+      "fixableBy": "manual",
+      "howToFix": "No fix is published; override, replace the package, or record an accepted risk with an expiry.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "stylelint-config-standard",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": false,
+        "fixIsMajor": false
+      }
+    },
+    {
+      "id": "DEP-AN-44",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "stylelint-config-standard-scss: high advisory (dev-only), via stylelint, stylelint-config-recommended-scss, stylelint-config-standard",
+      "location": "stylelint-config-standard-scss",
+      "evidence": {
+        "method": "tool",
+        "refs": [
+          "npm audit: stylelint-config-standard-scss high (*) via stylelint, stylelint-config-recommended-scss, stylelint-config-standard"
+        ]
+      },
+      "effort": "S",
+      "workType": "dependency-minor",
+      "fixableBy": "manual",
+      "howToFix": "No fix is published; override, replace the package, or record an accepted risk with an expiry.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "stylelint-config-standard-scss",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": true,
+        "fixAvailable": false,
+        "fixIsMajor": false
+      }
+    },
+    {
+      "id": "DEP-AN-45",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "stylelint-plugin-carbon-tokens: high advisory (dev-only), via stylelint",
+      "location": "stylelint-plugin-carbon-tokens",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm audit: stylelint-plugin-carbon-tokens high (>=3.0.0-rc.0) via stylelint"]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade stylelint-plugin-carbon-tokens to 2.8.0 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "stylelint-plugin-carbon-tokens",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": true,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-46",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "stylelint-scss: high advisory (dev-only), via stylelint",
+      "location": "stylelint-scss",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm audit: stylelint-scss high (>=2.0.0) via stylelint"]
+      },
+      "effort": "S",
+      "workType": "dependency-minor",
+      "fixableBy": "manual",
+      "howToFix": "No fix is published; override, replace the package, or record an accepted risk with an expiry.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "stylelint-scss",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": false,
+        "fixIsMajor": false
+      }
+    },
+    {
+      "id": "DEP-AN-47",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "stylelint-use-logical: high advisory (dev-only), via stylelint",
+      "location": "stylelint-use-logical",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm audit: stylelint-use-logical high (*) via stylelint"]
+      },
+      "effort": "S",
+      "workType": "dependency-minor",
+      "fixableBy": "manual",
+      "howToFix": "No fix is published; override, replace the package, or record an accepted risk with an expiry.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "stylelint-use-logical",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": true,
+        "fixAvailable": false,
+        "fixIsMajor": false
+      }
+    },
+    {
+      "id": "DEP-AN-48",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "undici: high advisory (dev-only), undici vulnerable to Denial of Service via unhandled error in WebSocket permessage-deflate decompression; undici vulnerable to downstream response splitting via retry interceptor",
+      "location": "undici",
+      "evidence": {
+        "method": "tool",
+        "refs": [
+          "npm audit: undici high (<=6.28.0) undici vulnerable to Denial of Service via unhandled error in WebSocket permessage-deflate decompression; undici vulnerable to downstream response splitting via retry interceptor",
+          "https://github.com/advisories/GHSA-3wwx-pv8p-q78v"
+        ]
+      },
+      "effort": "S",
+      "workType": "dependency-minor",
+      "fixableBy": "manual",
+      "howToFix": "Run npm audit fix or update to the patched version; run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "undici",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": false,
+        "fixAvailable": true,
+        "fixIsMajor": false
+      }
+    },
+    {
+      "id": "DEP-AN-49",
+      "check": "DEP-03",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "unlighthouse: high advisory (dev-only), via @unlighthouse/cli, @unlighthouse/core",
+      "location": "unlighthouse",
+      "evidence": {
+        "method": "tool",
+        "refs": [
+          "npm audit: unlighthouse high (0.3.13 - 0.3.15 || 0.4.3 - 0.19.1) via @unlighthouse/cli, @unlighthouse/core"
+        ]
+      },
+      "effort": "S",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Upgrade unlighthouse to 0.4.2 (breaking); run the tests.",
+      "standard": {
+        "owasp": "A06:2021",
+        "cwe": "CWE-1395"
+      },
+      "metrics": {
+        "package": "unlighthouse",
+        "npmSeverity": "high",
+        "devOnly": true,
+        "direct": true,
+        "fixAvailable": true,
+        "fixIsMajor": true
+      }
+    },
+    {
+      "id": "DEP-AN-50",
+      "check": "DEP-09",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "@eslint/js 9.39.5 is 1 major version(s) behind 10.0.1 (no documented migration), dev-only",
+      "location": "@eslint/js",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm outdated: @eslint/js current 9.39.5, latest 10.0.1"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Read the changelog for each major, upgrade behind a baseline test net, and verify behaviour by hand.",
+      "metrics": {
+        "package": "@eslint/js",
+        "current": "9.39.5",
+        "latest": "10.0.1",
+        "majorsBehind": 1,
+        "migrationDocumented": false,
+        "codemod": false,
+        "devOnly": true
+      }
+    },
+    {
+      "id": "DEP-AN-51",
+      "check": "DEP-09",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "eslint 9.39.5 is 1 major version(s) behind 10.13.0 (no documented migration), dev-only",
+      "location": "eslint",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm outdated: eslint current 9.39.5, latest 10.13.0"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Read the changelog for each major, upgrade behind a baseline test net, and verify behaviour by hand.",
+      "metrics": {
+        "package": "eslint",
+        "current": "9.39.5",
+        "latest": "10.13.0",
+        "majorsBehind": 1,
+        "migrationDocumented": false,
+        "codemod": false,
+        "devOnly": true
+      }
+    },
+    {
+      "id": "DEP-AN-52",
+      "check": "DEP-09",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "msw 2.15.0 is 1 major version(s) behind 3.0.3 (no documented migration), dev-only",
+      "location": "msw",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm outdated: msw current 2.15.0, latest 3.0.3"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Read the changelog for each major, upgrade behind a baseline test net, and verify behaviour by hand.",
+      "metrics": {
+        "package": "msw",
+        "current": "2.15.0",
+        "latest": "3.0.3",
+        "majorsBehind": 1,
+        "migrationDocumented": false,
+        "codemod": false,
+        "devOnly": true
+      }
+    },
+    {
+      "id": "DEP-AN-53",
+      "check": "DEP-19",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "27 package(s) have patch or minor updates pending",
+      "location": "package.json",
+      "evidence": {
+        "method": "tool",
+        "refs": ["npm outdated: current differs from latest within the same major"]
+      },
+      "effort": "S",
+      "workType": "dependency-minor",
+      "fixableBy": "script",
+      "howToFix": "Batch the updates (Renovate group) and run the tests.",
+      "metrics": {
+        "count": 27
+      }
+    },
+    {
+      "id": "DEP-AN-54",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "ansi-styles is installed in 4 major versions (3, 4, 5, 6)",
+      "location": "ansi-styles",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: ansi-styles majors 3, 4, 5, 6, 9 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "ansi-styles",
+        "majors": [3, 4, 5, 6],
+        "copies": 9
+      }
+    },
+    {
+      "id": "DEP-AN-55",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "chalk is installed in 4 major versions (2, 4, 5, 6)",
+      "location": "chalk",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: chalk majors 2, 4, 5, 6, 6 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "chalk",
+        "majors": [2, 4, 5, 6],
+        "copies": 6
+      }
+    },
+    {
+      "id": "DEP-AN-56",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "get-stream is installed in 4 major versions (5, 6, 8, 9)",
+      "location": "get-stream",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: get-stream majors 5, 6, 8, 9, 7 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "get-stream",
+        "majors": [5, 6, 8, 9],
+        "copies": 7
+      }
+    },
+    {
+      "id": "DEP-AN-57",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "lru-cache is installed in 4 major versions (5, 7, 10, 11)",
+      "location": "lru-cache",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: lru-cache majors 5, 7, 10, 11, 11 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "lru-cache",
+        "majors": [5, 7, 10, 11],
+        "copies": 11
+      }
+    },
+    {
+      "id": "DEP-AN-58",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "react-is is installed in 4 major versions (16, 17, 18, 19)",
+      "location": "react-is",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: react-is majors 16, 17, 18, 19, 4 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "react-is",
+        "majors": [16, 17, 18, 19],
+        "copies": 4
+      }
+    },
+    {
+      "id": "DEP-AN-59",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "supports-color is installed in 4 major versions (5, 7, 8, 10)",
+      "location": "supports-color",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: supports-color majors 5, 7, 8, 10, 5 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "supports-color",
+        "majors": [5, 7, 8, 10],
+        "copies": 5
+      }
+    },
+    {
+      "id": "DEP-AN-60",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "type-fest is installed in 4 major versions (1, 2, 4, 5)",
+      "location": "type-fest",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: type-fest majors 1, 2, 4, 5, 7 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "type-fest",
+        "majors": [1, 2, 4, 5],
+        "copies": 7
+      }
+    },
+    {
+      "id": "DEP-AN-61",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "cliui is installed in 3 major versions (7, 8, 9)",
+      "location": "cliui",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: cliui majors 7, 8, 9, 5 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "cliui",
+        "majors": [7, 8, 9],
+        "copies": 5
+      }
+    },
+    {
+      "id": "DEP-AN-62",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "dot-prop is installed in 3 major versions (5, 9, 10)",
+      "location": "dot-prop",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: dot-prop majors 5, 9, 10, 3 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "dot-prop",
+        "majors": [5, 9, 10],
+        "copies": 3
+      }
+    },
+    {
+      "id": "DEP-AN-63",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "emoji-regex is installed in 3 major versions (8, 9, 10)",
+      "location": "emoji-regex",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: emoji-regex majors 8, 9, 10, 9 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "emoji-regex",
+        "majors": [8, 9, 10],
+        "copies": 9
+      }
+    },
+    {
+      "id": "DEP-AN-64",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "escape-string-regexp is installed in 3 major versions (1, 4, 5)",
+      "location": "escape-string-regexp",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: escape-string-regexp majors 1, 4, 5, 6 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "escape-string-regexp",
+        "majors": [1, 4, 5],
+        "copies": 6
+      }
+    },
+    {
+      "id": "DEP-AN-65",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "execa is installed in 3 major versions (8, 9, 10)",
+      "location": "execa",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: execa majors 8, 9, 10, 5 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "execa",
+        "majors": [8, 9, 10],
+        "copies": 5
+      }
+    },
+    {
+      "id": "DEP-AN-66",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "has-flag is installed in 3 major versions (3, 4, 5)",
+      "location": "has-flag",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: has-flag majors 3, 4, 5, 3 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "has-flag",
+        "majors": [3, 4, 5],
+        "copies": 3
+      }
+    },
+    {
+      "id": "DEP-AN-67",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "marked is installed in 3 major versions (15, 17, 18)",
+      "location": "marked",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: marked majors 15, 17, 18, 3 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "marked",
+        "majors": [15, 17, 18],
+        "copies": 3
+      }
+    },
+    {
+      "id": "DEP-AN-68",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "p-limit is installed in 3 major versions (1, 3, 6)",
+      "location": "p-limit",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: p-limit majors 1, 3, 6, 3 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "p-limit",
+        "majors": [1, 3, 6],
+        "copies": 3
+      }
+    },
+    {
+      "id": "DEP-AN-69",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "parse-json is installed in 3 major versions (4, 5, 8)",
+      "location": "parse-json",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: parse-json majors 4, 5, 8, 4 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "parse-json",
+        "majors": [4, 5, 8],
+        "copies": 4
+      }
+    },
+    {
+      "id": "DEP-AN-70",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "parse5 is installed in 3 major versions (5, 6, 8)",
+      "location": "parse5",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: parse5 majors 5, 6, 8, 3 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "parse5",
+        "majors": [5, 6, 8],
+        "copies": 3
+      }
+    },
+    {
+      "id": "DEP-AN-71",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "semver is installed in 3 major versions (5, 6, 7)",
+      "location": "semver",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: semver majors 5, 6, 7, 8 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "semver",
+        "majors": [5, 6, 7],
+        "copies": 8
+      }
+    },
+    {
+      "id": "DEP-AN-72",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "string-width is installed in 3 major versions (4, 7, 8)",
+      "location": "string-width",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: string-width majors 4, 7, 8, 9 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "string-width",
+        "majors": [4, 7, 8],
+        "copies": 9
+      }
+    },
+    {
+      "id": "DEP-AN-73",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "undici is installed in 3 major versions (6, 7, 8)",
+      "location": "undici",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: undici majors 6, 7, 8, 5 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "undici",
+        "majors": [6, 7, 8],
+        "copies": 5
+      }
+    },
+    {
+      "id": "DEP-AN-74",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "which is installed in 3 major versions (1, 2, 6)",
+      "location": "which",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: which majors 1, 2, 6, 3 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "which",
+        "majors": [1, 2, 6],
+        "copies": 3
+      }
+    },
+    {
+      "id": "DEP-AN-75",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "yallist is installed in 3 major versions (3, 4, 5)",
+      "location": "yallist",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: yallist majors 3, 4, 5, 3 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "yallist",
+        "majors": [3, 4, 5],
+        "copies": 3
+      }
+    },
+    {
+      "id": "DEP-AN-76",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "yargs is installed in 3 major versions (16, 17, 18)",
+      "location": "yargs",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: yargs majors 16, 17, 18, 5 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "yargs",
+        "majors": [16, 17, 18],
+        "copies": 5
+      }
+    },
+    {
+      "id": "DEP-AN-77",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Medium",
+      "title": "yargs-parser is installed in 3 major versions (20, 21, 22)",
+      "location": "yargs-parser",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: yargs-parser majors 20, 21, 22, 5 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "yargs-parser",
+        "majors": [20, 21, 22],
+        "copies": 5
+      }
+    },
+    {
+      "id": "DEP-AN-78",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "@babel/runtime is installed in 2 major versions (7, 8)",
+      "location": "@babel/runtime",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: @babel/runtime majors 7, 8, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "@babel/runtime",
+        "majors": [7, 8],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-79",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "@octokit/openapi-types is installed in 2 major versions (27, 28)",
+      "location": "@octokit/openapi-types",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: @octokit/openapi-types majors 27, 28, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "@octokit/openapi-types",
+        "majors": [27, 28],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-80",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "@octokit/types is installed in 2 major versions (16, 17)",
+      "location": "@octokit/types",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: @octokit/types majors 16, 17, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "@octokit/types",
+        "majors": [16, 17],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-81",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "@puppeteer/browsers is installed in 2 major versions (2, 3)",
+      "location": "@puppeteer/browsers",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: @puppeteer/browsers majors 2, 3, 3 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "@puppeteer/browsers",
+        "majors": [2, 3],
+        "copies": 3
+      }
+    },
+    {
+      "id": "DEP-AN-82",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "@sentry/core is installed in 2 major versions (7, 10)",
+      "location": "@sentry/core",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: @sentry/core majors 7, 10, 5 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "@sentry/core",
+        "majors": [7, 10],
+        "copies": 5
+      }
+    },
+    {
+      "id": "DEP-AN-83",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "@sentry/node is installed in 2 major versions (7, 10)",
+      "location": "@sentry/node",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: @sentry/node majors 7, 10, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "@sentry/node",
+        "majors": [7, 10],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-84",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "@sindresorhus/is is installed in 2 major versions (4, 5)",
+      "location": "@sindresorhus/is",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: @sindresorhus/is majors 4, 5, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "@sindresorhus/is",
+        "majors": [4, 5],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-85",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "@vueuse/core is installed in 2 major versions (10, 14)",
+      "location": "@vueuse/core",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: @vueuse/core majors 10, 14, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "@vueuse/core",
+        "majors": [10, 14],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-86",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "@vueuse/metadata is installed in 2 major versions (10, 14)",
+      "location": "@vueuse/metadata",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: @vueuse/metadata majors 10, 14, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "@vueuse/metadata",
+        "majors": [10, 14],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-87",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "@vueuse/shared is installed in 2 major versions (10, 14)",
+      "location": "@vueuse/shared",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: @vueuse/shared majors 10, 14, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "@vueuse/shared",
+        "majors": [10, 14],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-88",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "agent-base is installed in 2 major versions (7, 9)",
+      "location": "agent-base",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: agent-base majors 7, 9, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "agent-base",
+        "majors": [7, 9],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-89",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "ajv is installed in 2 major versions (6, 8)",
+      "location": "ajv",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: ajv majors 6, 8, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "ajv",
+        "majors": [6, 8],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-90",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "ansi-regex is installed in 2 major versions (5, 6)",
+      "location": "ansi-regex",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: ansi-regex majors 5, 6, 9 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "ansi-regex",
+        "majors": [5, 6],
+        "copies": 9
+      }
+    },
+    {
+      "id": "DEP-AN-91",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "argparse is installed in 2 major versions (1, 2)",
+      "location": "argparse",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: argparse majors 1, 2, 4 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "argparse",
+        "majors": [1, 2],
+        "copies": 4
+      }
+    },
+    {
+      "id": "DEP-AN-92",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "balanced-match is installed in 2 major versions (1, 4)",
+      "location": "balanced-match",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: balanced-match majors 1, 4, 4 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "balanced-match",
+        "majors": [1, 4],
+        "copies": 4
+      }
+    },
+    {
+      "id": "DEP-AN-93",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "brace-expansion is installed in 2 major versions (1, 5)",
+      "location": "brace-expansion",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: brace-expansion majors 1, 5, 4 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "brace-expansion",
+        "majors": [1, 5],
+        "copies": 4
+      }
+    },
+    {
+      "id": "DEP-AN-94",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "chromium-bidi is installed in 2 major versions (14, 17)",
+      "location": "chromium-bidi",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: chromium-bidi majors 14, 17, 3 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "chromium-bidi",
+        "majors": [14, 17],
+        "copies": 3
+      }
+    },
+    {
+      "id": "DEP-AN-95",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "color-convert is installed in 2 major versions (1, 2)",
+      "location": "color-convert",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: color-convert majors 1, 2, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "color-convert",
+        "majors": [1, 2],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-96",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "configstore is installed in 2 major versions (5, 7)",
+      "location": "configstore",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: configstore majors 5, 7, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "configstore",
+        "majors": [5, 7],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-97",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "content-type is installed in 2 major versions (1, 2)",
+      "location": "content-type",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: content-type majors 1, 2, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "content-type",
+        "majors": [1, 2],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-98",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "cookie is installed in 2 major versions (0, 2)",
+      "location": "cookie",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: cookie majors 0, 2, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "cookie",
+        "majors": [0, 2],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-99",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "cookie-es is installed in 2 major versions (1, 3)",
+      "location": "cookie-es",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: cookie-es majors 1, 3, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "cookie-es",
+        "majors": [1, 3],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-100",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "crypto-random-string is installed in 2 major versions (2, 4)",
+      "location": "crypto-random-string",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: crypto-random-string majors 2, 4, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "crypto-random-string",
+        "majors": [2, 4],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-101",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "debug is installed in 2 major versions (2, 4)",
+      "location": "debug",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: debug majors 2, 4, 3 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "debug",
+        "majors": [2, 4],
+        "copies": 3
+      }
+    },
+    {
+      "id": "DEP-AN-102",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "entities is installed in 2 major versions (7, 8)",
+      "location": "entities",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: entities majors 7, 8, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "entities",
+        "majors": [7, 8],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-103",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "env-paths is installed in 2 major versions (2, 4)",
+      "location": "env-paths",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: env-paths majors 2, 4, 3 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "env-paths",
+        "majors": [2, 4],
+        "copies": 3
+      }
+    },
+    {
+      "id": "DEP-AN-104",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "eslint-visitor-keys is installed in 2 major versions (3, 4)",
+      "location": "eslint-visitor-keys",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: eslint-visitor-keys majors 3, 4, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "eslint-visitor-keys",
+        "majors": [3, 4],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-105",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "estree-walker is installed in 2 major versions (2, 3)",
+      "location": "estree-walker",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: estree-walker majors 2, 3, 3 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "estree-walker",
+        "majors": [2, 3],
+        "copies": 3
+      }
+    },
+    {
+      "id": "DEP-AN-106",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "figures is installed in 2 major versions (2, 6)",
+      "location": "figures",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: figures majors 2, 6, 4 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "figures",
+        "majors": [2, 6],
+        "copies": 4
+      }
+    },
+    {
+      "id": "DEP-AN-107",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "file-entry-cache is installed in 2 major versions (8, 11)",
+      "location": "file-entry-cache",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: file-entry-cache majors 8, 11, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "file-entry-cache",
+        "majors": [8, 11],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-108",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "find-up is installed in 2 major versions (2, 5)",
+      "location": "find-up",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: find-up majors 2, 5, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "find-up",
+        "majors": [2, 5],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-109",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "flat-cache is installed in 2 major versions (4, 6)",
+      "location": "flat-cache",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: flat-cache majors 4, 6, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "flat-cache",
+        "majors": [4, 6],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-110",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "glob-parent is installed in 2 major versions (5, 6)",
+      "location": "glob-parent",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: glob-parent majors 5, 6, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "glob-parent",
+        "majors": [5, 6],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-111",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "globals is installed in 2 major versions (14, 17)",
+      "location": "globals",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: globals majors 14, 17, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "globals",
+        "majors": [14, 17],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-112",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "hookified is installed in 2 major versions (1, 2)",
+      "location": "hookified",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: hookified majors 1, 2, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "hookified",
+        "majors": [1, 2],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-113",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "hosted-git-info is installed in 2 major versions (7, 9)",
+      "location": "hosted-git-info",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: hosted-git-info majors 7, 9, 3 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "hosted-git-info",
+        "majors": [7, 9],
+        "copies": 3
+      }
+    },
+    {
+      "id": "DEP-AN-114",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "http-proxy-agent is installed in 2 major versions (7, 9)",
+      "location": "http-proxy-agent",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: http-proxy-agent majors 7, 9, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "http-proxy-agent",
+        "majors": [7, 9],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-115",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "https-proxy-agent is installed in 2 major versions (7, 9)",
+      "location": "https-proxy-agent",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: https-proxy-agent majors 7, 9, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "https-proxy-agent",
+        "majors": [7, 9],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-116",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "human-signals is installed in 2 major versions (5, 8)",
+      "location": "human-signals",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: human-signals majors 5, 8, 3 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "human-signals",
+        "majors": [5, 8],
+        "copies": 3
+      }
+    },
+    {
+      "id": "DEP-AN-117",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "ignore is installed in 2 major versions (5, 7)",
+      "location": "ignore",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: ignore majors 5, 7, 4 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "ignore",
+        "majors": [5, 7],
+        "copies": 4
+      }
+    },
+    {
+      "id": "DEP-AN-118",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "import-fresh is installed in 2 major versions (3, 4)",
+      "location": "import-fresh",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: import-fresh majors 3, 4, 3 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "import-fresh",
+        "majors": [3, 4],
+        "copies": 3
+      }
+    },
+    {
+      "id": "DEP-AN-119",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "indent-string is installed in 2 major versions (4, 5)",
+      "location": "indent-string",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: indent-string majors 4, 5, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "indent-string",
+        "majors": [4, 5],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-120",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "ini is installed in 2 major versions (1, 6)",
+      "location": "ini",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: ini majors 1, 6, 5 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "ini",
+        "majors": [1, 6],
+        "copies": 5
+      }
+    },
+    {
+      "id": "DEP-AN-121",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "is-stream is installed in 2 major versions (3, 4)",
+      "location": "is-stream",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: is-stream majors 3, 4, 4 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "is-stream",
+        "majors": [3, 4],
+        "copies": 4
+      }
+    },
+    {
+      "id": "DEP-AN-122",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "isarray is installed in 2 major versions (1, 2)",
+      "location": "isarray",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: isarray majors 1, 2, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "isarray",
+        "majors": [1, 2],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-123",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "isexe is installed in 2 major versions (2, 4)",
+      "location": "isexe",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: isexe majors 2, 4, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "isexe",
+        "majors": [2, 4],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-124",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "js-tokens is installed in 2 major versions (4, 10)",
+      "location": "js-tokens",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: js-tokens majors 4, 10, 3 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "js-tokens",
+        "majors": [4, 10],
+        "copies": 3
+      }
+    },
+    {
+      "id": "DEP-AN-125",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "js-yaml is installed in 2 major versions (3, 4)",
+      "location": "js-yaml",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: js-yaml majors 3, 4, 4 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "js-yaml",
+        "majors": [3, 4],
+        "copies": 4
+      }
+    },
+    {
+      "id": "DEP-AN-126",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "json-parse-even-better-errors is installed in 2 major versions (2, 5)",
+      "location": "json-parse-even-better-errors",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: json-parse-even-better-errors majors 2, 5, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "json-parse-even-better-errors",
+        "majors": [2, 5],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-127",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "json-schema-traverse is installed in 2 major versions (0, 1)",
+      "location": "json-schema-traverse",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: json-schema-traverse majors 0, 1, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "json-schema-traverse",
+        "majors": [0, 1],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-128",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "keyv is installed in 2 major versions (4, 5)",
+      "location": "keyv",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: keyv majors 4, 5, 4 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "keyv",
+        "majors": [4, 5],
+        "copies": 4
+      }
+    },
+    {
+      "id": "DEP-AN-129",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "lighthouse is installed in 2 major versions (12, 13)",
+      "location": "lighthouse",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: lighthouse majors 12, 13, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "lighthouse",
+        "majors": [12, 13],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-130",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "locate-path is installed in 2 major versions (2, 6)",
+      "location": "locate-path",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: locate-path majors 2, 6, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "locate-path",
+        "majors": [2, 6],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-131",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "magic-string is installed in 2 major versions (0, 1)",
+      "location": "magic-string",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: magic-string majors 0, 1, 7 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "magic-string",
+        "majors": [0, 1],
+        "copies": 7
+      }
+    },
+    {
+      "id": "DEP-AN-132",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "meow is installed in 2 major versions (13, 14)",
+      "location": "meow",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: meow majors 13, 14, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "meow",
+        "majors": [13, 14],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-133",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "mimic-response is installed in 2 major versions (3, 4)",
+      "location": "mimic-response",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: mimic-response majors 3, 4, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "mimic-response",
+        "majors": [3, 4],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-134",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "minimatch is installed in 2 major versions (3, 10)",
+      "location": "minimatch",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: minimatch majors 3, 10, 4 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "minimatch",
+        "majors": [3, 10],
+        "copies": 4
+      }
+    },
+    {
+      "id": "DEP-AN-135",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "minipass is installed in 2 major versions (3, 7)",
+      "location": "minipass",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: minipass majors 3, 7, 3 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "minipass",
+        "majors": [3, 7],
+        "copies": 3
+      }
+    },
+    {
+      "id": "DEP-AN-136",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "negotiator is installed in 2 major versions (0, 1)",
+      "location": "negotiator",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: negotiator majors 0, 1, 3 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "negotiator",
+        "majors": [0, 1],
+        "copies": 3
+      }
+    },
+    {
+      "id": "DEP-AN-137",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "normalize-package-data is installed in 2 major versions (6, 8)",
+      "location": "normalize-package-data",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: normalize-package-data majors 6, 8, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "normalize-package-data",
+        "majors": [6, 8],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-138",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "normalize-url is installed in 2 major versions (8, 9)",
+      "location": "normalize-url",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: normalize-url majors 8, 9, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "normalize-url",
+        "majors": [8, 9],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-139",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "npm-run-path is installed in 2 major versions (5, 6)",
+      "location": "npm-run-path",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: npm-run-path majors 5, 6, 3 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "npm-run-path",
+        "majors": [5, 6],
+        "copies": 3
+      }
+    },
+    {
+      "id": "DEP-AN-140",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "p-locate is installed in 2 major versions (2, 5)",
+      "location": "p-locate",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: p-locate majors 2, 5, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "p-locate",
+        "majors": [2, 5],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-141",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "path-exists is installed in 2 major versions (3, 4)",
+      "location": "path-exists",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: path-exists majors 3, 4, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "path-exists",
+        "majors": [3, 4],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-142",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "path-key is installed in 2 major versions (3, 4)",
+      "location": "path-key",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: path-key majors 3, 4, 5 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "path-key",
+        "majors": [3, 4],
+        "copies": 5
+      }
+    },
+    {
+      "id": "DEP-AN-143",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "picomatch is installed in 2 major versions (2, 4)",
+      "location": "picomatch",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: picomatch majors 2, 4, 4 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "picomatch",
+        "majors": [2, 4],
+        "copies": 4
+      }
+    },
+    {
+      "id": "DEP-AN-144",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "pkg-types is installed in 2 major versions (1, 2)",
+      "location": "pkg-types",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: pkg-types majors 1, 2, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "pkg-types",
+        "majors": [1, 2],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-145",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "puppeteer-core is installed in 2 major versions (24, 25)",
+      "location": "puppeteer-core",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: puppeteer-core majors 24, 25, 3 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "puppeteer-core",
+        "majors": [24, 25],
+        "copies": 3
+      }
+    },
+    {
+      "id": "DEP-AN-146",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "read-package-up is installed in 2 major versions (11, 12)",
+      "location": "read-package-up",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: read-package-up majors 11, 12, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "read-package-up",
+        "majors": [11, 12],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-147",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "read-pkg is installed in 2 major versions (9, 10)",
+      "location": "read-pkg",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: read-pkg majors 9, 10, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "read-pkg",
+        "majors": [9, 10],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-148",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "resolve-from is installed in 2 major versions (4, 5)",
+      "location": "resolve-from",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: resolve-from majors 4, 5, 3 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "resolve-from",
+        "majors": [4, 5],
+        "copies": 3
+      }
+    },
+    {
+      "id": "DEP-AN-149",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "signal-exit is installed in 2 major versions (3, 4)",
+      "location": "signal-exit",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: signal-exit majors 3, 4, 9 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "signal-exit",
+        "majors": [3, 4],
+        "copies": 9
+      }
+    },
+    {
+      "id": "DEP-AN-150",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "socks-proxy-agent is installed in 2 major versions (8, 10)",
+      "location": "socks-proxy-agent",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: socks-proxy-agent majors 8, 10, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "socks-proxy-agent",
+        "majors": [8, 10],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-151",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "spdx-expression-parse is installed in 2 major versions (3, 4)",
+      "location": "spdx-expression-parse",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: spdx-expression-parse majors 3, 4, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "spdx-expression-parse",
+        "majors": [3, 4],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-152",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "strip-ansi is installed in 2 major versions (6, 7)",
+      "location": "strip-ansi",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: strip-ansi majors 6, 7, 8 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "strip-ansi",
+        "majors": [6, 7],
+        "copies": 8
+      }
+    },
+    {
+      "id": "DEP-AN-153",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "strip-final-newline is installed in 2 major versions (3, 4)",
+      "location": "strip-final-newline",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: strip-final-newline majors 3, 4, 3 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "strip-final-newline",
+        "majors": [3, 4],
+        "copies": 3
+      }
+    },
+    {
+      "id": "DEP-AN-154",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "strip-json-comments is installed in 2 major versions (2, 3)",
+      "location": "strip-json-comments",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: strip-json-comments majors 2, 3, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "strip-json-comments",
+        "majors": [2, 3],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-155",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "supports-hyperlinks is installed in 2 major versions (3, 4)",
+      "location": "supports-hyperlinks",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: supports-hyperlinks majors 3, 4, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "supports-hyperlinks",
+        "majors": [3, 4],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-156",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "tldts-core is installed in 2 major versions (6, 7)",
+      "location": "tldts-core",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: tldts-core majors 6, 7, 3 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "tldts-core",
+        "majors": [6, 7],
+        "copies": 3
+      }
+    },
+    {
+      "id": "DEP-AN-157",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "tldts-icann is installed in 2 major versions (6, 7)",
+      "location": "tldts-icann",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: tldts-icann majors 6, 7, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "tldts-icann",
+        "majors": [6, 7],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-158",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "tr46 is installed in 2 major versions (0, 7)",
+      "location": "tr46",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: tr46 majors 0, 7, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "tr46",
+        "majors": [0, 7],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-159",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "unctx is installed in 2 major versions (2, 3)",
+      "location": "unctx",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: unctx majors 2, 3, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "unctx",
+        "majors": [2, 3],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-160",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "unique-string is installed in 2 major versions (2, 3)",
+      "location": "unique-string",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: unique-string majors 2, 3, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "unique-string",
+        "majors": [2, 3],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-161",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "unplugin is installed in 2 major versions (2, 3)",
+      "location": "unplugin",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: unplugin majors 2, 3, 4 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "unplugin",
+        "majors": [2, 3],
+        "copies": 4
+      }
+    },
+    {
+      "id": "DEP-AN-162",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "webidl-conversions is installed in 2 major versions (3, 8)",
+      "location": "webidl-conversions",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: webidl-conversions majors 3, 8, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "webidl-conversions",
+        "majors": [3, 8],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-163",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "whatwg-url is installed in 2 major versions (5, 17)",
+      "location": "whatwg-url",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: whatwg-url majors 5, 17, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "whatwg-url",
+        "majors": [5, 17],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-164",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "wrap-ansi is installed in 2 major versions (7, 9)",
+      "location": "wrap-ansi",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: wrap-ansi majors 7, 9, 5 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "wrap-ansi",
+        "majors": [7, 9],
+        "copies": 5
+      }
+    },
+    {
+      "id": "DEP-AN-165",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "write-file-atomic is installed in 2 major versions (3, 7)",
+      "location": "write-file-atomic",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: write-file-atomic majors 3, 7, 3 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "write-file-atomic",
+        "majors": [3, 7],
+        "copies": 3
+      }
+    },
+    {
+      "id": "DEP-AN-166",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "ws is installed in 2 major versions (7, 8)",
+      "location": "ws",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: ws majors 7, 8, 5 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "ws",
+        "majors": [7, 8],
+        "copies": 5
+      }
+    },
+    {
+      "id": "DEP-AN-167",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "xdg-basedir is installed in 2 major versions (4, 5)",
+      "location": "xdg-basedir",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: xdg-basedir majors 4, 5, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "xdg-basedir",
+        "majors": [4, 5],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-168",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "yocto-queue is installed in 2 major versions (0, 1)",
+      "location": "yocto-queue",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: yocto-queue majors 0, 1, 2 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "yocto-queue",
+        "majors": [0, 1],
+        "copies": 2
+      }
+    },
+    {
+      "id": "DEP-AN-169",
+      "check": "DEP-13",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "zod is installed in 2 major versions (3, 4)",
+      "location": "zod",
+      "evidence": {
+        "method": "tool",
+        "refs": ["lockfile: zod majors 3, 4, 4 copies"]
+      },
+      "effort": "M",
+      "workType": "dependency-major",
+      "fixableBy": "manual",
+      "howToFix": "Align on one major; use overrides only as a stop-gap.",
+      "metrics": {
+        "package": "zod",
+        "majors": [3, 4],
+        "copies": 4
+      }
+    },
+    {
+      "id": "DEP-AN-170",
+      "check": "DEP-10",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "@ibm/plex is declared but not imported (heuristic, verify before removing)",
+      "location": "@ibm/plex",
+      "evidence": {
+        "method": "script",
+        "refs": ["import scan of 69 file(s): no import of @ibm/plex"]
+      },
+      "effort": "S",
+      "workType": "dependency-minor",
+      "fixableBy": "script",
+      "howToFix": "Remove the package."
+    },
+    {
+      "id": "DEP-AN-171",
+      "check": "DEP-10",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "react-is is declared but not imported (heuristic, verify before removing)",
+      "location": "react-is",
+      "evidence": {
+        "method": "script",
+        "refs": ["import scan of 69 file(s): no import of react-is"]
+      },
+      "effort": "S",
+      "workType": "dependency-minor",
+      "fixableBy": "script",
+      "howToFix": "Remove the package."
+    },
+    {
+      "id": "DEP-AN-172",
+      "check": "DEP-15",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "@cspell/dict-de-de is licensed LGPL-3.0 (copyleft)",
+      "location": "@cspell/dict-de-de",
+      "evidence": {
+        "method": "tool",
+        "refs": ["license data: @cspell/dict-de-de LGPL-3.0"]
+      },
+      "effort": "M",
+      "workType": "human-org",
+      "fixableBy": "manual",
+      "howToFix": "Ask legal to confirm, or replace the package."
+    },
+    {
+      "id": "DEP-AN-173",
+      "check": "DEP-15",
+      "dimension": "security",
+      "severity": "Low",
+      "title": "node-forge is licensed (BSD-3-Clause OR GPL-2.0) (dual (check the permissive option))",
+      "location": "node-forge",
+      "evidence": {
+        "method": "tool",
+        "refs": ["license data: node-forge (BSD-3-Clause OR GPL-2.0)"]
+      },
+      "effort": "M",
+      "workType": "human-org",
+      "fixableBy": "manual",
+      "howToFix": "Ask legal to confirm, or replace the package."
+    }
+  ],
+  "notAssessed": []
+}

@@ -1,0 +1,110 @@
+{
+  "covers": ["ux"],
+  "findings": [
+    {
+      "id": "UX-1",
+      "check": "UX-01",
+      "dimension": "ux",
+      "severity": "Low",
+      "title": "Hard-coded user-visible string in JSX: \"Page Content\"",
+      "location": "src/layouts/page-layout.jsx:25",
+      "evidence": {
+        "method": "script",
+        "refs": ["src/layouts/page-layout.jsx:25"]
+      },
+      "effort": "S",
+      "workType": "mechanical",
+      "fixableBy": "script",
+      "howToFix": "Extract string to NLS resource file and wrap with translation function (e.g. locale.s)."
+    },
+    {
+      "id": "UX-2",
+      "check": "UX-01",
+      "dimension": "ux",
+      "severity": "Low",
+      "title": "Hard-coded user-visible string in JSX: \"Loading welcome page...\"",
+      "location": "src/pages/welcome/Welcome.jsx:22",
+      "evidence": {
+        "method": "script",
+        "refs": ["src/pages/welcome/Welcome.jsx:22"]
+      },
+      "effort": "S",
+      "workType": "mechanical",
+      "fixableBy": "script",
+      "howToFix": "Extract string to NLS resource file and wrap with translation function (e.g. locale.s)."
+    },
+    {
+      "id": "UX-3",
+      "check": "UX-01",
+      "dimension": "ux",
+      "severity": "Low",
+      "title": "Hard-coded user-visible string in JSX: \"Blog data retrieval example\"",
+      "location": "src/pages/welcome/post/PostComponent.jsx:52",
+      "evidence": {
+        "method": "script",
+        "refs": ["src/pages/welcome/post/PostComponent.jsx:52"]
+      },
+      "effort": "S",
+      "workType": "mechanical",
+      "fixableBy": "script",
+      "howToFix": "Extract string to NLS resource file and wrap with translation function (e.g. locale.s)."
+    },
+    {
+      "id": "UX-4",
+      "check": "UX-01",
+      "dimension": "ux",
+      "severity": "Low",
+      "title": "Hard-coded user-visible string in JSX: \"Comments\"",
+      "location": "src/pages/welcome/post/PostComponent.jsx:63",
+      "evidence": {
+        "method": "script",
+        "refs": ["src/pages/welcome/post/PostComponent.jsx:63"]
+      },
+      "effort": "S",
+      "workType": "mechanical",
+      "fixableBy": "script",
+      "howToFix": "Extract string to NLS resource file and wrap with translation function (e.g. locale.s)."
+    },
+    {
+      "id": "UX-5",
+      "check": "UX-01",
+      "dimension": "ux",
+      "severity": "Low",
+      "title": "Hard-coded user-visible string in JSX: \"Something went wrong\"",
+      "location": "src/server.js:117",
+      "evidence": {
+        "method": "script",
+        "refs": ["src/server.js:117"]
+      },
+      "effort": "S",
+      "workType": "mechanical",
+      "fixableBy": "script",
+      "howToFix": "Extract string to NLS resource file and wrap with translation function (e.g. locale.s)."
+    }
+  ],
+  "hygiene": [],
+  "notAssessed": [
+    {
+      "dimension": "ux",
+      "check": "UX-07",
+      "evidenceNeeded": "Visual audit of page header patterns across active routes to verify header consistency"
+    },
+    {
+      "dimension": "ux",
+      "check": "UX-08",
+      "evidenceNeeded": "Live test of empty, loading, and error states under simulated network/API failure"
+    }
+  ],
+  "metrics": {
+    "filesScanned": 56,
+    "hardcodedStringsCount": 5,
+    "mockCopyCount": 0,
+    "deadNavCount": 0,
+    "disabledWithoutExplanationCount": 0,
+    "autoCompleteOffCount": 0,
+    "emptyOnClickCount": 0,
+    "emptyErrorStateCount": 0,
+    "genericActionLabelCount": 0,
+    "headerPatternsCount": 2
+  }
+}

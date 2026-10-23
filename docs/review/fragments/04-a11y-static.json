@@ -1,0 +1,40 @@
+{
+  "covers": ["accessibility"],
+  "findings": [],
+  "hygiene": [],
+  "notAssessed": [
+    {
+      "dimension": "accessibility",
+      "check": "A11Y-09",
+      "evidenceNeeded": "Manual focus-visible check in browser to confirm outline:0 has no visible replacement style."
+    },
+    {
+      "dimension": "accessibility",
+      "check": "A11Y-10",
+      "evidenceNeeded": "Keyboard run recording: Tab into modal, Esc to close, confirm focus returns to trigger."
+    },
+    {
+      "dimension": "accessibility",
+      "check": "A11Y-15",
+      "evidenceNeeded": "Contrast ratio measurement in each Carbon theme (white, g10, g90, g100) using axe or DevTools."
+    },
+    {
+      "dimension": "accessibility",
+      "check": "A11Y-17",
+      "evidenceNeeded": "320px viewport screenshot or scrollWidth check confirming no horizontal scrollbar."
+    },
+    {
+      "dimension": "accessibility",
+      "check": "A11Y-18",
+      "evidenceNeeded": "Text-spacing bookmarklet (1.4.12) applied; screenshot confirming no content loss."
+    },
+    {
+      "dimension": "accessibility",
+      "check": "A11Y-21",
+      "evidenceNeeded": "Screen reader pass: in-page status messages announced via live region."
+    }
+  ],
+  "metrics": {
+    "filesScanned": 66
+  }
+}

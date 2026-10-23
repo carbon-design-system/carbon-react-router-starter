@@ -1,0 +1,43 @@
+{
+  "covers": ["responsive", "ux"],
+  "findings": [
+    {
+      "id": "UX-DOM-1",
+      "check": "UX-10",
+      "dimension": "ux",
+      "severity": "Medium",
+      "title": "Identified 2 distinct passthrough wrapper pattern(s) in JSX trees (pilot recommended)",
+      "location": "src/components/profilePanel/ProfilePanel.jsx:50",
+      "evidence": {
+        "method": "script",
+        "refs": ["src/components/profilePanel/ProfilePanel.jsx:50", "src/components/profilePanel/ProfilePanel.jsx:54"]
+      },
+      "effort": "M",
+      "workType": "dom-structure",
+      "fixableBy": "manual",
+      "howToFix": "Consolidate nested single-child div wrappers into unified layout containers."
+    }
+  ],
+  "hygiene": [],
+  "notAssessed": [
+    {
+      "dimension": "ux",
+      "check": "UX-DOM-LIVE-DEPTH",
+      "evidenceNeeded": "Live DOM tree inspection snippet run via chrome-devtools evaluate_script to verify rendered browser depth"
+    }
+  ],
+  "metrics": {
+    "totalComponentsScanned": 28,
+    "maxDepth": 10,
+    "medianDepth": 2,
+    "distinctWrapperPatterns": 2,
+    "sharedShells": 1,
+    "selectorDependencies": 0,
+    "sharedShellsDetails": [
+      {
+        "module": "../../layouts/page-layout",
+        "importedByCount": 3
+      }
+    ]
+  }
+}
