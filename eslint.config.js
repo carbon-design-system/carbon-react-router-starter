@@ -79,6 +79,25 @@ export default [
         NOTE: Should be removable after https://github.com/Mikadv/carbon-react-starter/issues/32
         */
       'no-irregular-whitespace': ['error', { skipJSXText: true }],
+      /* no-console - disallow console calls in client-side application code.
+         Intentional server logging and test output are exempted below. */
+      'no-console': 'error',
     },
+  },
+  /* Server process files: console.log/error is the correct output mechanism for
+     a Node.js server process — consumed by process supervisors and log aggregators. */
+  {
+    files: ['src/server.js', 'src/config/**', 'src/service/**'],
+    rules: { 'no-console': 'off' },
+  },
+  /* Test files: console output is expected for test setup diagnostics. */
+  {
+    files: ['src/test/**', 'src/__tests__/**'],
+    rules: { 'no-console': 'off' },
+  },
+  /* CLI scripts: console is the correct output mechanism for command-line tools. */
+  {
+    files: ['scripts/**'],
+    rules: { 'no-console': 'off' },
   },
 ];

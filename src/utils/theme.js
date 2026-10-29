@@ -71,6 +71,7 @@ export function initializeTheme() {
   } else if (currentThemeSetting !== themeSetting) {
     // Cookie changed between SSR and hydration - log warning but don't update
     // to avoid hydration mismatch. The next navigation will use the new value.
+    // eslint-disable-next-line no-console -- unexpected console output useful for debug
     console.warn('Theme cookie changed between SSR and hydration. ' + 'Change will take effect on next navigation.');
   }
 
@@ -78,6 +79,7 @@ export function initializeTheme() {
     document.documentElement.setAttribute('data-header-inverse', String(headerInverse));
   } else if (currentHeaderInverse !== String(headerInverse)) {
     // Cookie changed between SSR and hydration - log warning but don't update
+    // eslint-disable-next-line no-console -- unexpected console output useful for debug
     console.warn(
       'Header inverse cookie changed between SSR and hydration. ' + 'Change will take effect on next navigation.',
     );
