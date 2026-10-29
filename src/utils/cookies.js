@@ -78,6 +78,7 @@ export function setCookie(name, value, options = {}) {
   // Validate cookie value before encoding
   const encodedValue = encodeURIComponent(value);
   if (!isValidCookieValue(encodedValue)) {
+    // eslint-disable-next-line no-console -- unexpected console output useful for debug
     console.warn(`Invalid cookie value for "${name}": contains invalid characters`);
     return;
   }
@@ -137,6 +138,7 @@ export function setThemeInCookies(values) {
     if (validThemeSettings.includes(values.themeSetting)) {
       setCookie('theme-setting', values.themeSetting);
     } else {
+      // eslint-disable-next-line no-console -- unexpected console output useful for debug
       console.warn(`Invalid theme setting: ${values.themeSetting}`);
     }
   }
