@@ -11,13 +11,11 @@ const COOKIE_MAX_AGE_ONE_YEAR = 31536000; // 1 year in seconds
 /**
  * Parse cookies from a cookie string (from document.cookie or request headers)
  * Handles edge cases like cookies with '=' in their values
- * @param {string} cookieString - The cookie string to parse
- * @returns {Record<string, string>} Object with cookie name-value pairs
  */
-export function parseCookies(cookieString) {
+export function parseCookies(cookieString: string): Record<string, string> {
   if (!cookieString) return {};
 
-  return cookieString.split(';').reduce((cookies, cookie) => {
+  return cookieString.split(';').reduce<Record<string, string>>((cookies, cookie) => {
     const trimmed = cookie.trim();
     const equalsIndex = trimmed.indexOf('=');
 
@@ -40,22 +38,25 @@ export function parseCookies(cookieString) {
 
 /**
  * Get a cookie value by name (client-side only)
- * @param {string} name - The cookie name
- * @returns {string | null} The cookie value or null if not found
  */
-export function getCookie(name) {
+export function getCookie(name: string): string | null {
   if (typeof document === 'undefined') return null;
 
   const cookies = parseCookies(document.cookie);
-  return cookies[name] || null;
+  return cookies[name] ?? null;
+}
+
+interface CookieOptions {
+  maxAge?: number;
+  path?: string;
+  sameSite?: 'Strict' | 'Lax' | 'None';
+  secure?: boolean;
 }
 
 /**
  * Validate cookie value before setting
- * @param {string} value - The cookie value to validate
- * @returns {boolean} True if valid, false otherwise
  */
-function isValidCookieValue(value) {
+function isValidCookieValue(value: string): boolean {
   // Check for invalid characters in cookie values
   // Cookies cannot contain control characters, whitespace, or certain special chars
   // eslint-disable-next-line no-control-regex
@@ -64,15 +65,8 @@ function isValidCookieValue(value) {
 
 /**
  * Set a cookie (client-side only)
- * @param {string} name - The cookie name
- * @param {string} value - The cookie value
- * @param {object} [options] - Cookie options
- * @param {number} [options.maxAge] - Max age in seconds (default: 1 year)
- * @param {string} [options.path] - Cookie path (default: '/')
- * @param {string} [options.sameSite] - SameSite attribute (default: 'Lax')
- * @param {boolean} [options.secure] - Secure flag (default: false in dev, true in prod)
  */
-export function setCookie(name, value, options = {}) {
+export function setCookie(name: string, value: string, options: CookieOptions = {}): void {
   if (typeof document === 'undefined') return;
 
   // Validate cookie value before encoding
@@ -101,17 +95,20 @@ export function setCookie(name, value, options = {}) {
   document.cookie = cookieString;
 }
 
+export interface ThemeCookieValues {
+  themeSetting: string;
+  headerInverse: boolean;
+}
+
 /**
  * Get theme values from cookies
- * @param {string} [cookieString] - Optional cookie string (for server-side)
- * @returns {{ themeSetting: string, headerInverse: boolean }} Object with themeSetting and headerInverse values
  */
-export function getThemeFromCookies(cookieString) {
+export function getThemeFromCookies(cookieString?: string): ThemeCookieValues {
   const cookies = cookieString
     ? parseCookies(cookieString)
     : parseCookies(typeof document !== 'undefined' ? document.cookie : '');
 
-  const themeSetting = cookies['theme-setting'] || 'system';
+  const themeSetting = cookies['theme-setting'] ?? 'system';
   const headerInverse = cookies['header-inverse'] === 'true';
 
   // Validate theme setting value
@@ -124,13 +121,15 @@ export function getThemeFromCookies(cookieString) {
   };
 }
 
+interface SetThemeCookieValues {
+  themeSetting?: string;
+  headerInverse?: boolean;
+}
+
 /**
  * Set theme values in cookies (client-side only)
- * @param {object} values - Theme values to set
- * @param {string} [values.themeSetting] - Theme setting (system, light, dark)
- * @param {boolean} [values.headerInverse] - Header inverse setting
  */
-export function setThemeInCookies(values) {
+export function setThemeInCookies(values: SetThemeCookieValues): void {
   if (values.themeSetting !== undefined) {
     // Validate theme setting before setting cookie
     const validThemeSettings = ['system', 'light', 'dark'];
