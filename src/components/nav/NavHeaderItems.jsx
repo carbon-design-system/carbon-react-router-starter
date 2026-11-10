@@ -14,6 +14,7 @@ import { useTranslation } from 'react-i18next';
  * Handles both exact matches and dynamic route segments
  */
 const isPathActive = (menuPath, currentPath) => {
+  /* v8 ignore next -- menuPath and currentPath are always strings when called from NavHeaderItems */
   if (!menuPath || !currentPath) return false;
   // Exact match
   if (menuPath === currentPath) return true;
