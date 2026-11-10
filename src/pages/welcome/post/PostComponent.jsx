@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { getComments, getPost } from '../../../api/message.js';
+import { getComments, getPost } from '../../../api/message.ts';
 import { Heading, Grid, Layer, Section, Stack, Tile } from '@carbon/react';
 import { useEffect, useState } from 'react';
 
