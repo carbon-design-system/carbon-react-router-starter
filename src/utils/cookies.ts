@@ -74,6 +74,7 @@ export function setCookie(name: string, value: string, options: CookieOptions = 
   /* v8 ignore start -- encodeURIComponent always escapes the chars isValidCookieValue rejects;
      this guard is a defensive fallback that cannot be reached via normal inputs */
   if (!isValidCookieValue(encodedValue)) {
+    // eslint-disable-next-line no-console -- unexpected console output useful for debug
     console.warn(`Invalid cookie value for "${name}": contains invalid characters`);
     return;
   }
@@ -139,6 +140,7 @@ export function setThemeInCookies(values: SetThemeCookieValues): void {
     if (validThemeSettings.includes(values.themeSetting)) {
       setCookie('theme-setting', values.themeSetting);
     } else {
+      // eslint-disable-next-line no-console -- unexpected console output useful for debug
       console.warn(`Invalid theme setting: ${values.themeSetting}`);
     }
   }

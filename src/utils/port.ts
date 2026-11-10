@@ -21,11 +21,13 @@ export async function findAvailablePort(preferredPort: number): Promise<number> 
     const availablePort = await detect(preferredPort);
 
     if (availablePort !== preferredPort) {
+      // eslint-disable-next-line no-console -- server side console output
       console.warn(`⚠️  Port ${preferredPort} is in use, using port ${availablePort} instead`);
     }
 
     return availablePort;
   } catch (error) {
+    // eslint-disable-next-line no-console -- server side console output
     console.error('Error detecting available port:', error);
     // Throw error instead of silently falling back to potentially unavailable port
     throw new Error(`Failed to find available port: ${error instanceof Error ? error.message : 'Unknown error'}`);
