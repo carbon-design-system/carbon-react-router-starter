@@ -174,4 +174,11 @@ describe('findAvailablePort', () => {
     expect(results).toEqual(ports);
     expect(detect).toHaveBeenCalledTimes(3);
   });
+
+  test('includes "Unknown error" in message when error has no message property', async () => {
+    const preferredPort = 5173;
+    detect.mockRejectedValue({});
+
+    await expect(findAvailablePort(preferredPort)).rejects.toThrow('Failed to find available port: Unknown error');
+  });
 });
