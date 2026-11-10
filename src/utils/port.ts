@@ -5,17 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// eslint-disable-next-line import-x/no-named-as-default
 import detect from 'detect-port';
 
 /**
  * Find an available port, starting from the preferred port.
  * If the preferred port is in use, it will try the next available port.
  *
- * @param {number} preferredPort - The preferred port to use
- * @returns {Promise<number>} The available port
+ * @param preferredPort - The preferred port to use
+ * @returns The available port
  * @throws {Error} If port detection fails
  */
-export async function findAvailablePort(preferredPort) {
+export async function findAvailablePort(preferredPort: number): Promise<number> {
   try {
     const availablePort = await detect(preferredPort);
 
@@ -27,6 +28,6 @@ export async function findAvailablePort(preferredPort) {
   } catch (error) {
     console.error('Error detecting available port:', error);
     // Throw error instead of silently falling back to potentially unavailable port
-    throw new Error(`Failed to find available port: ${error.message || 'Unknown error'}`);
+    throw new Error(`Failed to find available port: ${error instanceof Error ? error.message : 'Unknown error'}`);
   }
 }
