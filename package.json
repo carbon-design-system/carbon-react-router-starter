@@ -103,13 +103,15 @@
     ]
   },
   "overrides": {
-    "react": "$react",
-    "react-dom": "$react-dom",
     "basic-ftp": "^6.0.1",
+    "body-parser": "^2.4.0",
     "get-uri": "^8.0.0",
     "pac-proxy-agent": "^9.0.1",
+    "proxy-addr": "^2.0.8",
     "proxy-agent": "^8.0.1",
-    "qs": "^6.16.0",
+    "qs": "^6.16.2",
+    "react": "$react",
+    "react-dom": "$react-dom",
     "tmp": "^0.2.6",
     "uuid": "^14.0.0"
   }
