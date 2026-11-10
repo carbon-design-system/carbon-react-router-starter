@@ -6,13 +6,7 @@
  */
 
 import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest';
-import {
-  parseCookies,
-  getCookie,
-  setCookie,
-  getThemeFromCookies,
-  setThemeInCookies,
-} from '../utils/cookies';
+import { parseCookies, getCookie, setCookie, getThemeFromCookies, setThemeInCookies } from '../utils/cookies';
 
 describe('cookie utilities', () => {
   describe('parseCookies', () => {
@@ -115,11 +109,11 @@ describe('cookie utilities', () => {
       mockDocument = {
         cookie: 'name=value; theme=dark',
       };
-      global.document = mockDocument;
+      vi.stubGlobal('document', mockDocument);
     });
 
     afterEach(() => {
-      delete global.document;
+      vi.unstubAllGlobals();
     });
 
     test('returns cookie value by name', () => {
@@ -133,7 +127,7 @@ describe('cookie utilities', () => {
     });
 
     test('returns null when document is undefined', () => {
-      delete global.document;
+      vi.stubGlobal('document', undefined);
       const result = getCookie('name');
       expect(result).toBeNull();
     });
@@ -158,13 +152,12 @@ describe('cookie utilities', () => {
           protocol: 'https:',
         },
       };
-      global.document = mockDocument;
-      global.window = mockWindow;
+      vi.stubGlobal('document', mockDocument);
+      vi.stubGlobal('window', mockWindow);
     });
 
     afterEach(() => {
-      delete global.document;
-      delete global.window;
+      vi.unstubAllGlobals();
     });
 
     test('sets a cookie with default options', () => {
@@ -199,7 +192,7 @@ describe('cookie utilities', () => {
     });
 
     test('does not set cookie when document is undefined', () => {
-      delete global.document;
+      vi.stubGlobal('document', undefined);
 
       setCookie('name', 'value');
 
@@ -276,20 +269,24 @@ describe('cookie utilities', () => {
       const mockDocument = {
         cookie: 'theme-setting=dark; header-inverse=true',
       };
-      global.document = mockDocument;
+      vi.stubGlobal('document', mockDocument);
 
       const result = getThemeFromCookies();
+
+      vi.unstubAllGlobals();
 
       expect(result).toEqual({
         themeSetting: 'dark',
         headerInverse: true,
       });
-
-      delete global.document;
     });
 
     test('handles missing document gracefully', () => {
+      vi.stubGlobal('document', undefined);
+
       const result = getThemeFromCookies();
+
+      vi.unstubAllGlobals();
 
       expect(result).toEqual({
         themeSetting: 'system',
@@ -311,13 +308,12 @@ describe('cookie utilities', () => {
           protocol: 'https:',
         },
       };
-      global.document = mockDocument;
-      global.window = mockWindow;
+      vi.stubGlobal('document', mockDocument);
+      vi.stubGlobal('window', mockWindow);
     });
 
     afterEach(() => {
-      delete global.document;
-      delete global.window;
+      vi.unstubAllGlobals();
     });
 
     test('sets theme setting cookie', () => {
@@ -347,9 +343,7 @@ describe('cookie utilities', () => {
 
       setThemeInCookies({ themeSetting: 'invalid' });
 
-      expect(consoleWarnSpy).toHaveBeenCalledWith(
-        expect.stringContaining('Invalid theme setting'),
-      );
+      expect(consoleWarnSpy).toHaveBeenCalledWith(expect.stringContaining('Invalid theme setting'));
       expect(mockDocument.cookie).not.toContain('theme-setting=invalid');
 
       consoleWarnSpy.mockRestore();
@@ -374,5 +368,3 @@ describe('cookie utilities', () => {
     });
   });
 });
-
-// Made with Bob

@@ -9,33 +9,25 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useState } from 'react';
 
-import './profile-panel.scss';
+// The styles are imported into index.scss by default.
+// Do the same unless you have a good reason not to.
+// import './profile-panel.scss';
 import { UserAvatar } from '@carbon/ibm-products';
-import {
-  ThemeSettings,
-  ThemeMenuComplement,
-  ThemeSwitcher,
-} from '@carbon-labs/react-theme-settings';
+import { ThemeSettings, ThemeMenuComplement, ThemeSwitcher } from '@carbon-labs/react-theme-settings';
 import { useTranslation } from 'react-i18next';
-import {
-  getThemeSettings,
-  setThemeSetting,
-  setHeaderInverse,
-} from '../../utils/theme';
+import { getThemeSettings, setThemeSetting, setHeaderInverse } from '../../utils/theme';
+import { usePrefix } from '@carbon/react';
 
 export const ProfilePanel = ({ className }) => {
+  const prefix = usePrefix();
   const { t } = useTranslation();
 
   // Get initial values from cookies (single call to avoid redundant parsing)
   const initialSettings = getThemeSettings();
 
-  const [themeSettingLocal, setThemeSettingLocal] = useState(
-    initialSettings.themeSetting,
-  );
+  const [themeSettingLocal, setThemeSettingLocal] = useState(initialSettings.themeSetting);
 
-  const [themeMenuComplementLocal, setThemeMenuComplementLocal] = useState(
-    initialSettings.headerInverse,
-  );
+  const [themeMenuComplementLocal, setThemeMenuComplementLocal] = useState(initialSettings.headerInverse);
 
   // Update theme setting
   const handleThemeSettingChange = (value) => {
@@ -57,32 +49,20 @@ export const ProfilePanel = ({ className }) => {
   return (
     <div className={classNames(className, 'cs--profile-panel')}>
       <div className="cs--profile-user-info">
-        <UserAvatar
-          name={userProfile.name}
-          renderIcon=""
-          size="lg"
-          tooltipAlignment="bottom"
-        />
-        <div className="cds--profile-user-info__text-wrapper">
-          <div className="cds--profile-user-info__name">{userProfile.name}</div>
-          <div className="cds--profile-user-info__email">
-            {userProfile.email}
-          </div>
+        <UserAvatar name={userProfile.name} renderIcon="" size="lg" tooltipAlignment="bottom" />
+        {/* Uses Carbon Prefix until Profile component (part of UIShell) released from @carbon/labs */}
+        <div className={`${prefix}--profile-user-info__text-wrapper`}>
+          <div className={`${prefix}--profile-user-info__name`}>{userProfile.name}</div>
+          <div className={`${prefix}--profile-user-info__email`}>{userProfile.email}</div>
         </div>
       </div>
 
       <div className="cs--profile-settings">
         <ThemeSettings>
-          <ThemeSwitcher
-            onChange={handleThemeSettingChange}
-            value={themeSettingLocal}
-          ></ThemeSwitcher>
+          <ThemeSwitcher onChange={handleThemeSettingChange} value={themeSettingLocal}></ThemeSwitcher>
           <ThemeMenuComplement
             id="theme-menu-complement"
-            labelText={t(
-              'profile.settings.complementMenuTheme',
-              'Complement menu theme',
-            )}
+            labelText={t('profile.settings.complementMenuTheme', 'Complement menu theme')}
             checked={themeMenuComplementLocal}
             onChange={handleThemeMenuComplementChange}
           />

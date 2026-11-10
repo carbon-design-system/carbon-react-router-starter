@@ -28,5 +28,5 @@ dist-ssr
 *.sw?
 
 # Tools for this template
-.lighthouseci/
+.unlighthouse/
 

@@ -11,8 +11,7 @@ export const getNetworking = () => {
   const runningRequests = new Set();
 
   const addRequests = (path) => {
-    if (!process.env.HIDE_NETWORK_LOGGING)
-      console.log('Calling BFF endpoint: ', path);
+    if (!process.env.HIDE_NETWORK_LOGGING) console.log('Calling BFF endpoint: ', path);
     runningRequests.add(path);
   };
 
@@ -24,10 +23,7 @@ export const getNetworking = () => {
   const verifyRunningRequests = () => {
     if (runningRequests.size > 0) {
       const allPaths = Array.from(runningRequests).join(' , ');
-      console.error(
-        'There are running requests after the test is completed: ',
-        allPaths,
-      );
+      console.error('There are running requests after the test is completed: ', allPaths);
       expect(runningRequests.size).toStrictEqual(0);
     } else {
       console.log('No running requests!');

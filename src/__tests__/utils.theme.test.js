@@ -28,15 +28,14 @@ describe('theme utilities', () => {
     };
 
     // Replace global document with mock
-    global.document = mockDocument;
+    vi.stubGlobal('document', mockDocument);
 
     // Reset all mocks
     vi.clearAllMocks();
   });
 
   afterEach(() => {
-    // Clean up
-    delete global.document;
+    vi.unstubAllGlobals();
   });
 
   describe('getThemeSettings', () => {
@@ -62,10 +61,7 @@ describe('theme utilities', () => {
       expect(cookieUtils.setThemeInCookies).toHaveBeenCalledWith({
         themeSetting: 'dark',
       });
-      expect(mockDocument.documentElement.setAttribute).toHaveBeenCalledWith(
-        'data-theme-setting',
-        'dark',
-      );
+      expect(mockDocument.documentElement.setAttribute).toHaveBeenCalledWith('data-theme-setting', 'dark');
     });
 
     test('handles light theme', () => {
@@ -74,10 +70,7 @@ describe('theme utilities', () => {
       expect(cookieUtils.setThemeInCookies).toHaveBeenCalledWith({
         themeSetting: 'light',
       });
-      expect(mockDocument.documentElement.setAttribute).toHaveBeenCalledWith(
-        'data-theme-setting',
-        'light',
-      );
+      expect(mockDocument.documentElement.setAttribute).toHaveBeenCalledWith('data-theme-setting', 'light');
     });
 
     test('handles system theme', () => {
@@ -86,14 +79,11 @@ describe('theme utilities', () => {
       expect(cookieUtils.setThemeInCookies).toHaveBeenCalledWith({
         themeSetting: 'system',
       });
-      expect(mockDocument.documentElement.setAttribute).toHaveBeenCalledWith(
-        'data-theme-setting',
-        'system',
-      );
+      expect(mockDocument.documentElement.setAttribute).toHaveBeenCalledWith('data-theme-setting', 'system');
     });
 
     test('does not update HTML when document is undefined', () => {
-      delete global.document;
+      vi.stubGlobal('document', undefined);
 
       themeUtils.setThemeSetting('dark');
 
@@ -111,10 +101,7 @@ describe('theme utilities', () => {
       expect(cookieUtils.setThemeInCookies).toHaveBeenCalledWith({
         headerInverse: true,
       });
-      expect(mockDocument.documentElement.setAttribute).toHaveBeenCalledWith(
-        'data-header-inverse',
-        'true',
-      );
+      expect(mockDocument.documentElement.setAttribute).toHaveBeenCalledWith('data-header-inverse', 'true');
     });
 
     test('updates cookie and HTML attribute when false', () => {
@@ -123,14 +110,11 @@ describe('theme utilities', () => {
       expect(cookieUtils.setThemeInCookies).toHaveBeenCalledWith({
         headerInverse: false,
       });
-      expect(mockDocument.documentElement.setAttribute).toHaveBeenCalledWith(
-        'data-header-inverse',
-        'false',
-      );
+      expect(mockDocument.documentElement.setAttribute).toHaveBeenCalledWith('data-header-inverse', 'false');
     });
 
     test('does not update HTML when document is undefined', () => {
-      delete global.document;
+      vi.stubGlobal('document', undefined);
 
       themeUtils.setHeaderInverse(true);
 
@@ -150,7 +134,7 @@ describe('theme utilities', () => {
     });
 
     test('does nothing when document is undefined', () => {
-      delete global.document;
+      vi.stubGlobal('document', undefined);
 
       themeUtils.initializeTheme();
 
@@ -162,14 +146,8 @@ describe('theme utilities', () => {
 
       themeUtils.initializeTheme();
 
-      expect(mockDocument.documentElement.setAttribute).toHaveBeenCalledWith(
-        'data-theme-setting',
-        'dark',
-      );
-      expect(mockDocument.documentElement.setAttribute).toHaveBeenCalledWith(
-        'data-header-inverse',
-        'true',
-      );
+      expect(mockDocument.documentElement.setAttribute).toHaveBeenCalledWith('data-theme-setting', 'dark');
+      expect(mockDocument.documentElement.setAttribute).toHaveBeenCalledWith('data-header-inverse', 'true');
     });
 
     test('does not update when attributes match cookies', () => {
@@ -196,9 +174,7 @@ describe('theme utilities', () => {
       themeUtils.initializeTheme();
 
       expect(consoleWarnSpy).toHaveBeenCalledWith(
-        expect.stringContaining(
-          'Theme cookie changed between SSR and hydration',
-        ),
+        expect.stringContaining('Theme cookie changed between SSR and hydration'),
       );
       expect(mockDocument.documentElement.setAttribute).not.toHaveBeenCalled();
 
@@ -217,9 +193,7 @@ describe('theme utilities', () => {
       themeUtils.initializeTheme();
 
       expect(consoleWarnSpy).toHaveBeenCalledWith(
-        expect.stringContaining(
-          'Header inverse cookie changed between SSR and hydration',
-        ),
+        expect.stringContaining('Header inverse cookie changed between SSR and hydration'),
       );
       expect(mockDocument.documentElement.setAttribute).not.toHaveBeenCalled();
 
@@ -235,15 +209,8 @@ describe('theme utilities', () => {
 
       themeUtils.initializeTheme();
 
-      expect(mockDocument.documentElement.setAttribute).toHaveBeenCalledTimes(
-        1,
-      );
-      expect(mockDocument.documentElement.setAttribute).toHaveBeenCalledWith(
-        'data-header-inverse',
-        'true',
-      );
+      expect(mockDocument.documentElement.setAttribute).toHaveBeenCalledTimes(1);
+      expect(mockDocument.documentElement.setAttribute).toHaveBeenCalledWith('data-header-inverse', 'true');
     });
   });
 });
-
-// Made with Bob

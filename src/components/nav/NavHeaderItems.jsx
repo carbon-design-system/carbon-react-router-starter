@@ -14,6 +14,7 @@ import { useTranslation } from 'react-i18next';
  * Handles both exact matches and dynamic route segments
  */
 const isPathActive = (menuPath, currentPath) => {
+  /* v8 ignore next -- menuPath and currentPath are always strings when called from NavHeaderItems */
   if (!menuPath || !currentPath) return false;
   // Exact match
   if (menuPath === currentPath) return true;
@@ -30,17 +31,9 @@ export const NavHeaderItems = ({ routesInHeader, currentPath }) => {
         !carbon.inSubMenu && carbon?.label ? (
           carbon.subMenu ? (
             <HeaderMenu
-              aria-label={
-                carbon.labelKey
-                  ? t(carbon.labelKey, carbon.label)
-                  : carbon.label
-              }
+              aria-label={carbon.labelKey ? t(carbon.labelKey, carbon.label) : carbon.label}
               key={path}
-              menuLinkName={
-                carbon.labelKey
-                  ? t(carbon.labelKey, carbon.label)
-                  : carbon.label
-              }
+              menuLinkName={carbon.labelKey ? t(carbon.labelKey, carbon.label) : carbon.label}
             >
               {carbon.subMenu.map((subRoute) => (
                 <HeaderMenuItem
@@ -56,15 +49,8 @@ export const NavHeaderItems = ({ routesInHeader, currentPath }) => {
               ))}
             </HeaderMenu>
           ) : (
-            <HeaderMenuItem
-              as={RouterLink}
-              key={path}
-              to={path}
-              isActive={isPathActive(path, currentPath)}
-            >
-              {carbon.labelKey
-                ? t(carbon.labelKey, carbon.label)
-                : carbon.label}
+            <HeaderMenuItem as={RouterLink} key={path} to={path} isActive={isPathActive(path, currentPath)}>
+              {carbon.labelKey ? t(carbon.labelKey, carbon.label) : carbon.label}
             </HeaderMenuItem>
           )
         ) : null,

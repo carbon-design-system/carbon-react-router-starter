@@ -19,10 +19,7 @@ import { WelcomeFetchingSection } from './WelcomeFetchingSection';
 
 const Welcome = () => {
   return (
-    <PageLayout
-      className="cs--welcome"
-      fallback={<p>Loading welcome page...</p>}
-    >
+    <PageLayout className="cs--welcome" fallback={<p>Loading welcome page...</p>}>
       <WelcomeHeader />
 
       <WelcomeRunSection />

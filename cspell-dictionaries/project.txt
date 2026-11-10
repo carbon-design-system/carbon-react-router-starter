@@ -13,3 +13,4 @@ fouc
 tseslint
 tsparser
 vite
+unlighthouse

@@ -1,3 +1,8 @@
+# Copyright IBM Corp. 2025, 2026
+#
+# This source code is licensed under the Apache-2.0 license found in the
+# LICENSE file in the root directory of this source tree.
+
 name: 'DCO Assistant'
 on:
   issue_comment:
@@ -28,8 +33,7 @@ jobs:
           remote-repository-name: carbon-dco
           create-file-commit-message: 'chore: create file to store dco signatures'
           signed-commit-message: 'chore: $contributorName has signed the dco in #$pullRequestNo'
-          custom-notsigned-prcomment:
-            'Thanks for your submission! We ask that $you sign our [Developer
+          custom-notsigned-prcomment: 'Thanks for your submission! We ask that $you sign our [Developer
             Certificate of
             Origin](https://github.com/carbon-design-system/carbon-dco/blob/main/dco.md)
             before we can accept your contribution. You can sign the DCO by

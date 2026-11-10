@@ -40,10 +40,7 @@ export const WelcomeAboutSection = () => {
   ];
 
   return (
-    <WelcomeCallout
-      className="cs--welcome__about"
-      heading={t('welcome.about.heading', 'What is this about?')}
-    >
+    <WelcomeCallout className="cs--welcome__about" heading={t('welcome.about.heading', 'What is this about?')}>
       {aboutItems.map((item) => (
         <WelcomeHighlightTile key={item.key} title={item.title}>
           {item.content}

@@ -5,25 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {
-  test,
-  expect,
-  beforeAll,
-  beforeEach,
-  afterEach,
-  afterAll,
-} from 'vitest';
+import { test, expect, beforeAll, beforeEach, afterEach, afterAll } from 'vitest';
 import { screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { renderWithAllProviders } from '../test/test-utils';
 import Welcome from '../pages/welcome/Welcome';
 import { server } from '../test/server';
-import {
-  setupBeforeAll,
-  setupBeforeEach,
-  setupAfterEach,
-  setupAfterAll,
-} from '../test/setup';
+import { setupBeforeAll, setupBeforeEach, setupAfterEach, setupAfterAll } from '../test/setup';
 
 // Setup test environment
 beforeAll(() => setupBeforeAll(server));
@@ -35,7 +23,5 @@ test('renders received message', async () => {
   renderWithAllProviders(<Welcome />);
 
   // Wait for the expected text to appear
-  expect(
-    await screen.findByText(/Welcome to the Carbon React Router starter/i),
-  ).toBeInTheDocument();
+  expect(await screen.findByText(/Welcome to the Carbon React Router starter/i)).toBeInTheDocument();
 });

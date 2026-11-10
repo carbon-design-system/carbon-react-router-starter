@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -39,6 +39,12 @@ vi.mock('../routes/config', () => {
   };
 });
 
+// Routes without a wildcard entry, used to test the null fallback
+const routesWithoutWildcard = [
+  { path: '/', element: vi.fn() },
+  { path: '/dashboard', element: vi.fn() },
+];
+
 describe('routes utils', () => {
   describe('findMatchingRoute', () => {
     test('finds exact match for root path', () => {
@@ -75,6 +81,28 @@ describe('routes utils', () => {
       expect(routeWithSlash).toEqual(routeWithoutSlash);
       expect(routeWithSlash.path).toBe('/dashboard');
     });
+
+    test('skips routes without a path property', () => {
+      // A route without path should be skipped; falls through to the wildcard
+      vi.spyOn(configModule, 'routes', 'get').mockReturnValue([
+        { element: vi.fn() }, // no path — should be skipped
+        { path: '*', element: vi.fn(), status: 404 },
+      ]);
+
+      const route = findMatchingRoute('/anything');
+      expect(route.path).toBe('*');
+
+      vi.restoreAllMocks();
+    });
+
+    test('returns null when no wildcard route exists and nothing matches', () => {
+      vi.spyOn(configModule, 'routes', 'get').mockReturnValue(routesWithoutWildcard);
+
+      const route = findMatchingRoute('/no-match');
+      expect(route).toBeNull();
+
+      vi.restoreAllMocks();
+    });
   });
 
   describe('getStatusCodeForPath', () => {
@@ -91,9 +119,7 @@ describe('routes utils', () => {
       // Temporarily modify the wildcard route to remove status
       const originalRoutes = [...configModule.routes];
       const modifiedRoutes = [...originalRoutes];
-      const wildcardIndex = modifiedRoutes.findIndex(
-        (route) => route.path === '*',
-      );
+      const wildcardIndex = modifiedRoutes.findIndex((route) => route.path === '*');
 
       if (wildcardIndex !== -1) {
         const wildcardRoute = { ...modifiedRoutes[wildcardIndex] };

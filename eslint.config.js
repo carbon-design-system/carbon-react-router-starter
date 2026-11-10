@@ -99,6 +99,30 @@ export default [
         { varsIgnorePattern: '^[A-Z_]', argsIgnorePattern: '^_' },
       ],
       '@typescript-eslint/no-explicit-any': 'warn',
+      /* Disallow React.FC / FC in favor of direct prop typing `({ prop }: Props)` for cleaner type inference and RSC compatibility */
+      '@typescript-eslint/no-restricted-types': [
+        'error',
+        {
+          types: {
+            'React.FC': {
+              message:
+                'Use direct prop parameter typing instead: `const MyComponent = ({ prop }: Props) => ...`',
+            },
+            FC: {
+              message:
+                'Use direct prop parameter typing instead: `const MyComponent = ({ prop }: Props) => ...`',
+            },
+            'React.FunctionComponent': {
+              message:
+                'Use direct prop parameter typing instead: `const MyComponent = ({ prop }: Props) => ...`',
+            },
+            FunctionComponent: {
+              message:
+                'Use direct prop parameter typing instead: `const MyComponent = ({ prop }: Props) => ...`',
+            },
+          },
+        },
+      ],
     },
   },
   importPlugin.flatConfigs.recommended,
@@ -122,16 +146,20 @@ export default [
       'import-x/unambiguous': 'error',
       /* no-unused-vars - ignore pattern for React component usage */
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       /* no-irregular-whitespace
         - ignore to allow prettier of the text layout. April 10th 2025.
 
         NOTE: Should be removable after https://github.com/Mikadv/carbon-react-starter/issues/32
         */
       'no-irregular-whitespace': ['error', { skipJSXText: true }],
+    },
+  },
+  /* Turn off JS no-unused-vars for TypeScript files to prevent false positives on type declarations */
+  {
+    files: ['**/*.{ts,tsx}'],
+    rules: {
+      'no-unused-vars': 'off',
     },
   },
 ];

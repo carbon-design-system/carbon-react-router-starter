@@ -39,10 +39,7 @@ export function setHeaderInverse(headerInverse) {
 
   // Update HTML attribute immediately (no re-render needed)
   if (typeof document !== 'undefined') {
-    document.documentElement.setAttribute(
-      'data-header-inverse',
-      String(headerInverse),
-    );
+    document.documentElement.setAttribute('data-header-inverse', String(headerInverse));
   }
 }
 
@@ -64,11 +61,8 @@ export function initializeTheme() {
   const { themeSetting, headerInverse } = getThemeSettings();
 
   // Get current attributes set by SSR
-  const currentThemeSetting =
-    document.documentElement.getAttribute('data-theme-setting');
-  const currentHeaderInverse = document.documentElement.getAttribute(
-    'data-header-inverse',
-  );
+  const currentThemeSetting = document.documentElement.getAttribute('data-theme-setting');
+  const currentHeaderInverse = document.documentElement.getAttribute('data-header-inverse');
 
   // Only update if attributes are missing OR if cookies have changed since SSR
   // This prevents hydration mismatch while allowing cookie updates to take effect
@@ -77,22 +71,15 @@ export function initializeTheme() {
   } else if (currentThemeSetting !== themeSetting) {
     // Cookie changed between SSR and hydration - log warning but don't update
     // to avoid hydration mismatch. The next navigation will use the new value.
-    console.warn(
-      'Theme cookie changed between SSR and hydration. ' +
-        'Change will take effect on next navigation.',
-    );
+    console.warn('Theme cookie changed between SSR and hydration. ' + 'Change will take effect on next navigation.');
   }
 
   if (!currentHeaderInverse) {
-    document.documentElement.setAttribute(
-      'data-header-inverse',
-      String(headerInverse),
-    );
+    document.documentElement.setAttribute('data-header-inverse', String(headerInverse));
   } else if (currentHeaderInverse !== String(headerInverse)) {
     // Cookie changed between SSR and hydration - log warning but don't update
     console.warn(
-      'Header inverse cookie changed between SSR and hydration. ' +
-        'Change will take effect on next navigation.',
+      'Header inverse cookie changed between SSR and hydration. ' + 'Change will take effect on next navigation.',
     );
   }
 }

@@ -9,22 +9,27 @@
 @use '@carbon/react/scss/type' as *;
 @use '@carbon/react/scss/breakpoint' as *;
 @use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/motion' as *;
 
 @mixin carbon-content-overrides() {
   // These Carbon overrides are pending outcome of issue #19877
   // https://github.com/carbon-design-system/carbon/issues/19877
 
   // :where used to allow padding to be overridden later
-  :where(.cds--content) {
+  :where(.cs--content) {
     // Padding is really not needed in the content and can get in the way
     // of page headers footers etc.
     // This is especially true on pages using Carbon CSS Grid
     // which has its own padding and margin. On mobile devices this can makes
     // for a lot of whitespace on the left and right of the page
     padding: 0;
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition: $duration-fast-02 motion(standard, productive);
+    }
   }
 
-  .cds--side-nav:not(.cds--side-nav--expanded) ~ .cds--content {
+  .cs--side-nav:not(.cs--side-nav--expanded) ~ .cs--content {
     margin-inline-start: 0;
   }
 }
