@@ -5,11 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { JSX } from 'react';
 import { AspectRatio, Column, Grid } from '@carbon/react';
 import { useTranslation } from 'react-i18next';
 
-export const Footer = (): JSX.Element => {
+export const Footer = () => {
   const { t } = useTranslation();
 
   return (

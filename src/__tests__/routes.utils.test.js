@@ -39,6 +39,12 @@ vi.mock('../routes/config', () => {
   };
 });
 
+// Routes without a wildcard entry, used to test the null fallback
+const routesWithoutWildcard = [
+  { path: '/', element: vi.fn() },
+  { path: '/dashboard', element: vi.fn() },
+];
+
 describe('routes utils', () => {
   describe('findMatchingRoute', () => {
     test('finds exact match for root path', () => {
@@ -74,6 +80,28 @@ describe('routes utils', () => {
 
       expect(routeWithSlash).toEqual(routeWithoutSlash);
       expect(routeWithSlash.path).toBe('/dashboard');
+    });
+
+    test('skips routes without a path property', () => {
+      // A route without path should be skipped; falls through to the wildcard
+      vi.spyOn(configModule, 'routes', 'get').mockReturnValue([
+        { element: vi.fn() }, // no path — should be skipped
+        { path: '*', element: vi.fn(), status: 404 },
+      ]);
+
+      const route = findMatchingRoute('/anything');
+      expect(route.path).toBe('*');
+
+      vi.restoreAllMocks();
+    });
+
+    test('returns null when no wildcard route exists and nothing matches', () => {
+      vi.spyOn(configModule, 'routes', 'get').mockReturnValue(routesWithoutWildcard);
+
+      const route = findMatchingRoute('/no-match');
+      expect(route).toBeNull();
+
+      vi.restoreAllMocks();
     });
   });
 

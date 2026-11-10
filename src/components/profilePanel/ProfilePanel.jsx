@@ -16,8 +16,10 @@ import { UserAvatar } from '@carbon/ibm-products';
 import { ThemeSettings, ThemeMenuComplement, ThemeSwitcher } from '@carbon-labs/react-theme-settings';
 import { useTranslation } from 'react-i18next';
 import { getThemeSettings, setThemeSetting, setHeaderInverse } from '../../utils/theme';
+import { usePrefix } from '@carbon/react';
 
 export const ProfilePanel = ({ className }) => {
+  const prefix = usePrefix();
   const { t } = useTranslation();
 
   // Get initial values from cookies (single call to avoid redundant parsing)
@@ -48,9 +50,10 @@ export const ProfilePanel = ({ className }) => {
     <div className={classNames(className, 'cs--profile-panel')}>
       <div className="cs--profile-user-info">
         <UserAvatar name={userProfile.name} renderIcon="" size="lg" tooltipAlignment="bottom" />
-        <div className="cds--profile-user-info__text-wrapper">
-          <div className="cds--profile-user-info__name">{userProfile.name}</div>
-          <div className="cds--profile-user-info__email">{userProfile.email}</div>
+        {/* Uses Carbon Prefix until Profile component (part of UIShell) released from @carbon/labs */}
+        <div className={`${prefix}--profile-user-info__text-wrapper`}>
+          <div className={`${prefix}--profile-user-info__name`}>{userProfile.name}</div>
+          <div className={`${prefix}--profile-user-info__email`}>{userProfile.email}</div>
         </div>
       </div>
 

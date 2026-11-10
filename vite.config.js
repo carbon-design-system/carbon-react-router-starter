@@ -48,7 +48,34 @@ export default defineConfig({
       provider: 'v8',
       reporter: ['text', 'html'],
       include: ['src/**'],
-      exclude: ['src/test/**', 'src/__tests__/**', 'src/**/*.scss', 'src/locales/**', 'src/stories/**'],
+      exclude: [
+        'src/test/**',
+        'src/__tests__/**',
+        'src/**/*.scss',
+        'src/**/.DS_Store',
+        'src/locales/**',
+        'src/stories/**',
+        'src/entry-client.jsx',
+        'src/entry-server.jsx',
+        'src/server.js',
+        'src/i18n.client.js',
+        'src/i18n.server.js',
+      ],
+      thresholds: {
+        statements: 90,
+        branches: 90,
+        functions: 90,
+        lines: 90,
+
+        // specific overrides for src/config.js due to an issue
+        // with anonymous in this instance
+        'src/routes/config.js': {
+          statements: 80,
+          branches: 90,
+          functions: 40,
+          lines: 90,
+        },
+      },
     },
   },
 });
