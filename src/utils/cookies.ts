@@ -43,7 +43,7 @@ export function getCookie(name: string): string | null {
   if (typeof document === 'undefined') return null;
 
   const cookies = parseCookies(document.cookie);
-  return cookies[name] ?? null;
+  return cookies[name] || null;
 }
 
 interface CookieOptions {
@@ -112,7 +112,7 @@ export function getThemeFromCookies(cookieString?: string): ThemeCookieValues {
     ? parseCookies(cookieString)
     : parseCookies(typeof document !== 'undefined' ? document.cookie : '');
 
-  const themeSetting = cookies['theme-setting'] ?? 'system';
+  const themeSetting = cookies['theme-setting'] || 'system';
   const headerInverse = cookies['header-inverse'] === 'true';
 
   // Validate theme setting value

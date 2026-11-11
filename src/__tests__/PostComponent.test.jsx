@@ -10,12 +10,12 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import PostComponent from '../pages/welcome/post/PostComponent';
 
-vi.mock('../api/message.js', () => ({
+vi.mock('../api/message', () => ({
   getPost: vi.fn(),
   getComments: vi.fn(),
 }));
 
-import { getPost, getComments } from '../api/message.js';
+import { getPost, getComments } from '../api/message';
 
 const mockPost = { id: 1, title: 'Test post title', body: 'Test post body content' };
 const mockComments = [

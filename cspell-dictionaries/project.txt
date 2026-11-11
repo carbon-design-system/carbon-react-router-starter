@@ -9,8 +9,6 @@ Platzhalterseite
 plex
 Stephane
 Testbarkeit
-fouc
 tseslint
-tsparser
 vite
 unlighthouse
