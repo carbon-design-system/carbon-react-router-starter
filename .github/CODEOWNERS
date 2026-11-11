@@ -3,4 +3,9 @@
 # These owners will be the default owners for everything in the
 # repo. Unless a later match takes precedence, this team will
 # be requested for review when someone opens a pull request.
-* @rodet
+* @rodet @lee-chase
+
+# Dependency manifests have no owner, so Renovate PRs don't auto-request
+# a review. Later patterns override earlier ones.
+package.json
+package-lock.json
