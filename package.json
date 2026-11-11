@@ -2,7 +2,7 @@
   "name": "carbon-react-starter",
   "private": true,
   "version": "1.0.0",
-  "packageManager": "npm@12.2.1",
+  "packageManager": "npm@12.2.2",
   "type": "module",
   "scripts": {
     "dev": "node src/server",
