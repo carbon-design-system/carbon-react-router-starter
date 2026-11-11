@@ -33,7 +33,7 @@ export default [
     ignores: ['dist', 'vite.config.js'],
     languageOptions: {
       /* added (globals.node) - for server side elements */
-      globals: { ...globals.browser, ...globals.node },
+      globals: { ...globals.browser, ...globals.node, ...globals.jest },
       ecmaVersion: 'latest', // Support all modern ECMAScript features
       parserOptions: {
         ecmaFeatures: { jsx: true },

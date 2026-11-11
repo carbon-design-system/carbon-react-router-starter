@@ -10,7 +10,7 @@ import { findAvailablePort } from '../utils/port.ts';
 // Server configuration constants
 // Extracted to avoid importing the full server during tests
 export const preferredPort: number = Number(process.env['PORT']) || 5173;
-export const base: string = process.env['BASE'] ?? '/';
+export const base: string = process.env['BASE'] || '/';
 
 // For backward compatibility with tests and synchronous code
 // These will use the preferred port, not the actual port if it changes

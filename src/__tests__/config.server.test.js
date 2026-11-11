@@ -7,12 +7,12 @@
 
 import { describe, test, expect, vi, beforeEach } from 'vitest';
 
-vi.mock('../utils/port.js', () => ({
+vi.mock('../utils/port', () => ({
   findAvailablePort: vi.fn(),
 }));
 
 import { getServerConfig } from '../config/server-config';
-import { findAvailablePort } from '../utils/port.js';
+import { findAvailablePort } from '../utils/port';
 
 describe('getServerConfig', () => {
   beforeEach(() => {
