@@ -1,9 +1,11 @@
 /**
- * Copyright IBM Corp. 2025, 2026
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+import type { Request, Response } from 'express';
 
 /**
  * This file contains the functions that do async network requests
@@ -18,25 +20,25 @@ let serverBaseUrl = 'http://localhost:5173'; // Default fallback
 
 /**
  * Set the base URL for the server
- * @param {string} url - The base URL to use
  */
-export const setBaseUrl = (url) => {
+export const setBaseUrl = (url: string): void => {
   serverBaseUrl = url;
 };
 
 /**
  * Get the base URL for the server
  */
-const getBaseUrl = () => {
+const getBaseUrl = (): string => {
   return serverBaseUrl;
 };
 
-export const getPost = async (req, res) => {
+export const getPost = async (req: Request<{ id: string }>, res: Response): Promise<void> => {
   const { id } = req.params;
 
   // Validate that id is a positive integer
   if (!/^\d+$/.test(id)) {
-    return res.status(400).json({ message: 'Invalid post id' });
+    res.status(400).json({ message: 'Invalid post id' });
+    return;
   }
 
   try {
@@ -44,11 +46,12 @@ export const getPost = async (req, res) => {
     const response = await fetch(`${getBaseUrl()}/api/external/post/${id}`);
 
     if (!response.ok) {
-      const error = await response.json();
-      return res.status(response.status).json(error);
+      const error: unknown = await response.json();
+      res.status(response.status).json(error);
+      return;
     }
 
-    const blogpost = await response.json();
+    const blogpost: unknown = await response.json();
 
     // Return the blogpost
     res.json(blogpost);
@@ -58,11 +61,12 @@ export const getPost = async (req, res) => {
   }
 };
 
-export const getComments = async (req, res) => {
+export const getComments = async (req: Request, res: Response): Promise<void> => {
   const { postId } = req.query;
 
-  if (!postId) {
-    return res.status(400).json({ message: 'Missing postId parameter' });
+  if (typeof postId !== 'string' || !postId) {
+    res.status(400).json({ message: 'Missing postId parameter' });
+    return;
   }
 
   try {
@@ -70,17 +74,18 @@ export const getComments = async (req, res) => {
     const response = await fetch(`${getBaseUrl()}/api/external/comments?postId=${postId}`);
 
     if (!response.ok) {
-      const error = await response.json();
-      return res.status(response.status).json(error);
+      const error: unknown = await response.json();
+      res.status(response.status).json(error);
+      return;
     }
 
-    const comments = await response.json();
+    const comments: unknown = await response.json();
 
     // Return the comments
-    return res.json(comments);
+    res.json(comments);
   } catch (error) {
     console.error('Error fetching comments:', error);
-    return res.status(500).json({ message: 'Failed to fetch comments' });
+    res.status(500).json({ message: 'Failed to fetch comments' });
   }
 };
 

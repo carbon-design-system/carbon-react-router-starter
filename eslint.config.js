@@ -132,7 +132,7 @@ export default [
   /* Server process files: console.log/error is the correct output mechanism for
      a Node.js server process — consumed by process supervisors and log aggregators. */
   {
-    files: ['src/server.js', 'src/config/**', 'src/service/**'],
+    files: ['src/server.ts', 'src/config/**', 'src/service/**'],
     rules: { 'no-console': 'off' },
   },
   /* Test files: console output is expected for test setup diagnostics. */

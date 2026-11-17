@@ -1,11 +1,19 @@
 /**
- * Copyright IBM Corp. 2025, 2026
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { getPost, getComments } from '../service/postHandlers.js';
-import { getExternalPost, getExternalComments } from '../service/externalHandlers.js';
+import type { Request, Response } from 'express';
+import { getPost, getComments } from '../service/postHandlers.ts';
+import { getExternalPost, getExternalComments } from '../service/externalHandlers.ts';
+
+type RouteHandler<P> = (req: Request<P>, res: Response) => Promise<void>;
+
+/** The part of an Express app (or the MSW test router) that route registration needs. */
+export interface RouteRegistrar {
+  get<P>(path: string, handler: RouteHandler<P>): unknown;
+}
 
 /**
  * Registers all API routes on the given Express app instance.
@@ -17,10 +25,10 @@ import { getExternalPost, getExternalComments } from '../service/externalHandler
  * @param externalHandlers - External API mock handlers (can be mocked for testing)
  */
 export const getRoutes = (
-  app,
+  app: RouteRegistrar,
   handlers = { getPost, getComments },
   externalHandlers = { getExternalPost, getExternalComments },
-) => {
+): void => {
   // Client-facing API routes (these call the external routes below)
   app.get('/api/post/:id', handlers.getPost);
   app.get('/api/comments', handlers.getComments);

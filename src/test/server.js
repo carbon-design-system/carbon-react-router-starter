@@ -20,7 +20,7 @@ const _setupServer = (...args) => {
   getRoutes(getRouter(mocks, networking));
 
   // Mock external API calls from postHandlers to our local external endpoints
-  // These intercept the fetch calls made by postHandlers.js
+  // These intercept the fetch calls made by postHandlers.ts
   const externalMocks = [
     http.get(`${base}:${port}/api/external/post/:id`, ({ params }) => {
       return HttpResponse.json({

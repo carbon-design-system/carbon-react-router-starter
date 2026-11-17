@@ -98,7 +98,7 @@
       "apiLayer": "API-Schicht",
       "apiLayerDesc": "Client-seitige Funktionen in api/message.js verarbeiten HTTP-Anfragen an unser Express-Backend",
       "serviceLayer": "Service-Schicht",
-      "serviceLayerDesc": "Server-seitige Handler in service/postHandlers.js leiten Anfragen an externe APIs weiter.",
+      "serviceLayerDesc": "Server-seitige Handler in service/postHandlers.ts leiten Anfragen an externe APIs weiter.",
       "summary": "Dieses Muster hält Ihre Komponenten auf die Darstellung fokussiert, während die Datenabruflogik zentral für Wiederverwendbarkeit und Testbarkeit gebündelt wird."
     }
   }

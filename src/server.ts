@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025, 2026
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,14 +8,19 @@
 import fs from 'node:fs/promises';
 import express from 'express';
 import { Transform } from 'node:stream';
-import { getRoutes } from './routes/routes.js';
+import type { ViteDevServer } from 'vite';
+import { getRoutes } from './routes/routes.ts';
 import { base, getServerConfig } from './config/server-config.ts';
-import i18nextMiddleware from 'i18next-http-middleware';
+import { handle as i18nextHandle } from 'i18next-http-middleware';
 import i18n from './i18n.server.js';
-import { setBaseUrl } from './service/postHandlers.js';
+import { setBaseUrl } from './service/postHandlers.ts';
+
+type EntryServer = { render: typeof import('./entry-server.jsx').render };
+
+const toError = (value: unknown): Error => (value instanceof Error ? value : new Error(String(value)));
 
 // Constants
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env['NODE_ENV'] === 'production';
 const ABORT_DELAY = 10000;
 
 // Get available port
@@ -28,14 +33,13 @@ setBaseUrl(baseUrl);
 const app = express();
 
 // Add Vite or respective production middlewares
-/** @type {import('vite').ViteDevServer | undefined} */
-let vite;
+let vite: ViteDevServer | undefined;
 if (!isProduction) {
   const { createServer } = await import('vite');
   const { findAvailablePort } = await import('./utils/port.ts');
 
   // Find an available port for Vite's HMR WebSocket server
-  let hmrPort;
+  let hmrPort: number;
   try {
     hmrPort = await findAvailablePort(24678);
   } catch (error) {
@@ -63,7 +67,7 @@ if (!isProduction) {
 
 // Add i18next middleware for language detection
 app.use(
-  i18nextMiddleware.handle(i18n, {
+  i18nextHandle(i18n, {
     ignoreRoutes: [], // Don't ignore any routes
     removeLngFromUrl: false,
   }),
@@ -80,22 +84,26 @@ app.use('*all', async (req, res) => {
     // Get cookies from request
     const cookies = req.headers.cookie || '';
 
-    /** @type {string} */
-    let template;
-    /** @type {import('./entry-server.jsx').render} */
-    let render;
-    if (!isProduction) {
+    let template: string;
+    let render: EntryServer['render'];
+    if (vite) {
       // Always read fresh template in development
       template = await fs.readFile('./index.html', 'utf-8');
       // Transform HTML for SSR - Vite 8 requires the full URL path
       // Ensure we always have a valid path (default to '/' for root)
       const transformUrl = url || '/';
       template = await vite.transformIndexHtml(transformUrl, template);
-      render = (await vite.ssrLoadModule('/src/entry-server.jsx')).render;
+      render = ((await vite.ssrLoadModule('/src/entry-server.jsx')) as EntryServer).render;
     } else {
-      const templateHtml = isProduction ? await fs.readFile('./dist/client/index.html', 'utf-8') : '';
-      template = templateHtml;
-      render = (await import('../dist/server/entry-server.js')).render;
+      template = await fs.readFile('./dist/client/index.html', 'utf-8');
+      // Built output; the specifier is a variable so type checking does not require a build
+      const entryServerPath = '../dist/server/entry-server.js';
+      render = ((await import(entryServerPath)) as EntryServer).render;
+    }
+
+    const [htmlStart, htmlEnd] = template.split(`<!--app-html-->`);
+    if (htmlStart === undefined || htmlEnd === undefined) {
+      throw new Error('index.html is missing the <!--app-html--> placeholder');
     }
 
     let didError = false;
@@ -104,7 +112,8 @@ app.use('*all', async (req, res) => {
       url,
       req.i18n,
       {
-        onShellError(error) {
+        onShellError(shellError) {
+          const error = toError(shellError);
           // Improved error handling with debugging context
           console.error('Shell rendering error:', {
             url,
@@ -127,8 +136,6 @@ app.use('*all', async (req, res) => {
             },
           });
 
-          const [htmlStart, htmlEnd] = template.split(`<!--app-html-->`);
-
           // Inject head content (i18n state) and theme attribute into the html tag
           let htmlStartProcessed = htmlStart.replace('<!--app-head-->', head);
           htmlStartProcessed = themeAttr
@@ -143,7 +150,8 @@ app.use('*all', async (req, res) => {
 
           pipe(transformStream);
         },
-        onError(error) {
+        onError(streamError) {
+          const error = toError(streamError);
           didError = true;
           // Enhanced error logging with context
           console.error('Streaming error:', {
@@ -161,12 +169,13 @@ app.use('*all', async (req, res) => {
       abort();
     }, ABORT_DELAY);
   } catch (e) {
-    vite?.ssrFixStacktrace(e);
+    const error = toError(e);
+    vite?.ssrFixStacktrace(error);
     // Enhanced error logging with full context
     console.error('Server error:', {
       url: req.originalUrl,
-      error: e.message,
-      stack: e.stack,
+      error: error.message,
+      stack: error.stack,
       timestamp: new Date().toISOString(),
     });
     res.status(500).set('Content-Type', 'text/plain').end('Internal Server Error');
@@ -179,7 +188,7 @@ const server = app.listen(port, () => {
 });
 
 // Graceful shutdown handler
-function gracefulShutdown(signal) {
+function gracefulShutdown(signal: NodeJS.Signals): void {
   console.log(`\n${signal} received. Closing server gracefully...`);
 
   server.close(() => {
@@ -187,10 +196,16 @@ function gracefulShutdown(signal) {
 
     // Close Vite dev server if running
     if (vite) {
-      vite.close().then(() => {
-        console.log('Vite dev server closed');
-        process.exit(0);
-      });
+      vite.close().then(
+        () => {
+          console.log('Vite dev server closed');
+          process.exit(0);
+        },
+        (error: unknown) => {
+          console.error('Failed to close Vite dev server:', error);
+          process.exit(1);
+        },
+      );
     } else {
       process.exit(0);
     }

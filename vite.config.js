@@ -57,7 +57,7 @@ export default defineConfig({
         'src/stories/**',
         'src/entry-client.jsx',
         'src/entry-server.jsx',
-        'src/server.js',
+        'src/server.ts',
         'src/i18n.client.js',
         'src/i18n.server.js',
       ],

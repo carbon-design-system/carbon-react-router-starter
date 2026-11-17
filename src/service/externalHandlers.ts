@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,8 +12,25 @@
  * You can remove/replace these with actual external API handlers in your actual application.
  */
 
+import type { Request, Response } from 'express';
+
+interface Post {
+  id: number;
+  title: string;
+  body: string;
+  userId: number;
+}
+
+interface PostComment {
+  id: number;
+  postId: number;
+  name: string;
+  email: string;
+  body: string;
+}
+
 // Mock database for posts
-const mockPosts = {
+const mockPosts: Record<string, Post> = {
   1: {
     id: 1,
     title: 'What is Carbon?',
@@ -38,7 +55,7 @@ const mockPosts = {
 };
 
 // Mock database for comments
-const mockComments = {
+const mockComments: Record<string, PostComment[]> = {
   1: [
     {
       id: 1,
@@ -79,12 +96,13 @@ const mockComments = {
  * Mock external API handler for fetching a single post
  * Simulates an external service response
  */
-export const getExternalPost = async (req, res) => {
+export const getExternalPost = async (req: Request<{ id: string }>, res: Response): Promise<void> => {
   const { id } = req.params;
 
   // Validate that id is a positive integer
   if (!/^\d+$/.test(id)) {
-    return res.status(400).json({ message: 'Invalid post id' });
+    res.status(400).json({ message: 'Invalid post id' });
+    return;
   }
 
   // Simulated network delay
@@ -92,7 +110,8 @@ export const getExternalPost = async (req, res) => {
   const post = mockPosts[id];
 
   if (!post) {
-    return res.status(404).json({ message: 'Post not found' });
+    res.status(404).json({ message: 'Post not found' });
+    return;
   }
 
   res.json(post);
@@ -102,18 +121,19 @@ export const getExternalPost = async (req, res) => {
  * Mock external API handler for fetching comments for a post
  * Simulates an external service response
  */
-export const getExternalComments = async (req, res) => {
+export const getExternalComments = async (req: Request, res: Response): Promise<void> => {
   const { postId } = req.query;
 
   // Validate that postId is provided and is a positive integer
-  if (!postId || !/^\d+$/.test(postId)) {
-    return res.status(400).json({ message: 'Invalid or missing postId' });
+  if (typeof postId !== 'string' || !/^\d+$/.test(postId)) {
+    res.status(400).json({ message: 'Invalid or missing postId' });
+    return;
   }
 
   // Simulate network delay
   await new Promise((resolve) => setTimeout(resolve, 100));
 
-  const comments = mockComments[postId] || [];
+  const comments = mockComments[postId] ?? [];
 
   res.json(comments);
 };
