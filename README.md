@@ -76,15 +76,18 @@ TypeScript is configured with strict mode and additional strictness options enab
 
 ### Type checking
 
-Vite compiles TypeScript for speed but doesn't perform type checking during development. To check types:
-
-This is done using the script "lint:types" which is executed during the "lint" script. This means it is also performed during "lint-staged"
-
-You can check manually using:
+Vite strips types without checking them. Type checking runs as `npm run lint:types`, which is part of `npm run lint` (and therefore of the pre-commit hook):
 
 ```bash
 npm run lint:types
 ```
+
+Type checking uses TypeScript 7. TypeScript 7 has no programmatic API yet, so tools that need one (such as `typescript-eslint`) use the TypeScript 6 compatibility package instead. Following the [official guidance](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/), both are installed via npm aliases:
+
+- `typescript` → `@typescript/typescript6` (the 6.0 API, for tooling)
+- `@typescript/native` → `typescript@7` (provides `tsc`)
+
+Once `typescript-eslint` supports the TypeScript 7 API, the aliases can be replaced by a plain `typescript` dependency.
 
 ### Gradual migration
 
