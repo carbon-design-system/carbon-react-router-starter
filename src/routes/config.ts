@@ -1,11 +1,34 @@
 /**
- * Copyright IBM Corp. 2025, 2026
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { lazy } from 'react';
-import { MagicWand, LogoGithub } from '@carbon/icons-react';
+import { lazy, type ComponentType, type LazyExoticComponent } from 'react';
+import { MagicWand, LogoGithub, type CarbonIconType } from '@carbon/icons-react';
+
+export interface CarbonRouteType {
+  /** Stands in for `path` when arranging Carbon menus for entries without a route */
+  virtualPath?: string;
+  label: string;
+  labelKey?: string;
+  inHeader?: boolean;
+  inSideNav?: boolean;
+  icon?: CarbonIconType;
+  href?: string;
+  /** Set during processing below */
+  subMenu?: RouteType[];
+  /** Set during processing below */
+  inSubMenu?: boolean;
+}
+
+export interface RouteType {
+  path?: string;
+  index?: boolean;
+  element?: LazyExoticComponent<ComponentType>;
+  status?: number;
+  carbon?: CarbonRouteType;
+}
 
 // This project splits the pages each in different JavaScript bundles.
 // You might also split part of the pages that incur significant
@@ -16,27 +39,7 @@ const NotFound = lazy(() => import('../pages/not-found/NotFound'));
 const Placeholder = lazy(() => import('../pages/placeholder/Placeholder'));
 const Welcome = lazy(() => import('../pages/welcome/Welcome'));
 
-// type carbonRouteType = {
-//   virtualPath: string; // related to path, used for arranging Carbon menu when no path exists
-//   label: string;
-//   inHeader?: boolean;
-//   inSideNav?: boolean;
-//   separator?: boolean;
-//   icon?: CarbonIconType;
-//   subMenu?: routesType[];
-//   inSubMenu?: boolean;
-//   href?: string,
-// };
-
-// type routesType = {
-//   path: string;
-//   index?: boolean;
-//   element?: ({ usingOutlet }: { usingOutlet?: boolean }) => JSX.Element;
-//   status?: number;
-//   carbon?: carbonRouteType;
-// };
-
-export const routes = [
+export const routes: RouteType[] = [
   {
     index: true,
     path: '/',
@@ -171,9 +174,9 @@ export const routes = [
  * A direct child means the subPath starts with the parent path followed by '/',
  * and contains no additional '/' characters after that.
  *
- * @param {string} parentPath - The parent path to check against
- * @param {string} subPath - The potential child path
- * @returns {boolean} True if subPath is a direct child of parentPath
+ * @param parentPath - The parent path to check against
+ * @param subPath - The potential child path
+ * @returns True if subPath is a direct child of parentPath
  *
  * @example
  * isDirectChildPath('/link-4', '/link-4/sub-link-1') // true
@@ -181,7 +184,7 @@ export const routes = [
  * isDirectChildPath('/dashboard', '/dashboard/123') // true
  * isDirectChildPath('/dashboard', '/dashboard') // false
  */
-export const isDirectChildPath = (parentPath, subPath) => {
+export const isDirectChildPath = (parentPath: string | undefined, subPath: string | undefined): boolean => {
   if (!subPath || !parentPath) {
     return false;
   }
@@ -220,16 +223,13 @@ const routesProcessed = routes.map((route) => {
     return !route.index && isDirectChildPath(path, subPath);
   });
 
-  if (subMenu && subMenu.length > 0) {
+  if (subMenu.length > 0) {
     // add sub menu to parent
     route.carbon.subMenu = subMenu;
 
-    // mark child as in sub menu
+    // mark child as in sub menu (every entry has carbon config, see filter above)
     subMenu.forEach((menu) => {
-      const subPath = menu.path || menu.carbon.virtualPath;
-      // Carbon should never be blank (filtered above, but kept as a safety fallback)
-      menu.carbon = menu.carbon || { label: subPath };
-      menu.carbon.inSubMenu = true;
+      if (menu.carbon) menu.carbon.inSubMenu = true;
     });
   }
 

@@ -58,8 +58,8 @@ export default defineConfig({
         'src/entry-client.jsx',
         'src/entry-server.jsx',
         'src/server.ts',
-        'src/i18n.client.js',
-        'src/i18n.server.js',
+        'src/i18n.client.ts',
+        'src/i18n.server.ts',
       ],
       thresholds: {
         statements: 90,
@@ -69,7 +69,7 @@ export default defineConfig({
 
         // specific overrides for src/config.js due to an issue
         // with anonymous in this instance
-        'src/routes/config.js': {
+        'src/routes/config.ts': {
           statements: 80,
           branches: 90,
           functions: 40,

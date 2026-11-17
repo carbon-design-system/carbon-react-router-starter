@@ -14,7 +14,7 @@ import { Router } from './routes';
 
 // App level imports
 import { initializeTheme } from './utils/theme';
-import i18n from './i18n.client.js';
+import i18n from './i18n.client.ts';
 
 /**
  * Initializes the theme on client load by reading the user's preference

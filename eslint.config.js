@@ -115,6 +115,9 @@ export default [
     rules: {
       '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]', argsIgnorePattern: '^_' }],
       '@typescript-eslint/no-explicit-any': 'warn',
+      /* Flags the documented i18next.use() chain; typescript-eslint advises disabling this rule for TS,
+         as it re-parses dependencies (https://typescript-eslint.io/troubleshooting/typed-linting/performance) */
+      'import-x/no-named-as-default-member': 'off',
       /* Disallow React.FC / FC in favor of direct prop typing `({ prop }: Props)` for cleaner type inference and RSC compatibility */
       '@typescript-eslint/no-restricted-types': [
         'error',

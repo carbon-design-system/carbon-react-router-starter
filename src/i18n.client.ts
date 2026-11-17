@@ -1,23 +1,36 @@
 /**
- * Copyright IBM Corp. 2025, 2026
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import i18next from 'i18next';
+import i18next, { type Resource } from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import resourcesToBackend from 'i18next-resources-to-backend';
 
-i18next
+/** Translation state the server embeds into the page for the client to load before hydration. */
+export interface InitialI18nState {
+  initialI18nStore: Resource;
+  initialLanguage: string;
+}
+
+declare global {
+  interface Window {
+    __INITIAL_I18N_STATE__?: InitialI18nState;
+  }
+}
+
+// Not awaited: before hydrating, entry-client adds the server's translation state itself.
+void i18next
   // Detect user language
   .use(LanguageDetector)
   // Pass the i18n instance to react-i18next
   .use(initReactI18next)
   // Load translation files dynamically
   .use(
-    resourcesToBackend((language) => {
+    resourcesToBackend((language: string) => {
       // Only load non-English translations from files
       // English is provided as defaultValue in components
       if (language === 'en') {
@@ -43,9 +56,11 @@ i18next
     // components never suspend during hydration, which would cause a mismatch
     // with the server-rendered HTML.
     //
-    // Note: Both i18n.client.js and i18n.server.js need this setting because
+    // Note: Both i18n.client.ts and i18n.server.ts need this setting because
     // they are separate i18next instances that run in different environments.
-    useSuspense: false,
+    react: {
+      useSuspense: false,
+    },
 
     // Return key if translation missing (useful with defaultValue pattern)
     returnNull: false,

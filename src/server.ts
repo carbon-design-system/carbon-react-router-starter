@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2026
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,7 +12,7 @@ import type { ViteDevServer } from 'vite';
 import { getRoutes } from './routes/routes.ts';
 import { base, getServerConfig } from './config/server-config.ts';
 import { handle as i18nextHandle } from 'i18next-http-middleware';
-import i18n from './i18n.server.js';
+import i18n from './i18n.server.ts';
 import { setBaseUrl } from './service/postHandlers.ts';
 
 type EntryServer = { render: typeof import('./entry-server.jsx').render };

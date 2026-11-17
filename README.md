@@ -184,9 +184,9 @@ Where documenting inline is not possible or impractical, we have added explanati
 
   Translation files are stored in `src/locales/` as JSON files, one per language (e.g., `de.json` for German). These files are bundled into the application at build time using `vite-plugin-i18next-loader`, which means no additional network requests are needed to load translations.
 
-  The i18n setup is split between server and client. The server configuration lives in `src/i18n.server.js` and the client configuration in `src/i18n.client.js`. When a user visits the application, the server reads the `Accept-Language` header from their browser to determine their preferred language. The server then renders the page with the appropriate translations and passes the translation state to the client. The client loads this state before React hydration to ensure consistency. You can find detailed comments explaining this process in `src/entry-client.jsx`.
+  The i18n setup is split between server and client. The server configuration lives in `src/i18n.server.ts` and the client configuration in `src/i18n.client.ts`. When a user visits the application, the server reads the `Accept-Language` header from their browser to determine their preferred language. The server then renders the page with the appropriate translations and passes the translation state to the client. The client loads this state before React hydration to ensure consistency. You can find detailed comments explaining this process in `src/entry-client.jsx`.
 
-  To add a new language, create a JSON file in `src/locales/` named with the language code (e.g., `fr.json` for French). Then add that language code to the `supportedLngs` array in both `src/i18n.client.js` and `src/i18n.server.js`.
+  To add a new language, create a JSON file in `src/locales/` named with the language code (e.g., `fr.json` for French). Then add that language code to the `supportedLngs` array in both `src/i18n.client.ts` and `src/i18n.server.ts`.
 
   In your components, use the `useTranslation` hook to access translations. The `t` function takes a translation key and an English fallback: `const { t } = useTranslation(); t('greeting', 'Hello')`. English text stays inline in your code as the default, while other languages are defined in their respective JSON files.
 

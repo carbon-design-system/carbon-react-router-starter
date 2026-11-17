@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,7 +8,7 @@
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import Backend from 'i18next-fs-backend';
-import i18nextMiddleware from 'i18next-http-middleware';
+import { LanguageDetector } from 'i18next-http-middleware';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
@@ -19,7 +19,7 @@ await i18next
   // Load translation files from filesystem
   .use(Backend)
   // Add language detector for server-side
-  .use(i18nextMiddleware.LanguageDetector)
+  .use(LanguageDetector)
   // Pass the i18n instance to react-i18next
   .use(initReactI18next)
   // Init i18next
@@ -37,7 +37,9 @@ await i18next
     // On the server, translations are preloaded so they should always be
     // available. We set this to false as a safeguard to ensure rendering
     // never suspends unexpectedly, which could cause issues with streaming SSR.
-    useSuspense: false,
+    react: {
+      useSuspense: false,
+    },
 
     // Return key if translation missing (useful with defaultValue pattern)
     returnNull: false,
@@ -45,9 +47,8 @@ await i18next
 
     // Language detection for server-side (used by i18next-http-middleware)
     detection: {
-      order: ['header'],
-      lookupHeader: 'accept-language',
-      caches: false,
+      order: ['header'], // reads accept-language
+      caches: [],
     },
 
     backend: {
