@@ -12,12 +12,11 @@
 
 import pluginJs from '@eslint/js';
 import importPlugin from 'eslint-plugin-import-x';
-/* added (eslint-plugin-react) - as the most popular eslint plugin for React March 24th 2025 */
-import pluginReact from 'eslint-plugin-react';
 import pluginReactHooks from 'eslint-plugin-react-hooks';
 import pluginReactRefresh from 'eslint-plugin-react-refresh';
-/* added (eslint-plugin-jsx-a11y) - ensures attributes needed for accessibility are added */
-import eslintPluginJsxA11y from 'eslint-plugin-jsx-a11y';
+/* added (eslint-plugin-jsx-a11y-x) - ensures attributes needed for accessibility are added.
+   Maintained fork of eslint-plugin-jsx-a11y with ESLint 10 support, November 2026 */
+import eslintPluginJsxA11y from 'eslint-plugin-jsx-a11y-x';
 import globals from 'globals';
 /* added eslint-plugin-prettier to run prettier as an ESLint plugin April 15th 2025 */
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
@@ -39,9 +38,6 @@ export default [
       },
     },
     settings: {
-      react: {
-        version: 'detect',
-      },
       'import-x/resolver': {
         node: {
           extensions: ['.js', '.jsx'],
@@ -55,12 +51,10 @@ export default [
     },
   },
   importPlugin.flatConfigs.recommended,
-  /* added (eslint-plugin-react) - popular recommended config March 24th 2025 */
-  pluginReact.configs.flat['jsx-runtime'],
   pluginReactHooks.configs.flat.recommended,
   pluginReactRefresh.configs.vite,
-  /* added (eslint-plugin-jsx-a11y) - ensures attributes needed for accessibility are added */
-  eslintPluginJsxA11y.flatConfigs.recommended,
+  /* added (eslint-plugin-jsx-a11y-x) - ensures attributes needed for accessibility are added */
+  eslintPluginJsxA11y.configs.recommended,
   /* added eslint-plugin-prettier to run prettier as an ESLint plugin April 15th 2025 */
   eslintPluginPrettierRecommended,
   /* added eslint-config-prettier to turn off conflicting rules April 15th 2025 */

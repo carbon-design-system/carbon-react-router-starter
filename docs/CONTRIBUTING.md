@@ -187,7 +187,7 @@ npm run lint:spell     # CSpell only
 - **JavaScript/JSX:** Follow the ESLint configuration defined in [`eslint.config.js`](./eslint.config.js)
 - **SCSS/CSS:** Follow the Stylelint configuration defined in [`.stylelintrc.json`](./.stylelintrc.json). See [docs/stylelint.md](./docs/stylelint.md) for detailed guidance
 - **Formatting:** Prettier handles code formatting automatically based on [`prettier.config.js`](./prettier.config.js)
-- **Accessibility:** Follow accessibility best practices enforced by `eslint-plugin-jsx-a11y` and `@double-great/stylelint-a11y`
+- **Accessibility:** Follow accessibility best practices enforced by `eslint-plugin-jsx-a11y-x` and `@double-great/stylelint-a11y`
 
 ### Copyright headers
 
