@@ -73,10 +73,11 @@ TypeScript is configured with strict mode and additional strictness options enab
 - **Build**: TypeScript is compiled as part of the normal build process (`npm run build`)
 - **Linting**: ESLint is configured to lint both JavaScript and TypeScript files
 - **Testing**: Vitest supports TypeScript natively
+- **Server**: Node runs the server entry and its imports directly, using its built-in type stripping, so server-side modules can be `.ts` too. Imports must include the `.ts` extension, type-only imports must use `import type` (enforced by `verbatimModuleSyntax`), and only erasable syntax is allowed, so no `enum`, `namespace` or constructor parameter properties (enforced by `erasableSyntaxOnly`)
 
 ### Type checking
 
-Vite strips types without checking them. Type checking runs as `npm run lint:types`, which is part of `npm run lint` (and therefore of the pre-commit hook):
+Vite strips types without checking them. Type checking runs as `npm run lint:types`, which is part of `npm run lint` (and therefore of the pre-commit hook) and of CI:
 
 ```bash
 npm run lint:types

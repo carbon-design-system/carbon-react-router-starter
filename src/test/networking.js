@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { expect } from 'vitest';
+
 export const getNetworking = () => {
   const runningRequests = new Set();
 
