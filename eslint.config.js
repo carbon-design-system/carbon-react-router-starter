@@ -26,6 +26,8 @@ import eslintConfigPrettier from 'eslint-config-prettier/flat';
 /* replaced split @typescript-eslint/eslint-plugin + @typescript-eslint/parser with unified typescript-eslint */
 import tseslint from 'typescript-eslint';
 
+const tsFiles = ['**/*.{ts,tsx}'];
+
 export default [
   { ignores: ['dist', 'vite.config.js', 'node_modules/**'] },
   {
@@ -53,64 +55,6 @@ export default [
         espree: ['.js', '.cjs', '.mjs', '.jsx'],
       },
       'import-x/internal-regex': '^(@carbon|react)',
-    },
-  },
-  /* disable type-checked rules for JS files — required because recommendedTypeChecked
-     is applied globally below and JS files cannot be type-checked by the TS parser */
-  {
-    files: ['**/*.{js,mjs,cjs,jsx}'],
-    ...tseslint.configs.disableTypeChecked,
-  },
-  /* TypeScript configuration — uses projectService for typed linting */
-  {
-    files: ['**/*.{ts,tsx}'],
-    languageOptions: {
-      parser: tseslint.parser,
-      parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-        ecmaFeatures: { jsx: true },
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname,
-      },
-      globals: { ...globals.browser, ...globals.node },
-    },
-    plugins: {
-      '@typescript-eslint': tseslint.plugin,
-    },
-    settings: {
-      react: {
-        version: 'detect',
-      },
-      'import-x/resolver': {
-        typescript: true,
-        node: true,
-      },
-    },
-    rules: {
-      ...tseslint.configs.recommendedTypeChecked.reduce((acc, cfg) => ({ ...acc, ...(cfg.rules ?? {}) }), {}),
-      '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]', argsIgnorePattern: '^_' }],
-      '@typescript-eslint/no-explicit-any': 'warn',
-      /* Disallow React.FC / FC in favor of direct prop typing `({ prop }: Props)` for cleaner type inference and RSC compatibility */
-      '@typescript-eslint/no-restricted-types': [
-        'error',
-        {
-          types: {
-            'React.FC': {
-              message: 'Use direct prop parameter typing instead: `const MyComponent = ({ prop }: Props) => ...`',
-            },
-            FC: {
-              message: 'Use direct prop parameter typing instead: `const MyComponent = ({ prop }: Props) => ...`',
-            },
-            'React.FunctionComponent': {
-              message: 'Use direct prop parameter typing instead: `const MyComponent = ({ prop }: Props) => ...`',
-            },
-            FunctionComponent: {
-              message: 'Use direct prop parameter typing instead: `const MyComponent = ({ prop }: Props) => ...`',
-            },
-          },
-        },
-      ],
     },
   },
   importPlugin.flatConfigs.recommended,
@@ -147,11 +91,42 @@ export default [
       'no-console': 'error',
     },
   },
-  /* Turn off JS no-unused-vars for TypeScript files to prevent false positives on type declarations */
+  /* TypeScript - typed linting (#769). Placed after the shared rules so typescript-eslint can turn off
+     core rules that TypeScript already covers (no-undef, no-unused-vars, ...). */
+  ...tseslint.configs.recommendedTypeChecked.map((config) => ({ ...config, files: tsFiles })),
   {
-    files: ['**/*.{ts,tsx}'],
+    files: tsFiles,
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+      globals: { ...globals.browser, ...globals.node },
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
+      'import-x/resolver': {
+        typescript: true,
+        node: true,
+      },
+    },
     rules: {
-      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]', argsIgnorePattern: '^_' }],
+      '@typescript-eslint/no-explicit-any': 'warn',
+      /* Disallow React.FC / FC in favor of direct prop typing `({ prop }: Props)` for cleaner type inference and RSC compatibility */
+      '@typescript-eslint/no-restricted-types': [
+        'error',
+        {
+          types: Object.fromEntries(
+            ['React.FC', 'FC', 'React.FunctionComponent', 'FunctionComponent'].map((type) => [
+              type,
+              { message: 'Use direct prop parameter typing instead: `const MyComponent = ({ prop }: Props) => ...`' },
+            ]),
+          ),
+        },
+      ],
     },
   },
   /* Server process files: console.log/error is the correct output mechanism for
