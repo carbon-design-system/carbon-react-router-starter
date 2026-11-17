@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2026
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { Request, Response } from 'express';
+import type { JsonResponse, ParamsRequest, QueryRequest } from './types.ts';
 
 /**
  * This file contains the functions that do async network requests
@@ -32,7 +32,7 @@ const getBaseUrl = (): string => {
   return serverBaseUrl;
 };
 
-export const getPost = async (req: Request<{ id: string }>, res: Response): Promise<void> => {
+export const getPost = async (req: ParamsRequest<{ id: string }>, res: JsonResponse): Promise<void> => {
   const { id } = req.params;
 
   // Validate that id is a positive integer
@@ -61,7 +61,7 @@ export const getPost = async (req: Request<{ id: string }>, res: Response): Prom
   }
 };
 
-export const getComments = async (req: Request, res: Response): Promise<void> => {
+export const getComments = async (req: QueryRequest, res: JsonResponse): Promise<void> => {
   const { postId } = req.query;
 
   if (typeof postId !== 'string' || !postId) {

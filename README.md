@@ -201,15 +201,15 @@ This project comes with a pre-configured testing setup using React Testing Libra
 
 #### Setup
 
-- The test configuration is located in `vite.config.js`, which sets up Vitest with globals, a JSDOM environment, and points to the setup file `src/test/setup.js`.
+- The test configuration is located in `vite.config.js`, which sets up Vitest with globals, a JSDOM environment, and points to the setup file `src/test/setup.ts`.
 
 - This file handles mocking network requests and manages server startup and teardown. It also handles mocking browser features missing in JSDOM.
 
-- The `src/test/server.js` wraps the server with msw's setupServer function and injects networking utils from `src/test/networking.js` that track each outgoing network request and help debugging unit tests.
+- The `src/test/server.ts` wraps the server with msw's setupServer function. It registers the app's API routes (`src/routes/routes.ts`) through `src/test/router.ts`, so requests to `/api/...` run the real route handlers, and it mocks the "external" API those handlers call. Networking utils from `src/test/networking.ts` track each outgoing network request and help debugging unit tests.
 
 #### Writing Tests
 
-Add your test files to `src/__test__/*.test.jsx`, import the necessary methods from React Testing Library and MSW and use `render` and `screen` to render your components and interact with them. Use MSW handlers (defined in `src/test/server.js`) to mock API responses for your components.
+Add your test files to `src/__tests__/*.test.tsx` (or `.test.ts`), import the necessary methods from React Testing Library and MSW and use `render` and `screen` to render your components and interact with them. Use MSW handlers (defined in `src/test/server.ts`) to mock API responses for your components.
 
 #### Running Tests
 

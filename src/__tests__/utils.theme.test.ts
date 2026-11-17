@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, test, expect, vi, beforeEach, afterEach, type Mock } from 'vitest';
 import * as themeUtils from '../utils/theme';
 import * as cookieUtils from '../utils/cookies';
 
@@ -16,7 +16,7 @@ vi.mock('../utils/cookies', () => ({
 }));
 
 describe('theme utilities', () => {
-  let mockDocument;
+  let mockDocument: { documentElement: { setAttribute: Mock; getAttribute: Mock } };
 
   beforeEach(() => {
     // Create a mock document object
@@ -40,12 +40,12 @@ describe('theme utilities', () => {
 
   describe('getThemeSettings', () => {
     test('returns theme settings from cookies', () => {
-      const mockThemeSettings = {
+      const mockThemeSettings: cookieUtils.ThemeCookieValues = {
         themeSetting: 'dark',
         headerInverse: true,
       };
 
-      cookieUtils.getThemeFromCookies.mockReturnValue(mockThemeSettings);
+      vi.mocked(cookieUtils.getThemeFromCookies).mockReturnValue(mockThemeSettings);
 
       const result = themeUtils.getThemeSettings();
 
@@ -127,7 +127,7 @@ describe('theme utilities', () => {
 
   describe('initializeTheme', () => {
     beforeEach(() => {
-      cookieUtils.getThemeFromCookies.mockReturnValue({
+      vi.mocked(cookieUtils.getThemeFromCookies).mockReturnValue({
         themeSetting: 'dark',
         headerInverse: true,
       });
@@ -151,7 +151,7 @@ describe('theme utilities', () => {
     });
 
     test('does not update when attributes match cookies', () => {
-      mockDocument.documentElement.getAttribute.mockImplementation((attr) => {
+      mockDocument.documentElement.getAttribute.mockImplementation((attr: string) => {
         if (attr === 'data-theme-setting') return 'dark';
         if (attr === 'data-header-inverse') return 'true';
         return null;
@@ -163,9 +163,9 @@ describe('theme utilities', () => {
     });
 
     test('logs warning when theme setting changed between SSR and hydration', () => {
-      const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation();
+      const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
-      mockDocument.documentElement.getAttribute.mockImplementation((attr) => {
+      mockDocument.documentElement.getAttribute.mockImplementation((attr: string) => {
         if (attr === 'data-theme-setting') return 'light';
         if (attr === 'data-header-inverse') return 'true';
         return null;
@@ -182,9 +182,9 @@ describe('theme utilities', () => {
     });
 
     test('logs warning when header inverse changed between SSR and hydration', () => {
-      const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation();
+      const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
-      mockDocument.documentElement.getAttribute.mockImplementation((attr) => {
+      mockDocument.documentElement.getAttribute.mockImplementation((attr: string) => {
         if (attr === 'data-theme-setting') return 'dark';
         if (attr === 'data-header-inverse') return 'false';
         return null;
@@ -201,7 +201,7 @@ describe('theme utilities', () => {
     });
 
     test('sets only missing attributes', () => {
-      mockDocument.documentElement.getAttribute.mockImplementation((attr) => {
+      mockDocument.documentElement.getAttribute.mockImplementation((attr: string) => {
         if (attr === 'data-theme-setting') return 'dark';
         if (attr === 'data-header-inverse') return null;
         return null;

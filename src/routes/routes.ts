@@ -1,14 +1,14 @@
 /**
- * Copyright IBM Corp. 2026
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import type { Request, Response } from 'express';
 import { getPost, getComments } from '../service/postHandlers.ts';
 import { getExternalPost, getExternalComments } from '../service/externalHandlers.ts';
+import type { JsonResponse, ParamsRequest, QueryRequest } from '../service/types.ts';
 
-type RouteHandler<P> = (req: Request<P>, res: Response) => Promise<void>;
+export type RouteHandler<P> = (req: ParamsRequest<P> & QueryRequest, res: JsonResponse) => Promise<void>;
 
 /** The part of an Express app (or the MSW test router) that route registration needs. */
 export interface RouteRegistrar {

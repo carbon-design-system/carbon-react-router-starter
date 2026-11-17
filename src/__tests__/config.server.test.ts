@@ -21,7 +21,7 @@ describe('getServerConfig', () => {
   });
 
   test('returns port and baseUrl when port is available', async () => {
-    findAvailablePort.mockResolvedValue(5173);
+    vi.mocked(findAvailablePort).mockResolvedValue(5173);
 
     const result = await getServerConfig();
 
@@ -32,7 +32,7 @@ describe('getServerConfig', () => {
   });
 
   test('returns alternative port and baseUrl when preferred port is in use', async () => {
-    findAvailablePort.mockResolvedValue(5174);
+    vi.mocked(findAvailablePort).mockResolvedValue(5174);
 
     const result = await getServerConfig();
 
@@ -44,7 +44,7 @@ describe('getServerConfig', () => {
 
   test('throws with descriptive message when port detection fails', async () => {
     const error = new Error('No ports available');
-    findAvailablePort.mockRejectedValue(error);
+    vi.mocked(findAvailablePort).mockRejectedValue(error);
 
     await expect(getServerConfig()).rejects.toThrow('Unable to start server');
     expect(console.error).toHaveBeenCalledWith('Failed to get server configuration:', error);

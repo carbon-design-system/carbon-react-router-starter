@@ -5,34 +5,41 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { describe, test, expect, vi, beforeEach } from 'vitest';
+import { describe, test, expect, vi, beforeEach, afterEach, type Mock } from 'vitest';
 import { getPost, getComments } from '../api/message';
 
 describe('api/message client', () => {
+  let fetchMock: Mock;
+
   beforeEach(() => {
-    global.fetch = vi.fn();
+    fetchMock = vi.fn();
+    vi.stubGlobal('fetch', fetchMock);
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
   });
 
   describe('getPost', () => {
     test('calls the post endpoint with the id and returns the parsed body', async () => {
       const body = { id: 7, title: 'a post' };
-      global.fetch.mockResolvedValueOnce({
+      fetchMock.mockResolvedValueOnce({
         json: () => Promise.resolve(body),
       });
 
       const result = await getPost(7);
 
-      expect(global.fetch).toHaveBeenCalledWith('/api/post/7');
+      expect(fetchMock).toHaveBeenCalledWith('/api/post/7');
       expect(result).toEqual(body);
     });
 
     test('throws when the network call rejects', async () => {
-      global.fetch.mockRejectedValueOnce(new Error('offline'));
+      fetchMock.mockRejectedValueOnce(new Error('offline'));
       await expect(getPost(1)).rejects.toThrow(/Failed to load post/);
     });
 
     test('throws when the response body cannot be parsed', async () => {
-      global.fetch.mockResolvedValueOnce({
+      fetchMock.mockResolvedValueOnce({
         json: () => Promise.reject(new Error('bad json')),
       });
       await expect(getPost(1)).rejects.toThrow(/Failed to load post/);
@@ -42,18 +49,18 @@ describe('api/message client', () => {
   describe('getComments', () => {
     test('calls the comments endpoint with postId as a query param', async () => {
       const body = [{ id: 1, body: 'nice' }];
-      global.fetch.mockResolvedValueOnce({
+      fetchMock.mockResolvedValueOnce({
         json: () => Promise.resolve(body),
       });
 
       const result = await getComments(42);
 
-      expect(global.fetch).toHaveBeenCalledWith('/api/comments?postId=42');
+      expect(fetchMock).toHaveBeenCalledWith('/api/comments?postId=42');
       expect(result).toEqual(body);
     });
 
     test('throws when the network call rejects', async () => {
-      global.fetch.mockRejectedValueOnce(new Error('offline'));
+      fetchMock.mockRejectedValueOnce(new Error('offline'));
       await expect(getComments(1)).rejects.toThrow(/Failed to load comments/);
     });
   });

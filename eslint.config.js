@@ -132,6 +132,11 @@ export default [
       ],
     },
   },
+  /* Tests: Vitest's asymmetric matchers (expect.any, expect.objectContaining, ...) are typed `any` */
+  {
+    files: ['src/__tests__/**/*.{ts,tsx}'],
+    rules: { '@typescript-eslint/no-unsafe-assignment': 'off' },
+  },
   /* Server process files: console.log/error is the correct output mechanism for
      a Node.js server process — consumed by process supervisors and log aggregators. */
   {

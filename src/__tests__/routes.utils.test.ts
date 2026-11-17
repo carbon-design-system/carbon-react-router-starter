@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2025, 2026
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { test, expect, describe, vi } from 'vitest';
+import { test, expect, describe, vi, assert } from 'vitest';
 import { findMatchingRoute, getStatusCodeForPath } from '../routes/utils';
 import * as configModule from '../routes/config';
 
@@ -40,36 +40,33 @@ vi.mock('../routes/config', () => {
 });
 
 // Routes without a wildcard entry, used to test the null fallback
-const routesWithoutWildcard = [
-  { path: '/', element: vi.fn() },
-  { path: '/dashboard', element: vi.fn() },
-];
+const routesWithoutWildcard = [{ path: '/' }, { path: '/dashboard' }];
 
 describe('routes utils', () => {
   describe('findMatchingRoute', () => {
     test('finds exact match for root path', () => {
       const route = findMatchingRoute('/');
-      expect(route).toBeDefined();
+      assert(route);
       expect(route.path).toBe('/');
       expect(route.index).toBe(true);
     });
 
     test('finds exact match for dashboard path', () => {
       const route = findMatchingRoute('/dashboard');
-      expect(route).toBeDefined();
+      assert(route);
       expect(route.path).toBe('/dashboard');
-      expect(route.carbon.label).toBe('Dashboard');
+      expect(route.carbon?.label).toBe('Dashboard');
     });
 
     test('finds nested wildcard match', () => {
       const route = findMatchingRoute('/nested/something');
-      expect(route).toBeDefined();
+      assert(route);
       expect(route.path).toBe('/nested/*');
     });
 
     test('returns wildcard route for non-existent path', () => {
       const route = findMatchingRoute('/non-existent');
-      expect(route).toBeDefined();
+      assert(route);
       expect(route.path).toBe('*');
       expect(route.status).toBe(404);
     });
@@ -79,18 +76,18 @@ describe('routes utils', () => {
       const routeWithoutSlash = findMatchingRoute('dashboard');
 
       expect(routeWithSlash).toEqual(routeWithoutSlash);
-      expect(routeWithSlash.path).toBe('/dashboard');
+      expect(routeWithSlash?.path).toBe('/dashboard');
     });
 
     test('skips routes without a path property', () => {
       // A route without path should be skipped; falls through to the wildcard
       vi.spyOn(configModule, 'routes', 'get').mockReturnValue([
-        { element: vi.fn() }, // no path — should be skipped
-        { path: '*', element: vi.fn(), status: 404 },
+        { carbon: { label: 'No path' } }, // no path — should be skipped
+        { path: '*', status: 404 },
       ]);
 
       const route = findMatchingRoute('/anything');
-      expect(route.path).toBe('*');
+      expect(route?.path).toBe('*');
 
       vi.restoreAllMocks();
     });

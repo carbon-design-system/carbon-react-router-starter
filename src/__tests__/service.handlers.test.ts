@@ -5,24 +5,37 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, test, expect, vi, beforeEach, afterEach, type Mock } from 'vitest';
 import { getPost, getComments, setBaseUrl } from '../service/postHandlers';
 import { getExternalPost, getExternalComments } from '../service/externalHandlers';
 
+type MockResponse = { status: Mock; json: Mock };
+
+const mockFetch = (): Mock => {
+  const fetchMock = vi.fn();
+  vi.stubGlobal('fetch', fetchMock);
+  return fetchMock;
+};
+
+afterEach(() => {
+  vi.unstubAllGlobals();
+});
+
 describe('postHandlers', () => {
   describe('getPost', () => {
-    let mockReq;
-    let mockRes;
+    let mockReq: { params: { id: string } };
+    let mockRes: MockResponse;
+    let fetchMock: Mock;
 
     beforeEach(() => {
       mockReq = {
-        params: {},
+        params: { id: '' },
       };
       mockRes = {
         status: vi.fn().mockReturnThis(),
         json: vi.fn(),
       };
-      global.fetch = vi.fn();
+      fetchMock = mockFetch();
     });
 
     test('validates post id is a positive integer', async () => {
@@ -54,8 +67,8 @@ describe('postHandlers', () => {
 
     test('handles fetch errors', async () => {
       mockReq.params.id = '1';
-      global.fetch.mockRejectedValue(new Error('Network error'));
-      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation();
+      fetchMock.mockRejectedValue(new Error('Network error'));
+      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
       await getPost(mockReq, mockRes);
 
@@ -70,10 +83,10 @@ describe('postHandlers', () => {
 
     test('handles non-ok responses', async () => {
       mockReq.params.id = '999';
-      global.fetch.mockResolvedValue({
+      fetchMock.mockResolvedValue({
         ok: false,
         status: 404,
-        json: async () => ({ message: 'Post not found' }),
+        json: () => Promise.resolve({ message: 'Post not found' }),
       });
 
       await getPost(mockReq, mockRes);
@@ -85,9 +98,9 @@ describe('postHandlers', () => {
     test('returns post data on success', async () => {
       mockReq.params.id = '1';
       const mockPost = { id: 1, title: 'Test Post' };
-      global.fetch.mockResolvedValue({
+      fetchMock.mockResolvedValue({
         ok: true,
-        json: async () => mockPost,
+        json: () => Promise.resolve(mockPost),
       });
 
       await getPost(mockReq, mockRes);
@@ -98,8 +111,9 @@ describe('postHandlers', () => {
   });
 
   describe('getComments', () => {
-    let mockReq;
-    let mockRes;
+    let mockReq: { query: { postId?: string } };
+    let mockRes: MockResponse;
+    let fetchMock: Mock;
 
     beforeEach(() => {
       mockReq = {
@@ -109,7 +123,7 @@ describe('postHandlers', () => {
         status: vi.fn().mockReturnThis(),
         json: vi.fn(),
       };
-      global.fetch = vi.fn();
+      fetchMock = mockFetch();
     });
 
     test('validates postId is provided', async () => {
@@ -123,8 +137,8 @@ describe('postHandlers', () => {
 
     test('handles fetch errors', async () => {
       mockReq.query.postId = '1';
-      global.fetch.mockRejectedValue(new Error('Network error'));
-      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation();
+      fetchMock.mockRejectedValue(new Error('Network error'));
+      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
       await getComments(mockReq, mockRes);
 
@@ -139,10 +153,10 @@ describe('postHandlers', () => {
 
     test('handles non-ok responses', async () => {
       mockReq.query.postId = '999';
-      global.fetch.mockResolvedValue({
+      fetchMock.mockResolvedValue({
         ok: false,
         status: 404,
-        json: async () => ({ message: 'Comments not found' }),
+        json: () => Promise.resolve({ message: 'Comments not found' }),
       });
 
       await getComments(mockReq, mockRes);
@@ -156,9 +170,9 @@ describe('postHandlers', () => {
     test('returns comments on success', async () => {
       mockReq.query.postId = '1';
       const mockComments = [{ id: 1, body: 'Test comment' }];
-      global.fetch.mockResolvedValue({
+      fetchMock.mockResolvedValue({
         ok: true,
-        json: async () => mockComments,
+        json: () => Promise.resolve(mockComments),
       });
 
       await getComments(mockReq, mockRes);
@@ -178,9 +192,9 @@ describe('setBaseUrl', () => {
     setBaseUrl('http://localhost:9999');
 
     const mockPost = { id: 1, title: 'Test' };
-    global.fetch = vi.fn().mockResolvedValue({
+    const fetchMock = mockFetch().mockResolvedValue({
       ok: true,
-      json: async () => mockPost,
+      json: () => Promise.resolve(mockPost),
     });
 
     const mockReq = { params: { id: '1' } };
@@ -188,18 +202,18 @@ describe('setBaseUrl', () => {
 
     await getPost(mockReq, mockRes);
 
-    expect(global.fetch).toHaveBeenCalledWith('http://localhost:9999/api/external/post/1');
+    expect(fetchMock).toHaveBeenCalledWith('http://localhost:9999/api/external/post/1');
   });
 });
 
 describe('externalHandlers', () => {
   describe('getExternalPost', () => {
-    let mockReq;
-    let mockRes;
+    let mockReq: { params: { id: string } };
+    let mockRes: MockResponse;
 
     beforeEach(() => {
       mockReq = {
-        params: {},
+        params: { id: '' },
       };
       mockRes = {
         status: vi.fn().mockReturnThis(),
@@ -241,8 +255,8 @@ describe('externalHandlers', () => {
   });
 
   describe('getExternalComments', () => {
-    let mockReq;
-    let mockRes;
+    let mockReq: { query: { postId?: string } };
+    let mockRes: MockResponse;
 
     beforeEach(() => {
       mockReq = {

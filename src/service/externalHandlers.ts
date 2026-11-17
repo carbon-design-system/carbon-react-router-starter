@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2026
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,7 +12,7 @@
  * You can remove/replace these with actual external API handlers in your actual application.
  */
 
-import type { Request, Response } from 'express';
+import type { JsonResponse, ParamsRequest, QueryRequest } from './types.ts';
 
 interface Post {
   id: number;
@@ -96,7 +96,7 @@ const mockComments: Record<string, PostComment[]> = {
  * Mock external API handler for fetching a single post
  * Simulates an external service response
  */
-export const getExternalPost = async (req: Request<{ id: string }>, res: Response): Promise<void> => {
+export const getExternalPost = async (req: ParamsRequest<{ id: string }>, res: JsonResponse): Promise<void> => {
   const { id } = req.params;
 
   // Validate that id is a positive integer
@@ -121,7 +121,7 @@ export const getExternalPost = async (req: Request<{ id: string }>, res: Respons
  * Mock external API handler for fetching comments for a post
  * Simulates an external service response
  */
-export const getExternalComments = async (req: Request, res: Response): Promise<void> => {
+export const getExternalComments = async (req: QueryRequest, res: JsonResponse): Promise<void> => {
   const { postId } = req.query;
 
   // Validate that postId is provided and is a positive integer

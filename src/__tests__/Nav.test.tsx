@@ -6,6 +6,7 @@
  */
 
 import { describe, test, expect } from 'vitest';
+import type { ReactElement } from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
@@ -16,7 +17,7 @@ import { Nav } from '../components/nav/Nav';
 import { NavHeaderItems } from '../components/nav/NavHeaderItems';
 import { NavSideItems } from '../components/nav/NavSideItems';
 
-function renderWithRouter(ui, path = '/') {
+function renderWithRouter(ui: ReactElement, path = '/') {
   return render(
     <I18nextProvider i18n={i18n}>
       <MemoryRouter initialEntries={[path]}>
@@ -174,7 +175,7 @@ const sideNavFlatRoutes = [
 ];
 
 const sideNavExternalRoutes = [
-  { path: null, carbon: { label: 'GitHub', labelKey: 'nav.github', href: 'https://github.com', inSideNav: true } },
+  { carbon: { label: 'GitHub', labelKey: 'nav.github', href: 'https://github.com', inSideNav: true } },
 ];
 
 const sideNavSubMenuRoutes = [

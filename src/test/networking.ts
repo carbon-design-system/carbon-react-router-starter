@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025, 2026
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,15 +8,15 @@
 import { expect } from 'vitest';
 
 export const getNetworking = () => {
-  const runningRequests = new Set();
+  const runningRequests = new Set<string>();
 
-  const addRequests = (path) => {
-    if (!process.env.HIDE_NETWORK_LOGGING) console.log('Calling BFF endpoint: ', path);
+  const addRequests = (path: string) => {
+    if (!process.env['HIDE_NETWORK_LOGGING']) console.log('Calling BFF endpoint: ', path);
     runningRequests.add(path);
   };
 
-  const removeRequest = (path) => {
-    if (!process.env.HIDE_NETWORK_LOGGING) console.log('Request done: ', path);
+  const removeRequest = (path: string) => {
+    if (!process.env['HIDE_NETWORK_LOGGING']) console.log('Request done: ', path);
     runningRequests.delete(path);
   };
 
@@ -42,3 +42,5 @@ export const getNetworking = () => {
     getRunningRequestCount,
   };
 };
+
+export type Networking = ReturnType<typeof getNetworking>;

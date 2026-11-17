@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2025, 2026
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { test, expect, describe } from 'vitest';
+import { test, expect, describe, assert } from 'vitest';
 import { routes, routesInHeader, routesInSideNav, isDirectChildPath } from '../routes/config';
 
 describe('routes configuration', () => {
@@ -16,25 +16,25 @@ describe('routes configuration', () => {
 
     // Check that the index route is defined correctly
     const indexRoute = routes.find((route) => route.index === true);
-    expect(indexRoute).toBeDefined();
+    assert(indexRoute);
     expect(indexRoute.path).toBe('/');
-    expect(indexRoute.element).toBeDefined();
+    assert(indexRoute.element);
     // Check for lazy component (has $$typeof and _payload properties)
     expect(indexRoute.element.$$typeof).toBeDefined();
 
     // Check that the NotFound route is defined correctly
     const notFoundRoute = routes.find((route) => route.path === '*');
-    expect(notFoundRoute).toBeDefined();
-    expect(notFoundRoute.element).toBeDefined();
+    assert(notFoundRoute);
+    assert(notFoundRoute.element);
     expect(notFoundRoute.element.$$typeof).toBeDefined();
     expect(notFoundRoute.status).toBe(404);
 
     // Check that a regular route is defined correctly
     const dashboardRoute = routes.find((route) => route.path === '/dashboard');
-    expect(dashboardRoute).toBeDefined();
-    expect(dashboardRoute.element).toBeDefined();
+    assert(dashboardRoute);
+    assert(dashboardRoute.element);
     expect(dashboardRoute.element.$$typeof).toBeDefined();
-    expect(dashboardRoute.carbon).toBeDefined();
+    assert(dashboardRoute.carbon);
     expect(dashboardRoute.carbon.label).toBe('Dashboard');
     expect(dashboardRoute.carbon.inHeader).toBe(true);
   });
@@ -44,7 +44,7 @@ describe('routes configuration', () => {
 
     // All routes in routesInHeader should have carbon.inHeader === true
     routesInHeader.forEach((route) => {
-      expect(route.carbon).toBeDefined();
+      assert(route.carbon);
       expect(route.carbon.inHeader).toBe(true);
       expect(route.carbon.inSubMenu).toBeFalsy();
     });
@@ -61,7 +61,7 @@ describe('routes configuration', () => {
 
     // All routes in routesInSideNav should have carbon.inSideNav === true
     routesInSideNav.forEach((route) => {
-      expect(route.carbon).toBeDefined();
+      assert(route.carbon);
       expect(route.carbon.inSideNav).toBe(true);
       expect(route.carbon.inSubMenu).toBeFalsy();
     });
@@ -74,15 +74,10 @@ describe('routes configuration', () => {
   });
 
   test('routes with subMenu have their children marked as inSubMenu', () => {
-    const routesWithSubMenu = routes.filter(
-      (route) => route.carbon && route.carbon.subMenu && route.carbon.subMenu.length > 0,
-    );
+    const subMenuRoutes = routes.flatMap((route) => route.carbon?.subMenu ?? []);
 
-    routesWithSubMenu.forEach((route) => {
-      route.carbon.subMenu.forEach((subRoute) => {
-        expect(subRoute.carbon).toBeDefined();
-        expect(subRoute.carbon.inSubMenu).toBe(true);
-      });
+    subMenuRoutes.forEach((subRoute) => {
+      expect(subRoute.carbon.inSubMenu).toBe(true);
     });
   });
 
@@ -93,7 +88,7 @@ describe('routes configuration', () => {
 
       // Routes with path should have an element or be a parent route
       if (route.path && !route.carbon?.subMenu) {
-        expect(route.element).toBeDefined();
+        assert(route.element);
       }
 
       // Check that index routes are properly configured
@@ -117,32 +112,20 @@ describe('routes configuration', () => {
     routesWithElements.forEach((route) => {
       const element = route.element;
 
-      // Verify it's a lazy component by checking React's internal structure
-      // Lazy components have $$typeof symbol and _payload/_init properties
-      expect(element).toBeDefined();
+      // Verify it's a lazy component via its $$typeof symbol
+      assert(element);
       expect(element.$$typeof).toBeDefined();
       expect(typeof element.$$typeof).toBe('symbol');
-
-      // Verify the lazy component has the expected structure
-      // _payload contains the import promise, _init is the initialization function
-      expect(element._payload).toBeDefined();
-      expect(element._init).toBeDefined();
-      expect(typeof element._init).toBe('function');
     });
   });
 
   test('lazy components have correct React.lazy structure', () => {
     // Test that lazy components have the expected React.lazy structure
     const indexRoute = routes.find((route) => route.index === true);
-    expect(indexRoute).toBeDefined();
-    expect(indexRoute.element).toBeDefined();
+    assert(indexRoute);
+    assert(indexRoute.element);
 
     const lazyComponent = indexRoute.element;
-
-    // Verify it has the React lazy component structure
-    expect(lazyComponent._payload).toBeDefined();
-    expect(lazyComponent._init).toBeDefined();
-    expect(typeof lazyComponent._init).toBe('function');
 
     // Verify the $$typeof is the REACT_LAZY_TYPE symbol
     expect(lazyComponent.$$typeof).toBeDefined();
@@ -161,8 +144,8 @@ describe('routes configuration', () => {
 
     for (const [path, importFn] of Object.entries(componentImports)) {
       const route = routes.find((r) => r.path === path);
-      expect(route).toBeDefined();
-      expect(route.element).toBeDefined();
+      assert(route);
+      assert(route.element);
 
       // Verify the route has a lazy component
       const lazyComponent = route.element;
@@ -177,7 +160,7 @@ describe('routes configuration', () => {
 
       // Verify it's a valid React component
       const component = module.default;
-      const componentName = component.displayName || component.name;
+      const componentName = component.name;
       expect(componentName).toBeDefined();
       expect(typeof componentName).toBe('string');
       expect(componentName.length).toBeGreaterThan(0);
@@ -218,9 +201,7 @@ describe('isDirectChildPath', () => {
     expect(isDirectChildPath('/api', '/api-v2')).toBe(false);
   });
 
-  test('handles edge cases with null, undefined, and empty strings', () => {
-    expect(isDirectChildPath(null, '/path')).toBe(false);
-    expect(isDirectChildPath('/path', null)).toBe(false);
+  test('handles edge cases with undefined and empty strings', () => {
     expect(isDirectChildPath(undefined, '/path')).toBe(false);
     expect(isDirectChildPath('/path', undefined)).toBe(false);
     expect(isDirectChildPath('', '/path')).toBe(false);

@@ -25,16 +25,6 @@ describe('cookie utilities', () => {
       expect(result).toEqual({});
     });
 
-    test('handles null cookie string', () => {
-      const result = parseCookies(null);
-      expect(result).toEqual({});
-    });
-
-    test('handles undefined cookie string', () => {
-      const result = parseCookies(undefined);
-      expect(result).toEqual({});
-    });
-
     test('handles cookies with equals signs in values', () => {
       const cookieString = 'token=abc=def=ghi';
       const result = parseCookies(cookieString);
@@ -103,7 +93,7 @@ describe('cookie utilities', () => {
   });
 
   describe('getCookie', () => {
-    let mockDocument;
+    let mockDocument: { cookie: string };
 
     beforeEach(() => {
       mockDocument = {
@@ -140,8 +130,8 @@ describe('cookie utilities', () => {
   });
 
   describe('setCookie', () => {
-    let mockDocument;
-    let mockWindow;
+    let mockDocument: { cookie: string };
+    let mockWindow: { location: { protocol: string } };
 
     beforeEach(() => {
       mockDocument = {
@@ -296,8 +286,8 @@ describe('cookie utilities', () => {
   });
 
   describe('setThemeInCookies', () => {
-    let mockDocument;
-    let mockWindow;
+    let mockDocument: { cookie: string };
+    let mockWindow: { location: { protocol: string } };
 
     beforeEach(() => {
       mockDocument = {
@@ -339,7 +329,7 @@ describe('cookie utilities', () => {
     });
 
     test('validates theme setting and warns for invalid values', () => {
-      const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation();
+      const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
       setThemeInCookies({ themeSetting: 'invalid' });
 

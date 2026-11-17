@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025, 2026
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -36,10 +36,9 @@ beforeEach(() => {
   vi.spyOn(themeUtils, 'setHeaderInverse').mockImplementation(mockSetHeaderInverse);
 
   // Mock cookie utilities to return default values
-  // Note: headerInverse is 'false' (string) which converts to false (boolean)
   vi.spyOn(cookieUtils, 'getThemeFromCookies').mockReturnValue({
     themeSetting: 'light',
-    headerInverse: 'false',
+    headerInverse: false,
   });
 
   // Mock getThemeSettings to return the same values
