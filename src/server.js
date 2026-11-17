@@ -40,7 +40,7 @@ if (!isProduction) {
     hmrPort = await findAvailablePort(24678);
   } catch (error) {
     console.error('Failed to find available port for Vite HMR:', error);
-    throw new Error('Unable to start development server: Could not find available port for HMR');
+    throw new Error('Unable to start development server: Could not find available port for HMR', { cause: error });
   }
 
   vite = await createServer({
