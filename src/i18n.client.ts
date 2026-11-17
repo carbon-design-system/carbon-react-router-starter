@@ -51,7 +51,7 @@ void i18next
     // the component renders immediately and useTranslation returns ready: false.
     //
     // On the client, we load translations from the server's state before
-    // React hydrates (see entry-client.jsx). However, this i18next instance
+    // React hydrates (see entry-client.tsx). However, this i18next instance
     // initializes before that happens. Setting useSuspense to false ensures
     // components never suspend during hydration, which would cause a mismatch
     // with the server-rendered HTML.

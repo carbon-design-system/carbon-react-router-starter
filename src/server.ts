@@ -15,7 +15,7 @@ import { handle as i18nextHandle } from 'i18next-http-middleware';
 import i18n from './i18n.server.ts';
 import { setBaseUrl } from './service/postHandlers.ts';
 
-type EntryServer = { render: typeof import('./entry-server.jsx').render };
+type EntryServer = { render: typeof import('./entry-server.tsx').render };
 
 const toError = (value: unknown): Error => (value instanceof Error ? value : new Error(String(value)));
 
@@ -93,7 +93,7 @@ app.use('*all', async (req, res) => {
       // Ensure we always have a valid path (default to '/' for root)
       const transformUrl = url || '/';
       template = await vite.transformIndexHtml(transformUrl, template);
-      render = ((await vite.ssrLoadModule('/src/entry-server.jsx')) as EntryServer).render;
+      render = ((await vite.ssrLoadModule('/src/entry-server.tsx')) as EntryServer).render;
     } else {
       template = await fs.readFile('./dist/client/index.html', 'utf-8');
       // Built output; the specifier is a variable so type checking does not require a build

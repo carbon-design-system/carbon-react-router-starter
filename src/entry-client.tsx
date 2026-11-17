@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025, 2026
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -37,19 +37,25 @@ initializeTheme();
  * cause a brief flash of English (the fallback language) before the
  * correct translations appear.
  */
-const { initialI18nStore, initialLanguage } = window.__INITIAL_I18N_STATE__ || {};
+const initialState = window.__INITIAL_I18N_STATE__;
 
-if (initialI18nStore && initialLanguage) {
-  Object.keys(initialI18nStore).forEach((lng) => {
-    Object.keys(initialI18nStore[lng]).forEach((ns) => {
-      i18n.addResourceBundle(lng, ns, initialI18nStore[lng][ns], true, true);
-    });
-  });
-  i18n.changeLanguage(initialLanguage);
+if (initialState) {
+  for (const [lng, namespaces] of Object.entries(initialState.initialI18nStore)) {
+    for (const [ns, resources] of Object.entries(namespaces)) {
+      i18n.addResourceBundle(lng, ns, resources, true, true);
+    }
+  }
+  // Not awaited (unchanged behavior): the resources above are already in the store
+  void i18n.changeLanguage(initialState.initialLanguage);
+}
+
+const root = document.getElementById('root');
+if (!root) {
+  throw new Error('Missing #root element in index.html');
 }
 
 hydrateRoot(
-  document.getElementById('root'),
+  root,
   <StrictMode>
     <I18nextProvider i18n={i18n}>
       <BrowserRouter>

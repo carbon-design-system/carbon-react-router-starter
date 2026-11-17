@@ -1,11 +1,10 @@
 /**
- * Copyright IBM Corp. 2025, 2026
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useState } from 'react';
 
@@ -16,9 +15,14 @@ import { UserAvatar } from '@carbon/ibm-products';
 import { ThemeSettings, ThemeMenuComplement, ThemeSwitcher } from '@carbon-labs/react-theme-settings';
 import { useTranslation } from 'react-i18next';
 import { getThemeSettings, setThemeSetting, setHeaderInverse } from '../../utils/theme';
+import type { ThemeSetting } from '../../utils/cookies';
 import { usePrefix } from '@carbon/react';
 
-export const ProfilePanel = ({ className }) => {
+interface ProfilePanelProps {
+  className?: string;
+}
+
+export const ProfilePanel = ({ className }: ProfilePanelProps) => {
   const prefix = usePrefix();
   const { t } = useTranslation();
 
@@ -30,13 +34,13 @@ export const ProfilePanel = ({ className }) => {
   const [themeMenuComplementLocal, setThemeMenuComplementLocal] = useState(initialSettings.headerInverse);
 
   // Update theme setting
-  const handleThemeSettingChange = (value) => {
+  const handleThemeSettingChange = (value: ThemeSetting) => {
     setThemeSettingLocal(value);
     setThemeSetting(value);
   };
 
   // Update header inverse
-  const handleThemeMenuComplementChange = (value) => {
+  const handleThemeMenuComplementChange = (value: boolean) => {
     setThemeMenuComplementLocal(value);
     setHeaderInverse(value);
   };
@@ -70,10 +74,6 @@ export const ProfilePanel = ({ className }) => {
       </div>
     </div>
   );
-};
-
-ProfilePanel.propTypes = {
-  className: PropTypes.string,
 };
 
 export default ProfilePanel;

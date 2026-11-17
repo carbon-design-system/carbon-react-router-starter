@@ -8,7 +8,7 @@
     "dev": "node src/server.ts",
     "build": "cross-env NODE_ENV=production npm run build:client && npm run build:server",
     "build:client": "cross-env NODE_ENV=production vite build --ssrManifest .vite/ssr-manifest.json  --outDir dist/client",
-    "build:server": "cross-env NODE_ENV=production vite build --ssr src/entry-server.jsx --outDir dist/server",
+    "build:server": "cross-env NODE_ENV=production vite build --ssr src/entry-server.tsx --outDir dist/server",
     "lighthouse": "npm run build && lsof -ti:5299 | xargs kill -9 2>/dev/null; PORT=5299 npm run preview:prod & npx wait-on http://localhost:5299 --timeout 30000 && unlighthouse-ci --site http://localhost:5299; kill %1 2>/dev/null",
     "lint": "npm run lint:types && npm run lint:es && npm run lint:style && npm run lint:format && npm run lint:spell",
     "lint-fix": "npm run lint:es -- --fix && npm run lint:style -- --fix && npm run lint:format",

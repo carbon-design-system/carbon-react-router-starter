@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025, 2026
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,22 +7,37 @@
 
 // Third-party imports
 import { StrictMode } from 'react';
-import { renderToPipeableStream } from 'react-dom/server';
+import { renderToPipeableStream, type PipeableStream, type RenderToPipeableStreamOptions } from 'react-dom/server';
+import type { i18n as I18n, Resource } from 'i18next';
 import { StaticRouter } from 'react-router';
 import { I18nextProvider } from 'react-i18next';
 
 // App level imports
-import { Router } from './routes/index.jsx';
+import { Router } from './routes/index.tsx';
 import { getStatusCodeForPath } from './routes/utils.js';
 import { getThemeFromCookies } from './utils/cookies.ts';
+import type { InitialI18nState } from './i18n.client.ts';
+
+export interface RenderResult {
+  pipe: PipeableStream['pipe'];
+  abort: PipeableStream['abort'];
+  /** Markup to inject at <!--app-head--> */
+  head: string;
+  statusCode: number;
+  /** Attributes to add to the <html> element */
+  themeAttr: string;
+}
 
 /**
- * @param {string} url
- * @param {import('i18next').i18n} i18n
- * @param {import('react-dom/server').RenderToPipeableStreamOptions} [options]
- * @param {string} [cookies] - Cookie string from request headers
+ * @param _url - Request URL relative to the app base
+ * @param cookies - Cookie string from request headers
  */
-export function render(_url, i18n, options, cookies) {
+export function render(
+  _url: string,
+  i18n: I18n,
+  options?: RenderToPipeableStreamOptions,
+  cookies?: string,
+): RenderResult {
   const url = `/${_url}`;
   const statusCode = getStatusCodeForPath(url);
 
@@ -44,12 +59,13 @@ export function render(_url, i18n, options, cookies) {
   );
 
   // Serialize i18n state to pass to client
-  const initialI18nStore = {};
+  const initialI18nStore: Resource = {};
   i18n.languages.forEach((lng) => {
-    initialI18nStore[lng] = i18n.services.resourceStore.data[lng];
+    const resources = i18n.services.resourceStore.data[lng];
+    if (resources) initialI18nStore[lng] = resources;
   });
 
-  const initialState = {
+  const initialState: InitialI18nState = {
     initialI18nStore,
     initialLanguage: i18n.language,
   };

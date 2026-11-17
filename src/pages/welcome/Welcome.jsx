@@ -7,7 +7,7 @@
 
 import { Footer } from '../../components/footer/Footer';
 import { WelcomeHeader } from './WelcomeHeader.jsx';
-import { PageLayout } from '../../layouts/page-layout.jsx';
+import { PageLayout } from '../../layouts/page-layout';
 import { WelcomeRunSection } from './WelcomeRunSection';
 import { WelcomeAboutSection } from './WelcomeAboutSection';
 import { WelcomeFeaturesSection } from './WelcomeFeaturesSection';

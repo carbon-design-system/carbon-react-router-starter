@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025, 2026
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,7 +21,7 @@ import {
 } from '@carbon/react';
 import classNames from 'classnames';
 
-import { LogoGithub, MagicWand, Search, Switcher as SwitcherIcon, UserAvatar } from '@carbon/icons-react';
+import { Search, Switcher as SwitcherIcon, UserAvatar } from '@carbon/icons-react';
 import { Link as RouterLink, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { ProfilePanel } from '../profilePanel/ProfilePanel';

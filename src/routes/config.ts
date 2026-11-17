@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2026
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,7 +17,7 @@ export interface CarbonRouteType {
   icon?: CarbonIconType;
   href?: string;
   /** Set during processing below */
-  subMenu?: RouteType[];
+  subMenu?: NavRouteType[];
   /** Set during processing below */
   inSubMenu?: boolean;
 }
@@ -29,6 +29,11 @@ export interface RouteType {
   status?: number;
   carbon?: CarbonRouteType;
 }
+
+/** A route that takes part in Carbon navigation */
+export type NavRouteType = RouteType & { carbon: CarbonRouteType };
+
+const isNavRoute = (route: RouteType): route is NavRouteType => route.carbon !== undefined;
 
 // This project splits the pages each in different JavaScript bundles.
 // You might also split part of the pages that incur significant
@@ -214,10 +219,8 @@ const routesProcessed = routes.map((route) => {
 
   const path = route.path || route.carbon.virtualPath;
 
-  const subMenu = routes.filter((subRoute) => {
-    // Only include routes with carbon config in navigation menus
-    if (!subRoute.carbon) return false;
-
+  // Only include routes with carbon config in navigation menus
+  const subMenu = routes.filter(isNavRoute).filter((subRoute) => {
     const subPath = subRoute.path || subRoute.carbon.virtualPath;
 
     return !route.index && isDirectChildPath(path, subPath);
@@ -227,20 +230,20 @@ const routesProcessed = routes.map((route) => {
     // add sub menu to parent
     route.carbon.subMenu = subMenu;
 
-    // mark child as in sub menu (every entry has carbon config, see filter above)
+    // mark child as in sub menu
     subMenu.forEach((menu) => {
-      if (menu.carbon) menu.carbon.inSubMenu = true;
+      menu.carbon.inSubMenu = true;
     });
   }
 
   return route;
 });
 
-export const routesInHeader = routesProcessed.filter(
-  (route) => route.carbon && route.carbon.inHeader && !route.carbon.inSubMenu,
-);
+export const routesInHeader = routesProcessed
+  .filter(isNavRoute)
+  .filter((route) => route.carbon.inHeader && !route.carbon.inSubMenu);
 
-export const routesInSideNav = routesProcessed.filter(
-  (route) => route.carbon && route.carbon.inSideNav && !route.carbon.inSubMenu,
-);
+export const routesInSideNav = routesProcessed
+  .filter(isNavRoute)
+  .filter((route) => route.carbon.inSideNav && !route.carbon.inSubMenu);
 // v8 ignore stop
