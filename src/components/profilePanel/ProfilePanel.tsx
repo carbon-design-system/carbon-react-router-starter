@@ -1,0 +1,79 @@
+/**
+ * Copyright IBM Corp. 2025, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import classNames from 'classnames';
+import { useState } from 'react';
+
+// The styles are imported into index.scss by default.
+// Do the same unless you have a good reason not to.
+// import './profile-panel.scss';
+import { UserAvatar } from '@carbon/ibm-products';
+import { ThemeSettings, ThemeMenuComplement, ThemeSwitcher } from '@carbon-labs/react-theme-settings';
+import { useTranslation } from 'react-i18next';
+import { getThemeSettings, setThemeSetting, setHeaderInverse } from '../../utils/theme';
+import type { ThemeSetting } from '../../utils/cookies';
+import { usePrefix } from '@carbon/react';
+
+interface ProfilePanelProps {
+  className?: string;
+}
+
+export const ProfilePanel = ({ className }: ProfilePanelProps) => {
+  const prefix = usePrefix();
+  const { t } = useTranslation();
+
+  // Get initial values from cookies (single call to avoid redundant parsing)
+  const initialSettings = getThemeSettings();
+
+  const [themeSettingLocal, setThemeSettingLocal] = useState(initialSettings.themeSetting);
+
+  const [themeMenuComplementLocal, setThemeMenuComplementLocal] = useState(initialSettings.headerInverse);
+
+  // Update theme setting
+  const handleThemeSettingChange = (value: ThemeSetting) => {
+    setThemeSettingLocal(value);
+    setThemeSetting(value);
+  };
+
+  // Update header inverse
+  const handleThemeMenuComplementChange = (value: boolean) => {
+    setThemeMenuComplementLocal(value);
+    setHeaderInverse(value);
+  };
+
+  const userProfile = {
+    name: 'Anne Profile',
+    email: 'anne.profile@ibm.com',
+  };
+
+  return (
+    <div className={classNames(className, 'cs--profile-panel')}>
+      <div className="cs--profile-user-info">
+        <UserAvatar name={userProfile.name} renderIcon="" size="lg" tooltipAlignment="bottom" />
+        {/* Uses Carbon Prefix until Profile component (part of UIShell) released from @carbon/labs */}
+        <div className={`${prefix}--profile-user-info__text-wrapper`}>
+          <div className={`${prefix}--profile-user-info__name`}>{userProfile.name}</div>
+          <div className={`${prefix}--profile-user-info__email`}>{userProfile.email}</div>
+        </div>
+      </div>
+
+      <div className="cs--profile-settings">
+        <ThemeSettings>
+          <ThemeSwitcher onChange={handleThemeSettingChange} value={themeSettingLocal}></ThemeSwitcher>
+          <ThemeMenuComplement
+            id="theme-menu-complement"
+            labelText={t('profile.settings.complementMenuTheme', 'Complement menu theme')}
+            checked={themeMenuComplementLocal}
+            onChange={handleThemeMenuComplementChange}
+          />
+        </ThemeSettings>
+      </div>
+    </div>
+  );
+};
+
+export default ProfilePanel;

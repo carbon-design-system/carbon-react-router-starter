@@ -27,7 +27,7 @@ Add these two scripts to your `package.json`:
 
 ### Step 2: Switch to Hash Router
 
-In your client entry file (e.g., `src/entry-client.jsx`), replace `BrowserRouter` with `HashRouter`:
+In your client entry file (e.g., `src/entry-client.tsx`), replace `BrowserRouter` with `HashRouter`:
 
 ```jsx
 // Before

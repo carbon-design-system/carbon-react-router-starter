@@ -73,18 +73,22 @@ TypeScript is configured with strict mode and additional strictness options enab
 - **Build**: TypeScript is compiled as part of the normal build process (`npm run build`)
 - **Linting**: ESLint is configured to lint both JavaScript and TypeScript files
 - **Testing**: Vitest supports TypeScript natively
+- **Server**: Node runs the server entry and its imports directly, using its built-in type stripping, so server-side modules can be `.ts` too. Imports must include the `.ts` extension, type-only imports must use `import type` (enforced by `verbatimModuleSyntax`), and only erasable syntax is allowed, so no `enum`, `namespace` or constructor parameter properties (enforced by `erasableSyntaxOnly`)
 
 ### Type checking
 
-Vite compiles TypeScript for speed but doesn't perform type checking during development. To check types:
-
-This is done using the script "lint:types" which is executed during the "lint" script. This means it is also performed during "lint-staged"
-
-You can check manually using:
+Vite strips types without checking them. Type checking runs as `npm run lint:types`, which is part of `npm run lint` (and therefore of the pre-commit hook) and of CI:
 
 ```bash
 npm run lint:types
 ```
+
+Type checking uses TypeScript 7. TypeScript 7 has no programmatic API yet, so tools that need one (such as `typescript-eslint`) use the TypeScript 6 compatibility package instead. Following the [official guidance](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/), both are installed via npm aliases:
+
+- `typescript` → `@typescript/typescript6` (the 6.0 API, for tooling)
+- `@typescript/native` → `typescript@7` (provides `tsc`)
+
+Once `typescript-eslint` supports the TypeScript 7 API, the aliases can be replaced by a plain `typescript` dependency.
 
 ### Gradual migration
 
@@ -180,9 +184,9 @@ Where documenting inline is not possible or impractical, we have added explanati
 
   Translation files are stored in `src/locales/` as JSON files, one per language (e.g., `de.json` for German). These files are bundled into the application at build time using `vite-plugin-i18next-loader`, which means no additional network requests are needed to load translations.
 
-  The i18n setup is split between server and client. The server configuration lives in `src/i18n.server.js` and the client configuration in `src/i18n.client.js`. When a user visits the application, the server reads the `Accept-Language` header from their browser to determine their preferred language. The server then renders the page with the appropriate translations and passes the translation state to the client. The client loads this state before React hydration to ensure consistency. You can find detailed comments explaining this process in `src/entry-client.jsx`.
+  The i18n setup is split between server and client. The server configuration lives in `src/i18n.server.ts` and the client configuration in `src/i18n.client.ts`. When a user visits the application, the server reads the `Accept-Language` header from their browser to determine their preferred language. The server then renders the page with the appropriate translations and passes the translation state to the client. The client loads this state before React hydration to ensure consistency. You can find detailed comments explaining this process in `src/entry-client.tsx`.
 
-  To add a new language, create a JSON file in `src/locales/` named with the language code (e.g., `fr.json` for French). Then add that language code to the `supportedLngs` array in both `src/i18n.client.js` and `src/i18n.server.js`.
+  To add a new language, create a JSON file in `src/locales/` named with the language code (e.g., `fr.json` for French). Then add that language code to the `supportedLngs` array in both `src/i18n.client.ts` and `src/i18n.server.ts`.
 
   In your components, use the `useTranslation` hook to access translations. The `t` function takes a translation key and an English fallback: `const { t } = useTranslation(); t('greeting', 'Hello')`. English text stays inline in your code as the default, while other languages are defined in their respective JSON files.
 
@@ -197,15 +201,15 @@ This project comes with a pre-configured testing setup using React Testing Libra
 
 #### Setup
 
-- The test configuration is located in `vite.config.js`, which sets up Vitest with globals, a JSDOM environment, and points to the setup file `src/test/setup.js`.
+- The test configuration is located in `vite.config.js`, which sets up Vitest with globals, a JSDOM environment, and points to the setup file `src/test/setup.ts`.
 
 - This file handles mocking network requests and manages server startup and teardown. It also handles mocking browser features missing in JSDOM.
 
-- The `src/test/server.js` wraps the server with msw's setupServer function and injects networking utils from `src/test/networking.js` that track each outgoing network request and help debugging unit tests.
+- The `src/test/server.ts` wraps the server with msw's setupServer function. It registers the app's API routes (`src/routes/routes.ts`) through `src/test/router.ts`, so requests to `/api/...` run the real route handlers, and it mocks the "external" API those handlers call. Networking utils from `src/test/networking.ts` track each outgoing network request and help debugging unit tests.
 
 #### Writing Tests
 
-Add your test files to `src/__test__/*.test.jsx`, import the necessary methods from React Testing Library and MSW and use `render` and `screen` to render your components and interact with them. Use MSW handlers (defined in `src/test/server.js`) to mock API responses for your components.
+Add your test files to `src/__tests__/*.test.tsx` (or `.test.ts`), import the necessary methods from React Testing Library and MSW and use `render` and `screen` to render your components and interact with them. Use MSW handlers (defined in `src/test/server.ts`) to mock API responses for your components.
 
 #### Running Tests
 

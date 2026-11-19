@@ -99,8 +99,14 @@ export function setCookie(name: string, value: string, options: CookieOptions = 
   document.cookie = cookieString;
 }
 
+const THEME_SETTINGS = ['system', 'light', 'dark'] as const;
+
+export type ThemeSetting = (typeof THEME_SETTINGS)[number];
+
+const isThemeSetting = (value: string): value is ThemeSetting => THEME_SETTINGS.some((setting) => setting === value);
+
 export interface ThemeCookieValues {
-  themeSetting: string;
+  themeSetting: ThemeSetting;
   headerInverse: boolean;
 }
 
@@ -112,15 +118,11 @@ export function getThemeFromCookies(cookieString?: string): ThemeCookieValues {
     ? parseCookies(cookieString)
     : parseCookies(typeof document !== 'undefined' ? document.cookie : '');
 
-  const themeSetting = cookies['theme-setting'] || 'system';
+  const themeSetting = cookies['theme-setting'] ?? '';
   const headerInverse = cookies['header-inverse'] === 'true';
 
-  // Validate theme setting value
-  const validThemeSettings = ['system', 'light', 'dark'];
-  const validatedThemeSetting = validThemeSettings.includes(themeSetting) ? themeSetting : 'system';
-
   return {
-    themeSetting: validatedThemeSetting,
+    themeSetting: isThemeSetting(themeSetting) ? themeSetting : 'system',
     headerInverse,
   };
 }
@@ -136,8 +138,7 @@ interface SetThemeCookieValues {
 export function setThemeInCookies(values: SetThemeCookieValues): void {
   if (values.themeSetting !== undefined) {
     // Validate theme setting before setting cookie
-    const validThemeSettings = ['system', 'light', 'dark'];
-    if (validThemeSettings.includes(values.themeSetting)) {
+    if (isThemeSetting(values.themeSetting)) {
       setCookie('theme-setting', values.themeSetting);
     } else {
       // eslint-disable-next-line no-console -- unexpected console output useful for debug

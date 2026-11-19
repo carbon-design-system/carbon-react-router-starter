@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { Request, Response } from 'express';
+import type { JsonResponse } from './types.ts';
 
 /**
  * This file contains the functions that do async network requests
  */
 
-export const getMessage = async (_req: Request, res: Response): Promise<void> => {
+export const getMessage = async (_req: unknown, res: JsonResponse): Promise<void> => {
   try {
     const response = await fetch(
       // TODO: replace with actual endpoint URL

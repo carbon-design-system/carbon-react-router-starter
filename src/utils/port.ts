@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// eslint-disable-next-line import-x/no-named-as-default
-import detect from 'detect-port';
+import detectPort from 'detect-port';
 
 /**
  * Find an available port, starting from the preferred port.
@@ -18,7 +17,7 @@ import detect from 'detect-port';
  */
 export async function findAvailablePort(preferredPort: number): Promise<number> {
   try {
-    const availablePort = await detect(preferredPort);
+    const availablePort = await detectPort(preferredPort);
 
     if (availablePort !== preferredPort) {
       // eslint-disable-next-line no-console -- server side console output

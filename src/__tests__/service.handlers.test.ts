@@ -1,0 +1,317 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { describe, test, expect, vi, beforeEach, afterEach, type Mock } from 'vitest';
+import { getPost, getComments, setBaseUrl } from '../service/postHandlers';
+import { getExternalPost, getExternalComments } from '../service/externalHandlers';
+
+type MockResponse = { status: Mock; json: Mock };
+
+const mockFetch = (): Mock => {
+  const fetchMock = vi.fn();
+  vi.stubGlobal('fetch', fetchMock);
+  return fetchMock;
+};
+
+afterEach(() => {
+  vi.unstubAllGlobals();
+});
+
+describe('postHandlers', () => {
+  describe('getPost', () => {
+    let mockReq: { params: { id: string } };
+    let mockRes: MockResponse;
+    let fetchMock: Mock;
+
+    beforeEach(() => {
+      mockReq = {
+        params: { id: '' },
+      };
+      mockRes = {
+        status: vi.fn().mockReturnThis(),
+        json: vi.fn(),
+      };
+      fetchMock = mockFetch();
+    });
+
+    test('validates post id is a positive integer', async () => {
+      mockReq.params.id = 'invalid';
+
+      await getPost(mockReq, mockRes);
+
+      expect(mockRes.status).toHaveBeenCalledWith(400);
+      expect(mockRes.json).toHaveBeenCalledWith({ message: 'Invalid post id' });
+    });
+
+    test('rejects negative numbers', async () => {
+      mockReq.params.id = '-1';
+
+      await getPost(mockReq, mockRes);
+
+      expect(mockRes.status).toHaveBeenCalledWith(400);
+      expect(mockRes.json).toHaveBeenCalledWith({ message: 'Invalid post id' });
+    });
+
+    test('rejects alphanumeric strings', async () => {
+      mockReq.params.id = '123abc';
+
+      await getPost(mockReq, mockRes);
+
+      expect(mockRes.status).toHaveBeenCalledWith(400);
+      expect(mockRes.json).toHaveBeenCalledWith({ message: 'Invalid post id' });
+    });
+
+    test('handles fetch errors', async () => {
+      mockReq.params.id = '1';
+      fetchMock.mockRejectedValue(new Error('Network error'));
+      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+      await getPost(mockReq, mockRes);
+
+      expect(mockRes.status).toHaveBeenCalledWith(500);
+      expect(mockRes.json).toHaveBeenCalledWith({
+        message: 'Failed to fetch post',
+      });
+      expect(consoleErrorSpy).toHaveBeenCalled();
+
+      consoleErrorSpy.mockRestore();
+    });
+
+    test('handles non-ok responses', async () => {
+      mockReq.params.id = '999';
+      fetchMock.mockResolvedValue({
+        ok: false,
+        status: 404,
+        json: () => Promise.resolve({ message: 'Post not found' }),
+      });
+
+      await getPost(mockReq, mockRes);
+
+      expect(mockRes.status).toHaveBeenCalledWith(404);
+      expect(mockRes.json).toHaveBeenCalledWith({ message: 'Post not found' });
+    });
+
+    test('returns post data on success', async () => {
+      mockReq.params.id = '1';
+      const mockPost = { id: 1, title: 'Test Post' };
+      fetchMock.mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve(mockPost),
+      });
+
+      await getPost(mockReq, mockRes);
+
+      expect(mockRes.json).toHaveBeenCalledWith(mockPost);
+      expect(mockRes.status).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('getComments', () => {
+    let mockReq: { query: { postId?: string } };
+    let mockRes: MockResponse;
+    let fetchMock: Mock;
+
+    beforeEach(() => {
+      mockReq = {
+        query: {},
+      };
+      mockRes = {
+        status: vi.fn().mockReturnThis(),
+        json: vi.fn(),
+      };
+      fetchMock = mockFetch();
+    });
+
+    test('validates postId is provided', async () => {
+      await getComments(mockReq, mockRes);
+
+      expect(mockRes.status).toHaveBeenCalledWith(400);
+      expect(mockRes.json).toHaveBeenCalledWith({
+        message: 'Missing postId parameter',
+      });
+    });
+
+    test('handles fetch errors', async () => {
+      mockReq.query.postId = '1';
+      fetchMock.mockRejectedValue(new Error('Network error'));
+      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+      await getComments(mockReq, mockRes);
+
+      expect(mockRes.status).toHaveBeenCalledWith(500);
+      expect(mockRes.json).toHaveBeenCalledWith({
+        message: 'Failed to fetch comments',
+      });
+      expect(consoleErrorSpy).toHaveBeenCalled();
+
+      consoleErrorSpy.mockRestore();
+    });
+
+    test('handles non-ok responses', async () => {
+      mockReq.query.postId = '999';
+      fetchMock.mockResolvedValue({
+        ok: false,
+        status: 404,
+        json: () => Promise.resolve({ message: 'Comments not found' }),
+      });
+
+      await getComments(mockReq, mockRes);
+
+      expect(mockRes.status).toHaveBeenCalledWith(404);
+      expect(mockRes.json).toHaveBeenCalledWith({
+        message: 'Comments not found',
+      });
+    });
+
+    test('returns comments on success', async () => {
+      mockReq.query.postId = '1';
+      const mockComments = [{ id: 1, body: 'Test comment' }];
+      fetchMock.mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve(mockComments),
+      });
+
+      await getComments(mockReq, mockRes);
+
+      expect(mockRes.json).toHaveBeenCalledWith(mockComments);
+      expect(mockRes.status).not.toHaveBeenCalled();
+    });
+  });
+});
+
+describe('setBaseUrl', () => {
+  afterEach(() => {
+    setBaseUrl('http://localhost:5173');
+  });
+
+  test('updates the base URL used by subsequent fetch calls', async () => {
+    setBaseUrl('http://localhost:9999');
+
+    const mockPost = { id: 1, title: 'Test' };
+    const fetchMock = mockFetch().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve(mockPost),
+    });
+
+    const mockReq = { params: { id: '1' } };
+    const mockRes = { status: vi.fn().mockReturnThis(), json: vi.fn() };
+
+    await getPost(mockReq, mockRes);
+
+    expect(fetchMock).toHaveBeenCalledWith('http://localhost:9999/api/external/post/1');
+  });
+});
+
+describe('externalHandlers', () => {
+  describe('getExternalPost', () => {
+    let mockReq: { params: { id: string } };
+    let mockRes: MockResponse;
+
+    beforeEach(() => {
+      mockReq = {
+        params: { id: '' },
+      };
+      mockRes = {
+        status: vi.fn().mockReturnThis(),
+        json: vi.fn(),
+      };
+    });
+
+    test('validates post id is a positive integer', async () => {
+      mockReq.params.id = 'invalid';
+
+      await getExternalPost(mockReq, mockRes);
+
+      expect(mockRes.status).toHaveBeenCalledWith(400);
+      expect(mockRes.json).toHaveBeenCalledWith({ message: 'Invalid post id' });
+    });
+
+    test('returns 404 for non-existent post', async () => {
+      mockReq.params.id = '999';
+
+      await getExternalPost(mockReq, mockRes);
+
+      expect(mockRes.status).toHaveBeenCalledWith(404);
+      expect(mockRes.json).toHaveBeenCalledWith({ message: 'Post not found' });
+    });
+
+    test('returns post data for valid id', async () => {
+      mockReq.params.id = '1';
+
+      await getExternalPost(mockReq, mockRes);
+
+      expect(mockRes.json).toHaveBeenCalledWith(
+        expect.objectContaining({
+          id: 1,
+          title: expect.any(String),
+          body: expect.any(String),
+        }),
+      );
+    });
+  });
+
+  describe('getExternalComments', () => {
+    let mockReq: { query: { postId?: string } };
+    let mockRes: MockResponse;
+
+    beforeEach(() => {
+      mockReq = {
+        query: {},
+      };
+      mockRes = {
+        status: vi.fn().mockReturnThis(),
+        json: vi.fn(),
+      };
+    });
+
+    test('validates postId is provided', async () => {
+      await getExternalComments(mockReq, mockRes);
+
+      expect(mockRes.status).toHaveBeenCalledWith(400);
+      expect(mockRes.json).toHaveBeenCalledWith({
+        message: 'Invalid or missing postId',
+      });
+    });
+
+    test('validates postId is a positive integer', async () => {
+      mockReq.query.postId = 'invalid';
+
+      await getExternalComments(mockReq, mockRes);
+
+      expect(mockRes.status).toHaveBeenCalledWith(400);
+      expect(mockRes.json).toHaveBeenCalledWith({
+        message: 'Invalid or missing postId',
+      });
+    });
+
+    test('returns empty array for post with no comments', async () => {
+      mockReq.query.postId = '999';
+
+      await getExternalComments(mockReq, mockRes);
+
+      expect(mockRes.json).toHaveBeenCalledWith([]);
+    });
+
+    test('returns comments for valid postId', async () => {
+      mockReq.query.postId = '1';
+
+      await getExternalComments(mockReq, mockRes);
+
+      expect(mockRes.json).toHaveBeenCalledWith(
+        expect.arrayContaining([
+          expect.objectContaining({
+            id: expect.any(Number),
+            postId: 1,
+            name: expect.any(String),
+          }),
+        ]),
+      );
+    });
+  });
+});
+
+// Made with Bob

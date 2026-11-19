@@ -43,7 +43,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: './src/test/setup.js',
+    setupFiles: './src/test/setup.ts',
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],
@@ -55,11 +55,11 @@ export default defineConfig({
         'src/**/.DS_Store',
         'src/locales/**',
         'src/stories/**',
-        'src/entry-client.jsx',
-        'src/entry-server.jsx',
-        'src/server.js',
-        'src/i18n.client.js',
-        'src/i18n.server.js',
+        'src/entry-client.tsx',
+        'src/entry-server.tsx',
+        'src/server.ts',
+        'src/i18n.client.ts',
+        'src/i18n.server.ts',
       ],
       thresholds: {
         statements: 90,
@@ -69,7 +69,7 @@ export default defineConfig({
 
         // specific overrides for src/config.js due to an issue
         // with anonymous in this instance
-        'src/routes/config.js': {
+        'src/routes/config.ts': {
           statements: 80,
           branches: 90,
           functions: 40,
