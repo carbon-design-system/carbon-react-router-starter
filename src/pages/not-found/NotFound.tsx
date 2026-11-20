@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025, 2026
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,13 +19,11 @@ const NotFound = () => {
       <CommonHeader
         title={t('notFound.title', 'Page not found')}
         paragraphs={[
-          <>{t('notFound.description', 'This is not the page you were looking for.')}</>,
-          <>
-            {t('notFound.routeNotRecognized', "The route '{{pathname}}' is not recognized.", {
-              pathname: location.pathname,
-            })}
-          </>,
-          <>{t('notFound.maintainer', 'Maintained by fed-at-ibm, a chapter of the OIC.')}</>,
+          t('notFound.description', 'This is not the page you were looking for.'),
+          t('notFound.routeNotRecognized', "The route '{{pathname}}' is not recognized.", {
+            pathname: location.pathname,
+          }),
+          t('notFound.maintainer', 'Maintained by fed-at-ibm, a chapter of the OIC.'),
         ]}
       />
     </PageLayout>

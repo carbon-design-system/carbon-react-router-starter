@@ -55,13 +55,36 @@ const EXCLUDE_PATTERNS = [
 ];
 
 /**
+ * Get the original file path if the file is currently staged as a rename in git
+ */
+function getOriginalFilePathIfRenamed(filePath) {
+  try {
+    const status = execSync('git status --porcelain', { encoding: 'utf-8' });
+    for (const line of status.split('\n')) {
+      const match = line.match(/^.{2}\s+(.*?)\s+->\s+(.*)$/);
+      if (match) {
+        const src = match[1].trim();
+        const dest = match[2].trim();
+        if (dest === filePath) {
+          return src;
+        }
+      }
+    }
+  } catch {
+    // If git command fails, fall back to current filePath
+  }
+  return filePath;
+}
+
+/**
  * Get the creation year of a file from git history
  */
 function getFileCreationYear(filePath) {
   try {
+    const lookupPath = getOriginalFilePathIfRenamed(filePath);
     // Get the year from the first commit that added this file
     const result = execSync(
-      `git log --follow --format=%ad --date=format:%Y --diff-filter=A -- "${filePath}" | tail -1`,
+      `git log --follow --format=%ad --date=format:%Y --diff-filter=A -- "${lookupPath}" | tail -1`,
       { encoding: 'utf-8' },
     ).trim();
 
