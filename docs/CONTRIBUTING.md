@@ -162,7 +162,8 @@ npm run lint
 
 This command runs:
 
-- **ESLint** - JavaScript/JSX code quality
+- **Type checking** - TypeScript compiler type verification (`tsc --noEmit`)
+- **ESLint** - TypeScript and code quality linting
 - **Stylelint** - SCSS/CSS code quality
 - **Prettier** - Code formatting
 - **CSpell** - Spell checking
@@ -176,6 +177,7 @@ npm run lint-fix
 Run individual linters:
 
 ```bash
+npm run lint:types     # TypeScript compiler typecheck
 npm run lint:es        # ESLint only
 npm run lint:style     # Stylelint only
 npm run lint:format    # Prettier only
@@ -184,7 +186,7 @@ npm run lint:spell     # CSpell only
 
 ### Code style guidelines
 
-- **JavaScript/JSX:** Follow the ESLint configuration defined in [`eslint.config.js`](./eslint.config.js)
+- **TypeScript/TSX:** Follow the TypeScript and ESLint configuration defined in [`tsconfig.json`](./tsconfig.json) and [`eslint.config.js`](./eslint.config.js)
 - **SCSS/CSS:** Follow the Stylelint configuration defined in [`.stylelintrc.json`](./.stylelintrc.json). See [docs/stylelint.md](./docs/stylelint.md) for detailed guidance
 - **Formatting:** Prettier handles code formatting automatically based on [`prettier.config.js`](./prettier.config.js)
 - **Accessibility:** Follow accessibility best practices enforced by `eslint-plugin-jsx-a11y` and `@double-great/stylelint-a11y`
@@ -209,7 +211,7 @@ The pre-commit hook automatically adds or updates copyright headers. For modifie
 - **Components:** Place in `src/components/` with a dedicated folder for each component
 - **Pages:** Place in `src/pages/` with a dedicated folder for each page
 - **Utilities:** Place in `src/utils/`
-- **Tests:** Place in `src/__tests__/` with the naming pattern `*.test.jsx`
+- **Tests:** Place in `src/__tests__/` with the naming pattern `*.test.tsx` (or `*.test.ts`)
 - **Styles:** Co-locate SCSS files with their components
 
 ## Testing
@@ -228,22 +230,22 @@ npm run test:watch
 
 ### Write tests
 
-- Place test files in `src/__tests__/` with the `.test.jsx` extension
+- Place test files in `src/__tests__/` with the `.test.tsx` (for components) or `.test.ts` (for functions/modules) extension
 - Use React Testing Library for component testing
 - Use [MSW (Mock Service Worker)](https://mswjs.io/) to mock API requests
 - Follow the existing test patterns in the codebase
 
 Example test structure:
 
-```javascript
+```tsx
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import YourComponent from '../components/YourComponent';
 
 describe('YourComponent', () => {
   it('renders correctly', () => {
-    render(<YourComponent />);
-    expect(screen.getByText('Expected Text')).toBeInTheDocument();
+    render(<YourComponent title="Hello" />);
+    expect(screen.getByText('Hello')).toBeInTheDocument();
   });
 });
 ```

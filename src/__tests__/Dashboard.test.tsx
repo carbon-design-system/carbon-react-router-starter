@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import type { ReactNode } from 'react';
 import { describe, test, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
@@ -17,7 +18,7 @@ import DashboardNumberTiles from '../pages/dashboard/DashboardNumberTiles';
 import DashboardVisualizations from '../pages/dashboard/DashboardVisualizations';
 
 // DashboardURLParameters uses useParams which requires a matched route to populate params
-function renderURLParameters(path, route = '/dashboard') {
+function renderURLParameters(path: string, route = '/dashboard') {
   return render(
     <I18nextProvider i18n={i18n}>
       <MemoryRouter initialEntries={[path]}>
@@ -30,7 +31,7 @@ function renderURLParameters(path, route = '/dashboard') {
   );
 }
 
-function renderWithI18n(ui) {
+function renderWithI18n(ui: ReactNode) {
   return render(
     <I18nextProvider i18n={i18n}>
       <MemoryRouter>
