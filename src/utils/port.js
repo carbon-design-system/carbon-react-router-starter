@@ -29,6 +29,6 @@ export async function findAvailablePort(preferredPort) {
     // eslint-disable-next-line no-console -- server side console output
     console.error('Error detecting available port:', error);
     // Throw error instead of silently falling back to potentially unavailable port
-    throw new Error(`Failed to find available port: ${error.message || 'Unknown error'}`);
+    throw new Error(`Failed to find available port: ${error.message || 'Unknown error'}`, { cause: error });
   }
 }
