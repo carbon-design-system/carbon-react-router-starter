@@ -78,7 +78,7 @@
     "msw": "^3.0.0",
     "prettier": "^3.5.3",
     "sass-embedded": "^1.85.1",
-    "semantic-release": "^25.0.5",
+    "semantic-release": "^26.0.0",
     "stylelint": "^17.0.0",
     "stylelint-config-standard-scss": "^17.0.0",
     "stylelint-plugin-carbon-tokens": "^5.0.0",
