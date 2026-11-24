@@ -1,17 +1,18 @@
 /**
- * Copyright IBM Corp. 2025, 2026
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Column, Stack, UnorderedList, ListItem } from '@carbon/react';
+import { Column, ListItem, Stack, UnorderedList } from '@carbon/react';
+import type { ReactElement } from 'react';
 import { Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
-import { WelcomeCallout } from './WelcomeCallout';
 import PostComponent from './post/PostComponent';
+import { WelcomeCallout } from './WelcomeCallout';
 
-export const WelcomeFetchingSection = () => {
+export const WelcomeFetchingSection = (): ReactElement => {
   const { t } = useTranslation();
 
   return (
@@ -32,14 +33,14 @@ export const WelcomeFetchingSection = () => {
               <strong>{t('welcome.fetching.uiLayer', 'UI layer')}</strong> -{' '}
               {t(
                 'welcome.fetching.uiLayerDesc',
-                'PostComponent.jsx manages React state and renders the data using Carbon Design components',
+                'PostComponent.tsx manages React state and renders the data using Carbon Design components',
               )}
             </ListItem>
             <ListItem>
               <strong>{t('welcome.fetching.apiLayer', 'API layer')}</strong> -{' '}
               {t(
                 'welcome.fetching.apiLayerDesc',
-                'Client-side functions in api/message.js handle HTTP requests to our Express backend',
+                'Client-side functions in api/message.ts handle HTTP requests to our Express backend',
               )}
             </ListItem>
             <ListItem>

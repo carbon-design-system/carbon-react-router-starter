@@ -1,18 +1,25 @@
 /**
- * Copyright IBM Corp. 2025, 2026
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import type { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import { WelcomeCallout } from './WelcomeCallout';
 import { WelcomeHighlightTile } from './WelcomeHighlightTile';
 
-export const WelcomeAboutSection = () => {
+export interface AboutItem {
+  key: string;
+  title: string;
+  content: string;
+}
+
+export const WelcomeAboutSection = (): ReactElement => {
   const { t } = useTranslation();
 
-  const aboutItems = [
+  const aboutItems: AboutItem[] = [
     {
       key: 'purpose',
       title: t('welcome.about.purpose.title', 'Purpose'),

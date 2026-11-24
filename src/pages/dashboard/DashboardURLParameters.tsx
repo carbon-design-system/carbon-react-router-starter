@@ -1,18 +1,23 @@
 /**
- * Copyright IBM Corp. 2025, 2026
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Column, Link, Tile, Stack, Grid } from '@carbon/react';
-import { useParams, useSearchParams } from 'react-router';
+import { Column, Grid, Link, Stack, Tile } from '@carbon/react';
+import type { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useParams, useSearchParams } from 'react-router';
 
-const DashboardURLParameters = () => {
+export interface DashboardPathParams extends Record<string, string | undefined> {
+  id?: string;
+}
+
+const DashboardURLParameters = (): ReactElement => {
   const { t } = useTranslation();
   // Access path parameters (e.g., /dashboard/1234 -> id = "1234")
-  const params = useParams();
+  const params = useParams<DashboardPathParams>();
   const { id } = params;
 
   // Access query parameters (e.g., /dashboard/1234?q=xxx&name=John -> q = "xxx", name = "John")
