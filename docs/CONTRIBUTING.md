@@ -193,7 +193,7 @@ npm run lint:spell     # CSpell only
 
 ### Copyright headers
 
-All script and style files (`.js`, `.ts`, `.jsx`, `.tsx`, `.css`, `.scss`) must include a copyright header:
+All script and style files (`.js`, `.ts`, `.tsx`, `.css`, `.scss`) must include a copyright header:
 
 ```javascript
 /**

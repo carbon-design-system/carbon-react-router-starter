@@ -6,12 +6,12 @@ import { execSync } from 'child_process';
 const CURRENT_YEAR = new Date().getFullYear();
 
 // File extensions that should have copyright headers
-const EXTENSIONS_REQUIRING_COPYRIGHT = ['.js', '.jsx', '.ts', '.tsx', '.scss', '.css', '.html', '.yml', '.yaml'];
+const EXTENSIONS_REQUIRING_COPYRIGHT = ['.js', '.ts', '.tsx', '.scss', '.css', '.html', '.yml', '.yaml'];
 
 // Comment styles for different file types
 const COMMENT_STYLES = {
   block: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.css', '.scss'],
+    extensions: ['.js', '.ts', '.tsx', '.css', '.scss'],
     start: '/**',
     middle: ' *',
     end: ' */',
@@ -70,8 +70,12 @@ function getOriginalFilePathIfRenamed(filePath) {
         }
       }
     }
-  } catch {
+  } catch (error) {
     // If git command fails, fall back to current filePath
+    console.error(
+      `check-copyright: unable to read git status for rename detection, using original path for ${filePath}`,
+      error instanceof Error ? error.message : error,
+    );
   }
   return filePath;
 }

@@ -67,7 +67,7 @@ export default defineConfig({
         functions: 90,
         lines: 90,
 
-        // specific overrides for src/config.js due to an issue
+        // specific overrides for src/routes/config.ts due to an issue
         // with anonymous in this instance
         'src/routes/config.ts': {
           statements: 80,
