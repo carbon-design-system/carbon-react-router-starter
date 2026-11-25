@@ -8,7 +8,7 @@ It is intended to be helping, not dictating. If you don't know exactly what to u
 
 ## Branch: `next`
 
-This branch tracks work toward **v2** — a fully TypeScript implementation of the starter project. Development continues in parallel on the `main` branch, and criteria for retiring the JavaScript files have not yet been established. New files in this branch should be written in TypeScript; existing `.js`/`.jsx` files are converted incrementally as work touches them.
+This branch tracks work toward **v2** — a fully TypeScript implementation of the starter project. All source and test files in `src/` are written in TypeScript with strict type checking enabled.
 
 ## Get started
 
@@ -45,11 +45,11 @@ Create a production build with `npm run build`, but be aware that a server runti
 
 ## TypeScript support
 
-This project supports both JavaScript and TypeScript out of the box. You can freely mix `.js`/`.jsx` and `.ts`/`.tsx` files in your project.
+This project is built fully with TypeScript.
 
-### Using TypeScript
+### Writing TypeScript components
 
-To create a TypeScript file, simply use the `.ts` or `.tsx` extension. Components should use direct prop typing on parameters and leverage TypeScript's automatic return type inference rather than `React.FC` or explicit `JSX.Element` annotations. For example, `src/components/commonHeader/CommonHeader.tsx`:
+Components use `.tsx` and modules use `.ts`. Components should use direct prop typing on parameters and leverage TypeScript's automatic return type inference rather than `React.FC` or explicit `JSX.Element` annotations. For example, `src/components/commonHeader/CommonHeader.tsx`:
 
 ```tsx
 import type { ReactNode } from 'react';
@@ -67,13 +67,13 @@ export const CommonHeader = ({ title, paragraphs, action }: CommonHeaderProps) =
 
 ### Configuration
 
-TypeScript is configured with strict mode and additional strictness options enabled in `tsconfig.json`. This is intentional — the goal is a fully TypeScript codebase, and setting a high bar from the start avoids retrofitting type errors later. Existing JavaScript files continue to work without modification during the transition.
+TypeScript is configured with strict mode and additional strictness options enabled in `tsconfig.json`.
 
-- **Development**: TypeScript files are compiled automatically by Vite during development with full HMR support
-- **Build**: TypeScript is compiled as part of the normal build process (`npm run build`)
-- **Linting**: ESLint is configured to lint both JavaScript and TypeScript files
+- **Development**: TypeScript files are transformed automatically by Vite during development with full HMR support
+- **Build**: TypeScript is bundled as part of the normal build process (`npm run build`)
+- **Linting**: ESLint is configured with `typescript-eslint` for type-aware linting
 - **Testing**: Vitest supports TypeScript natively
-- **Server**: Node runs the server entry and its imports directly, using its built-in type stripping, so server-side modules can be `.ts` too. Imports must include the `.ts` extension, type-only imports must use `import type` (enforced by `verbatimModuleSyntax`), and only erasable syntax is allowed, so no `enum`, `namespace` or constructor parameter properties (enforced by `erasableSyntaxOnly`)
+- **Server**: Node runs the server entry and its imports directly, using its built-in type stripping, so server-side modules are `.ts` too. Imports must include the `.ts` extension, type-only imports must use `import type` (enforced by `verbatimModuleSyntax`), and only erasable syntax is allowed, so no `enum`, `namespace` or constructor parameter properties (enforced by `erasableSyntaxOnly`)
 
 ### Type checking
 
@@ -89,14 +89,6 @@ Type checking uses TypeScript 7. TypeScript 7 has no programmatic API yet, so to
 - `@typescript/native` → `typescript@7` (provides `tsc`)
 
 Once `typescript-eslint` supports the TypeScript 7 API, the aliases can be replaced by a plain `typescript` dependency.
-
-### Gradual migration
-
-The project is moving toward a fully TypeScript codebase. JavaScript files are supported during the transition, but new files should be written in TypeScript:
-
-- Convert existing `.js`/`.jsx` files to `.ts`/`.tsx` as you work on them
-- Write all new files in TypeScript
-- Both can coexist in the same project without issues during the transition
 
 ### Running production
 

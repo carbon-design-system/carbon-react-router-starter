@@ -25,15 +25,15 @@ const mockComments = [
 
 beforeEach(() => {
   vi.clearAllMocks();
-  getPost.mockResolvedValue(mockPost);
-  getComments.mockResolvedValue(mockComments);
+  vi.mocked(getPost).mockResolvedValue(mockPost);
+  vi.mocked(getComments).mockResolvedValue(mockComments);
 });
 
 describe('PostComponent', () => {
   test('shows loading state before data arrives', () => {
     // Return a promise that never resolves so we can observe the initial state
-    getPost.mockReturnValue(new Promise(() => {}));
-    getComments.mockReturnValue(new Promise(() => {}));
+    vi.mocked(getPost).mockReturnValue(new Promise(() => {}));
+    vi.mocked(getComments).mockReturnValue(new Promise(() => {}));
 
     render(<PostComponent postId={1} />);
 
@@ -57,7 +57,7 @@ describe('PostComponent', () => {
   });
 
   test('keeps loading state when post fetch fails', async () => {
-    getPost.mockRejectedValue(new Error('Network error'));
+    vi.mocked(getPost).mockRejectedValue(new Error('Network error'));
 
     render(<PostComponent postId={1} />);
 
@@ -68,7 +68,7 @@ describe('PostComponent', () => {
   });
 
   test('renders no comments when comments fetch fails', async () => {
-    getComments.mockRejectedValue(new Error('Network error'));
+    vi.mocked(getComments).mockRejectedValue(new Error('Network error'));
 
     render(<PostComponent postId={1} />);
 

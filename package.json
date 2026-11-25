@@ -97,7 +97,7 @@
     "vitest": "^5.0.0"
   },
   "lint-staged": {
-    "*.{js,ts,jsx,tsx,scss,css,html,yml,yaml}": [
+    "*.{js,ts,tsx,scss,css,html,yml,yaml}": [
       "node scripts/check-copyright.js --fix",
       "git add",
       "npm run lint"
