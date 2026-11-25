@@ -31,28 +31,24 @@ const tsFiles = ['**/*.{ts,tsx}'];
 export default [
   { ignores: ['dist', 'vite.config.js', 'node_modules/**'] },
   {
-    files: ['**/*.{js,mjs,cjs,jsx}'],
+    files: ['**/*.{js,mjs,cjs}'],
     ignores: ['dist', 'vite.config.js'],
     languageOptions: {
-      /* added (globals.node) - for server side elements */
+      /* added (globals.node) - for server side and script elements */
       globals: { ...globals.browser, ...globals.node },
       ecmaVersion: 'latest', // Support all modern ECMAScript features
       parserOptions: {
-        ecmaFeatures: { jsx: true },
         sourceType: 'module',
       },
     },
     settings: {
-      react: {
-        version: 'detect',
-      },
       'import-x/resolver': {
         typescript: true,
         node: true,
       },
       'import-x/ignore': ['node_modules'],
       'import-x/parsers': {
-        espree: ['.js', '.cjs', '.mjs', '.jsx'],
+        espree: ['.js', '.cjs', '.mjs'],
       },
       'import-x/internal-regex': '^(@carbon|react)',
     },

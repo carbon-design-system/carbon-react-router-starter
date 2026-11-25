@@ -13,7 +13,7 @@ fi
 echo ""
 
 # Find all relevant files and run the copyright checker/fixer
-find src -type f \( -name "*.js" -o -name "*.jsx" -o -name "*.ts" -o -name "*.tsx" -o -name "*.scss" -o -name "*.css" -o -name "*.html" -o -name "*.yml" -o -name "*.yaml" \) \
+find src -type f \( -name "*.js" -o -name "*.ts" -o -name "*.tsx" -o -name "*.scss" -o -name "*.css" -o -name "*.html" -o -name "*.yml" -o -name "*.yaml" \) \
   -not -path "*/node_modules/*" \
   -not -path "*/dist/*" \
   -not -path "*/build/*" \
