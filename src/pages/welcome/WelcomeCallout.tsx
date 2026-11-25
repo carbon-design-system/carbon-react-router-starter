@@ -5,17 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { ReactNode } from 'react';
 import { Column, Grid, Heading, Section } from '@carbon/react';
 import classNames from 'classnames';
+import type { ReactElement, ReactNode } from 'react';
 
-interface WelcomeCalloutProps {
+export interface WelcomeCalloutProps {
   children?: ReactNode;
   className?: string;
   heading: string;
 }
 
-export const WelcomeCallout = ({ children, className, heading }: WelcomeCalloutProps) => {
+export const WelcomeCallout = ({ children, className, heading }: WelcomeCalloutProps): ReactElement => {
   return (
     <Section as={Grid} className={classNames('cs--welcome__callout', className)}>
       <Column sm={4} md={4} lg={8} xlg={4}>

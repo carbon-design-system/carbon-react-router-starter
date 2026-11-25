@@ -4,13 +4,14 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+import type { ReactElement } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router';
 import { CommonHeader } from '../../components/commonHeader/CommonHeader';
 import { PageLayout } from '../../layouts/page-layout';
 
-import { useLocation } from 'react-router';
-import { useTranslation } from 'react-i18next';
-
-const NotFound = () => {
+const NotFound = (): ReactElement => {
   const { t } = useTranslation();
   const location = useLocation();
 

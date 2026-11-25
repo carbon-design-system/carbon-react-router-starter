@@ -5,15 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { ReactNode } from 'react';
 import { Column, Tile } from '@carbon/react';
+import type { ReactElement, ReactNode } from 'react';
 
-interface WelcomeHighlightTileProps {
+export interface WelcomeHighlightTileProps {
   title: string;
   children?: ReactNode;
 }
 
-export const WelcomeHighlightTile = ({ title, children }: WelcomeHighlightTileProps) => {
+export const WelcomeHighlightTile = ({ title, children }: WelcomeHighlightTileProps): ReactElement => {
   return (
     <Column sm={4} md={4} lg={8} xlg={4}>
       <Tile className="cs--welcome__highlight-tile">

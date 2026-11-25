@@ -6,18 +6,26 @@
  */
 
 import { Column, Grid, Tile } from '@carbon/react';
+import type { ReactElement } from 'react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const NumberTile = () => {
+export interface NumberTileProps {
+  label?: string;
+  initialCount?: number;
+}
+
+const NumberTile = ({ label, initialCount }: NumberTileProps): ReactElement => {
   const { t } = useTranslation();
-  const [activeUsers] = useState(() => Math.round(Math.random() * 1000));
+  const [activeUsers] = useState<number>(() =>
+    initialCount !== undefined ? initialCount : Math.round(Math.random() * 1000),
+  );
 
   return (
     <Column sm={4} md={4} lg={4} xlg={4}>
       <Tile className="cs--dashboard__tile cs--dashboard__tile--number">
         <dl>
-          <dt>{t('dashboard.numberTiles.activeUsers', 'Active users')}</dt>
+          <dt>{label ?? t('dashboard.numberTiles.activeUsers', 'Active users')}</dt>
           <dd>{activeUsers}</dd>
         </dl>
       </Tile>
@@ -25,7 +33,7 @@ const NumberTile = () => {
   );
 };
 
-const DashboardNumberTiles = () => {
+const DashboardNumberTiles = (): ReactElement => {
   return (
     <Grid>
       <NumberTile />

@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Button } from '@carbon/react';
-
 import { ArrowRight } from '@carbon/icons-react';
+import { Button } from '@carbon/react';
+import type { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import { CommonHeader } from '../../components/commonHeader/CommonHeader';
 
-export const WelcomeHeader = () => {
+export const WelcomeHeader = (): ReactElement => {
   const { t } = useTranslation();
 
   return (

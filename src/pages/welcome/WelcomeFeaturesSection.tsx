@@ -5,17 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import type { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import { WelcomeCallout } from './WelcomeCallout';
-import { WelcomeFeatureTile } from './WelcomeFeatureTile';
+import { WelcomeFeatureTile, type WelcomeFeatureTileProps } from './WelcomeFeatureTile';
 
-const features = [
+const features: WelcomeFeatureTileProps[] = [
   { title: 'Flexibility', feature: 'React 19' },
   { title: 'Feature 2', feature: 'Carbon Design v11' },
   { title: 'Feature 3', feature: 'Vite 6.0' },
 ];
 
-export const WelcomeFeaturesSection = () => {
+export const WelcomeFeaturesSection = (): ReactElement => {
   const { t } = useTranslation();
 
   return (

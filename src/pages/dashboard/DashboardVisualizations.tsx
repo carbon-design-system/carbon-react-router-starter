@@ -6,12 +6,13 @@
  */
 
 import { Column, Grid, Tile } from '@carbon/react';
+import type { ReactElement } from 'react';
 
-interface DataVisualizationProps {
+export interface DataVisualizationProps {
   title: string;
 }
 
-const DataVisualization = ({ title }: DataVisualizationProps) => {
+const DataVisualization = ({ title }: DataVisualizationProps): ReactElement => {
   return (
     <Column sm={4} md={8} lg={8} xlg={8}>
       <Tile className="cs--dashboard__tile cs--dashboard__tile--data">
@@ -21,7 +22,7 @@ const DataVisualization = ({ title }: DataVisualizationProps) => {
   );
 };
 
-const DashboardVisualizations = () => {
+const DashboardVisualizations = (): ReactElement => {
   return (
     <Grid>
       <DataVisualization title="Visualization" />

@@ -5,19 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { PageHeader } from '@carbon/ibm-products';
+import type { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
-
 import { Footer } from '../../components/footer/Footer';
 import { PageLayout } from '../../layouts/page-layout';
-import { PageHeader } from '@carbon/ibm-products';
-import DashboardURLParameters from './DashboardURLParameters';
 import DashboardNumberTiles from './DashboardNumberTiles';
+import DashboardURLParameters from './DashboardURLParameters';
 import DashboardVisualizations from './DashboardVisualizations';
 
 // The styles are imported into index.scss by default.
 // Do the same unless you have a good reason not to.
 
-const Dashboard = () => {
+const Dashboard = (): ReactElement => {
   const { t } = useTranslation();
 
   return (

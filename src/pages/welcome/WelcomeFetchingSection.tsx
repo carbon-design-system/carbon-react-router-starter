@@ -5,13 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Column, Stack, UnorderedList, ListItem } from '@carbon/react';
+import { Column, ListItem, Stack, UnorderedList } from '@carbon/react';
+import type { ReactElement } from 'react';
 import { Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
-import { WelcomeCallout } from './WelcomeCallout';
 import PostComponent from './post/PostComponent';
+import { WelcomeCallout } from './WelcomeCallout';
 
-export const WelcomeFetchingSection = () => {
+export const WelcomeFetchingSection = (): ReactElement => {
   const { t } = useTranslation();
 
   return (

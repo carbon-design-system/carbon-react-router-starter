@@ -6,13 +6,14 @@
  */
 
 import { Column, Tile } from '@carbon/react';
+import type { ReactElement } from 'react';
 
-interface WelcomeFeatureTileProps {
+export interface WelcomeFeatureTileProps {
   title: string;
   feature: string;
 }
 
-export const WelcomeFeatureTile = ({ title, feature }: WelcomeFeatureTileProps) => {
+export const WelcomeFeatureTile = ({ title, feature }: WelcomeFeatureTileProps): ReactElement => {
   return (
     <Column className="cs--welcome__feature-tile" sm={2} md={4} lg={4}>
       <Tile title={title}>

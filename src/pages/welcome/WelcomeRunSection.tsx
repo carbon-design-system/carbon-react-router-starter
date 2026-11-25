@@ -6,11 +6,12 @@
  */
 
 import { Column } from '@carbon/react';
+import type { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import { WelcomeCallout } from './WelcomeCallout';
 import { WelcomeCommandSnippet } from './WelcomeCommandSnippet';
 
-export const WelcomeRunSection = () => {
+export const WelcomeRunSection = (): ReactElement => {
   const { t } = useTranslation();
 
   return (

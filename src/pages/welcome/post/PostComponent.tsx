@@ -5,62 +5,68 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { getComments, getPost } from '../../../api/message.ts';
 import { Heading, Layer, Section, Stack, Tile } from '@carbon/react';
+import type { ReactElement } from 'react';
 import { useEffect, useState } from 'react';
+import { getComments, getPost } from '../../../api/message';
 
-interface Post {
-  id?: number | string;
+export interface Post {
+  id?: number;
+  userId?: number;
   title?: string;
   body?: string;
 }
 
-interface Comment {
-  id: number | string;
+export interface Comment {
+  id: number;
+  postId?: number;
+  name?: string;
   email: string;
   body: string;
-  postId?: number | string;
 }
 
-interface PostComponentProps {
-  postId?: number | string;
+export interface PostComponentProps {
+  /**
+   * The ID of the post to display.
+   * If not provided, defaults to 1 and renders the first post.
+   */
+  postId?: number;
 }
 
 /**
  * Renders a single blog post and its comments.
  */
-const PostComponent = ({ postId = 1 }: PostComponentProps) => {
+const PostComponent = ({ postId = 1 }: PostComponentProps): ReactElement => {
   const [post, setPost] = useState<Post | string>();
   const [comments, setComments] = useState<Comment[]>([]);
 
-  const loadPost = async (id: number | string) => {
+  const loadPost = async (id: number): Promise<void> => {
     try {
-      const postData = (await getPost(id)) as Post;
-      setPost(postData);
+      const post = (await getPost(id)) as Post;
+      setPost(post);
     } catch {
       setPost('Failed to load message');
     }
   };
 
-  const loadComments = async (id: number | string) => {
+  const loadComments = async (id: number): Promise<void> => {
     try {
-      const commentsData = (await getComments(id)) as Comment[];
-      setComments(commentsData);
+      const comments = (await getComments(id)) as Comment[];
+      setComments(comments);
     } catch {
       setComments([]);
     }
   };
 
   useEffect(() => {
-    const loadData = async () => {
+    const loadData = async (): Promise<void> => {
       await loadPost(postId);
       await loadComments(postId);
     };
     void loadData();
   }, [postId]);
 
-  const postTitle = typeof post === 'object' && post?.title ? post.title : 'Loading...';
-  const postBody = typeof post === 'object' ? post?.body : undefined;
+  const loadedPost = typeof post === 'object' ? post : undefined;
 
   return (
     <Section>
@@ -69,8 +75,8 @@ const PostComponent = ({ postId = 1 }: PostComponentProps) => {
         <Stack gap={3}>
           <Section as="article">
             <Section>
-              <Heading>{postTitle}</Heading>
-              <p>{postBody}</p>
+              <Heading>{loadedPost?.title ?? 'Loading...'}</Heading>
+              <p>{loadedPost?.body}</p>
             </Section>
           </Section>
 
